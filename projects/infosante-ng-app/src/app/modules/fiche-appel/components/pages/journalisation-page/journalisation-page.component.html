@@ -1,0 +1,62 @@
+<ng-template #alertContainer></ng-template>
+
+<div id="Journalisation"
+     class="col-md-12 horisontal">
+  <div class="border-bottom-infosante">
+    <h1 class="no-padding">{{'sigct.ss.f_rapport_journ.titre' | translate}}</h1>
+  </div>
+
+  <div id="sectionUsager"
+       class="contentZone row"
+       *hasAllRoles="['ROLE_SA_RAPPORT_AUD']">
+    <msss-consultation-journal #consultationJournalUsager
+                               labelTitreSection="sigct.ss.f_rapport_journ.section_usager"
+                               labelIdentifiant="sigct.ss.f_rapport_journ.idUsager"
+                               [identifiantFocus]="true"
+                               (submitEvent)="onSubmitUsagerEmitted($event)">
+    </msss-consultation-journal>
+  </div>
+
+  <div id="sectionInfoSante"
+       class="contentZone row"
+       *hasAllRoles="['ROLE_SA_RAPPORT_AUD']">
+    <msss-consultation-journal #consultationJournalFicheAppel
+                               labelTitreSection="sigct.sa.f_rapport_journ.section_consultation"
+                               labelIdentifiant="sigct.sa.f_rapport_journ.idconsultation"
+                               (submitEvent)="onSubmitFicheAppelEmitted($event)">
+    </msss-consultation-journal>
+  </div>
+
+  <div id="journalUtilisateurSectionInfoSante"
+       class="contentZone row"
+       *hasAllRoles="['ROLE_SA_RAPPORT_AUD']">
+    <msss-consultation-journal-utilisateur [utilisateurs]="utilisateurs"
+                                           [typesRapportUtilisateur]="typesRapportUtilisateurSA"
+                                           [moyensCommunication]="moyensCommunication"
+                                           [typesCoordMoyenCommunication]="typesCoordMoyenCommunication">
+    </msss-consultation-journal-utilisateur>
+  </div>
+
+  <div id="sectionJournalCompletFicheAppel"
+       class="contentZone row"
+       *hasAllRoles="['ROLE_SA_RAPPORT_AUD']">
+    <msss-consultation-journal #consultationJournalCompletFicheAppel
+                               labelTitreSection="sigct.sa.f_rapport_journ.section_consultation_complet"
+                               labelIdentifiant="sigct.sa.f_rapport_journ.idconsultation"
+                               (submitEvent)="onSubmitFicheAppelCompletEmitted($event)">
+    </msss-consultation-journal>
+  </div>
+
+  <div id="sectionJournalMessageCti"
+       class="contentZone row"
+       *hasAllRoles="['ROLE_SA_RAPPORT_AUD_PROV']">
+    <msss-consultation-journal-message-cti [utilisateurs]="utilisateursOrganismeISA">
+    </msss-consultation-journal-message-cti>
+  </div>
+</div>
+
+<div id="PiedDePage"
+     class="navbar-fixed-bottom">
+  <msss-quebec-pied-de-page [urlImage]="'assets/logo-qc.gif'"
+                            nomModule="infosante"></msss-quebec-pied-de-page>
+</div>

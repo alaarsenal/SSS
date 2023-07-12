@@ -1,0 +1,12 @@
+<div class="onglets">
+  <ul *ngIf="this.onglets" class="nav nav-tabs">
+      <li *ngFor="let item of this.onglets" class="nav-item"
+          [class.active]="item.isSelected">
+          <a *ngIf="item.url" routerLink="{{item.url}}" (click)="this.onOngletClick(item)">{{item.libelle | translate}}</a>
+          <a *ngIf="!item.url" href="#" onclick="return false;" (click)="this.onOngletClick(item.id)">{{item.libelle | translate}}</a>
+      </li>
+      <li title="{{this.titleCode | translate}}" *ngIf="this.onglets.length < this.nbOngletMax" class="nav-item-plus">
+          <mat-icon (click)="this.onAddOngletClick()"><i class="fa fa-plus fa-lg"></i></mat-icon>
+      </li>
+  </ul>
+</div>

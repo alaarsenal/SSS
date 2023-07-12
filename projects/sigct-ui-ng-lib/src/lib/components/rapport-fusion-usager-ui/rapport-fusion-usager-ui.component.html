@@ -1,0 +1,120 @@
+<div class=" col-md-12">
+  <div id="filtre-fusion"
+       class="panel panel-default contentZone">
+    <div class="panel-heading"
+         style="height:50px;">
+      <span><i class="fa fa-filter fa-fw"></i><b>{{"usager.recherche.filtrerecherche" | translate}}</b></span>
+      <span class="badge badge_content_zone"></span>
+      <span class="pull-right">
+        <button id="btn-rechercher"
+                type="button"
+                class="btn btn-sm btn-primary form-btn"
+                title="{{'sigct.rapport.fusionusager.btnrechercherinfobulle' | translate}}"
+                (click)="onBtnRechercher()">{{'sigct.rapport.fusionusager.btnrechercher' | translate}}</button>&nbsp;
+        <button id="btn-reinitialiser"
+                type="button"
+                class="btn btn-sm btn-default btn-blanc form-btn"
+                title="{{'sigct.rapport.fusionusager.btnreinitialiserinfobulle' | translate}}"
+                (click)="onBtnReinitialiser()">{{'sigct.rapport.fusionusager.btnreinitialiser' | translate}}</button>
+      </span>
+    </div>
+
+    <div class="panel-body">
+      <div id="panel-criteres-usager">
+        <div class="row">
+          <div class="col col-md-2 width-200">
+            <msss-sigct-datepicker #critereDateDebut
+                                   id="critere-date-debut"
+                                   label="sigct.rapport.fusionusager.filtre.dtdebut"
+                                   dateFormat="yyyy-mm-dd"
+                                   placeHolder="aaaa-mm-jj"
+                                   [endDate]="endDate"
+                                   [valide]="isDateDebutValide"
+                                   [(ngModel)]="criteresRecherche.dateDebut"
+                                   (keydown.enter)="onKeydownEnter($event)">
+            </msss-sigct-datepicker>
+          </div>
+          <div class="col col-md-2 width-200">
+            <msss-sigct-datepicker id="critere-date-fin"
+                                   label="sigct.rapport.fusionusager.filtre.dtfin"
+                                   dateFormat="yyyy-mm-dd"
+                                   placeHolder="aaaa-mm-jj"
+                                   [endDate]="endDate"
+                                   [valide]="isDateFinValide"
+                                   [(ngModel)]="criteresRecherche.dateFin"
+                                   (keydown.enter)="onKeydownEnter($event)">
+            </msss-sigct-datepicker>
+          </div>
+          <div class="col col-md-2 width-200">
+            <msss-input-text id="critere-id-usager-ident"
+                             label="sigct.rapport.fusionusager.filtre.identusager"
+                             maxlength="10"
+                             patternMask="0999999999"
+                             [autocomplete]="'off'"
+                             [disableNumberCheck]="false"
+                             [decimalPatternCheck]="false"
+                             [(ngModel)]="criteresRecherche.idUsagerIdent"
+                             (keydown.enter)="onKeydownEnter($event)">
+            </msss-input-text>
+          </div>
+          <ng-template [ngIf]="!isRapportProvincial">
+            <div class="col col-md-3">
+              <msss-sigct-chosen id="critere-username-intervenant"
+                                 [label]="'sigct.rapport.fusionusager.filtre.utilisateur'"
+                                 [options]="listeIntervenant"
+                                 [(ngModel)]="criteresRecherche.usernameIntervenantFusion"
+                                 (keydown.enter)="onKeydownEnter($event)"
+                                 (optionSelected)="onIntervenantSelected($event)">
+              </msss-sigct-chosen>
+            </div>
+            <div class="col col-md-3">
+              <div class="row">
+                <div class="col-md-12">
+                  <strong>{{'sigct.rapport.fusionusager.filtre.organisme' | translate}}</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 critere-text">{{nomOrganisme}}</div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template [ngIf]="isRapportProvincial">
+            <div class="col col-md-3">
+              <msss-sigct-chosen id="critere-organisme"
+                                 [label]="'sigct.rapport.fusionusager.filtre.organisme'"
+                                 [options]="listeOrganisme"
+                                 [(ngModel)]="criteresRecherche.idStOrganismesFusion"
+                                 (keydown.enter)="onKeydownEnter($event)">
+              </msss-sigct-chosen>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class=" col-md-12">
+  <msss-table-pagination [displayedColumns]="displayedColumns"
+                         [dataSource]="resultatDto.listeRapportUsagerFusionDto"
+                         [defaultsortField]="defaultSortField"
+                         [defaultPageSize]="defaultPageSize"
+                         [headTitleByCodeColumn]="headTitleByCodeColumn"
+                         [columnsHeadThatNeedDateFormatAAAAMMJJHHMI]="['dateHeureFusion']"
+                         [columnsHeadThatNeedEllipsis]="['nomPrenomUsagerIdentOrigine1','nomPrenomUsagerIdentOrigine2','nomPrenomUsagerIdentResultat','nomPrenomIntervenantFusion','nomOrganismeFusion']"
+                         [isConsultBtnDisplayed]="false"
+                         [resultsLength]="resultatDto.nbTotalElements"
+                         [identifiantPaginationTable]="identifiantPaginationTable"
+                         (rechercherTabContent)="onRefreshTable($event)">
+  </msss-table-pagination>
+</div>
+
+<div class="row row-exporter-bt">
+  <div class="col-md-12 text-right padding-top-10">
+    <button type="button"
+            class="btn-sm btn btn-primary form-btn m-8"
+            id="exporterBtnAdressFusion"
+            title="{{ 'sigct.rapport.fusionusager.btnexporterinfobulle' | translate }}"
+            (click)="onExporter()"> {{ 'sigct.rapport.fusionusager.btnexporter' | translate }} </button>
+  </div>
+</div>

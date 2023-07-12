@@ -1,0 +1,55 @@
+<div class="tooltip-crlf"
+     [title]="toolTip | stripHtml">
+    <label [class.error]="isValide === false"
+           [class.label-disabled]="isDisabled">{{label | translate}}
+        <span class="margin-left-3 asterisk"
+              *ngIf="showAsterisk">*</span>
+    </label>
+
+    <mat-form-field appearance="outline"
+                    class="width-100-pourcent"
+                    [class.disabled]="isDisabled">
+        <mat-select #matSelect
+                    multiple
+                    placeholder="{{placeholder | translate}}"
+                    [formControl]="selectFormControl"
+                    (openedChange)="onOpenedChange($event)"
+                    (keydown.arrowup)="onKeydownArrowUp($event)">
+            <!-- mat-select-trigger affiche dans le champ les éléments sélectionnés  -->
+            <mat-select-trigger>
+                {{selectFormControl.value ? findOptionFromValue(selectFormControl.value[0])?.label : ''}}
+                <span *ngIf="selectFormControl.value?.length > 1"
+                      class="additional-selection">
+                    (+{{selectFormControl.value.length - 1}} {{selectFormControl.value?.length === 2 ? 'autre' :
+                    'autres'}})
+                </span>
+            </mat-select-trigger>
+
+            <div class="filterTextbox">
+                <input #filterTextBox
+                       autocomplete="off"
+                       placeholder="Filtre"
+                       aria-label="Filtre"
+                       matInput
+                       [formControl]="filterTextboxControl"
+                       (blur)="onFilterTextBoxBlur($event)"
+                       (focus)="onFilterTextBoxFocus($event)"
+                       (keydown.space)="onKeydownSpace($event)"
+                       (keydown.arrowdown)="onKeydownArrowDown($event)"
+                       (keydown.arrowup)="onKeydownArrowUp($event)">
+            </div>
+
+            <mat-optgroup *ngIf="(filteredOptions | async)?.length == 0">
+                <div>{{"multiselect.aucun.element" | translate}}</div>
+            </mat-optgroup>
+
+            <mat-option *ngFor="let option of filteredOptions | async"
+                        title="{{option.label | stripHtml}}"
+                        [value]="option.value"
+                        (onSelectionChange)="onSelectionChange($event)">
+                <span [class.inactif]="option.actif === false"
+                      [innerHTML]="option.label | highlight: txtHighlight | safe: 'html'"></span>
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

@@ -1,0 +1,31 @@
+.detail-label, .detail-span {
+  display: inline-block;
+}
+
+.detail-label {
+  width: 8%;
+  vertical-align: top;
+}
+
+.detail-span {
+  width: 92%;
+}
+
+.pt-0-5 {
+  padding-top: .5rem;
+}
+
+@media (max-width: 1440px) {
+  .col-md-3 {
+    width: 15%;
+  }
+  .col-md-9 {
+    width: 85%;
+  }
+  .detail-label {
+    width: 12%;
+  }
+  .detail-span {
+    width: 88%;
+  }
+}

@@ -1,0 +1,27 @@
+<msss-sigct-content-zone id="section-referentiels"
+                         title="sigct.sa.f_appel.consultevaluation.Referentiels">
+    <div *ngIf="intervention || listeProtocole?.length > 0"
+         class="row">
+        <div class="col-md-12">
+            <msss-sigct-field-set titleFieldset="{{ 'sigct.sa.f_appel.consultevaluation.intervention' | translate }}">
+                <ng-container *ngIf="listeProtocole?.length > 0">
+                    <div class="libelle-protocoles">
+                        {{'sigct.sa.f_appel.consultevaluation.referentielconsulte' | translate}}
+                    </div>
+
+                    <app-consultation-liste-protocoles [readOnly]="true"
+                                                       [listeProtocoleDto]="listeProtocole"
+                                                       (consulter)="onConsulterProtocole($event)">
+                    </app-consultation-liste-protocoles>
+
+                    <div class="spacer">&nbsp;</div>
+                </ng-container>
+
+                <msss-sigct-field-set *ngIf="intervention">
+                    <div class="formatHTML"
+                         [innerHTML]="intervention"></div>
+                </msss-sigct-field-set>
+            </msss-sigct-field-set>
+        </div>
+    </div>
+</msss-sigct-content-zone>

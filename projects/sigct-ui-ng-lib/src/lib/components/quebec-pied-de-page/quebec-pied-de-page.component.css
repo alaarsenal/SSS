@@ -1,0 +1,41 @@
+.text-align-center {
+	text-align: center;
+}
+.text-align-right {
+	text-align: left;
+    font-size: 12px;
+    height: 5px;
+}
+
+.navbar {
+    background-color: #FFFFFF;
+    padding-top: 8px;
+    height: 7px;
+    line-height:1;
+}
+
+#qc_logo {
+    width: 100px;
+}
+
+.border-top-usager{
+    border-top: solid 2px #458BC7;
+}
+
+.border-top-infosante{
+    border-top: solid 2px #C9DC87;
+}
+
+.border-top-infosocial{
+    border-top: solid 2px #E8AA31;
+}
+.container {
+  display:flex;
+  justify-content:space-between;
+}
+span.nobreak {
+    white-space: nowrap;
+    font-weight: bold;
+
+}
+

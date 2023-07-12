@@ -1,0 +1,11 @@
+.modal-header {
+    height: 60px;
+}
+
+.modal-body {
+    height: calc(100% - 120px);
+}
+
+.modal-footer {
+    height: 60px;
+}

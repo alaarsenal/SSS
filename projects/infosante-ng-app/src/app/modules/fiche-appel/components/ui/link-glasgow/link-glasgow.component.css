@@ -1,0 +1,10 @@
+a {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.disabled{
+  color: #aaa;
+  font-weight: bold;
+}
+

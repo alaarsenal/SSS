@@ -1,0 +1,276 @@
+<div class="wrapper">
+  <div class="row title">
+    <div class="col-md-6">
+      <i class="fa fa-lg fa-eraser"></i>
+      <h1>{{ 'sigct.ss.f_appel.corriger.titre' | translate }}</h1>
+    </div>
+    <div class="col-md-6 actions">
+      <button id="btnModifierUsager"
+              class="btn btn-primary"
+              type="button"
+              title="{{'sigct.ss.f_appel.corriger.modiferusagerinfobulle'|translate}}"
+              [disabled]="btnModifierUsagerDisabled"
+              (click)="onClickBtnModifierUsager()">
+        {{'sigct.ss.f_appel.corriger.modiferusager'|translate}}
+      </button>
+      <button id="btnTerminerCorrectionFiche"
+              class="btn btn-primary margin-left-5"
+              type="button"
+              title="{{'sigct.ss.f_appel.corriger.terminerinfobulle'|translate}}"
+              no-double-click
+              (safeClick)="onClickBtnTerminerCorrection()">
+        {{'sigct.ss.f_appel.corriger.terminer'|translate}}
+      </button>
+      <button id="btnAnnuler"
+              class="btn btn-secundary margin-left-5"
+              type="button"
+              title="{{'sigct.ss.f_appel.corriger.annulerinfobulle'|translate}}"
+              (click)="onClickBtnCancel()">
+        {{'sigct.ss.f_appel.corriger.annuler'|translate}}
+      </button>
+      <button id="btnRetourner"
+              class="btn btn-outline-primary margin-left-5 btn-print"
+              type="button"
+              title="{{'sigct.ss.f_appel.corriger.revenirinfobulle'|translate}}"
+              (click)="onClickBtnReturn()">
+        <i class="fa fa-lg fa-times"
+           title="{{ 'sigct.ss.f_appel.corriger.revenirinfobulle' | translate }}">
+        </i>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <msss-input-textarea #raisonCorrection
+                           id="raisonCorrection"
+                           name="raisoncorrection"
+                           label="sigct.ss.f_appel.corriger.raison"
+                           rows="5"
+                           [required]="true"
+                           maxlength="1000"
+                           [(ngModel)]="ficheAppelCorrection.raisonCorrection">
+      </msss-input-textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 px-none">
+      <msss-consultation-fiche-section-usager #consultationFicheSectionUsager
+                                              [consultationUsager]="consultationFicheSectionUsagerDTO">
+      </msss-consultation-fiche-section-usager>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mt-space">
+      <msss-input-textarea id="accueil"
+                           name="accueil"
+                           label="sigct.so.f_appel.corriger.accueil"
+                           rows="5"
+                           maxlength="4000"
+                           CSSResize="vertical"
+                           [required]="!accueilDisabled"
+                           [disabled]="accueilDisabled"
+                           [(ngModel)]="ficheAppel.accueil">
+      </msss-input-textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 px-none">
+      <msss-sigct-content-zone title="{{ 'sigct.so.f_appel.corriger.analysesituation' | translate }}"
+                               id="analyseSituationContentZone">
+        <div class="row mt-less">
+          <div class="col-md-12">
+            <msss-input-textarea id="analyseSituation"
+                                 name="analyseSituation"
+                                 label="sigct.so.f_appel.corriger.analysesituation"
+                                 [required]="!analyseSituationDisabled"
+                                 maxlength="4000"
+                                 rows="5"
+                                 CSSResize="vertical"
+                                 [disabled]="analyseSituationDisabled"
+                                 [(ngModel)]="ficheAppel.analyseSituation">
+            </msss-input-textarea>
+          </div>
+          <div class="row px-space">
+            <div class="col-md-6">
+              <label id="label_dangerSuicide"
+                     [ngClass]="{'control-label label_disabled':estimationDangerSuicideDisabled,
+                                                 'control-label':!estimationDangerSuicideDisabled}">
+                {{ "sigct.so.f_appel.corriger.analysesituation.estimsuicide" | translate }}
+              </label>
+            </div>
+            <div class="col-md-6">
+              <label id="label_risqueHomicide"
+                     [ngClass]="{'control-label label_disabled':estimationRisqueHomicideDisabled,
+                                          'control-label':!estimationRisqueHomicideDisabled}"
+                     class="control-label">{{ "sigct.so.f_appel.corriger.analysesituation.estimhomicide" | translate }}
+              </label>
+            </div>
+          </div>
+          <div class="row px-space">
+            <div class="col-md-6">
+              <msss-bouton-radio-couleur idComposant="boutonRadioCouleurDangerSuicide"
+                                         [listeBouton]="listeDangerSuicide"
+                                         [disabledAll]="estimationDangerSuicideDisabled"
+                                         [(ngModel)]="ficheAppel.codeReferenceDangerSuicide">
+              </msss-bouton-radio-couleur>
+            </div>
+            <div class="col-md-6">
+              <msss-bouton-radio-couleur idComposant="boutonRadioCouleurRisqueHomicide"
+                                         [listeBouton]="listeRisqueHomicide"
+                                         [disabledAll]="estimationRisqueHomicideDisabled"
+                                         [(ngModel)]="ficheAppel.codeReferenceRisqueHomicide">
+              </msss-bouton-radio-couleur>
+            </div>
+          </div>
+          <div class="row px-space">
+            <div class="col-md-6">
+              <msss-input-textarea id="estimationSuicide"
+                                   name="estimationSuicide"
+                                   maxlength="4000"
+                                   rows="7"
+                                   CSSResize="vertical"
+                                   [disabled]="estimationDangerSuicideDisabled"
+                                   [(ngModel)]="ficheAppel.estimationSuicide">
+              </msss-input-textarea>
+            </div>
+            <div class="col-md-6">
+              <msss-input-textarea id="estimationHomicide"
+                                   name="estimationHomicide"
+                                   maxlength="4000"
+                                   rows="7"
+                                   CSSResize="vertical"
+                                   [disabled]="estimationRisqueHomicideDisabled"
+                                   [(ngModel)]="ficheAppel.estimationHomicide">
+              </msss-input-textarea>
+            </div>
+          </div>
+        </div>
+      </msss-sigct-content-zone>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mt-space">
+      <msss-input-textarea id="difficultePriorisee"
+                           label="sigct.so.f_appel.planaction.difficultepriorisee"
+                           name="difficultePriorisee"
+                           maxlength="4000"
+                           [required]="!difficultePrioriseeDisabled"
+                           rows="4"
+                           CSSResize="vertical"
+                           [disabled]="difficultePrioriseeDisabled"
+                           [(ngModel)]="ficheAppel.difficultePriorisee">
+      </msss-input-textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <msss-input-textarea id="objectif"
+                           label="sigct.so.f_appel.corriger.objcourterme"
+                           name="objectif"
+                           maxlength="4000"
+                           rows="4"
+                           [required]="!objectifDisabled"
+                           CSSResize="vertical"
+                           [disabled]="objectifDisabled"
+                           [(ngModel)]="ficheAppel.objectif">
+      </msss-input-textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 px-none">
+      <msss-sigct-content-zone title="{{ 'sigct.so.f_appel.corriger.moyensmodalites' | translate }}"
+                               id="moyenModaliteContentZone">
+        <div class="row mt-less">
+          <div class="col-md-12">
+            <msss-input-textarea id="moyenModalite"
+                                 name="moyenModalite"
+                                 rows="15"
+                                 maxlength="500000"
+                                 CSSResize="vertical"
+                                 [disabled]="moyenModaliteDisabled"
+                                 [(ngModel)]="ficheAppel.intervention">
+            </msss-input-textarea>
+          </div>
+        </div>
+      </msss-sigct-content-zone>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 px-none">
+      <msss-sigct-content-zone title="{{ 'sigct.ss.f_appel.corriger.suitesintervention' | translate }}"
+                               id="suiteInterventionContentZone"   [required]="true">
+        <div class="row mt-less">
+          <div class="col-md-12">
+            <msss-input-checkbox id="aucuneSuite"
+                                 name="acunesuite"
+                                 [options]="inputOptionAucuneSuite"
+                                 [disabled]="aucuneSuiteDisabled"
+                                 [(ngModel)]="ficheAppel.aucuneSuite">
+            </msss-input-checkbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <msss-suites-intervention #orientation
+                                      id="orientations"
+                                      [idFicheAppel]="ficheAppel.id"
+                                      [referencesItemSuitesIntervention]="listeReferencesOrientation"
+                                      [orientations]="listeOrientations"
+                                      (updateListEvent)="onUpdateListeOrientationsEvent($event)">
+            </msss-suites-intervention>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <msss-suites-intervention #reference
+                                      id="references"
+                                      [idFicheAppel]="ficheAppel.id"
+                                      [referencesItemSuitesIntervention]="listeReferencesReference"
+                                      [references]="listeReferences"
+                                      (updateListEvent)="onUpdateListeReferencesEvent($event)">
+            </msss-suites-intervention>
+          </div>
+        </div>
+      </msss-sigct-content-zone>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 px-none">
+      <msss-sigct-content-zone title="{{ 'sigct.ss.f_appel.corriger.valfininterv' | translate }}"
+                               id="validationFinInterventionContentZone">
+        <div class="row mt-less">
+          <div class="col-md-12">
+            <msss-input-textarea id="opinionProf"
+                                 name="opinionProf"
+                                 label="sigct.so.f_appel.corriger.valfininterv.opinionpro"
+                                 maxlength="4000"
+                                 rows="10"
+                                 [required]="!opinionProfessionelleDisabled"
+                                 CSSResize="vertical"
+                                 [disabled]="opinionProfessionelleDisabled"
+                                 [(ngModel)]="ficheAppel.opinionProf">
+            </msss-input-textarea>
+          </div>
+        </div>
+      </msss-sigct-content-zone>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 px-none">
+      <msss-sigct-content-zone title="{{ 'sigct.so.f_appel.corriger.resumeintervention' | translate }}"
+                               id="resumeInterventionContentZone"   [required]="!raisonInterventionDisabled">
+        <div class="row mt-less-15">
+          <div class="col-md-6">
+            <msss-edition-liste-entite #resumeIntervention
+                                       [referencesReference]="listeReferencesRaisonIntervention"
+                                       [references]="listeRaisonIntervention"
+                                       [disabled]="raisonInterventionDisabled"
+                                       [titreReference]="'sigct.so.f_appel.corriger.resumeintervention.raisonintervention'">
+            </msss-edition-liste-entite>
+          </div>
+          <div class="col-md-6"></div>
+        </div>
+      </msss-sigct-content-zone>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+<div class="accueil-fiche-appel-page ">
+  <div class="info-accueil padding top-border">
+    <msss-bienvenue-top-bar [nomSysteme]="'sigct.sa.f_accueil.titre'"
+                             [nomEnvironnement]="nomEnvironnement"
+                            [prenomNomUtilisateur]="prenomNomUtilisateur"
+                            [nomOrganismeCourant]="nomOrganismeCourant"
+                            [nomRegionOrganismeCourant]="nomRegionOrganismeCourant"
+                            [urlImageLogo]="'assets/picto-sante.png'"
+                            [bienvenueMot]="'sigct.sa.f_accueil.bienvenue'">
+    </msss-bienvenue-top-bar>
+  </div>
+
+  <ng-template #alertContainer></ng-template>
+
+  <div class="conteneur-compos">
+    <div class="row ">
+      <div id="colonneGauche"
+           class="col-lg-3">
+
+        <div id="NouvelleConsultation"
+             *hasAnyRoles="['ROLE_SA_APPEL_MODIF', 'ROLE_SA_SAISIE_DIFFEREE']">
+          <msss-sigct-content-zone [isCollapsible]="false" [nomSysteme]="'infoSante'"  id="NouvelleConsultationInfoSante"
+                                   title="{{'sigct.sa.f_accueil.sectionappel' | translate}}">
+
+              <button id="ajoutConsultation_btn"
+                      type="button"
+                      *hasAllRoles="['ROLE_SA_APPEL_MODIF']"
+                      class="btn-sm btn btn-primary form-btn   btn-width "
+                      title="{{ 'sigct.sa.f_accueil.btnnouvappelInfob' | translate }}"
+                      (click)="onAjoutConsultationBtnClick()">
+                {{ 'sigct.sa.f_accueil.btnnouvappel' | translate}}
+              </button>
+
+              <button id="ajoutConsultationSaisieDifferee_btn"
+                      type="button"
+                      *hasAllRoles="['ROLE_SA_SAISIE_DIFFEREE']"
+                      class="btn-sm btn btn-primary form-btn  btn-width margin-top-10"
+                      title="{{'sigct.sa.f_accueil.btnsaisirapideinfobulle' | translate }}"
+                      (click)="onAjoutConsultationSaisieDiffereeBtnClick()">
+                {{'sigct.sa.f_accueil.btnsaisirapide' | translate}}
+              </button>
+
+
+          </msss-sigct-content-zone>
+        </div>
+
+        <div id="NotesComplementaires"
+             *hasAnyRoles="['ROLE_US_USAGER_CONSULT','ROLE_SA_APPEL_RECH']">
+          <msss-sigct-content-zone [isCollapsible]="false"  [nomSysteme]="'infoSante'"  id="NotesComplemantairesInfoSante"
+                                   title="{{ 'sigct.sa.f_accueil.sectionnote' | translate }}">
+            <div class="margin-bottom-10">
+              <button *hasAllRoles="['ROLE_US_USAGER_CONSULT']"
+                      type="button"
+                      class="btn-sm btn  btn-primary form-btn margin-right-10 btn-width"
+                      title="{{ 'sigct.sa.f_accueil.btnrechusagerinfob' | translate }}"
+                      id="rechercherUsager_btn"
+                      (click)="rechercherUsager();">
+                {{ 'sigct.sa.f_accueil.btnrechusager' | translate}}
+              </button>
+              <button *hasAllRoles="['ROLE_SA_APPEL_RECH','ROLE_US_USAGER_CONSULT']"
+                      type="button"
+                      class="btn-sm btn btn-primary form-btn margin-top-10  btn-width"
+                      title="{{ 'sigct.sa.f_accueil.btnrechappelinfob' | translate }}"
+                      id="rechercherConsultation_btn"
+                      (click)="rechercherFicheAppel()">
+                {{ 'sigct.sa.f_accueil.btnrechappel' | translate }}
+              </button>
+            </div>
+              <button type="button"
+                      *hasAnyRoles="['ROLE_SA_APPEL_RECH_ISISW','ROLE_SA_APPEL_RECH_ISISW_TOUS']"
+                      class="btn-sm btn btn-primary form-btn btn-width margin-top-10"
+                      title="{{ 'sigct.ss.f_accueil.btn.info.bullerechappelisisw' | translate }}"
+                      id="rechercherIsiswHisto_btn"
+                      (click)="onBtnRechercherIsiswClick()">
+                {{ 'sigct.ss.f_accueil.btn.rechappelisisw' | translate}}
+              </button>
+              <!-- <button *ngIf="utilisateurPeutRechercherConsultation && !utilisateurPeutConsulterUsager" type="button"
+                class="btn-sm btn  btn-primary form-btn" title="{{ 'sigct.sa.f_accueil.btnrechappelinfob' | translate }}"
+                id="rechercherConsultation_btn">
+                {{ 'sigct.sa.f_accueil.btnrechappel' | translate }}
+              </button> -->
+
+          </msss-sigct-content-zone>
+        </div>
+
+        <div id="UsagerEnregistrement"
+             *hasAnyRoles="['ROLE_US_ENREGISTREMENT_CONSULT','ROLE_US_ENREGISTREMENT_CONSULT_TOUS']">
+          <msss-sigct-content-zone  [isCollapsible]="false"  [nomSysteme]="'infoSante'"  id="UsagerEnregistrement"
+                                   title="{{'sigct.sa.f_accueil.sectionclientele' | translate}}">
+
+              <button type="button"
+                      class="btn-sm btn btn-primary form-btn btn-width"
+                      title="{{ 'sigct.sa.f_accueil.rechercherenregistrementinfobulle' | translate }}"
+                      id="ajoutConsultation_btn"
+                      (click)="onRechercherEnregistrementsBtnClick()">
+                {{ 'sigct.sa.f_accueil.rechercherenregistrement' | translate}}
+              </button>
+
+          </msss-sigct-content-zone>
+        </div>
+
+      </div>
+
+      <div id="ColonneDroite"
+           class="col-lg-9">
+        <div id="AvisCommunication">
+          <msss-sigct-content-zone [isCollapsible]="false"   [nomSysteme]="'infoSante'"  id="AvisCommunicationInfoSante"
+                                   title="sigct.sa.f_accueil.sectionavis"
+                                   css="'no-padding-right'">
+
+            <msss-sigct-liens-utiles [setListeInformationsUtiles]="listeInformationsUtiles"
+                                     [setListeCategories]="listeCategorie"
+                                     (onTelechargerFichier)="onTelechargerFichier($event)"></msss-sigct-liens-utiles>
+
+          </msss-sigct-content-zone>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="PiedDePage"
+       class="footer">
+    <msss-quebec-pied-de-page
+
+    [versionGlobal]="version?.versionGlobal"
+    [appVersion]="version?.appVersion"
+    [buildNumber]="version?.buildnumber"
+    [urlImage]="'assets/logo-qc.gif'"
+                              nomModule="infosante"
+                             ></msss-quebec-pied-de-page>
+  </div>
+</div>

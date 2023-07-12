@@ -1,0 +1,34 @@
+<msss-sigct-field-set *ngIf="displaySection"
+                      id="sectionValidationFinIntervention"
+                      titleFieldset="{{ 'sigct.ss.f_appel.consultation.terminaison.validfinintervention' | translate}}">
+  <div class="row">
+    <div class="col-md-6"
+         *ngIf="displayValidations">
+      <div *ngFor="let indicateur of dto.validations"
+           class="row">
+        <div class="col-md-9">
+          <label>{{indicateur.nomReferenceValidation}} :</label>
+        </div>
+        <div class="col-md-3">
+          <span>{{indicateur.reponse}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6"
+         *ngIf="displayDetail">
+      <div class="detail-label">
+        <label>{{ 'sigct.ss.f_appel.consultation.terminaison.validfinintervention.details' | translate }} : </label>
+      </div>
+      <div class="detail-span">
+        <span>{{dto.details}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="row"
+       *ngIf="displayOpinionProfessionnelle">
+    <div class="col-md-12 pt-0-5">
+      <msss-cadre-text [cadreTextDto]="cadreTextOpinionProfessionnelle">
+      </msss-cadre-text>
+    </div>
+  </div>
+</msss-sigct-field-set>

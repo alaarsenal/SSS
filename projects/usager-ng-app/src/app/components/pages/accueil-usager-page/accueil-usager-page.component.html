@@ -1,0 +1,83 @@
+<div class="accueil-page ">
+<div class="padding top-border info-accueil  ">
+<msss-bienvenue-top-bar [nomSysteme]="'sigct.us.f_accueil.titre'"
+                        [nomEnvironnement]="nomEnvironnement"
+                        [prenomNomUtilisateur]="prenomNomUtilisateur"
+                        [nomOrganismeCourant]="nomOrganismeCourant"
+                        [nomRegionOrganismeCourant]="nomRegionOrganismeCourant"
+                        [versionGlobal]="version?.versionGlobal"
+                        [appVersion]="version?.appVersion"
+                        [buildNumber]="version?.buildnumber"
+                        [urlImageLogo]="'assets/picto-usager.png'"
+                        [bienvenueMot]="'sigct.us.f_accueil.bienvenue'">
+</msss-bienvenue-top-bar>
+</div>
+
+<div class="conteneur-compos">
+
+    <div class="row">
+      <div id="colonneGauche"
+           class="col-lg-3">
+        <div id="rechercheUsager_div"
+             *hasAnyRoles="['ROLE_US_USAGER_CONSULT']">
+          <msss-sigct-content-zone [isCollapsible]="false"  [nomSysteme]="'usager'"  id="RechercheUsager_zone"
+                                   title="{{ 'sigct.us.f_accueil.sectionrechusager.titre' | translate}}">
+
+              <button *hasAllRoles="['ROLE_US_USAGER_CONSULT']"
+                      type="button"
+                      class=" btn-sm btn btn-primary form-btn margin-bottom-10  btn-width"
+                      (click)="rechercherUsager();"
+                      title="{{ 'sigct.us.f_accueil.btnrechusagerinfobulle' | translate }}"
+                      id="rechercherUsager_btn">
+                {{ 'sigct.us.f_accueil.btnrechusager' | translate}}
+              </button>
+
+              <button type="button"
+              class=" btn-sm btn btn-primary form-btn   btn-width paddingTop margin-bottom-10"
+              (click)="suiviEnregistrementsUsager();"
+              title="{{ 'sigct.us.f_accueil.sectionsuivi.bntrechercher' | translate }}"
+              id="sectionsuiviUsager_btn">
+             {{ 'sigct.us.f_accueil.sectionsuivi.bntrechercher' | translate}}
+              </button>
+
+
+              <button *hasAllRoles="['ROLE_US_USAGER_CONSULT']"
+              type="button"
+              class=" btn-sm btn btn-primary form-btn   btn-width paddingTop "
+              (click)="consulterAlertesUsager();"
+              title="{{ 'sigct.us.f_accueil.alertes.consulterinfobulle' | translate }}"
+              id="consulterAlertes_btn">
+              {{ 'sigct.us.f_accueil.alertes.consulter' | translate}}
+              </button>
+
+          </msss-sigct-content-zone>
+        </div>
+      </div>
+      <div id="ColonneDroite"
+           class="col-lg-9">
+        <div id="AvisCommunication">
+          <msss-sigct-content-zone [isCollapsible]="false"   [nomSysteme]="'usager'"  id="AvisCommunicationUsager"
+                                   title="sigct.sa.f_accueil.sectionavis"
+                                   css="'no-padding-right'">
+
+            <msss-sigct-liens-utiles [setListeInformationsUtiles]="listeInformationsUtiles"
+                                     [setListeCategories]="listeCategorie"
+                                     (onTelechargerFichier)="onTelechargerFichier($event)"></msss-sigct-liens-utiles>
+
+          </msss-sigct-content-zone>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+  <div id="PiedDePage"
+       class="navbar-fixed-bottom">
+    <msss-quebec-pied-de-page
+    [versionGlobal]="version?.versionGlobal"
+    [appVersion]="version?.appVersion"
+    [buildNumber]="version?.buildnumber"
+    [urlImage]="'assets/logo-qc.gif'"
+    nomModule="usager"></msss-quebec-pied-de-page>
+  </div>
+</div>

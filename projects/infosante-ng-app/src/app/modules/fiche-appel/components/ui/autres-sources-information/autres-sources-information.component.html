@@ -1,0 +1,51 @@
+<div id="autresSourcesInformations" class="col-md-6 background-gris enlever-espace no-padding-right">
+
+  <form #fAutreSourceInformation="ngForm" (ngSubmit)="onSubmit()">
+
+
+    <div class="col-md-11 padding-left-15 no-padding-left no-padding-right">
+
+      <div class="col-md-6 no-padding-left">
+
+        <msss-sigct-chosen #asrc label="sigct.sa.f_appel.intervention.autres-sources" name="autreSource"
+          required id="autreSource" [options]="inputOptionsAutreSource" [valide]="isValide"
+          [(ngModel)]="autresSourcesInformationDTO.codeRefSourceInformation"
+          (optionSelected)="onAutreSourceValide($event)" [disabled]="isDisabled">
+        </msss-sigct-chosen>
+
+      </div>
+
+      <div class="col-md-6 padding-left-15 no-padding-right">
+
+        <msss-input-text #detail id="detail" name="detail" label="sigct.sa.f_appel.evaluation.details" maxlength="255"
+          [(ngModel)]="autresSourcesInformationDTO.details"
+          [disabled]="isDisabled" raccourcis=true></msss-input-text>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-1 padding-top-10 margin-left-m30 btn-submit-wrapper">
+      <button type="submit" style="display:none" #submitBtn>Submit</button>
+      <msss-action-link [actionLinks]="actionLinks" [disableAll]="isDisabled"></msss-action-link>
+    </div>
+
+  </form>
+
+</div>
+
+
+
+
+<div id="affichageAutresSourcesInformation" class="col-md-6  no-padding-right fontcolorblack">
+  <div class="no-padding-right">
+
+    <msss-list-info-action [list]="this.listeAutresSourcesInformationDTO" [formatAction]="formatActionAutreSource"
+      supprimerId="supprimerBtnAut" (supprimerAction)="confirmerDeleteAutreSource($event)"
+      [cacherAfficherReduire]="true" [afficherBoutonSupprimer]="true" *ngIf="!isDisabled">
+    </msss-list-info-action>
+
+  </div>
+
+
+</div>

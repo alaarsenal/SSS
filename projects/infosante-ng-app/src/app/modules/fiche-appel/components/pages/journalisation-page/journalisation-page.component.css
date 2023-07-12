@@ -1,0 +1,44 @@
+#NouvelleConsultation {
+    margin-bottom: 10px;
+}
+
+#ColonneDroite {
+    float: right;
+    padding-left: 0px;
+}
+
+
+.margin-bottom-10 {
+    margin-bottom: 10px;    
+}
+
+.margin-left--15 {
+    margin-left: -15px;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+.navbar-fixed-bottom {
+    z-index: 1065;
+    max-height: 50px;
+}
+
+.padding-left-15 {
+    padding-left: 15px;
+}
+
+.border-bottom-infosante{
+    border-bottom: solid 2px #C9DC87 !important;
+    padding-left: 15px !important;
+    padding-right: 0px !important;
+}
+
+.no_padding{
+    padding-bottom:0.0em !important;
+}
+
+ .no-padding-right {
+     padding-right: 0px !important;
+ }

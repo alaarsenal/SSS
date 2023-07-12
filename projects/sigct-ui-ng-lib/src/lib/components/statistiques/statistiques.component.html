@@ -1,0 +1,115 @@
+<div class="row padding-top-15">
+
+    <div class="col-md-12 enlever-espace no_padding-left no-padding-right bordures" title="">
+        <div class="col-md-6 no-padding-right background-gris">
+            <form name="formRaisonAppel" (ngSubmit)="onSubmitRaisonAppel()" #fComRaison="ngForm">
+
+                <div class="col-md-11 padding-left-15 no-padding-right">
+
+                    <div class="row">
+
+                        <div class="col-md-12 no-padding-left no-padding-right">
+
+                            <msss-sigct-chosen #liste_raison
+                                [isDisabled]="isDisabled"
+                                               [required]="!isDisabled"
+                                label="sigct.ss.f_appel.terminaison.statistiques.raisonintervention" name="raison" required
+                                id="raison" [options]="inputOptionsRaisonAppel" [valide]="isRaisonAppelValide"
+                                [(ngModel)]="raisonAppel.referenceRaisonAppelCode"
+                                (optionSelected)="onRaisonChange($event)">
+                            </msss-sigct-chosen>
+                        </div>
+
+                    </div>
+                    <br/>
+                </div>
+
+                <div class="col-md-1 col-btn">
+
+                    <div class="col-sm-1 enlever-espace margin-top-15 margin-left-m1">
+                        <div id="raisonAppelActionIcon">
+                            <button type="submit" style="display:none" #submitRaisonAppelBtn>Submit</button>
+                            <msss-action-link [actionLinks]="actionLinksRaison" [disableAll]="isDisabled"></msss-action-link>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-6 col-md-6m background-blanc no-padding-right">
+            <msss-list-info-action  [list]="this.listeRaisonAppel" [formatAction]="formatActionRaisonAppel"
+                supprimerId="supprimerBtnRaisonAppel" (supprimerAction)="confirmerSupprimerRaisonAppel($event)"
+                [cacherAfficherReduire]="true" [afficherBoutonSupprimer]="true"
+                [idElementModifieSelectionne]="idElementModifieSelectionne"
+
+                *ngIf="!isDisabled"
+                >
+            </msss-list-info-action>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row padding-top-20">
+    <div class="col-md-12 enlever-espace no_padding-left no-padding-right bordures" title="">
+        <div class="col-md-6 no-padding-right background-gris">
+            <form name="formRoleAction" (ngSubmit)="onSubmitRoleAction()" #fComRole="ngForm">
+
+                <div class="col-md-11 padding-left-15 no-padding-right">
+
+                    <div class="row">
+
+                        <div class="col-md-12 no-padding-left no-padding-right">
+
+                            <msss-sigct-chosen #liste_role
+                                label="sigct.ss.f_appel.terminaison.statistiques.roleaction" name="role" required
+                                id="role" [options]="inputOptionsRoleAction" [valide]="isRoleActionValide"
+                                [(ngModel)]="roleAction.referenceRoleActionCode"
+                                (optionSelected)="onRoleChange($event)"
+                                               [required]="!isDisabled"
+                                [isDisabled]="isDisabled">
+                            </msss-sigct-chosen>
+                        </div>
+
+                    </div>
+                    <br/>
+                </div>
+
+                <div class="col-md-1 col-btn">
+
+                    <div class="col-sm-1 enlever-espace margin-top-15 margin-left-m1">
+                        <div id="roleActionActionIcon">
+                            <button type="submit" style="display:none" #submitRoleActionBtn>Submit</button>
+                            <msss-action-link  [disableAll]="isDisabled" [actionLinks]="actionLinksRole"></msss-action-link>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-6 col-md-6m background-blanc no-padding-right">
+            <msss-list-info-action  [list]="this.listeRoleAction" [formatAction]="formatActionRoleAction"
+                supprimerId="supprimerBtnRoleAction" (supprimerAction)="confirmerSupprimerRoleAction($event)"
+                [cacherAfficherReduire]="true" [afficherBoutonSupprimer]="true"
+                [idElementModifieSelectionne]="idElementModifieSelectionne"
+                *ngIf="!isDisabled">
+            </msss-list-info-action>
+
+            <modal-confirmation id-container="confirm_popup_supri_role_action">
+                <div class="modal-confirm-body modal-body">
+                    {{ messageSupprimerRoleAction }}
+                </div>
+
+                <div class="modal-confirm-footer modal-footer">
+                    <button type="button" data-dismiss="modal"
+                        class="btn btn-primary btn-sm btn-key-action visibility-visible"
+                        id="ok_supri_button_role_action" (click)="supprimerRoleAction()">Oui</button>
+                    <button type="button" data-dismiss="modal"
+                        class="btn btn-sm btn-key-action hidePopup visibility-visible"
+                        id="cancel_supri_button_role_action">Non</button>
+                </div>
+            </modal-confirmation>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+.formatHTML {
+    white-space: pre-wrap;
+}
+
+.nobreak {
+    white-space: nowrap;
+    text-align: right;
+}
+
+.nobreakl {
+    white-space: nowrap;
+    text-align: left;
+    padding-left: 0px;
+}
+
+.black {
+    color: black !important;
+}
+
+@media (min-width:0px) and (max-width:1440px) {
+
+    .row {
+        margin-left:0px !important;
+        margin-right:0px !important;
+    }
+    
+}
+
+@media (min-width:1441px) and (max-width:1920px) {
+
+    .row {
+        margin-left:-15px !important;
+        margin-right:-15px !important;
+    }
+    
+}
+
+.gris {
+    border : 1px solid #d9d9d9 !important;
+}
+
+.consentement {
+    padding-bottom: 5px;
+}
+
+.margin-top-8 {
+    margin-top: 8px;
+}
+
+.margin-top-5 {
+    margin-top: 5px;
+}
+
+.word-break {
+    word-break: break-word;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

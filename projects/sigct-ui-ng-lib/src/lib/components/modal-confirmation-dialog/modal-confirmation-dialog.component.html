@@ -1,0 +1,18 @@
+<div id="{{id}}" class="confirm_popup_container" #confirm_popup class="modal" aria-labelledby="modal-title" role="dialog">
+  <div class="modal-dialog   ">
+    <div class="modal-content " [attr.aria-label]="titre | translate">
+      <div class="modal-header draggable">
+        <button type="button" class="close hidePopup" style="visibility: visible" data-dismiss="modal" aria-hidden="true" aria-label="Fermer">
+          <i class="fa fa-times-circle-o"></i>
+        </button>
+        <h4 class="modal-title" id="modal-title">
+          {{titre}}
+        </h4>
+      </div>
+
+      <ng-content select=".modal-confirm-body"></ng-content>
+
+      <ng-content select=".modal-confirm-footer"></ng-content>
+    </div>
+  </div>
+</div>

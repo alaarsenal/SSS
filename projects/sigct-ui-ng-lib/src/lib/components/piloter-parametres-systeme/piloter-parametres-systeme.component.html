@@ -1,0 +1,30 @@
+<div class="piloter-parametre-systeme-component">
+    <div class="container" cdkScrollable>
+        <div class="row margin-bottom-15">
+            <div class="col-md-12 {{css}}">
+                <h1 class="label-font-size">
+                    <i class="fa fa-wrench fa-lg margin-right-10"></i>{{ 'sigct.sa.pilotage.parametresys.titre' | translate }}
+                </h1>
+            </div>
+        </div>
+
+        <msss-piloter-parametres-systeme-section-criteres-recherche
+                                                                    (rechercherParamsSystemeBtn)="rechercherParametresSystemeWhenRechercherBtnIsTriggered($event)"
+                                                                    (enterKeydown)="rechercherParametresSystemeWhenEnterKeydownIsTriggered($event)">
+        </msss-piloter-parametres-systeme-section-criteres-recherche>
+
+        <msss-table-pagination [displayedColumns]="displayedColumns"
+                            [dataSource]="parametreSystemeDTOs"
+                            [defaultsortField]="defaultsortField"
+                            [defaultPageSize]="defaultPageSize"
+                            [columnsHeadThatNeedTitleProperty]="columnsHeadThatNeedTitleProperty"
+                            [columnsHeadThatNeedEllipsis]="columnsHeadThatNeedEllipsis"
+                            [headTitleByCodeColumn]="headTitleByCodeColumn"
+                            [isModifBtnDisplayed]="true"
+                            [resultsLength]="resultsLength"
+                            (rechercherTabContent)="rechercherParametresSystemeWhenPaginationOrSortEventIsTriggered($event)"
+                            (modifElement)="modifParametresSysteme($event)">
+        </msss-table-pagination>
+
+    </div>
+</div>

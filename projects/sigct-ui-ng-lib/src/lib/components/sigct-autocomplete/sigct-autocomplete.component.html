@@ -1,0 +1,17 @@
+<label>{{label | translate}}</label>
+
+<mat-form-field appearance = "outline" style="width:100% !important">
+  <input matInput placeholder="" [matAutocomplete]="auto" [formControl]="formControl">
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn">
+  <mat-option *ngIf="isLoading" class="is-loading">
+    <mat-spinner diameter="50"></mat-spinner>
+  </mat-option>
+  <ng-container *ngIf="!isLoading">
+    <mat-option *ngFor="let user of filteredResult" [value]="user">
+      <span [innerHTML]="user.name | highlight: toHighlight"></span>
+    </mat-option>
+  </ng-container>
+</mat-autocomplete>
+  

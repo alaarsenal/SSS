@@ -1,0 +1,52 @@
+<div class="wrapper">
+  <table mat-table
+         [dataSource]="dataSource"
+         [ngClass]="getDisabledClass()">
+    <ng-container matColumnDef="reference">
+      <th mat-header-cell
+          *matHeaderCellDef> {{titreReference | translate}}   <span *ngIf="required"   class="mandatory-indicator"> *</span></th>
+      <td mat-cell
+          *matCellDef="let reference">
+        <msss-sigct-chosen id="{{'reference_' + reference.id}}"
+                           name="reference"
+                           [options]="inputOptionsReference"
+                           [disabled]="disabled"
+                           [(ngModel)]="reference.code">
+        </msss-sigct-chosen>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell
+          *matHeaderCellDef> {{'sigct.ss.f_appel.corriger.action' | translate}} </th>
+      <td mat-cell
+          *matCellDef="let reference; index as idx">
+        <button type="button"
+                class="btn btn-default btn-sm padding-2"
+                (click)="onClickBtnSupprimer(idx)"
+                title="{{ 'sigct.ss.f_appel.corriger.suitesintervention.btnsupprimer' | translate }}"
+                [disabled]="disabled">
+          <i class="fa fa-lg fa-trash-o"></i>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row
+        *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div *ngIf="dataSource.data===null || dataSource.data===undefined  ||dataSource.data.length === 0" class="no-records mat-row">
+    {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+  </div>
+  <ng-template [ngIf]="!_singleEntity">
+    <div class="btn-ajouter">
+      <button id="btnAjouterSuitesIntervention"
+              class="btn btn-primary"
+              type="button"
+              title="{{'sigct.ss.f_appel.corriger.suitesintervention.btnajouterinfobulle'|translate}}"
+              [disabled]="disabled"
+              (click)="onClickBtnAjouterUneLigne()">
+        {{'sigct.ss.f_appel.corriger.suitesintervention.btnajouter'|translate}}
+      </button>
+    </div>
+  </ng-template>
+</div>

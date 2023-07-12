@@ -1,0 +1,32 @@
+<div>
+  <div class="row">
+    <div class="col-md-3 w-4">
+      <msss-input-radio id="servicesInterprete" name="servicesinterprete"
+        [label]="'sigct.ss.f_appel.terminaison.servicesutilises.servicesinterprete'" [options]="inputServicesInterprete"
+        [(ngModel)]="servicesUtilisesDTO.servicesInterprete"
+        [disabled]="isDisabled">
+      </msss-input-radio>
+    </div>
+    <div class="col-md-9 w-8">
+      <msss-input-text id="detailsInterprete" name="detailsinterprete"
+        label="sigct.ss.f_appel.terminaison.servicesutilises.detailsinterprete" maxlength="255"
+        [(ngModel)]="servicesUtilisesDTO.detailsInterprete"
+        [disabled]="isDisabled" raccourcis=true>
+      </msss-input-text>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 w-4">
+      <msss-input-radio id="servicesRelaisBell" name="servicesrelaisbell"
+        [label]="'sigct.ss.f_appel.terminaison.servicesutilises.servicesrelaisbell'" [options]="inputServicesRelaisBell"
+        [(ngModel)]="servicesUtilisesDTO.servicesRelaisBell" [disabled]="isDisabled">
+      </msss-input-radio>
+    </div>
+    <div class="col-md-9 w-8">
+      <msss-input-text id="detailsRelaisBell" name="detailsrelaisbell"
+        label="sigct.ss.f_appel.terminaison.servicesutilises.detailsrelaisbell" maxlength="255"
+        [(ngModel)]="servicesUtilisesDTO.detailsRelaisBell" [disabled]="isDisabled" raccourcis=true>
+      </msss-input-text>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<mat-dialog-content cdkScrollable>
+  <!-- #3957 cdkScrollable permet aux liste déroulantes ouvertes de demeurer fixées à leur component lors du scroll.
+    https://github.com/angular/components/issues/10079#issuecomment-491620284 -->
+
+  <div class="result" *ngIf="messageList && messageList.length > 0">
+    <div class="item" *ngFor="let messageItem of messageList; let i = index">
+      <span>
+        {{messageItem.nom}}
+        <a (click)="onClickRemoveResultItem(i)">
+          <i class="fa fa-times"></i>
+        </a>
+      </span>
+    </div>
+  </div>
+
+  <div class="conteneur">
+    <iframe id="rrss_frame" frameborder="0" [src]="rrssUrl | safe : 'resourceUrl'"
+      onload="javascript:window.parent.postMessage('loaded' , '*');" loaded="true"></iframe>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button id="btn-fermer-dialog" class="btn-sm btn btn-primary form-btn" (click)="fermerDialog()">Fermer</button>
+</mat-dialog-actions>

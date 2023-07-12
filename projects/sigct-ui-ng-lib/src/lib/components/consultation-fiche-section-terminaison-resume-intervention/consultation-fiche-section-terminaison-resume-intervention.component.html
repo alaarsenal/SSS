@@ -1,0 +1,51 @@
+<msss-sigct-field-set *ngIf="displaySection"
+                      id="sectionResumeIntervention"
+                      [titleFieldset]="labelSection">
+  <div class="row"
+       *ngIf="displayRaisonIntervention">
+    <div class="col-md-2 list-label">
+      <label>{{ 'sigct.ss.f_appel.consultation.terminaison.statistiques.raisonintervention' | translate }} :</label>
+    </div>
+    <div class="col-md-10">
+      <div *ngFor="let item of raisonsIntervention">
+        <ng-container *ngIf="item.referenceRaisonAppelCodeCn; else onlynameRaison;">
+          <span>{{item.referenceRaisonAppelCodeCn}} - {{item.referenceRaisonAppelNom}}</span>
+        </ng-container>
+        <ng-template #onlynameRaison>
+          <span>{{item.referenceRaisonAppelNom}}</span>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="row pt-0-5"
+       *ngIf="displayRoleAction">
+    <div class="col-md-2 list-label">
+      <label>{{ 'sigct.ss.f_appel.consultation.terminaison.statistiques.roleaction' | translate }} :</label>
+    </div>
+    <div class="col-md-10">
+      <div *ngFor="let item of rolesAction">
+        <ng-container *ngIf="item.referenceRoleActionCodeCn; else onlyNameRole">
+          <span>{{item.referenceRoleActionCodeCn}} - {{item.referenceRoleActionNom}}</span>
+        </ng-container>
+        <ng-template #onlyNameRole>
+          <span>{{item.referenceRoleActionNom}}</span>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="row pt-0-5">
+    <div class="col-md-2 list-label"
+         *ngIf="centreActivite">
+      <label>{{ 'sigct.ss.f_appel.consultation.terminaison.statistiques.centreactivite' | translate }} :</label>
+    </div>
+    <div class="col-md-4 list-detail-middle"
+         *ngIf="centreActivite">
+      <span>{{centreActivite.nom}}</span>
+    </div>
+    <div class="col-md-6"
+         *ngIf="langueIntervention">
+      <label>{{ labelChampLangue | translate }} :</label>
+      <span>{{langueIntervention.nom}}</span>
+    </div>
+  </div>
+</msss-sigct-field-set>

@@ -1,0 +1,13 @@
+.content {
+  margin-top: -.8rem;
+  padding-bottom: .5rem;
+}
+
+@media (max-width: 1440px) {
+  .col-md-3 {
+    width: 32%;
+  }
+  .col-md-9 {
+    width: 68%;
+  }
+}

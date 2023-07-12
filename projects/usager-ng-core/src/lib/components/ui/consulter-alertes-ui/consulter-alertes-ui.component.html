@@ -1,0 +1,164 @@
+<ng-template #alertContainer></ng-template>
+
+<div class="col-md-12 ml-10">
+
+  <div id="suiviEnregistraments" class="panel panel-default contentZone" #contentZone>
+    <div class="panel-heading h-50">
+      <span><i class="fa fa-filter fa-fw"></i><b>{{ "usager.alertes.filtre" | translate }}</b></span>
+      <span class="badge badge_content_zone"></span>
+      <span class="pull-right">
+
+        <button type="button" class="btn-sm btn btn-primary form-btn" title="{{ 'usager.alertes.rechercherinfobulle' | translate }}" id="recherche_btn"
+          (click)="rechercherAvecConfirmation();">{{ 'usager.alertes.rechercher' | translate }}</button> &nbsp;
+
+        <button type="button" class="btn-sm btn btn-reinit form-btn" title="{{ 'usager.alertes.reinitialiserinfobulle' | translate }}" id="reinit_btn"
+          (click)="reinitialiserAvecConfirmation();">{{ 'usager.alertes.reinitialiser' | translate }}</button>
+      </span>
+    </div>
+  </div>
+
+
+  <form name="form" #fCriteres="ngForm" novalidate>
+    <div id="filtre" class=" mat-elevation-z1">
+      <div class="col-md-12 ">
+        <div class="col-sm-3">
+          <msss-sigct-chosen label="usager.alertes.gestionnaire" name="gestionaire" id="gestionaire" #gestionaire="ngModel"
+            [(ngModel)]="rechercheCritere.idGestionaire" [options]="inputOptionsGestionaire">
+          </msss-sigct-chosen>
+        </div>
+
+        <div class="col-sm-6">
+          <msss-sigct-chosen label="usager.alertes.site" name="site" id="site" #site="ngModel"
+            [(ngModel)]="rechercheCritere.idSite" [options]="inputOptionsSite">
+          </msss-sigct-chosen>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class=" col-md-12">
+  <div id="usager" class="panel panel-default contentZone" #contentZone>
+    <div class="panel-heading ">
+      <span>
+        <i class="fa fa-list fa-fw"></i>
+        Affichage {{(paginator.pageIndex * paginator.pageSize) + 1}} à
+        {{(paginator.pageIndex + 1) * paginator.pageSize}} sur
+        <span class="badge" id="total-records">{{paginator.length}}</span> résultat(s)
+      </span>
+      <span class="badge badge_content_zone"></span>
+      <span class="float-right"></span>
+    </div>
+
+    <div class="result-container mat-elevation-z1">
+
+
+      <div class="result-table-container pn">
+
+        <table mat-table [dataSource]="dataSource" class="example-table" matSort>
+
+          <!-- State Column -->
+           <!-- State Column -->
+           <ng-container matColumnDef="dateAppel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.alertes.date' | translate }}</th>
+            <td mat-cell *matCellDef="let row" class="col-date-heure">{{row.dateAppel |  date : 'yyyy-MM-dd HH:mm'}}</td>
+          </ng-container>
+
+          <!-- State Column -->
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.alertes.type' | translate }}</th>
+            <td mat-cell *matCellDef="let row" class="col-type">{{ row.type }}</td>
+          </ng-container>
+
+          <!-- State Column -->
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.alertes.nom' | translate }}</th>
+            <td mat-cell *matCellDef="let row" class="col-nom">{{row.nom}}</td>
+          </ng-container>
+
+          <!-- State Column -->
+          <ng-container matColumnDef="prenom">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.alertes.prenom' | translate }}</th>
+            <td mat-cell *matCellDef="let row" class="col-prenom">{{row.prenom}}</td>
+          </ng-container>
+
+          <!-- State Column -->
+          <ng-container matColumnDef="dateNaissance">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.alertes.naissance' | translate }}</th>
+            <td mat-cell *matCellDef="let row" class="col-date-naissance">{{row.dateNaissance |  date : 'yyyy-MM-dd'}}</td>
+          </ng-container>
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="gestionaire">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ 'usager.alertes.gestionnairecas' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row" class="col-gestionnaire">{{row.gestionaire}}</td>
+          </ng-container>
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="site">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ 'usager.alertes.site' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row" class="col-site ellipsis" title="{{row.site}}">{{row.site}}</td>
+          </ng-container>
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="traite">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'w-center'">
+              {{ 'usager.alertes.traite' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;" class="padding-8">
+              <msss-input-checkbox [(ngModel)]="row.traite"
+                                   id="{{'alerte_traite_'+idx}}"
+                                   #alerte_traite="ngModel"
+                                   name="alerte_traite"
+                                   [options]="inputOptionAlerteTraite">
+              </msss-input-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="action" align="right">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'w-center'">
+              {{ 'usager.alertes.action' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row" class="padding-3" [ngClass]="'w-center'">
+              <button (click)=consulterAvecConfirmation(row) type="button" class="btn btn-default btn-sm padding-2" id="consuler_button"
+                 title="{{ 'usager.alertes.btnconsulter' | translate }}">
+                <i class="fa fa-file-text-o fa-lg"></i></button>&nbsp;
+            </td>
+          </ng-container>
+
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="identId">
+            <th mat-header-cell *matHeaderCellDef disableClear>
+              Id
+            </th>
+            <td mat-cell *matCellDef="let row">{{row.id}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div *ngIf="dataSource.data===null || dataSource.data===undefined  ||dataSource.data.length === 0" class="no-records mat-row">
+          {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+        </div>
+      </div>
+
+      <mat-paginator
+        [pageSize]="15"
+        [pageSizeOptions]="[5,10,15,20,25,50,100]"
+        [showFirstLastButtons]="true">
+      </mat-paginator>
+
+      <msss-verificateur-de-changement #verificateurDeChangementUi
+                                       [data]="consultationAlertes"
+                                       [messagAvertissement]="'usager.msg.confirmatiom'">
+      </msss-verificateur-de-changement>
+
+
+    </div>
+

@@ -1,0 +1,84 @@
+<div class="col-md-6 background-gris border-color-ddd border-solid-thin no-padding-right  min-height-142">
+    <form name="form" (ngSubmit)="onSubmit()" #fOrientationSuitesIntervention="ngForm">
+
+        <div class="col-md-11 no-padding-left no-padding-right">
+            <div class="row margin-top-5">
+
+                <div class="col-sm-6">
+                    <msss-sigct-chosen  label="sigct.ss.f_appel.suitesintervention.orientation"
+                                        name="referenceOrientationSuitesIntervention"
+                                        id="referenceOrientationSuitesIntervention"
+                                        valide="{{ chosenOrientationValide }}"
+                                        [options]="inputOptionsOrientationSuitesIntervention"
+                                        [(ngModel)]="orientationSaisi.codeReferenceOrientation"
+                                        (focus)="onFocus($event)">
+                    </msss-sigct-chosen>
+                </div>
+
+                <div class="col-sm-6">
+                    <msss-rrss-link rrssLabel="sigct.ss.f_appel.suitesintervention.ressource"
+                                    rrssLink="sigct.ss.f_appel.suitesintervention.rrss"
+                                    id="rrssLink"
+                                    (rssDialogClosed)="onCloseRrssDialog($event)">
+                    </msss-rrss-link>
+                    <msss-output-multiselect-text   id="multiSelectOrientationRessourceRrss"
+                                                    [outputContentList]="listeRessourceRrss"
+                                                    contentSeparator=";">
+                    </msss-output-multiselect-text>
+                </div>
+
+            </div>
+
+            <div class="row margin-top-5">
+
+                <div class="col-sm-6">
+                    <msss-input-text    id="programmeServiceInputText"
+                                        #programmeService
+                                        name="programmeService"
+                                        maxlength="255"
+                                        label="sigct.ss.f_appel.suitesintervention.programmeservice"
+                                        [(ngModel)]="orientationSaisi.programmeService"
+                                        raccourcis=true>
+                    </msss-input-text>
+                </div>
+
+                <div class="col-sm-6">
+                    <msss-input-text    id="detailInputText"
+                                        name="detail"
+                                        maxlength="255"
+                                        label={{label}}
+                                        [(ngModel)]="orientationSaisi.details"
+                                        raccourcis=true>
+                    </msss-input-text>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-1 col-btn">
+            <div class="col-sm-1 enlever-espace margin-top-40 margin-left-m1">
+                <div id="orientationActionIcon">
+                    <button type="submit" style="display:none" #submitBtn>Submit</button>
+                    <msss-action-link [actionLinks]="actionLinks"></msss-action-link>
+                </div>
+
+            </div>
+        </div>
+
+
+    </form>
+</div>
+
+<div class="col-md-6 background-blanc border-solid-thin border-color-ddd min-height-142">
+
+    <msss-list-info-action [list]="listeOrientation"
+                        [formatAction]="formatActionOrientation"
+                        supprimerId="supprimerBtnOrientation"
+                        (supprimerAction)="confirmerSupprimerOrientation($event)"
+                        [cacherAfficherReduire]="true"
+                        [afficherBoutonSupprimer]="true">
+    </msss-list-info-action>
+
+
+</div>

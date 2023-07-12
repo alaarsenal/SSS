@@ -1,0 +1,72 @@
+<msss-sigct-content-zone id="section-appelant-initial"
+                         title="{{'sigct.ss.f_appel.consultation.appelantinitial' | translate}}">
+    <div class="col-md-12 no-padding-left"
+         title="">
+        <div class="row">
+            <div class="col-md-6">
+                <div *ngIf="categorieAppelant"
+                     class="row">
+                    <div class="col-md-5 col-md-5p nobreak">
+                        <strong>{{'sigct.ss.f_appel.consultation.appelantinitial.catgaplnt' | translate}}&nbsp;:&nbsp;</strong>
+                    </div>
+                    <div class="col-md-7 col-md-7p">
+                        &nbsp;{{categorieAppelant}}
+                    </div>
+                </div>
+                <div *ngIf="nom"
+                     class="row">
+                    <div class="col-md-3 col-md-3p nobreak">
+                        <strong>{{'sigct.ss.f_appel.consultation.appelantinitial.nomprenom' | translate}}&nbsp;:&nbsp;</strong>
+                    </div>
+                    <div class="col-md-9 col-md-9p">
+                        {{nom}}, {{prenom}}
+                    </div>
+                </div>
+                <div *ngIf="organisme"
+                     class="row">
+                    <div class="col-md-3 col-md-3p nobreak">
+                        <strong>{{'sigct.ss.f_appel.consultation.appelantinitial.orgRRSS' | translate}}&nbsp;:&nbsp;</strong>
+                    </div>
+                    <div class="col-md-9 col-md-9p">
+                        {{organisme}}
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="details"
+                 class="col-md-6">
+                <div class="row">
+                    <div class="col-md-2 col-md-2p nobreak">
+                        <strong>{{'sigct.ss.f_appel.consultation.appelantinitial.details' | translate}}&nbsp;:&nbsp;</strong>
+                    </div>
+                    <div class="col-md-10 col-md-10p">
+                        {{details}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/><br/>
+        <div *ngIf="dtos.length > 0" class="row  padding-left-15">
+
+            <msss-sigct-field-set titleFieldset="{{ 'sigct.ss.f_appel.consultation.appelantinitial.communications' | translate}}">
+
+                <div class="content">
+                    <div class="row"
+                         *ngFor="let item of dtos">
+                        <div class="col-md-3 col-md-3p text-nowrap">
+                            <label [innerHTML]="item.key"></label>
+                        </div>
+                        <div class="col-md-9 col-md-9p">
+                            <span [innerHTML]="item.value"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </msss-sigct-field-set>
+
+
+
+        </div>
+
+
+    </div>
+</msss-sigct-content-zone>

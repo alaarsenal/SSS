@@ -1,0 +1,55 @@
+<msss-sigct-field-set *ngIf="displaySection"
+                      id="sectionDureeFiche"
+                      titleFieldset="{{ 'sigct.ss.f_appel.consultation.terminaison.dureefiche' | translate}}">
+  <div class="row">
+    <div class="col-md-3"
+         *ngIf="displayDatDebutFiche">
+      <label *ngIf="!saisieDifferee">{{ 'sigct.' + domaine.toLowerCase() +
+        '.f_appel.consultation.terminaison.dureefiche.datecreation' | translate}} :</label>
+      <label *ngIf="saisieDifferee">{{ 'sigct.' + domaine.toLowerCase() +
+        '.f_appel.consultation.terminaison.dureefiche.fichecommenceele' | translate}} :</label>
+      <span>{{dateDebutFiche | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+    </div>
+
+    <div class="col-md-3"
+         *ngIf="displayDatFinFiche">
+      <label>{{ 'sigct.' + domaine.toLowerCase() + '.f_appel.consultation.terminaison.dureefiche.fichetermineele' |
+        translate}} :</label>
+      <span>{{dateFinFiche | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+    </div>
+
+    <div class="col-md-2"
+         *ngIf="displayDureeCalculee">
+      <label>{{labelDuree}} :</label>
+      <span>{{labelDureeCalculee}} </span>
+    </div>
+
+    <div class="col-md-4">
+      <div class="detail-label"
+           *ngIf="displayDureeCorrigee">
+        <label>{{ 'sigct.ss.f_appel.consultation.terminaison.dureefiche.dureecorrigee' | translate}} :</label>
+      </div>
+      <div class="detail-span">
+        <span *ngIf="displayDureeCorrigee">{{labelDureeCorrigee}} </span>
+        <span class="italic"
+              *ngIf="displayDetailDureeCorrigee">({{detailsDureeCorrigee}})</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"
+       *ngIf="saisieDifferee">
+    <div class="col-md-3">
+      <label>{{ 'sigct.' + domaine.toLowerCase() +
+        '.f_appel.consultation.terminaison.dureefiche.fichesaisierapidecreeele' | translate}} :</label>
+      <span>{{dateCreationFiche | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+    </div>
+
+    <div class="col-md-3"
+         *ngIf="dateFinSaisieDiffereeFiche">
+      <label>{{ 'sigct.' + domaine.toLowerCase() +
+        '.f_appel.consultation.terminaison.dureefiche.fichesaisierapidetermineele' | translate}} :</label>
+      <span>{{dateFinSaisieDiffereeFiche | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+    </div>
+  </div>
+</msss-sigct-field-set>

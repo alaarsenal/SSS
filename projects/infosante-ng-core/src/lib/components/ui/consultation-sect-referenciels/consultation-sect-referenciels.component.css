@@ -1,0 +1,11 @@
+.formatHTML {
+    white-space: pre-wrap;
+}
+
+.libelle-protocoles {
+    font-weight: bold;
+}
+
+.spacer {
+    height: 5px;
+}

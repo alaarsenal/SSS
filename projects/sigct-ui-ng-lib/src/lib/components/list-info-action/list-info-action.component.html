@@ -1,0 +1,81 @@
+<div style="width:100%;" [attr.aria-label]="ariaLabel">
+  <div *ngFor="let obj of list; let i = index"
+       class="row">
+    <div *ngIf="obj && obj?.actif == false ;else color_black"
+         class="col-md-11 color-gray"
+         id="div-{{editerId}}-{{obj.id}}"
+         [ngClass]="getCSSClassAction(obj.id)">
+      <div [innerHTML]="formatAction(sanitize(obj)) | safe: 'html'"></div>
+    </div>
+    <ng-template #color_black>
+      <div class="col-md-11 texte-noir"
+           [innerHTML]="formatAction(sanitize(obj)) | safe: 'html'"
+           id="div-{{editerId}}-{{obj.id}}"
+           [ngClass]="getCSSClassAction(obj.id)"></div>
+    </ng-template>
+
+    <div *ngIf="obj && obj.actif;else other_msss_action_link"
+         class="col-md-1 no-padding-right"
+         [ngClass]="{'padding-left-37': !dispalyArchiveIcon}">
+      <div *ngIf="afficherBouton === true">
+        <a *ngIf="editerId !== undefined"
+           href="#"
+           onclick="return false"
+           (click)="onModifierClick(obj.id)"><i title="Modifier"
+             class="fa fa-arrow-left fa-fw cursor-pointer"
+             id="{{editerId}}{{i}}"></i><span class="sr-only">Modifier</span> </a>
+        <a *ngIf="archiverId !== undefined"
+           [ngClass]="{'dispaly-none': !dispalyArchiveIcon}"
+           href="#"
+           onclick="return false"
+           (click)="onArchiverClick(obj.id)"><i title="Archiver"
+             class="fa fa-archive cursor-pointer"
+             id="archiverId{{i}}"></i><span class="sr-only">Archiver</span></a>
+        <a *ngIf="afficherBoutonSupprimer === true"
+           href="#"
+           onclick="return false"
+           (click)="onSupprimerClick(obj.id)"><i title="Supprimer"
+             class="fa fa-trash-o cursor-pointer"
+             id="supprimerId{{i}}"></i> <span class="sr-only">Supprimer</span></a>
+      </div>
+    </div>
+    <ng-template #other_msss_action_link>
+      <div class="col-md-1 no-padding-right">
+        <div *ngIf="afficherBouton === true">
+          <a *ngIf="editerId !== undefined"
+             href="#"
+             onclick="return false"
+             (click)="onModifierClick(obj.id)"><i title="Modifier"
+               class="fa fa-arrow-left fa-fw cursor-pointer"
+               id="{{editerId}}{{i}}"></i> <span class="sr-only">Modifier</span></a>
+          <a *ngIf="afficherBoutonSupprimer === true"
+             href="#"
+             onclick="return false"
+             (click)="onSupprimerClick(obj.id)"><i title="Supprimer"
+               class="fa fa-trash-o cursor-pointer"
+               id="supprimerId{{i}}"></i> <span class="sr-only">Supprimer</span></a>
+        </div>
+      </div>
+    </ng-template>
+    <br />
+    <div *ngIf="getLigne(displayAll,i)"
+         class="col-md-12">
+      <hr class="separateur-horizontal" />
+      <span class="archiveLabel">{{"usager.consultation.comm.archives" | translate}}</span>
+    </div>
+  </div>
+
+  <ng-template [ngIf]="displayButtonAfficherTout">
+    <div *ngIf="displayAll == false && dispalyReductAndShowLinks">
+      <button (click)="afficherTout()"
+              [disabled]="cacherAfficherReduire"
+              [class.disabled]="cacherAfficherReduire">{{ labelDevelopper }}&nbsp;<i class="fa fa-chevron-down"
+           id="{{afficherId}}"
+           [class.disabled]="cacherAfficherReduire"></i></button>
+    </div>
+    <div *ngIf="displayAll == true && dispalyReductAndShowLinks">
+      <button (click)="afficherTout()">{{ labelReduire }}&nbsp;<i class="fa fa-chevron-up"
+           id="{{afficherId}}"></i></button>
+    </div>
+  </ng-template>
+</div>

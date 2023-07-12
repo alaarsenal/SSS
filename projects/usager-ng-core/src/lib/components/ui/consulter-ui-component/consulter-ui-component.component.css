@@ -1,0 +1,162 @@
+fieldset {
+    border: 1px solid;
+    border-color: #ccc;
+    margin:10px;
+}
+
+fieldset.error {
+    border: 1px solid;
+    border-color: red;
+}
+
+legend {
+	width: auto;
+	font-size: 14px;
+    font-weight: bold;
+    padding: 0 5px 0px 5px;
+    border-bottom: none;
+    margin-left: 13px;
+    margin-bottom: 5px;
+    border-color: #ccc;
+}
+
+.border-right {
+    border-right: 1px solid;
+    border-color: #ccc;
+}
+
+.table-content {
+    margin: 2px!important;
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 2 auto auto;
+    grid-gap: 2px;
+    background-color: rgb(255, 255, 255);
+    padding: 2px;
+    width:100%;
+    margin-left: 10px;
+  }
+
+  .grid-container-2 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 0px;
+    padding-left: 10px;
+    width:100%;
+    vertical-align: middle;
+  }
+
+  .grid-container-1 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 2px;
+    background-color: rgb(255, 255, 255);
+    padding: 2px;
+    width:100%;
+  }
+
+  .grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: left;
+    padding: 0px 0;
+    font-size: 14px;
+  }
+
+  .grid-container-2 > div {
+    background-color: rgb(255, 255, 255);
+    padding: 2px 10px;
+    font-size: 14px;
+  }
+  
+  .item1 {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    width:100%;
+  }
+
+  .item2 {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    width:100%;
+  }
+
+  .item3 {
+    grid-column-start: 3;
+    grid-column-end: 4;
+  }
+
+  .span2_3 {
+    grid-column-start: 2;
+    grid-column-end: 4;
+  }
+
+  .span1_3 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+  
+
+  .adresseUsagerZone {
+    margin-bottom: 0;
+}
+
+.communicationUsagerZone {
+    margin-bottom: 0;
+    margin-top: -15px;
+}
+
+.cadenas {
+    text-align: right;
+    margin-right: 15px;
+}
+
+.cadenas_rouge{
+    color: #cc0000 ;
+}
+
+.cadenas_vert{
+    color: #009e11 ;
+}
+
+.cadenas_jaune{
+    color: #f1c231 ;
+}
+
+td {
+  border: 0px solid black;
+  padding-left: 10px;
+  padding-bottom: 3px;
+/*  width: 725px;*/
+  word-break: break-all;
+  vertical-align: top;
+}
+
+th {
+  border: 0px solid black;
+  padding-left: 10px;
+  padding-bottom: 3px;
+  width: 160px;
+  vertical-align: top;
+  color: black;
+}
+
+/*
+table ,tr {
+  border: 0px solid black;
+  padding-left: 10px;
+  padding-bottom: 3px;
+  vertical-align: top;
+}
+*/
+
+
+label {
+  color:black;
+}
+
+.display-flex {
+  display: flex;
+}

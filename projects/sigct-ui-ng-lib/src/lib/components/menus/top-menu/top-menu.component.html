@@ -1,0 +1,198 @@
+<nav class="navbar navbar-inverse navbar-fixed-top {{cssClasseCouleurCadre}}"
+     role="navigation">
+  <div class="container_header">
+
+    <div class="navbar-header">
+      <button type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target="#girpi-topnavbar"
+              (click)="onClickButtonHeader()" aria-label="navigation">
+        <span class="sr-only">&nbsp;</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse {{getDisplayStyleTopnavBar()}}"
+         id="girpi-topnavbar">
+
+      <ul class="nav navbar-nav">
+
+        <li class=""
+            [id]="'rootList' + i"
+            #leftRootList
+            (click)="leftRootListClick($event)"
+            [attr.data-has-children]="item.children ? true : false"
+            *ngFor="let item of topMenuItemsLeft; let i = index"
+            title="{{item.infoBulle | translate }}"
+            [ngClass]="{'active':item.isActive}">
+
+          <ng-template [ngIf]="item.children &&   item.isSystemeConnexe==false && (item.visible == undefined || item.visible)">
+            <a class="dropdown-toggle"
+               [attr.data-toggle]="dropdown"
+               onclick="return false;"
+               (click)="memoriseMenu(i, $event)">
+              <i class="fa-inverse fa {{item.icon}} "></i>&nbsp; {{item.title | translate }}<b class="caret"></b>
+            </a>
+
+            <ul class="dropdown-menu"
+                [style.display]="getDisplayMenu(i)">
+              <li *ngFor="let itemChildren of item.children; let i = index"
+                  title="{{itemChildren.infoBulle | translate }}">
+                <ng-template [ngIf]="!itemChildren.isRouterLink">
+                  <a *ngIf="itemChildren.visible === true"
+                     href="{{itemChildren.link}}"
+                     (click)="onChildItemClick($event)">
+                    <i class="fa {{itemChildren.icon}} fa-fw"></i>
+                    {{itemChildren.title | translate }}
+                  </a>
+                </ng-template>
+                <ng-template [ngIf]="itemChildren.isRouterLink">
+                  <a *ngIf="itemChildren.visible === true"
+                     routerLink="{{itemChildren.link}}"
+                     (click)="onChildItemClick($event)">
+                    <i class="fa {{itemChildren.icon}} fa-fw"></i>
+                    {{itemChildren.title | translate }}
+                  </a>
+                </ng-template>
+              </li>
+            </ul>
+          </ng-template>
+           
+          <ng-template [ngIf]="item.children &&   item.isSystemeConnexe==true &&(item.visible == undefined || item.visible) && item.isChildrenAction">
+            <a class="dropdown-toggle"
+               [attr.data-toggle]="dropdown"
+               onclick="return false;"
+               (click)="memoriseMenu(topMenuItemsLeft.length + i - 1, $event)">
+              <i class="fa {{item.icon}} "></i> &nbsp;{{item.title | translate }}<b class="caret"></b>
+            </a>
+
+            <ul class="dropdown-menu"
+                [style.display]="getDisplayMenu(topMenuItemsLeft.length + i - 1)">
+              <li *ngFor="let itemChildren of item.children; let i = index"
+                  title="{{itemChildren.infoBulle | translate }}">
+                <ng-template [ngIf]="itemChildren.isAction">
+                  <a *ngIf="itemChildren.visible === true"
+                     (click)="itemChildren.action()"
+                     routerLink="{{itemChildren.link}}">
+                    <i class="fa {{itemChildren.icon}} fa-fw"
+                       *ngIf="itemChildren.icon"></i>
+                    {{itemChildren.infoBulle | translate }}
+                  </a>
+                </ng-template>
+              </li>
+            </ul>
+          </ng-template>
+
+          <ng-template [ngIf]="!item.children && item.isRouterLink">
+            <a routerLink="{{item.link}}">
+              <i class="fa-inverse fa {{item.icon}} "></i>&nbsp; {{item.title | translate }}
+            </a>
+          </ng-template>
+
+          <ng-template [ngIf]="!item.children && !item.isRouterLink">
+            <a href="{{item.link}}">
+              <i class="fa-inverse fa {{item.icon}} "></i>&nbsp; {{item.title | translate }}
+            </a>
+          </ng-template>
+        </li>
+
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+
+
+        <li class=""
+            *ngFor="let item of menuItemsRight; let i = index"
+            title="{{item.infoBulle | translate}}">
+
+          <ng-template [ngIf]="item.visible !== false">
+            <ng-template [ngIf]="item.isAction && !item.isChildrenAction">
+              <a [ngClass]="{'dropdown-toggle':item.children!= undefined}"
+                 (click)="item.action()"
+                 [attr.data-toggle]="item.children!= undefined? 'dropdown':''"
+                 [class.readonly]="item.disabled">
+                <i class="fa fa-lg {{item.icon}} "></i>&nbsp; {{item.title | translate}}
+                <b class="caret"
+                   *ngIf="item.children"></b>
+                <span class="badge"
+                      *ngIf="item.addBadge"
+                      id="{{item.idBadge}}">{{ getBadgeNumber(item.idBadge) }}</span>
+                <sup id="tools_warning"
+                     class="toolbar_warning"
+                     *ngIf="item.addToolWarning"><i class="fa fa-lg fa-exclamation-triangle"></i></sup>
+              </a>
+            </ng-template>
+
+            <ng-template [ngIf]="!item.isAction && !item.isChildrenAction">
+              <ng-template [ngIf]="item.isRouterLink">
+                <a [ngClass]="{'dropdown-toggle':item.children!= undefined}"
+                   target="{{item.target}}"
+                   [attr.data-toggle]="item.children!= undefined? 'dropdown':''"
+                   routerLink="{{item.link}}"
+                   [class.readonly]="item.disabled" [attr.aria-label]="item.infoBulle | translate">
+                  <i class="fa fa-lg {{item.icon}} "></i>&nbsp; {{item.title | translate }}
+                  <b class="caret"
+                     *ngIf="item.children"></b>
+                  <span class="badge"
+                        *ngIf="item.addBadge &&   getBadgeNumber(item.idBadge)!='0'"
+                        id="{{item.idBadge}}">{{ getBadgeNumber(item.idBadge) }}</span>
+                  <sup id="tools_warning"
+                       class="toolbar_warning"
+                       *ngIf="item.addToolWarning"><i class="fa fa-lg fa-exclamation-triangle"></i></sup>
+                </a>
+              </ng-template>
+
+              <ng-template [ngIf]="!item.isRouterLink && !item.isChildrenAction">
+                <a [ngClass]="{'dropdown-toggle':item.children!= undefined}"
+                   target="{{item.target}}"
+                   [attr.data-toggle]="item.children!= undefined? 'dropdown':''"
+                   href="{{item.link}}"
+                   [class.readonly]="item.disabled" [attr.aria-label]="item.infoBulle | translate">
+                  <i class="fa fa-lg {{item.icon}} "></i>&nbsp; {{item.title | translate }}
+                  <b class="caret"
+                     *ngIf="item.children"></b>
+                  <span class="badge"
+                        *ngIf="item.addBadge"
+                        id="{{item.idBadge}}"
+                        title="{{item.infoBulle| translate}}">{{ getBadgeNumber(item.idBadge) }}</span>
+                  <sup id="tools_warning"
+                       class="toolbar_warning"
+                       *ngIf="item.addToolWarning"><i class="fa fa-lg fa-exclamation-triangle"></i></sup>
+                </a>
+              </ng-template>
+            </ng-template>
+
+
+            <ng-template [ngIf]="item.children && !item.isChildrenAction">
+              <ul class="dropdown-menu">
+                <li *ngFor="let item of item.children; let i = index"
+                    title="{{item.infoBulle | translate}}">
+                  <a href="{{item.link}}"><i class="fa {{item.icon}} fa-fw"
+                       [class.readonly]="item.disabled"></i>{{item.title | translate}}</a>
+                </li>
+              </ul>
+            </ng-template>
+
+          
+          </ng-template>
+        </li>
+      </ul>
+
+      <div id="div-titre">
+        <span id="span-titre">{{titreSite | translate}}</span>
+
+        <ng-template [ngIf]="msgModulesInsactifs">
+          <span title="{{msgModulesInsactifs}}">
+            <a id="probleme-serveur">
+              <i class="fa fa-exclamation-triangle blinking"></i>
+            </a>
+          </span>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</nav>

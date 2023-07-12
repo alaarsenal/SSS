@@ -1,0 +1,83 @@
+.header {
+    background-color: #555555;
+    color: white;
+    font-size: 1.5em;
+    font-weight: 300;
+    margin: 0px 15px;
+    min-height: 45px;
+    padding: 5px 10px 5px 10px;
+}
+
+.header-title i {
+    font-size: 120%;
+    vertical-align: middle;
+}
+
+.header-title span {
+    padding-left: 10px;
+    vertical-align: middle;
+}
+
+.header-actions button {
+    margin-left: 5px;
+}
+
+.padding-15 {
+    padding: 15px;
+}
+
+.padding-top-5 {
+    padding-top: 5px !important;
+}
+
+#tbl-usager-comm {
+    margin-top: 15px;
+    width: 100%;
+}
+
+table {
+    height: 1px; /* Sera ignoré mais nécessaire */
+    padding: 5px;
+}
+
+.table {
+    margin-bottom: 0px;
+}
+
+.table td {
+    padding: 0px;
+    vertical-align: middle;
+  }
+  
+td textarea {
+    border-radius: 5px;
+    color: #AAAAAA;
+    height: 100%;
+    min-height: 35px;
+    resize: vertical;
+    width: 100%;
+}
+
+/* Retour à la ligne pour les cases à cocher + texte normal */
+::ng-deep .mat-checkbox-layout {
+    font-weight: normal !important;
+    white-space: normal !important;
+}
+
+/* Ajustement hauteur des chosen */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 10px 0 5px 0;
+    border-top: none;
+}
+::ng-deep .mat-form-field-wrapper{
+    padding-bottom: 0px;
+}
+
+/* Texte noir pour chosen disable */
+/* ::ng-deep .mat-input-element:disabled, .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+    color: black;
+} */
+
+.archive {
+    color: #AAAAAA;
+}

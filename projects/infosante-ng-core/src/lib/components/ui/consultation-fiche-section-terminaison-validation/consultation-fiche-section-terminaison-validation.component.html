@@ -1,0 +1,70 @@
+<msss-sigct-field-set *ngIf="displaySection"
+                      id="sectionValidationFinIntervention"
+                      titleFieldset="{{ 'sigct.ss.f_appel.consultation.terminaison.validfinintervention' | translate}}">
+  <div class="row pb-0-5">
+    <div class="col-md-6 print-block"
+         *ngIf="displayValidations">
+      <div *ngFor="let indicateur of dto.validations"
+           class="row">
+        <div class="col-md-9">
+          <label>{{indicateur.nomReferenceValidation}} :</label>
+        </div>
+        <div class="col-md-3">
+          <span>{{indicateur.reponse}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 print-block">
+      <div class="row pb-0-5"
+           *ngIf="displayRaisonCpInconnu">
+        <div class="col-md-12">
+          <div class="raison-label">
+            <label>{{ 'sigct.sa.f_appel.consultation.terminaison.validfinintervention.raisoncpnonsaisi' | translate }} :
+            </label>
+          </div>
+          <div class="raison-span">
+            <span>{{dto.nomRefRaisonCpInconnu}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row pb-0-5"
+           *ngIf="displayCategorieAppelant">
+        <div class="col-md-12">
+          <div class="conclusion-label">
+            <label>{{ 'sigct.sa.f_appel.consultation.terminaison.validfinintervention.concltypeinterloc' | translate }}
+              :
+            </label>
+          </div>
+          <div class="conclusion-span">
+            <span>{{dto.nomRefCategorieAppelant}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row"
+           *ngIf="displayDetail">
+        <div class="col-md-12">
+          <div class="detail-label">
+            <label>{{ 'sigct.ss.f_appel.consultation.terminaison.validfinintervention.details' | translate }} :
+            </label>
+          </div>
+          <div class="detail-span">
+            <span>{{dto.details}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row"
+       *ngIf="displayProjetRecherche">
+    <div class="col-md-12">
+      <div class="projet-label">
+        <label>{{ 'sigct.sa.f_appel.consultation.terminaison.validfinintervention.projetrech' | translate }} :</label>
+      </div>
+      <div class="projet-span">
+        <div *ngFor="let item of dto.projetRecherches">
+          <span>{{item.referenceProjetRechercheNom}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</msss-sigct-field-set>

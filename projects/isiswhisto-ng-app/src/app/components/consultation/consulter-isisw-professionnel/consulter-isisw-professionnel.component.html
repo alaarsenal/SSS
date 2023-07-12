@@ -1,0 +1,54 @@
+<msss-sigct-content-zone id="consulter-isisw-section-usager"
+                         title="{{ 'sigct.ss.c_appelsisisw.titreprofessionnel' | translate }}">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-9">
+        <label>
+          {{'sigct.ss.c_appelsisisw.appeltraitepar' | translate}} :
+        </label>
+        <span>{{dto.appelTraitePar}}</span>
+      </div>
+      <div class="col-md-3">
+        <label>
+          {{'sigct.ss.c_appelsisisw.poste' | translate}} :
+        </label>
+        <span>{{dto.poste}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <label>
+          {{'sigct.ss.c_appelsisisw.debutappel' | translate}} :
+        </label>
+        <span>{{dto.debutAppel}}</span>
+      </div>
+      <div class="col-md-3">
+        <label>
+          {{'sigct.ss.c_appelsisisw.finappel' | translate}} :
+        </label>
+        <span>{{dto.finAppel}}</span>
+      </div>
+      <div class="col-md-3">
+        <label>
+          {{'sigct.ss.c_appelsisisw.duree' | translate}} :
+        </label>
+        <span>{{dto.dureeAppel}}</span>
+      </div>
+      <div class="col-md-3">
+        <label>
+          {{'sigct.ss.c_appelsisisw.idfiche' | translate}} :
+        </label>
+        <span>{{dto.idFicheAppelIsisw}}</span>
+      </div>
+    </div>
+    <div class="row"
+         *ngIf="dto.saisieRapideEffectueePar">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.appelsaisierapidepar' | translate}} :
+        </label>
+        <span>{{dto.saisieRapideEffectueePar}}</span>
+      </div>
+    </div>
+  </div>
+</msss-sigct-content-zone>

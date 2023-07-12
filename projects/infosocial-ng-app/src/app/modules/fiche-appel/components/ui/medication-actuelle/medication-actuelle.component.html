@@ -1,0 +1,85 @@
+<div class="col-md-12 enlever-espace no-padding-right" title="">
+    <div class="col-md-6 background-gris no-padding-right">
+
+        <form name="form" (ngSubmit)="onSubmit()" #fMed="ngForm">
+
+          <div class="col-md-11 no-padding-left no-padding-right">
+            <div class="row margin-top-5">
+                <div class="col-sm-6">
+                    <msss-input-text id="medicationInputText"
+                                    #medication
+                                    name="medication"
+                                    maxlength="255"
+                                    [valide]="isMedicationValide"
+                                    label="sigct.so.f_appel.analyse.medactuelle.medication"
+                                    [(ngModel)]="medicationSocialSaisi.medication"
+                                    (focus)="onFocusMedication($event)"
+                                    [disabled]="disabledAll">
+                    </msss-input-text>
+                </div>
+
+                <div class="col-sm-6">
+                    <msss-input-text id="DetailmedicationInputText"
+                                    name="detail"
+                                    maxlength="255"
+                                    label="sigct.so.f_appel.analyse.medactuelle.details"
+                                    [(ngModel)]="medicationSocialSaisi.details"
+                                    [disabled]="disabledAll">
+                    </msss-input-text>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-1 col-btn">
+              <div class="col-sm-1 enlever-espace margin-top-15 margin-left-m1">
+                  <div id="medicationActionIcon">
+                      <button type="submit" style="display:none;" #submitBtn [disabled]="disabledAll">Submit</button>
+                      <msss-action-link [actionLinks]="actionLinks" [disableAll]="disabledAll"></msss-action-link>
+                  </div>
+              </div>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="col-md-6 background-blanc no-padding-right">
+
+        <msss-list-info-action [list]="this.listeMedications"
+                               [formatAction]="formatActionMedication"
+                               (modifierAction)="confirmerModifierMedication($event)"
+                               editerId="editerBtnMedication"
+                               supprimerId="supprimerBtnMedication"
+                               (supprimerAction)="confirmerSupprimerMedication($event)"
+                               [cacherAfficherReduire]="true"
+                               [idElementModifieSelectionne]="idMedicationSocialSelectionne"
+                               [afficherBoutonSupprimer]="true">
+        </msss-list-info-action>
+
+        <modal-confirmation id-container="confirm_popup_modif_medication">
+            <div class="modal-confirm-body modal-body">
+              {{ messageConfirmModif }}
+            </div>
+
+            <div class="modal-confirm-footer modal-footer">
+              <button id="confi_med_btn_oui" type="button" data-dismiss="modal"
+                class="btn btn-primary btn-sm btn-key-action visibility-visible" (click)="remplacerMedication()">Oui</button>
+              <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+                id="cancel_confirm_button_med">Non</button>
+            </div>
+          </modal-confirmation>
+
+          <modal-confirmation id-container="confirm_popup_supri_medication">
+            <div class="modal-confirm-body modal-body">
+              {{ messageConfirmSupp }}
+            </div>
+
+            <div class="modal-confirm-footer modal-footer">
+              <button id="supri_med_btn_oui" type="button" data-dismiss="modal"
+                class="btn btn-primary btn-sm btn-key-action visibility-visible" (click)="supprimerMedication()">Oui</button>
+              <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+                id="cancel_delete_button_med">Non</button>
+            </div>
+          </modal-confirmation>
+    </div>
+</div>

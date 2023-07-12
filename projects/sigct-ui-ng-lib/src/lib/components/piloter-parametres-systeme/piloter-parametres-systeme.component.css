@@ -1,0 +1,79 @@
+.piloter-parametre-systeme-component {
+  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.margin-bottom-45 {
+    margin-bottom: 45px;
+}
+
+.piloterParamsSystemeEnModifTitleSante {
+  font-weight: 700;
+  font-size: larger;
+  border-bottom: solid 2px #C9DC87;
+}
+
+.piloterParamsSystemeEnModifTitleSocial {
+  font-weight: 700;
+  font-size: larger;
+  border-bottom: solid 2px #e8aa31;
+}
+
+.container {
+    min-height: 30px; 
+    padding-left: 40px;  
+    padding-right: 40px; 
+    padding-top: 30px;
+    margin-left: 0px;
+    padding-bottom: 15px;
+    flex: auto;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+.margin-bottom-15 {
+    margin-bottom: 15px;;
+}
+
+.margin-right-10 {
+    margin-right:  10px;
+}
+
+.label-font-size {
+    font-size: 20px;
+}
+
+/* ********************* CSS applied to child table pagination ************************* */
+
+::ng-deep tr.mat-row:last-child td.mat-cell{
+    border-bottom: 1px solid black;
+  }
+  
+  ::ng-deep table.mat-table {
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+  }
+  
+  ::ng-deep div.mat-paginator-container {
+  background-color: #d9edf7!important;
+  }
+  
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 1.4375em 0;
+  }
+
+  .mat-header-cell {
+    border-bottom: 1px solid #111 !important;
+    border-top: 1px solid #111 !important;
+  }
+
+  ::ng-deep th.mat-header-cell:nth-of-type(3) {
+    width: 20px!important;
+   } 
+
+   ::ng-deep .mat-column-nom {
+    white-space: normal !important;
+    width: 470px !important;
+  }

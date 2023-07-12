@@ -1,0 +1,58 @@
+.center {
+  text-align: center;
+}
+
+.oui-ml {
+  margin-left: 1rem;
+}
+
+.non-ml {
+  margin-left: 1.2rem;
+}
+
+.so-ml {
+  margin-left: 1.2rem;
+}
+
+.line-height {
+  line-height: 2.5;
+}
+
+label {
+  display: inline-block;
+}
+
+@media (max-width: 1440px) {
+  .oui-ml {
+    margin-left: 1rem;
+  }
+}
+
+.padding-left-45{
+  padding-left: 45px !important;
+}
+
+@media (min-width: 1441px) and (max-width: 1920px){
+ .padding-left-45{
+    padding-left: 45px !important;
+ }
+}
+
+
+@media (max-width: 1440px) {
+  .padding-left-45{
+    padding-left: 15px !important;
+  }
+}
+
+::ng-deep .disabled  .mat-form-field-outline-start,
+::ng-deep  .disabled .mat-form-field-outline-gap,
+::ng-deep .disabled   .mat-form-field-outline-end{
+    background:#eeeeee !important;
+}
+
+::ng-deep .disabled mat-icon { color: #ACACAC!important; }
+
+::ng-deep .disabled { color: #ACACAC!important; }
+
+::ng-deep .label_disabled { color: #aaa !important;}

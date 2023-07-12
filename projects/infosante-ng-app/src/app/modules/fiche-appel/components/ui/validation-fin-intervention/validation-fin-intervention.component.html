@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-6">
+    <msss-indicateurs-fin-intervention #validations [questions]="indicateursFinInterventions"
+      (indicateurChangedEvent)="onIndicateurChanged($event)" [isDisabled]="isDisabled">
+    </msss-indicateurs-fin-intervention>
+  </div>
+  <div class="col-md-6">
+    <div class="row mb-1">
+      <div class="col-md-12">
+        <msss-sigct-chosen id="raisoncpnonsaisi" name="raisoncpnonsaisi"
+          label="sigct.sa.f_appel.terminaison.validfinintervention.raisoncpnonsaisi"
+          [options]="inputOptionsRaisonCpNonSaisi" [valide]="raisonCpNonSaisiValide" [title]="infoBullRaisonCpNonSaisi"
+          [(ngModel)]="validationFinIntervention.codeRefRaisonCpInconnu" (ngModelChange)="onChangeRaisonCpNonSaisi()"
+          (optionSelected)="onOptionSelectedRaisonCpNonSaisi()"
+          [disabled]="!validationFinIntervention.codePostalUsagerInconnu || isDisabled"
+          [required]="(!(!validationFinIntervention.codePostalUsagerInconnu || isDisabled))&& typeFiche!='MTCP'"  required>
+        </msss-sigct-chosen>
+      </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-md-12">
+        <msss-sigct-chosen id="concltypeinterloc" name="concltypeinterloc"
+          label="sigct.sa.f_appel.terminaison.validfinintervention.concltypeinterloc"
+          [options]="inputOptionsConclusionEffectuee" [valide]="conclusionEffectueeValide"
+          [title]="infoBullConclusionEffectuee" [(ngModel)]="validationFinIntervention.codeRefCategorieAppelant"
+          (ngModelChange)="onChangeConclusionEffectuee()" (optionSelected)="onOptionSelectedConclusionEffectuee()"
+          [disabled]="isDisabled"
+          [required]="!isDisabled && typeFiche!='MTCP' "
+          required>
+        </msss-sigct-chosen>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <msss-input-textarea id="details" name="details"
+          label="sigct.sa.f_appel.terminaison.validfinintervention.details" rows="4" maxlength="255"
+          [(ngModel)]="validationFinIntervention.details" [disabled]="isDisabled" raccourcis=true>
+        </msss-input-textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-12 padding-left-28 no-padding-right">
+    <app-projet-recherche #projetrecherche [listeProjetRecherche]="listeProjetRecherche"
+      (projetRechercheSave)="onProjetRechercheSave($event)"
+      (projetRechercheDelete)="onProjetRechercheDelete($event)" [isDisabled]="isDisabled"></app-projet-recherche>
+  </div>
+</div>
+<br/>

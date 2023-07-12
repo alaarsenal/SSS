@@ -1,0 +1,9 @@
+label {
+  display: inline;
+  margin-right: .5rem;
+}
+
+a {
+  cursor: pointer;
+  font-weight: bold;
+}

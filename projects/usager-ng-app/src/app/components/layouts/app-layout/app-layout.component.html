@@ -1,0 +1,13 @@
+<div class="main">
+	<msss-top-menu 
+		[topMenuItemsLeft]="topLeftMenuItems" 
+		[topMenuItemsRight]="topRightMenuItems"
+		[titreSite]="'sigct.us.f_accueil.titre'"
+		[urlApi]="urlUsagerApi"
+		[prefixeUrlAideEnLigne]="prefixeUrlAideEnLigne">
+	</msss-top-menu>
+
+	<div class="conteneur">
+		<router-outlet></router-outlet>
+	</div>
+</div>

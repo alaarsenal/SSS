@@ -1,0 +1,29 @@
+/* Réaffiche le "x" que bootstrap retire des champs de type "search" */
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button !important;
+  }
+
+.datetimepicker {
+  max-width: 200px;
+}
+
+label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Suite au passage à Angular les champs sont devenus plus petits, donc il a fallu réduire la taille des champs de type datepicker */
+::ng-deep mat-datepicker-toggle.datepicker-button > button {
+  height: 1.5em !important;
+}
+
+::ng-deep .mat-calendar-table-header {
+  color: #757575;
+}
+
+::ng-deep .mat-datepicker-content {
+  color: #757575;
+  border: 0.5px solid;
+  border-color: #757575;
+}

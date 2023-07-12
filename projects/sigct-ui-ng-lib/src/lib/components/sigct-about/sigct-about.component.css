@@ -1,0 +1,37 @@
+.display-none {
+    display: none !important;
+}
+
+.sigct-about-component {
+  height: calc(100vh - 51px);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.main {
+  flex: auto;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.alertContainer {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+button {
+  font-size: 200%;
+  font-weight: bold;
+  padding-left: 0;
+}
+
+button:focus-visible, .btn:focus {
+  /* outline: none; */
+  outline: 1px dotted navy;
+}
+
+.width-200px {
+  width: 200px; 
+}

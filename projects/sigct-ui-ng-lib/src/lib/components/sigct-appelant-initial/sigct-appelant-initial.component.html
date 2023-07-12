@@ -1,0 +1,92 @@
+<div class="row">
+    <msss-cti-aide-saisie *ngIf="infoAppelCti?.nomAppel || infoAppelCti?.noTelAppel"
+                          [infoAppelCti]="infoAppelCti"
+                          (nomSelected)="onNomCtiSelected($event)"
+                          (prenomSelected)="onPrenomCtiSelected($event)"
+                          (telephoneSelected)="onTelephoneCtiSelected($event)"></msss-cti-aide-saisie>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <msss-input-text id="nomApIn"
+                         name="nom"
+                         label="sigct.ss.f_appel.aplntusag.nomaplnt"
+                         [(ngModel)]="appelantDTO.nom"
+                         [maxlength]="MAX_LENGTH_NOM"
+                         (keyup)="onKey($event)"
+                         [disabled]="isDisabled">
+        </msss-input-text>
+    </div>
+
+    <div class="col-md-2">
+        <msss-input-text id="prenomApIn"
+                         name="prenom"
+                         label="sigct.ss.f_appel.aplntusag.prenomaplnt"
+                         [(ngModel)]="appelantDTO.prenom"
+                         [maxlength]="MAX_LENGTH_PRENOM"
+                         (keyup)="onKey($event)"
+                         [disabled]="isDisabled">
+        </msss-input-text>
+    </div>
+
+    <div class="col-md-4">
+        <div>
+            <label [class]="(isDisabled)?'control-label label_disabled':'control-label'">{{
+                "sigct.ss.f_appel.aplntusag.org" | translate }}
+                <a *ngIf="!isDisabled; else RSSSnoLink"
+                   href="#"
+                   onclick="return false"
+                   (click)="openDialogRrss()">{{"sigct.ss.f_appel.aplntusag.rrss" | translate}}</a>
+                <ng-template #RSSSnoLink>RSSS</ng-template>
+            </label>
+        </div>
+        <div style="display: flex;">
+            <div style="flex-grow: 1;">
+                <msss-input-text id="rrssNom"
+                                 name="rrssNom"
+                                 [(ngModel)]="appelantDTO.rrssDTO.rrssNom"
+                                 [disabled]="isDisabled"
+                                 #rrssNom="ngModel"
+                                 isReadonly="true"
+                                 cssClass="rrss-field"
+                                 title="{{appelantDTO.rrssDTO.rrssNom}}"
+                                 ariaLabel="{{'sigct.ss.f_appel.aplntusag.rrss' | translate}}">
+                </msss-input-text>
+            </div>
+            <div class="rrss-button"
+                 *ngIf="appelantDTO?.rrssDTO?.rrssNom">
+                <a href="#"
+                   onclick="return false"
+                   #suppRrssBtn
+                   (click)="suppRrss()"
+                   class="btn btn-default padding-x-3-9"
+                   title="Supprimer"><i class="fa fa-trash-o fa-fw"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <msss-input-text id="details"
+                         name="details"
+                         label="sigct.ss.f_appel.aplntusag.detailsaplnt"
+                         [(ngModel)]="appelantDTO.details"
+                         maxlength="255"
+                         [disabled]="isDisabled"
+                         raccourcis=true>
+        </msss-input-text>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <label>{{"sigct.ss.f_appel.aplntusag.titrecomm" | translate}}</label>
+    </div>
+</div>
+
+<msss-sigct-appelant-communication [moyenCommunication]="moyenCommunication"
+                                   [typeCoordMoyenCommunication]="typeCoordMoyenCommunication"
+                                   [appelantCommunications]="appelantCommunications"
+                                   (outputSubmitAppelantInitialCommunication)="onSubmitAppelantInitialCommunication()"
+                                   (outputSubmitUpdateAppelantComm)="onSubmitUpdateAppelantComm($event)"
+                                   [isDisabled]="isDisabled">
+</msss-sigct-appelant-communication>

@@ -1,0 +1,109 @@
+<div class="col-md-12 enlever-espace no-padding-right" title="">
+    <div class="col-md-6 background-gris no-padding-right">
+      <form name="formDemarcheAnterieures" (ngSubmit)="onSubmitDemarcheAnterieures()" #fCom="ngForm">
+
+        <div class="col-md-11 no-padding-left no-padding-right">
+          <div class="row">
+
+            <div class="col-sm-12">
+
+              <msss-input-text id="autosoin" #auto name="autosoin" label="sigct.sa.f_appel.evaluation.autosoins"
+                maxlength="255" [(ngModel)]="demarcheAnterieures.autosoin" required  [valide]="isAutosoinValide" (focusout)="onNgModelChange()"
+                [disabled]="isDisabled" raccourcis=true>
+              </msss-input-text>
+            </div>
+
+          </div>
+
+
+          <div class="row">
+
+            <div class="col-sm-4 col-sm-4plus no-padding-right">
+
+              <msss-sigct-chosen #liste_resultat label="sigct.sa.f_appel.evaluation.rsltobtenus" name="resultatDemaAnt" required
+                id="resultatDemAnt" [options]="inputOptionsResultatObtenu" [valide]="isResultatValide"
+                [(ngModel)]="demarcheAnterieures.referenceResultatObtenuId" [title]="infoBulleResultat"
+                (ngModelChange)="onResultatChange()" (optionSelected)="onResultatValide($event)"
+                [disabled]="isDisabled">
+              </msss-sigct-chosen>
+            </div>
+
+
+            <div class="col-sm-7 col-sm-7plus padding-right-15">
+              <msss-input-text id="detailsDemAnt" name="detailsDemAnt" label="sigct.sa.f_appel.evaluation.details"
+                maxlength="255" [(ngModel)]="demarcheAnterieures.details" [disabled]="isDisabled"
+                raccourcis=true>
+              </msss-input-text>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="col-md-1 col-btn">
+
+          <div class="col-sm-1 enlever-espace margin-top-30 margin-left-m1">
+            <div id="demAutoActionIcon">
+              <button type="submit" style="display:none" #submitDemAutoBtn>Submit</button>
+              <msss-action-link [actionLinks]="actionLinks" [disableAll]="isDisabled"></msss-action-link>
+            </div>
+          </div>
+
+        </div>
+
+
+
+    <modal-confirmation id-container="confirm_popup_ajout">
+      <div class="modal-confirm-body modal-body">
+        {{messageConfirmerAjout}}
+      </div>
+
+      <div class="modal-confirm-footer modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+          id="ok_confirm_button" (click)="remplacerDemarcheAnterieures()">Oui</button>
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+          id="cancel_confirm_button">Non</button>
+      </div>
+    </modal-confirmation>
+
+
+
+    </form>
+
+  </div>
+
+  <div class="col-md-6 background-blanc no-padding-right">
+    <msss-list-info-action [list]="this.listeDemarcheAnterieures" [formatAction]="formatActionDemarcheAnterieures"
+      (modifierAction)="confirmerModifierDemarcheAnterieures($event)" editerId="editerBtnDemAuto"
+      supprimerId="supprimerBtnDemAuto" (supprimerAction)="confirmerSupprimerDemarcheAnterieures($event)"
+      [cacherAfficherReduire]="true" [afficherBoutonSupprimer]="true"
+      [idElementModifieSelectionne]="idElementModifieSelectionne" *ngIf="!isDisabled">
+    </msss-list-info-action>
+
+    <modal-confirmation id-container="confirm_popup_modif_dem_auto">
+      <div class="modal-confirm-body modal-body">
+        {{ messageConfirmerDemarcheAnterieures }}
+      </div>
+
+      <div class="modal-confirm-footer modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+          id="ok_confirm_button_dem_auto" (click)="remplacerDemarcheAnterieures()">Oui</button>
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+          id="cancel_confirm_button_dem_auto">Non</button>
+      </div>
+    </modal-confirmation>
+
+    <modal-confirmation id-container="confirm_popup_supri_dem_auto">
+      <div class="modal-confirm-body modal-body">
+        {{ messageSupprimerDemarcheAnterieures }}
+      </div>
+
+      <div class="modal-confirm-footer modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+          id="ok_supri_button_dem_auto" (click)="supprimerDemarcheAnterieurAnterieures()">Oui</button>
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+          id="cancel_supri_button_dem_auto">Non</button>
+      </div>
+    </modal-confirmation>
+  </div>
+  </div>

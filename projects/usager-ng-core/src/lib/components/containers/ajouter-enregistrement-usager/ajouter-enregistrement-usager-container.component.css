@@ -1,0 +1,55 @@
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+::ng-deep #ressources-pro-usager .panel-body {
+    padding-top: 2px;
+}
+
+::ng-deep #organisme-enregistrement-usager .panel-body {
+    padding-top: 2px;
+}
+
+::ng-deep #medications-usager .panel-body {
+    padding-top: 2px;
+}
+
+::ng-deep #soins-service .panel-body {
+  padding-top: 2px;
+  padding-bottom: 0px;
+}
+
+::ng-deep #indicateurs-mesures-securite .panel-body {
+  padding-top: 2px;
+}
+
+::ng-deep #autres-informations-enregistrement .panel-body {
+    padding-top: 1px;
+}
+
+::ng-deep #fichers-enregistrement .panel-body {
+    padding-top: 1px;
+}
+
+::ng-deep textarea {
+    line-height: 16px !important;
+}
+
+.contenu-avec-scrollbar {
+    height: calc(100% - 45px);
+    width: 100%;
+    /* overflow-y: auto; */
+    overflow-x: hidden;
+}
+/*
+::ng-deep .cdk-overlay-container {
+	z-index: 1065 !important;
+} */
+/*
+::ng-deep .contentZone {
+    height: 100% !important;
+} */
+
+.bande-flottante-container {
+    padding-left: 338px;
+}

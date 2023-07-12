@@ -1,0 +1,38 @@
+.contenu-avec-scrollbar {
+    height: calc(100% - 45px);
+    width: 100%;
+    overflow-y: auto;
+}
+
+a.addComm:hover, a.addComm:active {font-size: 125%;}
+
+div.comm:not(:nth-last-of-type(1)) {
+	border-bottom: 1px solid #555555;
+}
+
+.aucuneComm{
+    margin-top: 30px;
+     margin-left: 35px;
+} 
+
+.comm {
+    margin-top: 20px;  
+    margin-left: 20px;
+     margin-right: 20px;
+} 
+
+.commInfo {
+    color :black; 
+    height: 27px;
+    padding-bottom: 40px;
+} 
+
+.plus-color {
+    color:#555555
+}
+
+.plus-container {
+    text-align:right;
+     font-size: 20px; 
+     height: 27px;
+}

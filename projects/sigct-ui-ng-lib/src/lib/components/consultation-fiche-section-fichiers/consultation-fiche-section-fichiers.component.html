@@ -1,0 +1,14 @@
+<msss-sigct-content-zone id="section-fichiers"
+                         title="{{'sigct.ss.f_appel.consultation.fichiersattaches' | translate}}">
+  <app-consultation-fichiers [loadExternalFichiers]="true"
+                             [listeFichiers]="this.liste"
+                             (onTelechargeFichier)="onTelechargerFichier($event)"></app-consultation-fichiers>
+  <div *ngIf="this.liste?.length == 0">
+    <div class="row padding-left-15">
+
+      <p>{{'sigct.ss.f_appel.consultation.aucunfichiersattaches' | translate}}</p>
+
+    </div>
+
+  </div>
+</msss-sigct-content-zone>

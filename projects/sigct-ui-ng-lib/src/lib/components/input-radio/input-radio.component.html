@@ -1,0 +1,20 @@
+<label [id]="label_id" for={{id}} [ngClass]="(isDisabled)?'control-label label_disabled':'control-label'"> {{label | translate}}
+  <span class="sr-only" *ngIf="!label">{{ariaLabel}}</span>
+  <span class="mandatory-indicator" *ngIf="required">*</span>
+</label>
+<mat-radio-group #radiogroup
+                 [id]="id"
+                 [name]="name"
+                 class="tp-radio-group"
+                 [(ngModel)]="value">
+  <mat-radio-button *ngFor="let item of inputOptionCollection.options"
+                    [value]="item.value"
+                    [disabled]="isDisabled"
+                    color="primary"
+                    [ngClass]="getInvalidClass()"
+                    [title]="item.description | translate">
+    <span [ngClass]="(isDisabled)?'disabled':'font-normal'"> {{item.label | translate}}</span>
+
+    <span class="sr-only" *ngIf="!item.label">{{item.value}}</span>
+  </mat-radio-button>
+</mat-radio-group>

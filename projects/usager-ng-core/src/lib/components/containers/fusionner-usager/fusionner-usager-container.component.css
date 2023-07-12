@@ -1,0 +1,64 @@
+.contenu-avec-scrollbar {
+    height: calc(100% - 45px);
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+table {
+    height: 1px; /* Sera ignoré mais nécessaire */
+}
+
+.table {
+    margin-bottom: 0px;
+}
+
+.table td {
+    padding: 0px;
+    vertical-align: middle;
+  }
+  
+td textarea {
+    color: #AAAAAA;
+    height: 100%;
+    min-height: 25px;
+    resize: vertical;
+    width: 100%;
+}
+
+/* Retour à la ligne pour les cases à cocher + texte normal */
+::ng-deep .mat-checkbox-layout {
+    font-weight: normal !important;
+    white-space: normal !important;
+}
+
+/* Ajustement hauteur des chosen */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 10px 0 5px 0;
+    border-top: none;
+}
+::ng-deep .mat-form-field-wrapper{
+    padding-bottom: 0px;
+}
+
+/* Texte noir pour chosen disable */
+/* ::ng-deep .mat-input-element:disabled, .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+    color: black;
+} */
+
+/** DIV espaceur */
+div.filler {
+    height: 15px;
+}
+
+textarea#usager-fusion-detail {
+    border-radius: 5px;
+}
+
+textarea#usager-fusion-detail.erreur {
+    border: 2px solid #F44336;
+}
+
+.padding-top-7 {
+    padding-top: 7px !important;
+}

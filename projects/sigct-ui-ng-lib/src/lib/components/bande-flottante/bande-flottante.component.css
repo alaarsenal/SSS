@@ -1,0 +1,35 @@
+.well {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.stiky {
+  position: fixed;
+  z-index: 1000;
+  margin-top: 1.5rem;
+}
+
+.pop-up {
+  margin-bottom: 7rem;
+}
+
+.row-boutons-interface {
+  height: 40px;
+}
+
+.btn:focus, .btn:active:focus {
+  outline: thin dotted;
+}
+
+.btn {
+  padding: 2px 4px !important;
+}
+
+.no-padding-left {
+  padding-left: 0px !important; 
+}
+
+.no-padding-right {
+  padding-right: 0px !important;
+}
+

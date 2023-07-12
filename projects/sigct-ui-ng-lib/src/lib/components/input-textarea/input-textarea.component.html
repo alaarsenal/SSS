@@ -1,0 +1,26 @@
+<div class="form-group " *ngIf="labelTop; else labelbotom">
+    <label [id]="label_id" for="{{id}}" class="control-label" [class]="(isDisabled)?'control-label label_disabled':'control-label'">{{label | translate }}
+        <span class="sr-only" *ngIf="!label">{{ariaLabel}}</span>
+      <span class="mandatory-indicator" *ngIf="isRequired">*</span>
+    </label>
+    <div>
+        <mat-form-field appearance="outline" class="mat-input-sigct" [class]="(isDisabled)?'disabled':''">
+            <textarea #inputchamp matInput [(ngModel)]="value" maxlength="{{maxlength}}" minlength="{{minlength}}" ng-required="inputValide"
+                rows="{{rows}}" placeholder="{{ placeholder }}" id="{{id}}" [ngClass]="getCSSResize()" [disabled]="isDisabled"
+                (keydown.space)="onKeySpaceDown($event)"
+                [style]="getMinHeight()">
+            </textarea>
+        </mat-form-field>
+    </div>
+</div>
+
+<ng-template #labelbotom>
+    <mat-form-field appearance="outline" class="mat-input-sigct" [class]="(isDisabled)?'disabled':''">
+        <textarea #inputchamp matInput [(ngModel)]="value" maxlength="{{maxlength}}" minlength="{{minlength}}" ng-required="inputValide"
+            rows="{{rows}}" placeholder="{{ placeholder }}" id="{{id}}"  [ngClass]="getCSSResize()" [disabled]="isDisabled"
+            (keydown.space)="onKeySpaceDown($event)"
+            [style]="getMinHeight()">
+        </textarea>
+    </mat-form-field>
+    <span class="sous-label-amj">{{label | translate }}</span>
+</ng-template>

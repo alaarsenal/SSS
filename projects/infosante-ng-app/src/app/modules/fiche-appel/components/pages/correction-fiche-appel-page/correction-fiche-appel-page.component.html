@@ -1,0 +1,19 @@
+<div class="main">
+  <div class="left-menu">
+    <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+  </div>
+  <div class="conteneur">
+    <div class="form-top-bar">
+      <msss-form-top-bar label="{{'sigct.ss.r_appel.consultation.titre' | translate}}"
+                         [options]="formTopBarOptions">
+      </msss-form-top-bar>
+    </div>
+    <div class="compos">
+      <ng-template #alertContainer></ng-template>
+      <sa-correction-fiche-appel-wrapper #correctionFicheWrapper
+                                         [idFicheAppel]="ficheAppelDto?.id"
+                                         (returnEvent)="onWrapperReturnEvent($event)">
+      </sa-correction-fiche-appel-wrapper>
+    </div>
+  </div>
+</div>

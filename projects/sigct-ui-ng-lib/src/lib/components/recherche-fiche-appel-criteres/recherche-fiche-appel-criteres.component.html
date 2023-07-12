@@ -1,0 +1,256 @@
+<div class="col-md-12 padding-left-15">
+    <div class="row">
+        <div class="col-md-2 padding-left-5 no-padding-right">
+            <div class="row">
+                <div class="col-md-12">
+                    <strong>{{'sigct.ss.r_appels.sctn_criteres_consultation.dhdbtperiodeappel'| translate}}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 padding-right-5">
+                    <msss-sigct-datepicker #dtdbperiodeappel
+                                           id="datedebutconsultation"
+                                           label=""
+                                           [(ngModel)]="criteresRecherche.dateDebutFicheAppelMin"
+                                           dateFormat="yyyy-mm-dd"
+                                           placeHolder="aaaa-mm-jj"
+                                           [ngModelOptions]="{standalone:true}"
+                                           [endDate]="demain"
+                                           (keydown.enter)="onExecuterRecherche()"
+                                           ariaLabel="date début">
+                    </msss-sigct-datepicker>
+                </div>
+                <div class="col-md-4 no-padding-left">
+                    <msss-input-text #heureDebutFicheAppelMin
+                                     id="heureDebutFicheAppelMin"
+                                     maxlength="5"
+                                     patternMask="Hh:m9"
+                                     placeholder="hh:mm"
+                                     [valide]="isHeureDebutMinValide"
+                                     [(ngModel)]="criteresRecherche.heureDebutFicheAppelMin"
+                                     (focusout)="onBlurHeureDtDebut()"
+                                     (keydown.enter)="onExecuterRecherche()"
+                                     ariaLabel="hh:mm">
+                    </msss-input-text>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <msss-sigct-chosen #roleactionconsultation
+                               id="roleactionconsultation"
+                               label="sigct.ss.r_appels.sctn_criteres_consultation.roleaction"
+                               name="roleactionconsultation"
+                               [options]="listeRoleAction"
+                               [(ngModel)]="criteresRecherche.idRfRoleAction"
+                               (keydown.enter)="onExecuterRecherche()">
+            </msss-sigct-chosen>
+        </div>
+        <div class="col-md-3 no-padding-left no-padding-right">
+            <div class="col-md-6"
+                 [class.width-100-percent]="domaine != 'SA'">
+                <msss-sigct-chosen #langueconsultation
+                                   id="langueconsultation"
+                                   label="sigct.ss.r_appels.sctn_criteres_consultation.langueappel"
+                                   name="langueconsultation"
+                                   [options]="listeLangueAppel"
+                                   [(ngModel)]="criteresRecherche.idRfLangueAppel"
+                                   (keydown.enter)="onExecuterRecherche()">
+                </msss-sigct-chosen>
+            </div>
+            <div class="col-md-6"
+                 [class.display-none]="domaine != 'SA'">
+                <msss-sigct-chosen #niveauurgenceconsul
+                                   id="niveauurgenceconsul"
+                                   label="sigct.ss.r_appels.sctn_criteres_consultation.nivurg"
+                                   name="niveauurgenceconsul"
+                                   [options]="listeNiveauUrgence"
+                                   [(ngModel)]="criteresRecherche.idRfNivUrgence"
+                                   (keydown.enter)="onExecuterRecherche()">
+                </msss-sigct-chosen>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <msss-sigct-chosen #organismeconsultation
+                               id="organismeconsultation"
+                               [label]="'sigct.' + domaine?.toLowerCase() + '.r_appels.sctn_criteres_consultation.regiontraitappel'"
+                               name="organismeconsultation"
+                               [options]="listeOrganisme"
+                               [(ngModel)]="criteresRecherche.idStOrganismes"
+                               (keydown.enter)="onExecuterRecherche()"
+                               (optionSelected)="onOrganismeSelected($event)">
+            </msss-sigct-chosen>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 padding-left-5 no-padding-right">
+            <div class="row">
+                <div class="col-md-12">
+                    <strong>{{'sigct.ss.r_appels.sctn_criteres_consultation.dhfinperiodeappel'| translate}}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 padding-right-5">
+                    <msss-sigct-datepicker #dtfnperiodeappel
+                                           id="datefinconsultation"
+                                           [(ngModel)]="criteresRecherche.dateDebutFicheAppelMax"
+                                           dateFormat="yyyy-mm-dd"
+                                           placeHolder="aaaa-mm-jj"
+                                           [ngModelOptions]="{standalone:true}"
+                                           [endDate]="demain"
+                                           (keydown.enter)="onExecuterRecherche()"
+                                           ariaLabel="date fin">
+                    </msss-sigct-datepicker>
+                </div>
+                <div class="col-md-4 no-padding-left">
+                    <msss-input-text #heureDebutFicheAppelMax
+                                     id="heureDebutFicheAppelMax"
+                                     maxlength="5"
+                                     patternMask="Hh:m9"
+                                     placeholder="hh:mm"
+                                     [valide]="isHeureDebutMaxValide"
+                                     [(ngModel)]="criteresRecherche.heureDebutFicheAppelMax"
+                                     (focusout)="onBlurHeureDtFin()"
+                                     (keydown.enter)="onExecuterRecherche()"
+                                     ariaLabel="hh:mm">
+                    </msss-input-text>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <msss-sigct-multi-select #raisoninterventionconsultation
+                                     id="raisoninterventionconsultation"
+                                     label="sigct.ss.r_appels.sctn_criteres_consultation.raisintrvtn"
+                                     name="raisoninterventionconsultation"
+                                     [options]="listeRaisonAppel?.options"
+                                     [(ngModel)]="criteresRecherche.idRfRaisonAppels"
+                                     (keydown.enter)="onExecuterRecherche()">
+            </msss-sigct-multi-select>
+        </div>
+        <div class="col-md-3">
+            <msss-sigct-chosen #professionnelconsultation
+                               id="professionnelconsultation"
+                               label="sigct.ss.r_appels.sctn_criteres_consultation.prfsnl"
+                               name="professionnelconsultation"
+                               [options]="listeIntervenant"
+                               [(ngModel)]="criteresRecherche.usernameIntervenant"
+                               (keydown.enter)="onExecuterRecherche()"
+                               (optionSelected)="onProfessionelSelected($event)">
+            </msss-sigct-chosen>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <strong>{{'sigct.ss.r_appels.sctn_criteres_consultation.dureeappelentre'| translate}}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-duree">
+                    <msss-input-text #dureedebut
+                                     id="dureedebut"
+                                     name="dureedebut"
+                                     maxlength="3"
+                                     patternMask="099"
+                                     [disableNumberCheck]="false"
+                                     [(ngModel)]="criteresRecherche.dureeFicheAppelMin"
+                                     [autocomplete]="'off'"
+                                     (keydown.enter)="onExecuterRecherche()"
+                                     ariaLabel="minutes minimum">
+                    </msss-input-text>
+                </div>
+                <div class="col-md-1 col-et">
+                    <strong>{{'sigct.ss.r_appels.sctn_criteres_consultation.dureeappelet'| translate}}</strong>
+                </div>
+                <div class="col-md-3 col-duree">
+                    <msss-input-text #dureefin
+                                     id="dureefin"
+                                     name="dureefin"
+                                     maxlength="3"
+                                     patternMask="099"
+                                     [disableNumberCheck]="false"
+                                     [(ngModel)]="criteresRecherche.dureeFicheAppelMax"
+                                     [autocomplete]="'off'"
+                                     (keydown.enter)="onExecuterRecherche()"
+                                     ariaLabel="minutes maximum">
+                    </msss-input-text>
+                </div>
+                <div class="col-md-1 col-minute">
+                    <strong>{{'sigct.ss.r_appels.sctn_criteres_consultation.dureeappelmin'| translate}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <msss-input-checkbox id="aucuneSuite"
+                                 name="acunesuite"
+                                 [options]="listeAucuneSuite"
+                                 [(ngModel)]="criteresRecherche.aucuneSuite"
+                                 #aucuneSuite="ngModel"
+                                 (keydown.enter)="onExecuterRecherche()">
+            </msss-input-checkbox>
+        </div>
+        <div class="col-md-4">
+            <msss-sigct-chosen #referenceconsult
+                               id="referenceconsult"
+                               label="sigct.ss.r_appels.sctn_criteres_consultation.rfrnc"
+                               name="referenceconsult"
+                               [options]="listeReference"
+                               [(ngModel)]="criteresRecherche.idRfReference"
+                               (keydown.enter)="onExecuterRecherche()">
+            </msss-sigct-chosen>
+        </div>
+        <div class="col-md-3">
+            <msss-sigct-chosen #orientationconsul
+                               id="orientationconsul"
+                               label="sigct.ss.r_appels.sctn_criteres_consultation.orttn"
+                               name="orientationconsul"
+                               [options]="listeOrientation"
+                               [(ngModel)]="criteresRecherche.idRfOrientation"
+                               (keydown.enter)="onExecuterRecherche()">
+            </msss-sigct-chosen>
+        </div>
+        <div class="col-md-3 col-identifiant">
+            <msss-input-text #identifiantappel
+                             id="identifiantappel"
+                             label="sigct.ss.r_appels.sctn_criteres_consultation.idappel"
+                             name="identifiantappel"
+                             maxlength="10"
+                             patternMask="0999999999"
+                             [disableNumberCheck]="false"
+                             [(ngModel)]="criteresRecherche.idFicheAppel"
+                             [autocomplete]="'off'"
+                             (keydown.enter)="onExecuterRecherche()">
+            </msss-input-text>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            <msss-sigct-chosen #centreactivite
+                               id="centreactivite"
+                               label="sigct.ss.r_appels.sctn_criteres_consultation.centreactiv"
+                               name="centreactivite"
+                               [options]="listeCentreActivite"
+                               [(ngModel)]="criteresRecherche.idRfCentreActivite"
+                               (keydown.enter)="onExecuterRecherche()">
+            </msss-sigct-chosen>
+        </div>
+        <div class="col-md-3">
+            <msss-input-text id="identifiantInteraction"
+                             label="sigct.ss.r_appels.sctn_criteres_consultation.interaction"
+                             name="identifiantInteraction"
+                             maxlength="18"
+                             [autocomplete]="'off'"
+                             [(ngModel)]="criteresRecherche.idInteraction"
+                             (keydown.enter)="onExecuterRecherche()">
+            </msss-input-text>
+        </div>
+        <div class="col-md-3 col-identifiant padding-top-16">
+            <msss-input-checkbox id="aucuneInteraction"
+                                 name="aucuneInteraction"
+                                 [options]="listeAucuneInteraction"
+                                 [(ngModel)]="criteresRecherche.aucuneInteraction"
+                                 (keydown.enter)="onExecuterRecherche()">
+            </msss-input-checkbox>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+.piloter-parametre-systeme-en-modif-component {
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    width: 100%;
+  }
+  
+.margin-bottom-45 {
+    margin-bottom: 45px;
+}
+
+.piloterParamsSystemeEnModifTitleSante {
+    font-weight: 700;
+    font-size: larger;
+    border-bottom: solid 2px #C9DC87;
+}
+
+.piloterParamsSystemeEnModifTitleSocial {
+    font-weight: 700;
+    font-size: larger;
+    border-bottom: solid 2px #e8aa31;
+}
+
+.container {
+    min-height: 30px; 
+    padding-left: 40px;  
+    padding-right: 40px; 
+    padding-top: 30px;
+    margin-left: 0px;
+    padding-bottom: 15px;
+    flex: auto;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.margin-bottom-15 {
+    margin-bottom: 15px;;
+}
+
+.margin-right-10 {
+    margin-right:  10px;
+}
+
+.label-font-size {
+    font-size: 20px;
+}
+
+.float-right {
+    float: right;
+}

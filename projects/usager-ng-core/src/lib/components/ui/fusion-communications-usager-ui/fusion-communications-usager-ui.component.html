@@ -1,0 +1,104 @@
+<msss-sigct-content-zone id="zone-communications"
+                         title="sigct.usager.fusion.communications">
+    <div class="row">
+        <div class="col-md-12 padding-bottom-10">
+            <table id="tbl-fusion-comm"
+                   class="table">
+                <colgroup>
+                    <!-- <col style="width: 37.5%;" />
+                    <col style="width: 37.5%;" />
+                    <col style="width: 25%;" /> -->
+                    <col style="width: 33%;" />
+                    <col style="width: 33%;" />
+                    <col style="width: 33%;" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-center">{{"sigct.usager.fusion.usager" | translate}} #{{idUsager1}}</th>
+                        <th class="text-center">{{"sigct.usager.fusion.usager" | translate}} #{{idUsager2}}</th>
+                        <th class="text-center">{{"sigct.usager.fusion.infofusion" | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usagerComms of tableauCommunications; let i = index">
+                        <td class="vertical-align-top">
+                            <div *ngIf="usagerComms[0]">
+                                <ng-template
+                                             *ngTemplateOutlet="usagerCommTemplate; context: {usagerCommDto : usagerComms[0]}">
+                                </ng-template>
+                            </div>
+                        </td>
+                        <td class="vertical-align-top">
+                            <div *ngIf="usagerComms[1]">
+                                <ng-template
+                                             *ngTemplateOutlet="usagerCommTemplate; context: {usagerCommDto : usagerComms[1]}">
+                                </ng-template>
+                            </div>
+                        </td>
+                        <td>
+                            <table class="tbl-fusion-comm-boutons"
+                                   width="100%">
+                                <colgroup>
+                                    <col />
+                                    <col style="width: 20px;" />
+                                    <col style="width: 20px;" />
+                                </colgroup>
+                                <tr>
+                                    <td>
+                                        <div class="readonly-div"
+                                             [class.erreur]="indexCommunicationsNonValides.includes(i)">
+                                            <ng-template
+                                                         *ngTemplateOutlet="usagerCommTemplate; context: {usagerCommDto : usagerComms[2]}">
+                                            </ng-template>
+                                        </div>
+                                    </td>
+                                    <td class="vertical-align-middle">
+                                        <button id="btn-editer-{{usagerComms[2]?.id}}"
+                                                class="btn-link color-black"
+                                                title="{{'sigct.usager.fusion.modifierinfobulle' | translate}}"
+                                                (click)="onEditerCommunication(i)">
+                                            <i class="fa fa-pencil-square-o font-size-120pct"></i>
+                                        </button>
+                                    </td>
+                                    <td class="vertical-align-middle">
+                                        <button id="btn-archiver-{{usagerComms[2]?.id}}"
+                                                class="btn-link color-black"
+                                                title="{{'sigct.usager.fusion.supprimerinfobulle' | translate}}"
+                                                (click)="onSupprimerCommunication(i)">
+                                            <i class="fa fa-trash-o font-size-120pct"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</msss-sigct-content-zone>
+
+<!-- Template pour afficher une communication -->
+<ng-template #usagerCommTemplate
+             let-usagerCommDto="usagerCommDto">
+    <ng-container *ngIf="usagerCommDto">
+        <div [class.archive]="!usagerCommDto.actif">
+            <ng-container *ngIf="usagerCommDto.numero">
+                <span>{{usagerCommDto.numero | telephonePipe: false}}</span>
+                <span *ngIf="usagerCommDto.poste"> poste {{usagerCommDto.poste}}</span>
+            </ng-container>
+            <ng-container *ngIf="usagerCommDto.courriel">
+                <span>{{usagerCommDto.courriel}}</span>
+            </ng-container>
+            <ng-container *ngIf="!usagerCommDto.numero && !usagerCommDto.courriel">
+                <span>{{usagerCommDto.coordonnees | telephonePipe: true }}</span>
+            </ng-container>
+            <span> - </span>
+            <span class="font-weight-bold">{{usagerCommDto.nomTypeEquipComm}}
+                {{usagerCommDto.nomTypeCoordComm}}</span>
+            <br />
+            <span class="font-style-italic"
+                  *ngIf="usagerCommDto.detail">({{usagerCommDto.detail}})</span>
+        </div>
+    </ng-container>
+</ng-template>

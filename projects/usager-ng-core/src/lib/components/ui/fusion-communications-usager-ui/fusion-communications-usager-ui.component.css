@@ -1,0 +1,54 @@
+table {
+    height: 1px; /* Sera ignoré mais nécessaire */
+}
+
+.table {
+    margin-bottom: 0px;
+}
+
+.table td {
+    padding: 5px;
+    vertical-align: middle;
+}
+  
+table.tbl-fusion-comm-boutons {
+    height: 100%;
+}
+
+table.tbl-fusion-comm-boutons td {
+    border: none;
+    padding: 0;
+}
+
+.archive {
+    color: #AAAAAA;
+}
+
+.color-black {
+    color: black;
+}
+
+.erreur {
+    border: 2px solid #F44336 !important;
+}
+
+.font-size-120pct {
+    font-size: 120%;
+}
+
+.readonly-div {
+    border: 1px solid #DDDDDD;
+    border-radius: 5px;
+    background-color: #F8F8F8;
+    height: 100%;
+    min-height: 40px;
+    padding: 2px;
+}
+
+.vertical-align-middle {
+    vertical-align: middle;
+}
+
+.vertical-align-top {
+    vertical-align: top !important;
+}

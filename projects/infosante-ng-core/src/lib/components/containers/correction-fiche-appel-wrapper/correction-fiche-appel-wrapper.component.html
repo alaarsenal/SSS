@@ -1,0 +1,176 @@
+<div class="wrapper">
+  <div class="row title">
+    <div class="col-md-6">
+      <i class="fa fa-lg fa-eraser"></i>
+      <h1>{{ 'sigct.ss.f_appel.corriger.titre' | translate }}</h1>
+    </div>
+    <div class="col-md-6 actions">
+      <button id="btnModifierUsager"
+              class="btn btn-primary"
+              type="button"
+              title="{{'sigct.ss.f_appel.corriger.modiferusagerinfobulle'|translate}}"
+              [disabled]="btnModifierUsagerDisabled"
+              (click)="onClickBtnModifierUsager()">
+        {{'sigct.ss.f_appel.corriger.modiferusager'|translate}}
+      </button>
+      <button id="btnTerminerCorrectionFiche"
+              class="btn btn-primary margin-left-5"
+              type="button"
+              title="{{'sigct.ss.f_appel.corriger.terminerinfobulle'|translate}}"
+              no-double-click
+              (safeClick)="onClickBtnTerminerCorrection()">
+        {{'sigct.ss.f_appel.corriger.terminer'|translate}}
+      </button>
+      <button id="btnAnnuler"
+              class="btn btn-secundary margin-left-5"
+              type="button"
+              title="{{'sigct.ss.f_appel.corriger.annulerinfobulle'|translate}}"
+              (click)="onClickBtnCancel()">
+        {{'sigct.ss.f_appel.corriger.annuler'|translate}}
+      </button>
+      <button id="btnRetourner"
+              class="btn btn-outline-primary margin-left-5 btn-print"
+              type="button"
+              title="{{'sigct.ss.f_appel.corriger.revenirinfobulle'|translate}}"
+              (click)="onClickBtnReturn()">
+        <i class="fa fa-lg fa-times"
+           title="{{ 'sigct.ss.f_appel.corriger.revenirinfobulle' | translate }}">
+        </i>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <msss-input-textarea #raisonCorrection
+                           id="raisonCorrection"
+                           name="raisoncorrection"
+                           label="sigct.ss.f_appel.corriger.raison"
+                           rows="5"
+                           [required]="true"
+                           maxlength="1000"
+                           [(ngModel)]="ficheAppelCorrection.raisonCorrection"
+                           raccourcis=true>
+      </msss-input-textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 px-none">
+      <msss-consultation-fiche-section-usager #consultationFicheSectionUsager
+                                              [consultationUsager]="consultationFicheSectionUsagerDTO">
+      </msss-consultation-fiche-section-usager>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 px-none">
+      <msss-sigct-content-zone title="{{ 'sigct.ss.f_appel.corriger.suitesintervention' | translate }}"
+      [required]="true"
+                               id="suiteInterventionContentZone">
+        <div class="row mt-less">
+          <div class="col-md-12">
+            <msss-input-checkbox id="aucuneSuite"
+                                 name="acunesuite"
+                                 [options]="inputOptionAucuneSuite"
+                                 [disabled]="aucuneSuiteDisabled"
+                                 [(ngModel)]="ficheAppel.aucuneSuite">
+            </msss-input-checkbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <msss-suites-intervention #orientation
+                                      id="orientations"
+                                      [idFicheAppel]="ficheAppel.id"
+                                      [referencesItemSuitesIntervention]="listeReferencesOrientation"
+                                      [orientations]="listeOrientations"
+                                      [libelle]="'SA'"
+                                      (updateListEvent)="onUpdateListeOrientationsEvent($event)">
+            </msss-suites-intervention>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <msss-suites-intervention #reference
+                                      id="references"
+                                      [idFicheAppel]="ficheAppel.id"
+                                      [referencesItemSuitesIntervention]="listeReferencesReference"
+                                      [references]="listeReferences"
+                                      [libelle]="'SA'"
+                                      (updateListEvent)="onUpdateListeReferencesEvent($event)">
+            </msss-suites-intervention>
+          </div>
+        </div>
+      </msss-sigct-content-zone>
+    </div>
+  </div>
+  <ng-template [ngIf]="!ficheAppel.saisieDifferee">
+    <div class="row px-none">
+      <msss-sigct-content-zone title="{{ 'sigct.ss.f_appel.corriger.valfininterv' | translate }}"
+                               id="validationFinInterventionContentZone">
+        <div class="mt-less pb-space wd-50">
+          <msss-edition-liste-entite #projetRecherche
+                                     [referencesReference]="listeReferencesProjetRecherche"
+                                     [references]="listeProjetRecherche"
+                                     [disabled]="projetRechercheDisabled"
+                                     [titreReference]="'sigct.sa.f_appel.corriger.validfinintervention.projetrech'">
+          </msss-edition-liste-entite>
+        </div>
+      </msss-sigct-content-zone>
+    </div>
+  </ng-template>
+  <div class="row px-none">
+    <msss-sigct-content-zone title="{{ 'sigct.sa.f_appel.corriger.statistiques' | translate }}"
+                             id="statistiquesContentZone">
+      <div class="mt-less wd-50">
+        <msss-edition-liste-entite #raisonIntervention
+                                   [referencesReference]="listeReferencesRaisonIntervention"
+                                   [references]="listeRaisonIntervention"
+                                   [disabled]="raisonInterventionDisabled"
+                                   [required]="true"
+                                   [titreReference]="'sigct.ss.f_appel.corriger.statistiques.raisonintervention'">
+        </msss-edition-liste-entite>
+      </div>
+      <div class="wd-50">
+        <msss-edition-liste-entite #roleAction
+                                   [referencesReference]="listeReferencesRoleAction"
+                                   [references]="listeRoleAction"
+                                   [disabled]="roleActionDisabled"
+                                   [required]="true"
+                                   [titreReference]="'sigct.ss.f_appel.corriger.statistiques.roleaction'">
+        </msss-edition-liste-entite>
+      </div>
+      <div class="wd-50">
+        <msss-edition-liste-entite #langueConsultation
+                                   [singleEntity]="true"
+                                   [referencesReference]="listeReferencesLangueConsultation"
+                                   [references]="listeLangueConsultation"
+                                   [disabled]="langueConsultationDisabled"
+                                   [required]="true"
+                                   [titreReference]="'sigct.ss.f_appel.corriger.statistiques.langueconsultation'">
+        </msss-edition-liste-entite>
+      </div>
+      <div class="pb-space wd-50">
+        <msss-edition-liste-entite #centreActivite
+                                   [singleEntity]="true"
+                                   [referencesReference]="listeReferencesCentreActivite"
+                                   [references]="listeCentreActivite"
+                                   [disabled]="centreActiviteDisabled"
+                                   [required]="true"
+                                   [titreReference]="'sigct.ss.f_appel.corriger.statistiques.centreactivite'">
+        </msss-edition-liste-entite>
+      </div>
+    </msss-sigct-content-zone>
+  </div>
+  <ng-template [ngIf]="!ficheAppel.saisieDifferee">
+    <div class="row px-none">
+      <msss-sigct-content-zone title="{{ 'sigct.ss.f_appel.corriger.dureefiche' | translate }}"
+                               id="validationFinInterventionContentZone">
+        <div class="mt-less pb-space">
+          <msss-duree-fiche-appel #dureeFicheAppel
+                                  [dureeFicheAppel]="dureeFicheAppelDto"
+                                  [correctionFicheAppel]="true">
+          </msss-duree-fiche-appel>
+        </div>
+      </msss-sigct-content-zone>
+    </div>
+  </ng-template>
+</div>

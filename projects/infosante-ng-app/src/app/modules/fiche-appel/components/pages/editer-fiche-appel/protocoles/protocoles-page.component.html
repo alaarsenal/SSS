@@ -1,0 +1,14 @@
+<div class="row boutons-row" *ngIf="isVersionGuideSanteRpiDrupal">
+    <div class="col-md-12 text-right">
+        <button type="button"
+                class="btn-sm btn btn-primary"
+                id="btn-relier-protocoles"
+                title="{{ 'sigct.sa.f_appel.referentiels.btncopier' | translate }}"
+                (click)="onRelierProtocoles()"> {{ 'sigct.sa.f_appel.referentiels.btncopier' | translate }} </button>
+    </div>
+</div>
+
+<iframe [id]="isVersionGuideSanteRpiDrupal ? 'iframe-protocoles-rpi' : 'iframe-protocoles-giea'"
+        [src]="urlIframe"
+        height="100%"
+        width="100%"></iframe>

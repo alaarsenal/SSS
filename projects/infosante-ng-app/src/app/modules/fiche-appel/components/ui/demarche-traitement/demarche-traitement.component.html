@@ -1,0 +1,118 @@
+<div class="col-md-12 enlever-espace no-padding-right" title="">
+  <div class="col-md-6 background-gris no-padding-right">
+    <form name="formDemarcheTraitement" (ngSubmit)="onSubmitDemarcheTraitement()" #fCom="ngForm">
+
+      <div class="col-md-11 no-padding-left no-padding-right">
+        <div class="row">
+
+          <div class="col-sm-4 col-sm-4plus no-padding-right">
+
+            <msss-sigct-chosen #liste_consulte label="sigct.sa.f_appel.evaluation.aconsulte" name="aconsulte" required
+              id="aconsulte" [options]="inputOptionsRessourceConsulte" [valide]="isConsulteValide"
+              [(ngModel)]="demarcheTraitement.referenceRessourceConsulte" [title]="infoBulleConsulte"
+              (ngModelChange)="onConsulteChange()" (optionSelected)="onConsulteValide($event)"
+              [disabled]="isDisabled">
+            </msss-sigct-chosen>
+          </div>
+
+
+          <div class="col-sm-7 col-sm-7plus padding-right-15">
+            <msss-input-text id="traitDemTrait" name="traitDemTrait" label="sigct.sa.f_appel.evaluation.traitsuivi"
+              maxlength="255" [(ngModel)]="demarcheTraitement.traitement" [disabled]="isDisabled" raccourcis=true>
+            </msss-input-text>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+
+          <div class="col-sm-4 col-sm-4plus no-padding-right">
+
+            <msss-sigct-chosen #liste_resultat label="sigct.sa.f_appel.evaluation.rsltobtenus" name="resultatDemTrait" required
+              id="resultatDemTrait" [options]="inputOptionsResultatObtenu" [valide]="isResultatValide"
+              [(ngModel)]="demarcheTraitement.referenceResultatObtenu" [title]="infoBulleResultat"
+              (ngModelChange)="onResultatChange()" (optionSelected)="onResultatValide($event)"
+              [disabled]="isDisabled">
+            </msss-sigct-chosen>
+          </div>
+
+
+          <div class="col-sm-7 col-sm-7plus padding-right-15">
+            <msss-input-text id="detailsDemTrait" name="detailsDemTrait" label="sigct.sa.f_appel.evaluation.details"
+              maxlength="255" [(ngModel)]="demarcheTraitement.details"
+              [disabled]="isDisabled" raccourcis=true>
+            </msss-input-text>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="col-md-1 col-btn">
+
+        <div class="col-sm-1 enlever-espace margin-top-30 margin-left-m1">
+          <div id="demTraitActionIcon">
+            <button type="submit" style="display:none" #submitDemTraitBtn>Submit</button>
+            <msss-action-link [actionLinks]="actionLinks" [disableAll]="isDisabled"></msss-action-link>
+          </div>
+        </div>
+
+      </div>
+
+
+
+  <modal-confirmation id-container="confirm_popup_ajout">
+    <div class="modal-confirm-body modal-body">
+      {{messageConfirmerAjout}}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+        id="ok_confirm_button" (click)="remplacerDemarcheTraitement()">Oui</button>
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+        id="cancel_confirm_button">Non</button>
+    </div>
+  </modal-confirmation>
+
+
+
+  </form>
+
+</div>
+
+<div class="col-md-6 background-blanc no-padding-right">
+  <msss-list-info-action [list]="this.listeDemarcheTraitements" [formatAction]="formatActionDemarcheTraitement"
+    (modifierAction)="confirmerModifierDemarcheTraitement($event)" editerId="editerBtnDemTrait"
+    supprimerId="supprimerBtnDemTrait" (supprimerAction)="confirmerSupprimerDemarcheTraitement($event)"
+    [cacherAfficherReduire]="true" [afficherBoutonSupprimer]="true"
+    [idElementModifieSelectionne]="idElementModifieSelectionne" *ngIf="!isDisabled">
+  </msss-list-info-action>
+
+  <modal-confirmation id-container="confirm_popup_modif_dem_trait">
+    <div class="modal-confirm-body modal-body">
+      {{ messageConfirmerDemarcheTraitements }}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+        id="ok_confirm_button_dem_trait" (click)="remplacerDemarcheTraitement()">Oui</button>
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+        id="cancel_confirm_button_dem_trait">Non</button>
+    </div>
+  </modal-confirmation>
+
+  <modal-confirmation id-container="confirm_popup_supri_dem_trait">
+    <div class="modal-confirm-body modal-body">
+      {{ messageSupprimerDemarcheTraitements }}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+        id="ok_supri_button_dem_trait" (click)="supprimerDemarcheAnterieurTraitement()">Oui</button>
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+        id="cancel_supri_button_dem_trait">Non</button>
+    </div>
+  </modal-confirmation>
+</div>
+</div>

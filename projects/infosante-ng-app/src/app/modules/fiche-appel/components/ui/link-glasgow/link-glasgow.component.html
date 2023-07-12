@@ -1,0 +1,7 @@
+<a *ngIf="!isDisabled" [id]="id" (click)="openDialog()" href="#" onclick="return false;">
+    {{link | translate}}
+</a>
+
+<apan class="disabled" *ngIf="isDisabled" [id]="id">
+  {{link | translate}}
+</apan>

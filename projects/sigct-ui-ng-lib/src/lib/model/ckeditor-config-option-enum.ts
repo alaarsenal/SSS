@@ -1,0 +1,18 @@
+export enum EnumCkEditorConfigOption {
+  BOLD = 'bold',
+  ITALIC = 'italic',
+  UNDERLINE = 'underline',
+  STRIKETHROUGH = 'strikethrough',
+  SUBSCRIPT = 'subscript',
+  SUPERSCRIPT = 'superscript',
+  REMOVE_FORMAT = 'removeFormat',
+  FONT_COLOR = 'fontColor',
+  FONT_BACKGROUND_COLOR = 'fontBackgroundColor',
+  SPECIAL_CHARACTERS = 'specialCharacters',
+  UNDO = 'undo',
+  REDO = 'redo',
+  BULLETED_LIST= 'bulletedlist',
+  NUMBERED_LIST= 'numberedlist',
+  IMAGE_UPLOAD = 'imageUpload',
+  SEPARATOR = "|",
+}

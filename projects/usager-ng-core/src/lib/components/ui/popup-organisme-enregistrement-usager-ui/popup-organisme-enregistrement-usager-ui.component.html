@@ -1,0 +1,165 @@
+<h4 mat-dialog-title>
+  {{ 'usager.enregistrement.sec.org.popup.titre' | translate }}
+  <button type="button"
+          class="close hidePopup visibility-visible"
+          data-dismiss="modal"
+          aria-hidden="true"
+          (click)="fermerDialog()">
+    <i class="fa fa-times-circle-o"></i>
+    <span class="sr-only">fermer</span>
+  </button>
+</h4>
+<mat-dialog-content class="scroll-auto">
+  <!-- #3957 cdkScrollable permet aux liste déroulantes ouvertes de demeurer fixées à leur component lors du scroll.
+      https://github.com/angular/components/issues/10079#issuecomment-491620284 -->
+  <div class="conteneur">
+    <div class="row">
+      <ng-template #alertContainer></ng-template>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>{{'usager.enregistrement.sec.org.popup.type' | translate}}</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1 padding-right-60 margin-bottom-10">
+        <msss-input-checkbox id="typeSante"
+                             name="typeSante"
+                             [options]="inputOptionTypeSante"
+                             [(ngModel)]="organismeEnregistreur.typeSante"
+                             #typeSante="ngModel"></msss-input-checkbox>
+      </div>
+      <div class="col-md-1 margin-bottom-10">
+        <msss-input-checkbox id="typeSocial"
+                             name="typeSocial"
+                             [options]="inputOptionTypeSocial"
+                             [(ngModel)]="organismeEnregistreur.typeSocial"
+                             #typeSocial="ngModel"></msss-input-checkbox>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 margin-bottom-10">
+        <msss-sigct-chosen label="usager.enregistrement.sec.org.popup.organisme"
+                           id="organismes"
+                           name="organismes"
+                           [options]="inputOptionsOrganismes"
+                           [(ngModel)]="organismeEnregistreur.idOrganisme"
+                           [valide]="isOrganismeValide"
+                           #idOrganisme="ngModel"
+                           [disabled]="!hasRoleAjoutModifTous"
+                           (ngModelChange)="onChangeOrganisme($event)">
+        </msss-sigct-chosen>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 margin-bottom-10">
+        <msss-sigct-chosen label="usager.enregistrement.sec.org.popup.site"
+                           id="sites"
+                           name="sites"
+                           [options]="inputOptionsSites"
+                           [(ngModel)]="organismeEnregistreur.idSite"
+                           #idSite="ngModel"
+                           (ngModelChange)="onChangeSite($event)">
+        </msss-sigct-chosen>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 margin-bottom-10">
+        <msss-sigct-chosen label="usager.enregistrement.sec.org.popup.gestionnaire"
+                           id="gestionnaires"
+                           name="gestionnaires"
+                           [options]="inputOptionsGestionnaires"
+                           [(ngModel)]="organismeEnregistreur.gestionnaire"
+                           [valide]="isGestionnaireValide"
+                           #gestionnaire="ngModel">
+        </msss-sigct-chosen>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 margin-bottom-10">
+        <msss-input-text label="usager.enregistrement.sec.org.popup.raison"
+                         name="raison"
+                         id="raison"
+                         #raison="ngModel"
+                         [(ngModel)]="organismeEnregistreur.raison"
+                         [valide]="isRaisonValide"
+                         maxlength="255">
+        </msss-input-text>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 margin-bottom-10">
+        <msss-input-text label="usager.enregistrement.sec.org.popup.nodossier"
+                         name="numeroDossier"
+                         id="numeroDossier"
+                         #numeroDossier="ngModel"
+                         [(ngModel)]="organismeEnregistreur.numeroDossier"
+                         maxlength="50">
+        </msss-input-text>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 margin-bottom-10">
+        <msss-input-textarea id="commentaires"
+                             name="commentaires"
+                             label="usager.enregistrement.sec.org.popup.commentaires"
+                             rows="2"
+                             maxlength="1500"
+                             [(ngModel)]="organismeEnregistreur.commentaires">
+        </msss-input-textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 margin-bottom-10">
+        <msss-sigct-datepicker label="usager.enregistrement.sec.org.popup.fermp"
+                               id="dateFermeturePrevue"
+                               #dateFermeturePrevue="ngModel"
+                               name="dateFermeturePrevue"
+                               dateFormat="yyyy-mm-dd"
+                               placeHolder="aaaa-mm-jj"
+                               [(ngModel)]="organismeEnregistreur.dateFermeturePrevue"
+                               [valide]="isDateFermeturePrevueValide"
+                               [ngModelOptions]="{standalone:true}"
+                               required>
+        </msss-sigct-datepicker>
+      </div>
+      <div class="col-md-7 fermeture">
+        <msss-input-checkbox id="fermeture"
+                             name="fermeture"
+                             [options]="inputOptionFermeture"
+                             [(ngModel)]="organismeEnregistreur.fermeture"
+                             #fermeture="ngModel"></msss-input-checkbox>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button type="button"
+          data-dismiss="modal"
+          class="btn btn-primary btn-sm btn-key-action visibility-visible"
+          id="ok_ajout_modif_organisme_button"
+          (click)="relierEtFermerDialog()"
+          cdkFocusInitial>{{ 'usager.enregistrement.sec.org.popup.relier' | translate }}</button>
+  <button id="btn-fermer-dialog"
+          class="btn btn-sm btn-key-action hidePopup visibility-visible"
+          (click)="fermerDialog()">{{ 'usager.enregistrement.sec.org.popup.annuler' | translate }}</button>
+</mat-dialog-actions>
+
+<modal-confirmation id-container="confirm_popup_relier_fermer_organisme">
+  <div class="modal-confirm-body modal-body">
+    {{'us-c90009' | translate}}
+  </div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button id="confi_relier_fermer_organisme_btn_oui"
+            type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-sm btn-key-action visibility-visible"
+            (click)="confirmerRelierEtFermerDialog()">Oui</button>
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="cancel_confirm_button">Non</button>
+  </div>
+</modal-confirmation>

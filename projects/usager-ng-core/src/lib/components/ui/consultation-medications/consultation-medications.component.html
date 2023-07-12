@@ -1,0 +1,49 @@
+<div class="table-container pn margin-bottom-10">
+    <table mat-table [dataSource]="dataSource" class="table marginB-0">
+      <!-- State Column -->
+      <ng-container matColumnDef="dateDebut">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingL-2  text-nowrap'">{{ 'usager.enregistrement.sec.medication.date' | translate}}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'w-209 paddingL-2'">
+            <div class="text-nowrap">
+            {{ row.dateDebut | date : "yyyy-MM-dd"}}
+            </div>
+
+        </td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+          {{ 'usager.enregistrement.sec.medication.medic' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" class="w-full">
+          {{row.medicament}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  <div *ngIf="dataSource.data===null ||dataSource.data===undefined  || dataSource.data.length === 0" class="no-records mat-row">
+    {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+  </div>
+  </div>
+
+  <div class="row">
+        <div class="col-md-12 margin-bottom-2">
+            <label>
+                {{'usager.enregistrement.sec.medication.therapie' | translate}} :
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" [innerHTML]="therapieIntraveineuse"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <app-consultation-fichiers  [idEnregistrement]="idEnregistrementIdent" [codeTypeFichier]="codeTypeFichierTherapie"></app-consultation-fichiers>
+        </div>
+    </div>
+
+

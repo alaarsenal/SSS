@@ -1,0 +1,32 @@
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-12">
+        <msss-indicateurs-fin-intervention #indicateursFinIntervention
+        [questions]="indicateursFinInterventions"
+          (indicateurChangedEvent)="onIndicateurChanged($event)"
+          [isDisabled]="typeFiche.isNomPert()">
+        </msss-indicateurs-fin-intervention>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <msss-input-textarea id="details" name="details"
+          label="sigct.so.f_appel.terminaison.validfinintervention.details" rows="4" maxlength="255"
+          [(ngModel)]="validationFinIntervention.details"
+          [disabled]="typeFiche.isNomPert()">
+        </msss-input-textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <msss-input-textarea id="opinionProf" [required]="typeFiche.isDetail()" #PremierElem label="sigct.so.f_appel.terminaison.validfinintervention.opinionpro"
+      maxlength="4000" rows="4" CSSResize="vertical" [(ngModel)]="validationFinIntervention.opinionProf" cssClass="minheight-290"
+      [disabled]="typeFiche.isNomPert() || typeFiche.isAbreg()">
+    </msss-input-textarea>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<msss-sigct-content-zone id="section-terminaison"
+                         title="{{ 'sigct.ss.f_appel.consultation.terminaison' | translate }}">
+  <div class="col-md-12">
+    <ng-content>
+    </ng-content>
+  </div>
+  <div class="col-md-12">
+    <msss-consultation-fiche-section-terminaison-resume-intervention [labelSection]="labelSectionResumeIntervention"
+                                                                     [labelChampLangue]="labelChampLangue"
+                                                                     [raisonsIntervention]="dto.raisonsIntervention"
+                                                                     [rolesAction]="dto.rolesAction"
+                                                                     [centreActivite]="dto.centreActivite"
+                                                                     [langueIntervention]="dto.langueIntervention">
+    </msss-consultation-fiche-section-terminaison-resume-intervention>
+  </div>
+  <div class="col-md-12">
+    <msss-consultation-fiche-section-terminaison-services-utilisees #sectionServicesUtilisees
+                                                                    [servicesInterprete]="dto.servicesInterprete"
+                                                                    [servicesRelaisBell]="dto.servicesRelaisBell"
+                                                                    [detailsInterprete]="dto.detailsInterprete"
+                                                                    [detailsRelaisBell]="dto.detailsRelaisBell">
+    </msss-consultation-fiche-section-terminaison-services-utilisees>
+  </div>
+  <div class="col-md-12">
+    <msss-consultation-fiche-section-terminaison-duree-fiche #sectionDureeFiche
+                                                             [domaine]="domaine"
+                                                             [saisieDifferee]="dto.saisieDifferee"
+                                                             [dureeFicheDTO]="dto.dureeFiche">
+    </msss-consultation-fiche-section-terminaison-duree-fiche>
+  </div>
+  <div class="col-md-12">
+    <msss-consultation-fiche-section-terminaison-interaction #sectionInteraction
+                                                             [consultationInteractionDto]="dto.interaction">
+    </msss-consultation-fiche-section-terminaison-interaction>
+  </div>
+</msss-sigct-content-zone>

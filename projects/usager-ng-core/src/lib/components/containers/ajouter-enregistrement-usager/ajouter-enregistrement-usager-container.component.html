@@ -1,0 +1,240 @@
+<msss-form-top-bar label="{{labelMenuTop}}"
+                   [options]="formTopBarOptions"
+                   [fixe]="topBarreFixe"
+                   [nomModule]="'usager'">
+</msss-form-top-bar>
+
+<modal-confirmation id-container="confirm_popup_relier_fermer_organisme">
+  <div class="modal-confirm-body modal-body">
+    {{'us-c90009' | translate}}
+  </div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button id="confi_relier_fermer_organisme_btn_oui"
+            type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-sm btn-key-action visibility-visible"
+            (click)="avertirSurTraitmentDesAlertes()">Oui</button>
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="cancel_confirm_button">Non</button>
+  </div>
+</modal-confirmation>
+
+<modal-confirmation id-container="confirm_popup_avertir_sur_traitment">
+  <div class="modal-confirm-body modal-body">
+    {{'us-iu-c40004' | translate}}
+  </div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button id="confi_avertir_sur_traitment_btn_oui"
+            type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-sm btn-key-action visibility-visible"
+            (click)="confirmerSauvegardeEnregistrement()">Oui</button>
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="cancel_confirm_button">Non</button>
+  </div>
+</modal-confirmation>
+
+
+<div #contenuScroll
+     id="contenuScroll"
+     class="contenu-avec-scrollbar"
+     cdkScrollable>
+
+  <div class="bande-flottante-container">
+    <msss-bande-flottante [toutOuvrirLb]="'usager.tout.ouvrir' | translate"
+                          [toutFermerLb]="'usager.tout.fermer' | translate"
+                          [basPageLb]="'usager.bas.page' | translate"
+                          [hautPageLb]="'usager.haut.page' | translate"
+                          [divToScroll]="contenuScroll"
+                          [contentZones]="[datesZone, organismeZone, informationsZone, ressourcesZone, medicationsZone, soinsZone, indicateursZone, autresZone, fichiersZone]">
+    </msss-bande-flottante>
+  </div>
+
+  <ng-template #alertPagContainer></ng-template>
+
+  <!-- section dates -->
+  <msss-sigct-content-zone #datesZone
+                           id="dates-enregistrement"
+                           title="{{'usager.enregistrement.sec.titre.dates' | translate}}">
+    <div class="row">
+      <app-dates-enregistrement-ui #datesEnregistrementUi
+                                   [enregistrement]="enregistrement"
+                                   [idUsager]="idUsagerIdent">
+      </app-dates-enregistrement-ui>
+    </div>
+  </msss-sigct-content-zone>
+  <!-- section organismes -->
+  <msss-sigct-content-zone #organismeZone
+                           id="organisme-enregistrement-usager"
+                           title="{{'usager.enregistrement.sec.organisme.titre' | translate}}">
+    <app-organismes-enregistrement-usager #appOrganismesEnregistrementUi
+                                          [actionEnCours]="action"
+                                          [listData]="enregistrement.organismes">
+    </app-organismes-enregistrement-usager>
+  </msss-sigct-content-zone>
+
+  <!-- section Informations générales -->
+  <msss-sigct-content-zone #informationsZone
+                           id="informations-generales-enregistrement"
+                           title="{{'usager.enregistrement.sec.titre.info' | translate}}">
+    <div class="row">
+      <div class="col-md-6 margin-bottom-10">
+        <msss-sigct-chosen #listeProfilHTML
+                           label="usager.enregistrement.sec.titre.info.profil"
+                           name="profils"
+                           required
+                           id="profils"
+                           [options]="inputOptionsProfils"
+                           [valide]="isProfilValide"
+                           [(ngModel)]="enregistrement.idReferenceProfil"
+                           (ngModelChange)="enregistrement.idReferenceProfil">
+        </msss-sigct-chosen>
+      </div>
+      <div class="col-md-2 margin-bottom-10">
+        <msss-sigct-chosen #listeMilieuVieHTML
+                           label="usager.enregistrement.sec.titre.info.milieu"
+                           name="milieuxVie"
+                           required
+                           id="milieuxVie"
+                           [options]="inputOptionsMilieuxVie"
+                           [valide]="isMilieuVieValide"
+                           [(ngModel)]="enregistrement.idReferenceMilieuVie"
+                           (ngModelChange)="enregistrement.idReferenceMilieuVie">
+        </msss-sigct-chosen>
+      </div>
+      <div class="col-md-4 margin-bottom-10">
+        <msss-input-text [(ngModel)]="enregistrement.commentaire"
+                         id="commentaire"
+                         label="usager.enregistrement.sec.titre.info.commentaire"
+                         name="commentaire"
+                         maxlength="300">
+        </msss-input-text>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 margin-bottom-10">
+
+        <msss-ckeditor [(value)]="enregistrement.diagnostic"
+                       id="cke-diagnostic"
+                       label="usager.enregistrement.sec.titre.info.diagnostic"
+                       maxlength="4000">
+        </msss-ckeditor>
+      </div>
+      <div class="col-md-6 margin-bottom-10">
+        <msss-ckeditor [(value)]="enregistrement.allergie"
+                       id="cke-allergie"
+                       label="usager.enregistrement.sec.titre.info.allergies"
+                       maxlength="4000"
+                       [minRows]="2">
+        </msss-ckeditor>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 margin-bottom-10">
+        <msss-ckeditor [(value)]="enregistrement.precaution"
+                       id="cke-precaution"
+                       label="usager.enregistrement.sec.titre.info.precautions"
+                       maxlength="4000">
+        </msss-ckeditor>
+      </div>
+      <div class="col-md-6 margin-bottom-10">
+        <msss-ckeditor [(value)]="enregistrement.conduite"
+                       id="cke-conduite"
+                       label="usager.enregistrement.sec.titre.info.conduite"
+                       maxlength="4000"></msss-ckeditor>
+      </div>
+    </div>
+  </msss-sigct-content-zone>
+  <!-- section ressources professionelles et sociales -->
+  <msss-sigct-content-zone #ressourcesZone
+                           id="ressources-pro-usager"
+                           title="{{'usager.enregistrement.sec.ress.prof.titre' | translate}}">
+    <app-ressources-pro-sociales-usager-ui #appRessourcesProSocialesUsagerUi
+                                           [actionEnCours]="action"
+                                           [listData]="enregistrement.ressourcesProfessionnelles"
+                                           [listeOptionsLienRessourcePro]="listeLienRessourcePro">
+    </app-ressources-pro-sociales-usager-ui>
+  </msss-sigct-content-zone>
+
+  <!-- section Médications -->
+  <msss-sigct-content-zone #medicationsZone
+                           id="medications-usager"
+                           title="{{'usager.enregistrement.sec.medication.titre' | translate}}">
+    <app-medications-enregistrement-usager-ui #appMedicationsUsagerUi
+                                              [enregistrement]="enregistrement"
+                                              [actionEnCours]="action"
+                                              [listData]="enregistrement.medications">
+    </app-medications-enregistrement-usager-ui>
+  </msss-sigct-content-zone>
+
+  <!-- section Soins et Services -->
+  <msss-sigct-content-zone #soinsZone
+                           id="soins-service"
+                           title="{{'usager.enregistrement.sec.soins.titre' | translate}}">
+    <app-soins-service-ui #appSoinServiceUi
+                          [actionEnCours]="action"
+                          [(listData)]="enregistrement.soinsEtServices"
+                          [listeOptionsTypeSoinsSecurite]="listeReferenceSoinsService">
+    </app-soins-service-ui>
+  </msss-sigct-content-zone>
+
+  <!-- section indicateurs pour mesures de sécurité -->
+  <msss-sigct-content-zone #indicateursZone
+                           id="indicateurs-mesures-securite"
+                           title="{{'usager.enregistrement.sec.indicateur.titre' | translate}}">
+    <app-indicateurs-mesure-securite #appIndicateursmesureSecuriteUi
+                                     [actionEnCours]="action"
+                                     [listData]="enregistrement.indicateursMesureSecurite"
+                                     [listeOptionsMesureSecurite]="listeReferenceMesureSecurite">
+    </app-indicateurs-mesure-securite>
+  </msss-sigct-content-zone>
+
+
+  <!-- section autres informations -->
+  <msss-sigct-content-zone #autresZone
+                           id="autres-informations-enregistrement"
+                           title="{{'usager.enregistrement.sec.autres.titre' | translate}}">
+    <div class="row">
+      <div class="col-md-12 margin-bottom-10">
+        <msss-input-textarea id="autreInformation"
+                             name="autreInformation"
+                             rows="2"
+                             maxlength="4000"
+                             CSSResize="vertical"
+                             minRows=2
+                             [(ngModel)]="enregistrement.autreInformation"
+                             ariaLabel="{{'usager.enregistrement.sec.autres.titre' | translate}}">
+        </msss-input-textarea>
+      </div>
+    </div>
+  </msss-sigct-content-zone>
+
+  <msss-sigct-content-zone #fichiersZone
+                           id="fichers-enregistrement"
+                           title="{{'usager.enregistrement.sec.fichier.titre' | translate}}">
+    <msss-gestionnaire-de-fichiers [listeFichiers]="enregistrement.fichiers"
+                                   [titreSection]="'usager.enregistrement.sec.fichier.titre'"
+                                   [inputOptionsReferenceType]="listeReferenceTypeFichier"
+                                   (onAjouterFichier)="onAjouterFichier($event)"
+                                   (onSupprimerFichier)="onSupprimerFichier($event)"
+                                   (onListFichier)="onListFichier($event)"
+                                   (onTelechargerFichier)="onTelechargerFichier($event)"
+                                   (onAficherAlert)="scrollTop()"
+                                   [readonly]="isFichierReadOnly()"
+                                   [urlTelechargment]="getUrlBaseTelecharge()">
+
+    </msss-gestionnaire-de-fichiers>
+  </msss-sigct-content-zone>
+
+  <msss-verificateur-de-changement #verificateurDeChangementUi
+                                   [data]="enregistrement"
+                                   [messagAvertissement]="'usager.msg.confirmatiom'">
+  </msss-verificateur-de-changement>
+
+</div>

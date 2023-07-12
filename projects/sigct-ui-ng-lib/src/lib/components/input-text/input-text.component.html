@@ -1,0 +1,70 @@
+<div class="form-group "
+     *ngIf="labelTop; else labelbotom">
+
+  <label [id]="label_id" for="{{id}}"
+         [ngClass]="(isDisabled)?'control-label label_disabled':'control-label'"
+         [class.error]="inputValide == false">{{label | translate }}<span class="margin-left-3 mondatory-asterisk"
+          *ngIf="showAsterisk">*</span>
+          <span class="sr-only" *ngIf="!label">{{ariaLabel}}</span></label>
+  <div>
+    <mat-form-field appearance="outline"
+                    class="mat-input-sigct"
+                    [class]="(isDisabled)?'disabled':''">
+
+
+      <input [formControl]="formControl"
+             #inputchamp
+             matInput
+             type="{{getInputType()}}"
+             maxlength="{{maxlength}}"
+             (focus)="onFocus()"
+             minlength="{{minlength}}"
+             [placeholder]="placeholder"
+             mask="{{ patternMask }}"
+             (blur)="onBlur($event)"
+             id="{{id}}"
+             name="input_name_{{id}}"
+             [validation]="validationMask"
+             [readonly]="isReadonly"
+             msss-sigct-only-number
+             [disableNumberCheck]="disableNumberCheck"
+             [decimalPatternCheck]="decimalPatternCheck"
+             [decimalIntegerPrecision]="decimalIntegerPrecision"
+             [decimalFractionPrecision]="decimalFractionPrecision"
+             autocomplete="{{autocompletion}}"
+             [ngClass]="cssClass"
+             [class.disabled]="isDisabled"
+             (keydown.space)="onKeySpaceDown($event)"
+             [attr.aria-label]="ariaLabel ? ariaLabel : label | translate">
+    </mat-form-field>
+  </div>
+</div>
+
+<ng-template #labelbotom>
+  <mat-form-field appearance="outline"
+                  class="mat-input-sigct">
+    <input [formControl]="formControl"
+          #inputchamp
+          matInput
+          type="{{getInputType()}}"
+          maxlength="{{maxlength}}"
+          (focus)="onFocus()"
+          minlength="{{minlength}}"
+          [placeholder]="placeholder"
+          mask="{{ patternMask }}"
+          (blur)="onBlur($event)"
+          id="{{id}}"
+          [validation]="validationMask"
+          [readonly]="isReadonly"
+          msss-sigct-only-number
+          [disableNumberCheck]="disableNumberCheck"
+          [decimalPatternCheck]="decimalPatternCheck"
+          [decimalIntegerPrecision]="decimalIntegerPrecision"
+          [decimalFractionPrecision]="decimalFractionPrecision"
+          autocomplete="{{autocompletion}}"
+          [ngClass]="cssClass"
+          [class.disabled]="isDisabled"
+          (keydown.space)="onKeySpaceDown($event)">
+  </mat-form-field>
+  <span [ngClass]="(isDisabled)?'sous-label-amj disabled':'sous-label-amj'"> {{label | translate }}</span>
+</ng-template>

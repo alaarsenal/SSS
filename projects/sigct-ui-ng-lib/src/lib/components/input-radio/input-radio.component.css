@@ -1,0 +1,36 @@
+:host(.error) label {
+  color: #ed541d!important;
+}
+
+.tp-radio-group {
+  padding: 5px;
+  margin-top: 3px;
+  display: inline-block;
+  color: black!important;
+  /* Permet de garder les libéllées des choix en noir même s'il y a une erreur */
+}
+
+.mat-radio-button {
+  padding-right: 10px !important;
+}
+
+.font-normal {
+  font-weight: normal !important;
+  color: #333 !important;
+}
+
+::ng-deep.invalid .mat-radio-outer-circle {
+  border-color: red !important;
+}
+
+::ng-deep .disabled  .mat-form-field-outline-start,
+::ng-deep  .disabled .mat-form-field-outline-gap,
+::ng-deep .disabled   .mat-form-field-outline-end{
+    background:#eeeeee !important;
+}
+
+::ng-deep .disabled mat-icon { color: #ACACAC!important; }
+
+::ng-deep span.disabled { color: #ACACAC!important; font-weight: normal; }
+
+::ng-deep .label_disabled { color: #aaa !important;}

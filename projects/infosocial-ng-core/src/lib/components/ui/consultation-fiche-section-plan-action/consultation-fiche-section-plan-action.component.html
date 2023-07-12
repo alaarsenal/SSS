@@ -1,0 +1,59 @@
+<msss-sigct-content-zone id="planAction"
+                         title="{{ 'sigct.so.f_appel.consultation.planaction' | translate }}">
+
+  <msss-sigct-field-set *ngIf="avisDTOs && avisDTOs.length > 0" titleFieldset="{{ 'sigct.ss.f_appel.aviscommuniques' | translate }}">
+    <ng-container>
+      <div *ngFor="let avis of avisDTOs;"
+           class="row avis">
+        <div class="col-md-7">
+          <a href="#"
+             onclick="return false" (click)="afficherAvis(avis.id)">{{avis.titre}}</a>
+        </div>
+        <div class="col-md-2"
+             *ngIf="avis.dateModifieExt; else noDateModifieExt">
+          {{ avis.dateModifieExt | date : "yyyy-MM-dd HH:mm"}}
+        </div>
+        <ng-template #noDateModifieExt>
+          <div class="col-md-2">
+            {{ avis.dateCreationExt | date : "yyyy-MM-dd HH:mm"}}
+          </div>
+        </ng-template>
+        <div class="col-md-3">{{avis.organisme}}</div>
+      </div>
+  
+    </ng-container>
+  </msss-sigct-field-set>
+  
+  <ng-container *ngFor="let cadreTextDto of cadreTextDtosSectionPlanAction">
+    <ng-container *ngIf="cadreTextDto.typeCadre == 1; else Ordinaire">
+      <msss-cadre-text-fieldset [cadreTextDto]="cadreTextDto" 
+                                (referentielConsultPdfAction)="consultReferentielPDF($event)"
+                                (referentielConsultAction)="consultReferentiel($event)"></msss-cadre-text-fieldset>  
+    </ng-container>
+
+    <ng-template #Ordinaire>
+      <msss-cadre-text [cadreTextDto]="cadreTextDto"> </msss-cadre-text>
+    </ng-template>
+
+  </ng-container>
+
+  <msss-consultation-fiche-section-suite-intervention
+                                                      [consultationFicheSectionSuiteInterventionDto]="consultationFicheSectionSuiteInterventionDto">
+  </msss-consultation-fiche-section-suite-intervention>
+
+</msss-sigct-content-zone>
+
+
+<modal-confirmation id-container="confirm_popup_doc_ref_or_pdf_non_access">
+  <div class="modal-confirm-body modal-body">
+    Vous n'êtes pas autorisé à consulter ce document. Veuillez contacter votre administrateur.
+  </div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button type="button"
+    data-dismiss="modal"
+    class="btn btn-primary btn-sm btn-key-action visibility-visible"
+    id="ok_confirm_button"
+    (click)="FermerModalNonAccessDoc()">Fermer</button>
+  </div>
+</modal-confirmation>

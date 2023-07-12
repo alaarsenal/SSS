@@ -1,0 +1,51 @@
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+::ng-deep #consulter-dates-enregistrement .panel-body {
+    padding-top: 15px;
+}
+
+::ng-deep #consulter-ressources-pro-usager .panel-body {
+    padding-top: 2px;
+}
+
+::ng-deep #consulter-organisme-enregistrement-usager .panel-body {
+    padding-top: 2px;
+}
+
+::ng-deep #consulter-medications-usager .panel-body {
+    padding-top: 2px;
+}
+
+::ng-deep #consulter-soins-service .panel-body {
+  padding-top: 2px;
+  padding-bottom: 0px;
+}
+
+::ng-deep #consulter-indicateurs-mesures-securite .panel-body {
+  padding-top: 2px;
+}
+
+::ng-deep #consulter-informations-generales-enregistrement .panel-body {
+    padding-top: 10px;
+}
+
+::ng-deep #consulter-autres-informations-enregistrement .panel-body {
+    padding-top: 2px;
+}
+
+::ng-deep textarea {
+    line-height: 16px !important;
+}
+
+.contenu-avec-scrollbar {
+    height: calc(100% - 45px);
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.bande-flottante-container {
+    padding-left: 338px; 
+}

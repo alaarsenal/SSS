@@ -1,0 +1,54 @@
+<msss-sigct-content-zone id="consultation-journal"
+                         title="{{labelTitreSection | translate}}">
+  <form name="form"
+        (ngSubmit)="onSubmit()">
+    <div class="contentZone row">
+      <div class="col-sm-2">
+        <msss-input-text #inputIdentifiant
+                         id="{{section}}_idIdentifiant"
+                         name="identifiant"
+                         [label]="labelIdentifiant"
+                         maxlength="10"
+                         [(ngModel)]="dto.identifiant"
+                         [patternMask]="'9999999999'"
+                         [disableNumberCheck]="false"
+                         [valide]="identifiantValide">
+        </msss-input-text>
+      </div>
+      <div class="col-sm-4">
+        <div class="date">
+          <msss-sigct-datepicker id="{{section}}_calendarDebut"
+                                 [label]="labelDateDebut"
+                                 [(ngModel)]="dto.dateDebut"
+                                 dateFormat="yyyy-mm-dd"
+                                 placeHolder="aaaa-mm-jj"
+                                 [ngModelOptions]="{standalone:true}"
+                                 [endDate]="endDate"
+                                 [valide]="dateDebutValide"
+                                 required>
+          </msss-sigct-datepicker>
+        </div>
+        <div class="date">
+          <msss-sigct-datepicker id="{{section}}_calendarFin"
+                                 [label]="labelDateFin"
+                                 [(ngModel)]="dto.dateFin"
+                                 dateFormat="yyyy-mm-dd"
+                                 placeHolder="aaaa-mm-jj"
+                                 [ngModelOptions]="{standalone:true}"
+                                 [endDate]="endDate"
+                                 [valide]="dateFinValide"
+                                 required>
+          </msss-sigct-datepicker>
+        </div>
+      </div>
+      <div class="col-sm-6 btn-submit">
+        <button id="idBtnSubmit"
+                type="submit"
+                class="btn btn-primary btn-sm btn-key-action pull-right"
+                title="{{'sigct.ss.f_rapport_journ.btn.genrer' | translate}}">
+          {{'sigct.ss.f_rapport_journ.btn.genrer' | translate}}
+        </button>
+      </div>
+    </div>
+  </form>
+</msss-sigct-content-zone>

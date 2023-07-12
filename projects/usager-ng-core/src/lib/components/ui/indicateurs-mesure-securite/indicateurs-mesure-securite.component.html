@@ -1,0 +1,107 @@
+<div class="table-container pn">
+  <table mat-table
+         [dataSource]="dataSource"
+         class="table marginB-0">
+    <!-- State Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell
+          *matHeaderCellDef
+          disableClear
+          [ngClass]="'th-left paddingL-2'">
+        {{ 'usager.enregistrement.sec.indicateur.type' | translate }}
+      </th>
+      <td mat-cell
+          *matCellDef="let row;index as idx;"
+          [ngClass]="'w-418  paddingL-2'">
+        <msss-sigct-chosen [(ngModel)]="row.type"
+                           id="{{'idReference_'+row.id}}"
+                           #indicateurs_lien
+                           [(ngModel)]="row.idReference"
+                           name="indicateurs_idReference"
+                           [valide]="listeTypeCommunicationValide"
+                           [options]="inputOptionsMesureSecurite"
+                           (ngModelChange)="row.idReference"
+                           ariaLabel="{{'usager.enregistrement.sec.indicateur.type' | translate }}">
+        </msss-sigct-chosen>
+      </td>
+    </ng-container>
+
+    <!-- Created Column -->
+    <ng-container matColumnDef="commentaires">
+      <th mat-header-cell
+          *matHeaderCellDef
+          disableClear
+          [ngClass]="'th-left'">
+        {{ 'usager.enregistrement.sec.indicateur.commentaire' | translate }}
+      </th>
+      <td mat-cell
+          *matCellDef="let row;index as idx;"
+          [ngClass]="'w-full'">
+        <msss-input-text [(ngModel)]="row.commentaires"
+                         id="{{'commentaires_'+row.id}}"
+                         #indicateurs_commentaires="ngModel"
+                         name="indicateurs_commentaires"
+                         maxlength="300"
+                         ariaLabel="{{'usager.enregistrement.sec.indicateur.commentaire' | translate }}">
+        </msss-input-text>
+      </td>
+    </ng-container>
+
+
+
+    <!-- Created Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell
+          *matHeaderCellDef
+          disableClear
+          [ngClass]="'th-right w-action-col paddingL-0'">
+        {{ 'usager.enregistrement.sec.indicateur.action' | translate }}
+      </th>
+      <td mat-cell
+          *matCellDef="let row;index as idx;"
+          [ngClass]="'w-center'">
+        <button type="button"
+                class="btn btn-default btn-sm btn-delete-ressource"
+                id="remove_mesure_securite_button"
+                (click)="confirmerSupprimerIndicateur(idx);"
+                title="{{ 'usager.enregistrement.sec.indicateur.supprimer' | translate }}">
+          <i class="fa fa-trash-o"></i></button>
+      </td>
+    </ng-container>
+    <tr mat-header-row
+        *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div *ngIf="dataSource.data===null || dataSource.data===undefined  ||dataSource.data.length === 0" class="no-records mat-row">
+    {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+  </div>
+  <mat-toolbar>
+    <mat-toolbar-row class="toolbar-ressource-add">
+      <button type="button"
+              class="btn-sm btn btn-primary form-btn"
+              id="ajouterBtn"
+              title="{{ 'usager.enregistrement.sec.indicateur.ajouter' | translate }}"
+              (click)="ajouterUneNouvelleIndicateurMesure(true)">
+        {{ 'usager.enregistrement.sec.ress.prof.ajouter' | translate }} </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <modal-confirmation id-container="confirm_popup_supression_mesure_securite">
+    <div class="modal-confirm-body modal-body">
+      {{ messageSupprimer }}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button"
+              data-dismiss="modal"
+              class="btn btn-primary btn-sm btn-key-action visibility-visible"
+              id="ok_supression_mesure_securite_button"
+              (click)="supprimerIndicateurMesure()">Oui</button>
+      <button type="button"
+              data-dismiss="modal"
+              class="btn btn-sm btn-key-action hidePopup visibility-visible"
+              id="cancel_supression_button">Non</button>
+    </div>
+  </modal-confirmation>
+</div>

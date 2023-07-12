@@ -1,0 +1,8 @@
+.uppercase {
+  text-transform: uppercase;
+}
+
+.content {
+  margin-top: -.8rem;
+  padding-bottom: .5rem;
+}

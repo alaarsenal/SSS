@@ -1,0 +1,21 @@
+<msss-gestionnaire-de-fichiers class="no-padding-left no-padding-right"
+                                           [showListeProfile]="isShowListeProfile"
+                                           [showColReference]="isShowColReference"
+                                           [showColTitre]="isShowColTitre"
+                                           [showColDescription]="isShowColDescription"
+                                           [listeFichiers]="listeFichiers"
+                                           [titreSection]="titreSection"
+                                           (onAjouterFichier)="onAjouterFichier($event)"
+                                           (onSupprimerFichier)="onSupprimerFichier($event)"
+                                           (onListFichier)="onListFichier($event)"
+                                           (onTelechargerFichier)="onTelechargerFichier($event)"
+                                           [readonly]="isFichierReadOnly()"
+                                           [urlTelechargment]="urlBaseMiniatureImg"
+                                           [typeFichierAccepter]="typeFichierAccepter"
+                                           [displayedColumns]="displayedColumns"
+                                           [msgSupprimer]="msgSupprimer"
+                                           [isPageFichierAttache]="isFocus"
+
+                                           >
+
+</msss-gestionnaire-de-fichiers>

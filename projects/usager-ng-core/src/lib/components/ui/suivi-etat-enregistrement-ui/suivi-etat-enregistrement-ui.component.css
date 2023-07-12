@@ -1,0 +1,191 @@
+/* Structure */
+.result-container {
+  position: relative;
+}
+
+.result-table-container {
+  position: relative;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.mat-table {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 12px;
+ }
+
+ .mat-cell, .mat-footer-cell {
+   font-size: 12px;
+ }
+
+ .mat-select {
+  display: inline-block;
+  width: 100%;
+  outline: 0;
+  height: 25px;
+ }
+
+ ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 10px 0 5px 0;
+  border-top: none;
+}
+
+
+table {
+  width: 100%;
+}
+
+tr.mat-header-row {
+   height: 28px;
+}
+
+tr.mat-footer-row, tr.mat-row {
+  height: 24px;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-rate-limit-reached {
+  color: #980000;
+  max-width: 360px;
+  text-align: center;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  max-width: 64px;
+}
+
+.mat-column-created {
+  max-width: 124px;
+}
+
+th {
+  font-weight: bold;
+  color:black;
+}
+
+a {
+  cursor: pointer;
+}
+
+.mat-row:nth-child(2n+1){
+  background-color: #f9f9f9;
+}
+
+.mat_row:nth-child(4n+1) {
+  background-color: white;
+}
+
+::ng-deep .mat-paginator-page-size-select {
+  line-height: 3.125!important;
+}
+
+:host ::ng-deep #codePostal input {
+  text-transform: uppercase;
+  }
+
+  :host ::ng-deep #nam input {
+    text-transform: uppercase;
+    }
+
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-0, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+      position: relative;
+      min-height: 1px;
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-bottom: 0px;
+    }
+    .col-md-12 {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+
+  .btn-reinit {
+    text-shadow: 0 1px 0 #fff;
+    background-image: linear-gradient(to bottom,#fff 0,#ffffff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    border-color: #dbdbdb;
+    border-color: #ccc;
+ }
+
+ .col-md-2 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom:0px;
+
+}
+
+/* Surcharge de btn-default de Bootstrap afin que le fond des bouttons soient blanc */
+.btn-default {
+background-image:none;
+}
+
+.padding-3 {
+padding: 3px;
+}
+
+.padding-2 {
+padding: 2px;
+}
+
+#filtre {
+  padding: 5px;
+  height: 80px;
+  width: 100%;
+  min-width: 1398px;
+}
+
+.h-50 {
+  height: 50px;
+}
+
+.m-8{
+  margin: 8px;
+}
+
+.recherche {
+  width: 98%;
+  margin-left: 17px;
+}
+.type_date{
+  width: 400px;
+
+}
+.type {
+  width: 62%;
+  display: block;
+  float: left;
+
+
+}
+
+.combo{
+  max-width: 250px;
+  display: block;
+  float: left;
+  margin-right: 10px;
+}
+
+.date {
+  max-width: 130px;
+  display: block;
+  float: left;
+  margin-right: 10px;
+}

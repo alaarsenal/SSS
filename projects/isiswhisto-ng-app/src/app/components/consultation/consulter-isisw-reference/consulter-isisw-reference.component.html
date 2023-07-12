@@ -1,0 +1,76 @@
+<msss-sigct-content-zone id="consulter-isisw-section-usager"
+                         title="{{ 'sigct.ss.c_appelsisisw.titrereference' | translate }}">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.soustitresuite' | translate}} :
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"
+           *ngFor="let suite of dto.listeSuite">
+        <span>{{suite}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.organismes' | translate}} :
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <span>{{dto.organisme}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.professionel' | translate}} :
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <span>{{dto.professionnel}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label>
+          {{'sigct.ss.c_appelsisisw.delaipec' | translate}} :
+        </label>
+        <span>{{dto.delaiPriseCharge}}</span>
+      </div>
+      <div class="col-md-4">
+        <label>
+          {{'sigct.ss.c_appelsisisw.heuredelaipec' | translate}} :
+        </label>
+        <span>{{dto.heureDelaiPriseCharge}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label>
+          {{'sigct.ss.c_appelsisisw.sipasamelioraiton' | translate}} :
+        </label>
+        <span>{{dto.siPasAmelioration}}</span>
+      </div>
+      <div class="col-md-4">
+        <label>
+          {{'sigct.ss.c_appelsisisw.consultez' | translate}} :
+        </label>
+        <span>{{dto.consulter}}</span>
+      </div>
+      <div class="col-md-4">
+        <label>
+          {{'sigct.ss.c_appelsisisw.relanceprevue' | translate}} :
+        </label>
+        <span>{{dto.relancePrevu}}</span>
+      </div>
+    </div>
+  </div>
+</msss-sigct-content-zone>

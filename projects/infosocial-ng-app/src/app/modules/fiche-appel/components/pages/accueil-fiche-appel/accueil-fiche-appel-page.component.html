@@ -1,0 +1,126 @@
+<div class="accueil-fiche-appel-page">
+  <div class="info-accueil padding top-border">
+    <msss-bienvenue-top-bar [nomSysteme]="'sigct.so.f_accueil.titre'"
+                            [nomEnvironnement]="nomEnvironnement"
+                            [prenomNomUtilisateur]="prenomNomUtilisateur"
+                            [nomOrganismeCourant]="nomOrganismeCourant"
+                            [nomRegionOrganismeCourant]="nomRegionOrganismeCourant"
+                            [versionGlobal]="version?.versionGlobal"
+                            [appVersion]="version?.appVersion"
+                            [buildNumber]="version?.buildnumber"
+                            [urlImageLogo]="'assets/picto-social.png'"
+                            [bienvenueMot]="'sigct.so.f_accueil.bienvenue'">
+    </msss-bienvenue-top-bar>
+  </div>
+
+  <ng-template #alertContainer></ng-template>
+
+  <div class="conteneur-compos">
+    <div class="row">
+      <div id="colonneGauche"
+           class="col-lg-3">
+        <div id="NouvelleConsultation"
+             *hasAnyRoles="['ROLE_SO_APPEL_MODIF', 'ROLE_SO_SAISIE_DIFFEREE']">
+          <msss-sigct-content-zone id="NouvelleConsultationinfoSocial" [isCollapsible]="false" [nomSysteme]="'infoSocial'"
+                                   title="{{'sigct.so.f_accueil.sectionappel' | translate }}">
+
+              <button type="button"
+
+                      class="btn-sm btn btn-primary form-btn btn-width"
+                      title="{{ 'sigct.so.f_accueil.btnnouvappelInfobulle' | translate }}"
+                      id="ajoutConsultation_btn"
+                      (click)="onAjoutConsultationBtnClick($event)">
+                {{ 'sigct.so.f_accueil.btnnouvappel' | translate}}
+              </button>
+
+              <button id="ajoutConsultationSaisieDifferee_btn"
+                      type="button"
+                      *hasAllRoles="['ROLE_SO_SAISIE_DIFFEREE']"
+                      class="btn-sm btn btn-primary form-btn margin-top-10 btn-width"
+                      title="{{'sigct.so.f_accueil.btnnouvappeldiffereInfobulle' | translate }}"
+                      (click)="onAjoutConsultationSaisieDiffereeBtnClick()">
+                {{'sigct.so.f_accueil.btnnouvappeldiffere' | translate}}
+              </button>
+
+          </msss-sigct-content-zone>
+        </div>
+
+        <div id="NotesComplementaires"
+             *hasAnyRoles="['ROLE_US_USAGER_CONSULT','ROLE_SO_APPEL_RECH']">
+          <msss-sigct-content-zone id="NotesComplemantairesInfoSante" [isCollapsible]="false" [nomSysteme]="'infoSocial'"
+                                   title="{{ 'sigct.so.f_accueil.sectionrecherche' | translate }}">
+
+              <button *hasAllRoles="['ROLE_US_USAGER_CONSULT']"
+                      type="button"
+                      class="btn-sm btn  btn-primary form-btn margin-right-10  btn-width"
+                      title="{{ 'sigct.so.f_accueil.btnrechusagerinfobulle' | translate }}"
+                      id="rechercherUsager_btn"
+                      (click)="rechercherUsager();">
+                {{ 'sigct.so.f_accueil.btnrechusager' | translate}}
+              </button>
+              <button *hasAllRoles="['ROLE_SO_APPEL_RECH','ROLE_US_USAGER_CONSULT']"
+                      type="button"
+                      class="btn-sm btn btn-primary form-btn margin-top-10  btn-width"
+                      title="{{ 'sigct.so.f_accueil.btnrechappelinfobulle' | translate }}"
+                      id="rechercherConsultation_btn"
+                      (click)="rechercherFicheAppel()">
+                {{ 'sigct.so.f_accueil.btnrechappel' | translate }}
+              </button>
+              <button type="button"
+                      *hasAnyRoles="['ROLE_SO_APPEL_RECH_ISISW','ROLE_SO_APPEL_RECH_ISISW_TOUS']"
+                      class="btn-sm btn btn-primary form-btn btn-width margin-top-10"
+                      title="{{ 'sigct.ss.f_accueil.btn.info.bullerechappelisisw' | translate }}"
+                      id="ajoutConsultation_btn"
+                      (click)="onBtnRechercherIsiswClick()">
+                {{ 'sigct.ss.f_accueil.btn.rechappelisisw' | translate}}
+              </button>
+
+          </msss-sigct-content-zone>
+        </div>
+
+        <div id="UsagerEnregistrement"
+             *hasAnyRoles="['ROLE_US_ENREGISTREMENT_CONSULT','ROLE_US_ENREGISTREMENT_CONSULT_TOUS']">
+          <msss-sigct-content-zone id="UsagerEnregistrement" [isCollapsible]="false" [nomSysteme]="'infoSocial'"
+                                   title="{{'sigct.sa.f_accueil.sectionclientele' | translate}}">
+
+              <button type="button"
+                      class="btn-sm btn btn-primary form-btn btn-width"
+                      title="{{ 'sigct.sa.f_accueil.rechercherenregistrementinfobulle' | translate }}"
+                      id="ajoutConsultation_btn"
+                      (click)="onRechercherEnregistrementsBtnClick()">
+                {{ 'sigct.sa.f_accueil.rechercherenregistrement' | translate}}
+              </button>
+
+          </msss-sigct-content-zone>
+        </div>
+
+      </div>
+
+      <div id="colonneDroite"
+           class="col-lg-9">
+        <div id="Autres">
+          <msss-sigct-content-zone id="AutreConsultationinfosocial" [isCollapsible]="false" [nomSysteme]="'infoSocial'"
+                                   title="sigct.so.f_accueil.sectionavis"
+                                   css="'no-padding-right'">
+
+            <msss-sigct-liens-utiles [setListeInformationsUtiles]="listeInformationsUtiles"
+                                     [setListeCategories]="listeCategorie"
+                                     (onTelechargerFichier)="onTelechargerFichier($event)"></msss-sigct-liens-utiles>
+
+          </msss-sigct-content-zone>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="PiedDePage"
+
+       class="navbar-fixed-bottom footer">
+    <msss-quebec-pied-de-page [urlImage]="'assets/logo-qc.gif'"
+                              nomModule="infosocial"
+                              [versionGlobal]="version?.versionGlobal"
+                              [appVersion]="version?.appVersion"
+                              [buildNumber]="version?.buildnumber"
+                              ></msss-quebec-pied-de-page>
+  </div>
+</div>

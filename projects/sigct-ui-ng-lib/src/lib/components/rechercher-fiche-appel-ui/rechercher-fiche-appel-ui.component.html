@@ -1,0 +1,274 @@
+<div class="col-md-12">
+    <div class="panel panel-default contentZone">
+        <div class="panel-heading "
+             style="height:50px;">
+            <span><i class="fa fa-filter fa-fw"></i><b>{{ "sigct.ss.r_appels.filtre_recherche" | translate }}</b></span>
+            <span class="pull-right">
+                <button type="button"
+                        id="btn-rechercher"
+                        class="btn-sm btn btn-primary form-btn"
+                        title="{{ 'button.rechercher.title' | translate }}"
+                        (click)="onRechercher()">{{ 'button.rechercher.label' | translate }}</button>&nbsp;
+                <button type="button"
+                        id="btn-reinitialiser"
+                        class="btn-sm btn btn-reinit form-btn"
+                        title="{{ 'button.reinitialiser.title' | translate }}"
+                        (click)="onReinitialiser()">{{ 'button.reinitialiser.label' | translate }}</button>
+            </span>
+        </div>
+        <div class="panel-body">
+            <msss-sigct-content-zone id="section-fiche-appel"
+                                     [title]="labelSectionCriteresFicheAppel">
+                <app-recherche-fiche-appel-criteres #appRechercheFicheAppelCriteres
+                                                    [domaine]="domaine"
+                                                    [listeRoleAction]="_inputOptionCollections.listeRoleAction"
+                                                    [listeRaisonAppel]="_inputOptionCollections.listeRaisonAppel"
+                                                    [listeLangueAppel]="_inputOptionCollections.listeLangueAppel"
+                                                    [listeIntervenant]="_inputOptionCollections.listeIntervenant"
+                                                    [listeOrganisme]="_inputOptionCollections.listeOrganisme"
+                                                    [listeNiveauUrgence]="_inputOptionCollections.listeNiveauUrgence"
+                                                    [listeReference]="_inputOptionCollections.listeReference"
+                                                    [listeOrientation]="_inputOptionCollections.listeOrientation"
+                                                    [listeAucuneInteraction]="_inputOptionCollections.listeAucuneInteraction"
+                                                    [listeAucuneSuite]="_inputOptionCollections.listeAucuneSuite"
+                                                    [criteresRecherche]="criteresRecherche?.criteresAppel"
+                                                    [listeCentreActivite]="_inputOptionCollections.listeCentreActivite"
+                                                    (majListeIntervenant)="onMajListeIntervenant($event)"
+                                                    (professionalEvent)="onProfessionalChange($event)"
+                                                    (rechercher)="onRechercher()">
+                </app-recherche-fiche-appel-criteres>
+            </msss-sigct-content-zone>
+
+            <msss-sigct-content-zone id="section-usager"
+                                     [title]="'sigct.ss.r_appels.sctn_criteres_usager'">
+                <app-recherche-usager-criteres #appRechercheUsagerCriteres
+                                               [critereRecherche]="criteresRecherche.criteresUsager"
+                                               [critereDoublonPotentielVisible]="false"
+                                               [inputOptionLangue]="_inputOptionCollections.listeLangueUsage"
+                                               [inputOptionMalentendant]="_inputOptionCollections.listeMalentendant"
+                                               [inputOptionRegion]="_inputOptionCollections.listeRegion"
+                                               [inputOptionSexe]="_inputOptionCollections.listeSexe"
+                                               [listeGroupeAge]="_inputOptionCollections.listeGroupeAge"
+                                               [isRechercheConsultOuTnterv]="true"
+                                               (enterKeydown)="onRechercher()">
+                </app-recherche-usager-criteres>
+            </msss-sigct-content-zone>
+
+            <msss-sigct-content-zone  #sectionAppelant id="section-appelant"
+                                     [title]="'sigct.ss.r_appels.sctn_criteres_appelant'"
+                                     [collapsed]="true">
+                <app-recherche-appelant-criteres #appRechercheAppelantCriteres
+                                                 [domaine]="domaine"
+                                                 [listeCategorieAppelant]="_inputOptionCollections.listeCategorieAppelant"
+                                                 [criteresRecherche]="criteresRecherche?.criteresAppelant"
+                                                 (rechercher)="onRechercher()">
+                </app-recherche-appelant-criteres>
+            </msss-sigct-content-zone>
+
+            <msss-sigct-content-zone id="section-note-complementaire"
+                                     [title]="'sigct.ss.r_appels.sctn_criteres_notes_cmpltr'"
+                                     [collapsed]="collapsedSectionNoteComplementaire">
+                <app-recherche-note-complementaire-criteres #appRechercheNoteComplementaireCriteres
+                                                            [listeTypeNote]="_inputOptionCollections.listeTypeNote"
+                                                            [listeIntervenantNote]="_inputOptionCollections.listeIntervenantNote"
+                                                            [criteresRecherche]="criteresRecherche?.criteresNoteComplementaire"
+                                                            (rechercher)="onRechercher()">
+                </app-recherche-note-complementaire-criteres>
+            </msss-sigct-content-zone>
+        </div>
+    </div>
+</div>
+
+<div class=" col-md-12">
+    <div id="resultat-recherche-appel"
+         class="panel panel-default contentZone">
+        <div class="panel-heading">
+            <span>
+                <i class="fa fa-list fa-fw"></i>
+                Affichage {{(pageIndex * pageSize) + 1}} à {{(pageIndex + 1) * pageSize}} sur
+                <span class="badge"
+                      id="total-records">{{nbItems}}</span> résultat(s)
+            </span>
+        </div>
+
+        <div class="container no-margin-left">
+            <table mat-table
+                   [dataSource]="resultatsAffiches"
+                   class="table"
+                   matSort
+                   matSortDisableClear
+                   [matSortActive]="criteresRecherche.champTri"
+                   [matSortDirection]="criteresRecherche.ordreTri"
+                   (matSortChange)="onSortChange($event)">
+
+                <!-- Date début Column -->
+                <ng-container matColumnDef="dtDebutFicheAppel">
+                    <th mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef
+                        class="col-date-debut">{{ 'sigct.ss.r_appels.sctn_rslt_rchrch.dhappel' | translate }}</th>
+                    <td mat-cell
+                        *matCellDef="let row">{{row.dtDebutFicheAppel | date:'yyyy-MM-dd HH:mm:ss':'UTC'}}</td>
+                </ng-container>
+
+                <!-- Service Column -->
+                <ng-container matColumnDef="sis">
+                    <th mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef
+                        class="col-sis">{{ 'sigct.ss.r_appels.sctn_rslt_rchrch.santesocial' | translate }}</th>
+                    <td mat-cell
+                        *matCellDef="let row">{{row.sis}}</td>
+                </ng-container>
+
+                <!-- Nom Column -->
+                <ng-container matColumnDef="nom">
+                    <th mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef>{{ 'sigct.ss.r_appels.sctn_rslt_rchrch.nom' | translate }}</th>
+                    <td mat-cell
+                        *matCellDef="let row">{{row.nom}}</td>
+                </ng-container>
+
+                <!-- Prenom Column -->
+                <ng-container matColumnDef="prenom">
+                    <th mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef>{{ 'sigct.ss.r_appels.sctn_rslt_rchrch.prnom' | translate }}</th>
+                    <td mat-cell
+                        *matCellDef="let row">{{row.prenom}}</td>
+                </ng-container>
+
+                <!-- Sexe Column -->
+                <ng-container matColumnDef="sexe">
+                    <th mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef
+                        class="col-sexe">{{ 'sigct.ss.r_appels.sctn_rslt_rchrch.sexe' | translate }}</th>
+                    <td mat-cell
+                        *matCellDef="let row">{{row.sexe}}</td>
+                </ng-container>
+
+                <!-- Téléphone Column -->
+                <ng-container matColumnDef="telephoneAffiche">
+                    <th mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef
+                        class="col-telephone">{{ 'sigct.ss.r_appels.sctn_rslt_rchrch.telprinc' | translate }}</th>
+                    <td mat-cell
+                        *matCellDef="let row">{{row.telephoneAffiche | telephonePipe: false}}</td>
+                </ng-container>
+
+                <!-- Région Column -->
+                <ng-container matColumnDef="codeNomRegion">
+                    <th mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef
+                        mat-sort-header
+                        class="col-region">{{ 'sigct.ss.r_appels.sctn_rslt_rchrch.rgn' | translate }}</th>
+                    <td mat-cell
+                        *matCellDef="let row">{{row.codeNomRegion}}</td>
+                </ng-container>
+
+                <!-- Région Column -->
+                <ng-container matColumnDef="codePostalAffiche">
+                    <th mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef
+                        mat-sort-header
+                        class="col-code-postal">{{ 'sigct.ss.r_appels.sctn_rslt_rchrch.codpostal' | translate }}
+                    </th>
+                    <td mat-cell
+                        *matCellDef="let row">{{row.codePostalAffiche | codePostalPipe}}</td>
+                </ng-container>
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell
+                        *matHeaderCellDef
+                        disableClear
+                        class="col-action center">
+                        {{ 'sigct.ss.r_appels.sctn_rslt_rchrch.actions' | translate }}
+                    </th>
+                    <td mat-cell
+                        *matCellDef="let row"
+                        class="center">
+                        <!-- Debug: row.idStOrganismes={{row.idStOrganismes}} idStOrganismeCourant={{idStOrganismeCourant}} row.domaine={{row.domaine}} <span *hasAllRoles="['ROLE_SA_APPEL_CONSULT']">hasAllRoles=['ROLE_SA_APPEL_CONSULT']</span> <span *hasAllRoles="['ROLE_SO_APPEL_CONSULT']">hasAllRoles=['ROLE_SO_APPEL_CONSULT']</span> -->
+                        <ng-container *ngIf="row.domaine == domaine && row.accessible">
+                            <ng-container *ngIf="row.domaine == 'SA'">
+                                <button *hasAnyRoles="['ROLE_SA_APPEL_CONSULT']"
+                                        type="button"
+                                        class="btn btn-default btn-sm padding-2"
+                                        id="btn-consulter"
+                                        (click)="onConsulterFicheAppel(row);"
+                                        title="{{ 'sigct.ss.r_appels.sctn_rslt_rchrch.ibconsulter' | translate }}">
+                                    <i class="fa fa-file-text-o fa-lg"></i>
+                                </button>
+                            </ng-container>
+
+                            <ng-container *ngIf="row.domaine == 'SO'">
+                                <button *hasAllRoles="['ROLE_SO_APPEL_CONSULT']"
+                                        type="button"
+                                        class="btn btn-default btn-sm padding-2"
+                                        id="btn-consulter"
+                                        (click)="onConsulterFicheAppel(row);"
+                                        title="{{ 'sigct.ss.r_appels.sctn_rslt_rchrch.ibconsulter' | translate }}">
+                                    <i class="fa fa-file-text-o fa-lg"></i>
+                                </button>
+                            </ng-container>
+                        </ng-container>
+                        <!-- Debug info masqué -->
+                        <div class="display-debug-info">
+                            <div>idStOrganismeCourant={{idStOrganismeCourant}}</div>
+                            <div>row.idStOrganismes={{row.idStOrganismes}}</div>
+                            <div>row.domaine={{row.domaine}}</div>
+                            <div>row.idAppel={{row.idAppel}}</div>
+                            <div>row.idFicheAppel={{row.idFicheAppel}}</div>
+                            <div>row.accessible={{row.accessible}}</div>
+                            <div>hasAllRoles=['ROLE_SA_APPEL_CONSULT']=<span
+                                      *hasAllRoles="['ROLE_SA_APPEL_CONSULT']">true</span></div>
+                            <div>hasAllRoles=['ROLE_SO_APPEL_CONSULT']=<span
+                                      *hasAllRoles="['ROLE_SO_APPEL_CONSULT']">true</span></div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row
+                    *matHeaderRowDef="displayedColumns"
+                    (clic)="onHeaderClick()"></tr>
+                <tr mat-row
+                    *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- Row shown when there is no matching data (Angular 10). -->
+                <tr class="mat-row"
+                    *matNoDataRow>
+                    <td class="mat-cell"
+                        colspan="4">{{'sigct.ss.r_appels.sctn_rslt_rchrch.aucunedonnee' | translate}}</td>
+                </tr>
+            </table>
+          <div *ngIf="resultatsAffiches===null ||resultatsAffiches===undefined  ||resultatsAffiches===undefined || resultatsAffiches.length === 0" class="no-records mat-row">
+            {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+          </div>
+            <mat-paginator [length]="nbItems"
+                           [pageSize]="criteresRecherche.pageSize"
+                           [pageSizeOptions]="[10,25,50,100]"
+                           [showFirstLastButtons]="true"
+                           (page)="onPageChange($event)"></mat-paginator>
+        </div>
+
+        <div class="row" *ngIf="resultatsAffiches.length > 0" style="margin: 0px; margin-bottom: 10px;">
+           <div class="col-md-12 text-right" style="padding-top: 10px; border-top: 1px solid #ddd; box-shadow: 0 -5px 5px -5px #ddd;">
+                <button type="button" class="btn-sm btn btn-primary form-btn m-8"  id="ajouterBtn" title="{{ 'sigct.recherche.fiche.intervention.liste.btnexporterinfobulle' | translate }}" (click)="onExporter()"> {{ 'usager.notification.recherche.liste.btnexporter' | translate }} </button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="main">
+    <div class="left-menu">
+        <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+    </div>
+    <div class="conteneur">
+        <sigct-usager-fusion-container [idUsager1]="idUsagerIdent1"
+                                       [idUsager2]="idUsagerIdent2"
+                                       (retourListe)="onRetourListe()"></sigct-usager-fusion-container>
+    </div>
+</div>

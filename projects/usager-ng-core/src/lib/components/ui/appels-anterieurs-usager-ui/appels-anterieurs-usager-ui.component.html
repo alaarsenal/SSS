@@ -1,0 +1,110 @@
+<div class=" col-md-12">
+  <div id="usager"
+       class="panel panel-default contentZone"
+       #contentZone>
+    <div class="panel-heading ">
+      <span>
+        <i class="fa fa-list fa-fw"></i>
+        Affichage {{(pageIndex * pageSize) + 1}} à {{(pageIndex + 1) * pageSize}} sur
+        <span class="badge"
+              id="total-records">{{nbItems}}</span> résultat(s)
+        <span *ngIf="nbItems >= 500"> - {{ 'usager.appelsanterieurs.limite.atteinte' | translate }}</span>
+      </span>
+    </div>
+
+    <div class="container marginL-0">
+
+      <div class="table-container pn">
+
+        <table mat-table
+               [dataSource]="items"
+               class="table"
+               matSort
+               matSortActive="dtDebutFicheAppel"
+               matSortDisableClear
+               matSortDirection="asc">
+
+          <!-- Date début Column -->
+          <ng-container matColumnDef="dtDebutFicheAppel">
+            <th mat-header-cell
+                *matHeaderCellDef>{{ 'usager.appelsanterieurs.dateheureappel' | translate }}</th>
+            <td mat-cell
+                *matCellDef="let row">{{row.dtDebutFicheAppel | date:'yyyy-MM-dd HH:mm:ss':'UTC'}}</td>
+          </ng-container>
+
+          <!-- Service Column -->
+          <ng-container matColumnDef="sis">
+            <th mat-header-cell
+                *matHeaderCellDef>{{ 'usager.appelsanterieurs.ss' | translate }}</th>
+            <td mat-cell
+                *matCellDef="let row"><span title="{{row.nomOrganisme}}">{{row.sis}}</span></td>
+          </ng-container>
+
+          <!-- Région Column -->
+          <ng-container matColumnDef="codeNomRegion">
+            <th mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header>{{ 'usager.appelsanterieurs.regionusager' | translate }}</th>
+            <td mat-cell
+                *matCellDef="let row">{{row.codeNomRegion}}</td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell
+                *matHeaderCellDef
+                disableClear
+                class="center">
+              {{ 'usager.appelsanterieurs.actions' | translate }}
+            </th>
+            <td mat-cell
+                *matCellDef="let row"
+                class="center">
+              <ng-container *ngIf="row.accessible && row.domaine == 'SA'">
+                <button *hasAllRoles="['ROLE_SA_APPEL_CONSULT']"
+                        type="button"
+                        class="btn btn-default btn-sm padding-2"
+                        id="btn-consulter"
+                        (click)="consulter(row);"
+                        title="{{ 'usager.appelsanterieurs.ibconsulter' | translate }}">
+                  <i class="fa fa-file-text-o fa-lg"></i></button>
+              </ng-container>
+
+              <ng-container *ngIf="row.accessible && row.domaine == 'SO'">
+                <button *hasAllRoles="['ROLE_SO_APPEL_CONSULT']"
+                        type="button"
+                        class="btn btn-default btn-sm padding-2"
+                        id="btn-consulter"
+                        (click)="consulter(row);"
+                        title="{{ 'usager.appelsanterieurs.ibconsulter' | translate }}">
+                  <i class="fa fa-file-text-o fa-lg"></i></button>
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row
+              *matHeaderRowDef="displayedColumns"
+              (click)="paginator.firstPage()"></tr>
+          <tr mat-row
+              *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <!-- Row shown when there is no matching data (Angular 10). -->
+          <tr class="mat-row"
+              *matNoDataRow>
+            <td class="mat-cell"
+                colspan="4">{{'usager.appelsanterieurs.aucunedonnee' | translate}}</td>
+          </tr>
+        </table>
+        <div *ngIf="items===null || items===undefined  || items.length === 0" class="no-records mat-row">
+          {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+        </div>
+      </div>
+
+      <mat-paginator [length]="nbItems"
+                     [pageSize]="25"
+                     [pageSizeOptions]="[5,10,15,20,25,50,100]"
+                     [showFirstLastButtons]="true"
+                     (page)="onPageChange($event)"></mat-paginator>
+    </div>
+  </div>
+</div>

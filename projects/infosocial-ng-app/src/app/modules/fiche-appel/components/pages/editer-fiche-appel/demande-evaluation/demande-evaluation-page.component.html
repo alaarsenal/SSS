@@ -1,0 +1,294 @@
+<div class="row enlever-espace-droite-gauche">
+  <div class="col-md-12">
+    <h4 class="h4center">{{ 'sigct.so.f_appel.menuver.demanalyse' | translate }}</h4>
+  </div>
+</div>
+
+<div class="row enlever-espace-droite-gauche">
+
+  <div class="col-md-2">
+    <msss-sigct-chosen label="sigct.so.f_appel.analyse.typefiche"
+                       name="typeFicheInterventionDemandeAnalyse"
+                       id="typeFicheInterventionDemandeAnalyse"
+                       [options]="inputOptionsTypeFicheIntervention"
+                       [(ngModel)]="ficheAppelSocialDto.codeReferenceTypeFiche"
+                       (optionSelected)="onTypeFicheSelected($event)"
+                       >
+    </msss-sigct-chosen>
+  </div>
+
+  <div class="col-md-3">
+    <msss-sigct-chosen label="sigct.so.f_appel.analyse.raison"
+                       name="raisonTypeIntervention"
+                       id="raisonTypeIntervention"
+                       [required]="isTypeInterventionNonPertinente"
+                       #raisonTypeIntervention
+                       [options]="inputOptionsRaisonTypeIntervention"
+                       [(ngModel)]="ficheAppelSocialDto.referenceRaisonTypeInterventionCode"
+                       [disabled]="!isTypeInterventionNonPertinente"
+                       *ngIf="displayRaisonTypeIntervention || isSaisieDifferee">
+    </msss-sigct-chosen>
+  </div>
+
+
+  <div class="col-md-2" *ngIf="isSaisieDifferee">
+    <div class="row">
+      <div class="col-md-12">
+        <strong>{{'sigct.so.f_appel.analyse.dhdbtappel' | translate}}</strong>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 padding-right-5">
+        <msss-sigct-datepicker id="date-debut-fiche-appel"
+                               [(ngModel)]="dateDebutFicheAppel"
+                               dateFormat="yyyy-mm-dd"
+                               placeHolder="aaaa-mm-jj"
+                               [ngModelOptions]="{standalone:true}"
+                               [endDate]="demain"
+                               ariaLabel="{{'sigct.so.f_appel.analyse.dhdbtappel' | translate}}">
+        </msss-sigct-datepicker>
+      </div>
+      <div class="col-md-4 no-padding-left">
+        <msss-input-text id="heure-debut-fiche-appel"
+                         maxlength="5"
+                         patternMask="Hh:m9"
+                         placeholder="hh:mm"
+                         [(ngModel)]="heureDebutFicheAppel"
+                         (focusout)="onBlurHeureDebutFicheAppel()"
+                         ariaLabel="hh:mm">
+        </msss-input-text>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2" *ngIf="isSaisieDifferee">
+    <div class="row">
+      <div class="col-md-12">
+        <strong>{{'sigct.so.f_appel.analyse.dhfinappel' | translate}}</strong>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 padding-right-5">
+        <msss-sigct-datepicker id="date-fin-fiche-appel"
+                               [(ngModel)]="dateFinFicheAppel"
+                               dateFormat="yyyy-mm-dd"
+                               placeHolder="aaaa-mm-jj"
+                               [ngModelOptions]="{standalone:true}"
+                               [endDate]="demain"
+                               ariaLabel="{{'sigct.so.f_appel.analyse.dhfinappel' | translate}}">
+        </msss-sigct-datepicker>
+      </div>
+      <div class="col-md-4 no-padding-left">
+        <msss-input-text id="heure-fin-fiche-appel"
+                         maxlength="5"
+                         patternMask="Hh:m9"
+                         placeholder="hh:mm"
+                         [(ngModel)]="heureFinFicheAppel"
+                         (focusout)="onBlurHeureFinFicheAppel()"
+                         ariaLabel="hh:mm">
+        </msss-input-text>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row enlever-espace-droite-gauche">
+  <div class="col-md-12">
+    <msss-input-textarea id="accueilDemandeAnalyse"
+                         #PremierElem
+                         label="sigct.so.f_appel.analyse.accueil"
+                         maxlength="4000"
+                         rows="4"
+                         CSSResize="vertical"
+                         [(ngModel)]="ficheAppelSocialDto.accueil"
+                         [required]="mandatoryFields.includes('accueilDemandeAnalyse')"
+
+                         >
+    </msss-input-textarea>
+  </div>
+</div>
+
+<div class="row enlever-espace-droite-gauche">
+  <div class="col-sm-12 block-consent">
+    <msss-input-checkbox *ngIf="displayConsentementFichesAnterieures"
+                         id="consentementFichesAnterieures"
+                         name="consentementFichesAnterieures"
+                         [options]="inputOptionConsentementFichesAnterieures"
+                         [(ngModel)]="ficheAppelSocialDto.usager.consentementFichesAnterieures"
+                         (itemLinkClickEvent)="onConsentementFicheAnterieuresClickEvent($event)">
+    </msss-input-checkbox>
+    <msss-popup [openPopup]="consentementFichesAnterieuresClicked"
+                buttonCloseLabel="{{'sigct.so.f_appel.fermerconsentement' | translate}}"
+                buttonCloseTitle="{{'sigct.so.f_appel.fermerconsentementinfobulle' | translate}}"
+                contentHeight="220px"
+                (closedEvent)="onPopupConsentementFichesAnterieuresCloseEvent()">
+      {{'sigct.so.f_appel.texteconsentement' | translate}}
+    </msss-popup>
+  </div>
+</div>
+
+<div class="row enlever-espace-droite-gauche">
+  <msss-sigct-content-zone title="{{ 'sigct.so.f_appel.analyse.analysesituation' | translate }}"
+                           id="analyseSituationContentZone"
+                           >
+
+    <div class="row">
+      <div class="col-md-12">
+        <msss-input-textarea #analyseSituationDemandeAnalyse
+                             id="analyseSituationDemandeAnalyse"
+                             label="sigct.so.f_appel.analyse.analysesituation"
+                             maxlength="4000"
+                             rows="5"
+                             [required]="mandatoryFields.includes('analyseSituationDemandeAnalyse')"
+                             CSSResize="vertical"
+                             [(ngModel)]="ficheAppelSocialDto.analyseSituation"
+                             ariaLabel="{{'sigct.so.f_appel.analyse.analysesituation' | translate}}">
+        </msss-input-textarea>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <label id="label_dangerSuicide"
+      [ngClass]="{'control-label label_disabled':boutonRadioCouleurDangerSuicide.isDisabled,
+                                         'control-label':!boutonRadioCouleurDangerSuicide.isDisabled}" >{{ "sigct.so.f_appel.analyse.estimsuicide" | translate }}
+                                         <span *ngIf=" mandatoryFields.includes('label_dangerSuicide')" class="mandatory-indicator"> *</span>
+                                        </label>
+
+        <msss-bouton-radio-couleur #boutonRadioCouleurDangerSuicide
+                                   idComposant="boutonRadioCouleurDangerSuicide"
+                                   [listeBouton]="listeDangerSuicide"
+                                   [(ngModel)]="ficheAppelSocialDto.codeReferenceDangerSuicide"
+                                   >
+        </msss-bouton-radio-couleur>
+
+        <msss-input-textarea #estimationSuicideDemandeAnalyse
+          id="estimationSuicideDemandeAnalyse"
+          maxlength="4000"
+          rows="7"
+          CSSResize="vertical"
+          [(ngModel)]="ficheAppelSocialDto.estimationSuicide"
+          ariaLabel="{{'sigct.so.f_appel.analyse.estimsuicide' | translate }}">
+        </msss-input-textarea>
+      </div>
+
+      <div class="col-md-6">
+        <label id="label_risqueHomicide"
+        [ngClass]="{'control-label label_disabled':boutonRadioCouleurDangerSuicide.isDisabled,
+        'control-label':!boutonRadioCouleurDangerSuicide.isDisabled}">{{ "sigct.so.f_appel.analyse.estimhomicide" | translate }}
+        <span *ngIf="mandatoryFields.includes('label_risqueHomicide')"  class="mandatory-indicator"> *</span></label>
+        <msss-bouton-radio-couleur #boutonRadioCouleurRisqueHomicide
+                                   idComposant="boutonRadioCouleurRisqueHomicide"
+                                   [listeBouton]="listeRisqueHomicide"
+                                   [(ngModel)]="ficheAppelSocialDto.codeReferenceRisqueHomicide"
+                                   >
+        </msss-bouton-radio-couleur>
+
+        <msss-input-textarea #estimationHomicideDemandeAnalyse
+        id="estimationHomicideDemandeAnalyse"
+        maxlength="4000"
+        rows="7"
+         CSSResize="vertical"
+        [(ngModel)]="ficheAppelSocialDto.estimationHomicide"
+        ariaLabel="{{'sigct.so.f_appel.analyse.estimhomicide' | translate }}">
+</msss-input-textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <msss-input-textarea #DEBADemandeAnalyse
+                             id="DEBADemandeAnalyse"
+                             label="sigct.so.f_appel.analyse.deba"
+                             maxlength="4000"
+                             rows="5"
+                             CSSResize="vertical"
+                             [(ngModel)]="ficheAppelSocialDto.deba"
+                             >
+        </msss-input-textarea>
+      </div>
+    </div>
+
+  </msss-sigct-content-zone>
+</div>
+
+<div class="row enlever-espace-droite-gauche">
+  <msss-sigct-content-zone title="{{ 'sigct.so.f_appel.analyse.compress' | translate }}"
+                           id="competenceRessourceContentZone">
+
+    <msss-input-textarea #competenceRessourceDemandeAnalyse
+                         id="competenceRessourceDemandeAnalyse"
+                         maxlength="4000"
+                         rows="5"
+                         CSSResize="vertical"
+                         [(ngModel)]="ficheAppelSocialDto.competenceRessource"
+                         ariaLabel="{{'sigct.so.f_appel.analyse.compress' | translate }}">
+    </msss-input-textarea>
+  </msss-sigct-content-zone>
+</div>
+
+
+<div class="row enlever-espace-droite-gauche">
+  <msss-sigct-content-zone title="{{ 'sigct.so.f_appel.analyse.medactuelle' | translate }}"
+                           id="medicationActuelleContentZone">
+    <div class="row">
+      <app-medication-actuelle #medication
+                               [id]="'medication'"
+                               [ficheAppel]="ficheAppelSocialDto"
+                               [listeMedication]="listeMedications"
+                               (medicationSave)="onMedicationSave($event)"
+                               (medicationDelete)="onMedicationDelete($event)"
+                               >
+      </app-medication-actuelle>
+    </div>
+  </msss-sigct-content-zone>
+</div>
+
+<div class="row enlever-espace-droite-gauche">
+  <msss-sigct-content-zone title="{{ 'sigct.so.f_appel.analyse.consulant' | translate }}"
+                           id="consultationAnterieureContentZone">
+    <div class="row">
+      <app-consultations-anterieures #consultationAnterieure
+                                     [id]="'consultationAnterieure'"
+                                     [ficheAppel]="ficheAppelSocialDto"
+                                     [consultationAnterieureSaisi]="consultationAnterieureSaisi"
+                                     [listeConsultationAnterieure]="listeConsultationAnterieure"
+                                     [listeRefRessConsult]="listeRefRessConsult"
+                                     (consultationAnterieureSave)="onConsultationAnterieureSave($event)"
+                                     (consultationAnterieureDelete)="onConsultationAnterieureDelete($event)"
+                                     >
+      </app-consultations-anterieures>
+    </div>
+  </msss-sigct-content-zone>
+</div>
+
+
+
+<msss-grise-automatique-selon-type-intervention #griseAutomatique
+    [codeReferenceTypeFiche] = "ficheAppelSocialDto.codeReferenceTypeFiche"
+    (onChangementTypeCancel) = "onChangmentTypeCencel($event)"
+    (onChangementTypeConfirme) = "onChangmentTypeConfirme($event)"
+    [abregDiabledList] = "[
+                          estimationSuicideDemandeAnalyse,
+                          estimationHomicideDemandeAnalyse,
+                          boutonRadioCouleurDangerSuicide,
+                          boutonRadioCouleurRisqueHomicide,
+                          competenceRessourceDemandeAnalyse,
+                          DEBADemandeAnalyse,
+                          medication,
+                          consultationAnterieure]"
+
+    [nomPertDiabledList] = "[PremierElem,
+                            analyseSituationDemandeAnalyse,
+                            estimationSuicideDemandeAnalyse,
+                            estimationHomicideDemandeAnalyse,
+                            competenceRessourceDemandeAnalyse,
+                            boutonRadioCouleurDangerSuicide,
+                            boutonRadioCouleurRisqueHomicide,
+                            competenceRessourceDemandeAnalyse,
+                            DEBADemandeAnalyse,
+                            medication,
+                            consultationAnterieure]" >
+  </msss-grise-automatique-selon-type-intervention>
+

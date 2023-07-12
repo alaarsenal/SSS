@@ -1,0 +1,67 @@
+textarea.textarea-resize-none {
+  resize: none;
+}
+
+textarea.textarea-resize-vertical {
+  resize: vertical;
+}
+
+textarea.textarea-resize-horizontal {
+  resize: horizontal;
+}
+
+textarea.textarea-resize-both {
+  resize: both;
+}
+
+:host(.error) input {
+  border: 1px solid red!important;
+}
+
+:host(.error) label {
+  color: red!important;
+}
+
+.sous-label-amj {
+  padding-left: 8px;
+  margin: 0px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.mat-form-field-infix {
+  width: 100% !important;
+}
+
+::ng-deep .mat-input-wrapper{
+  width:400px !important;
+
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 10px 0 5px 0;
+  border-top: none;
+}
+
+.mat-input-sigct {
+  width: 100% !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+}
+
+::ng-deep .mat-form-field-outline-start, ::ng-deep .mat-form-field-outline-gap, ::ng-deep .mat-form-field-outline-end {
+  background-color: white;
+}
+
+::ng-deep .disabled  .mat-form-field-outline-start,
+::ng-deep  .disabled .mat-form-field-outline-gap,
+::ng-deep .disabled   .mat-form-field-outline-end{
+    background:#eeeeee !important;
+}
+
+::ng-deep .disabled mat-icon { color: #ACACAC!important; }
+
+::ng-deep .label_disabled { color: #aaa !important;}

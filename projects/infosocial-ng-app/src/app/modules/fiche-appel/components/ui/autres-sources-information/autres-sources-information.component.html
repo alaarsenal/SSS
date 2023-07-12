@@ -1,0 +1,68 @@
+<div id="autresSourcesInformations" class="col-md-6 background-gris padding-top-10">
+
+  <form #fAutreSourceInformation="ngForm">
+    <div class="col-md-11 padding-left-0">
+      <div class="col-md-6">
+        <msss-sigct-chosen label="sigct.so.f_appel.intervention.titreautressourcesinformation" name="autreSource" id="autreSource"
+          [options]="inputOptionsAutreSource" [(ngModel)]="autresSourcesInformationDTO.codeRefSourceInformation">
+        </msss-sigct-chosen>
+      </div>
+
+      <div class="col-md-6">
+        <msss-input-text id="detail" name="detail" label="sigct.so.f_appel.evaluation.details" maxlength="255"
+          [(ngModel)]="autresSourcesInformationDTO.details"></msss-input-text>
+      </div>
+    </div>
+
+    <div class="col-md-1 padding-top-10">
+      <div class="padding-left-8" id="ActionAutreSourceInformationIcon">
+        <a href="#" onClick="return false;">
+          <i (click)="onAddAutreSource()" class="fa fa-arrow-right fa-2x" title="{{ cleInfoBulleSauvegarder | translate }}"></i>
+        </a>  
+      </div>
+    </div>
+
+  </form>
+
+</div>
+
+<div id="affichageAutresSourcesInformation" class="col-md-6" >
+  <div class="padding-top-10">
+    <div *ngFor="let itemAutreSource of listeAutresSourcesInformationDTO; let i=index">
+      <div class="row padding-top-bottom-2">
+        <div class="col-md-11">
+
+          <span *ngIf="getAttribut1RefAutresSourcesInformation(itemAutreSource.codeRefSourceInformation) == 'URL'; else pasURL">
+            <a href="{{ getAttribut2RefAutresSourcesInformation(itemAutreSource.codeRefSourceInformation) }}" target="_blank">
+              {{ getNomRefAutresSourcesInformation(itemAutreSource.codeRefSourceInformation) }}
+            </a>
+          </span>
+          <ng-template #pasURL>
+            <span>{{ getNomRefAutresSourcesInformation(itemAutreSource.codeRefSourceInformation) }}</span>
+          </ng-template>
+          <span *ngIf="itemAutreSource.details">&nbsp;(<em>{{ itemAutreSource.details }}</em>)</span>
+
+        </div>
+        <div class="col-md-1">
+          <a href="#" onclick="return false" (click)="confirmerDeleteAutreSource(itemAutreSource.id)">
+            <i (click)="confirmerDeleteAutreSource(itemAutreSource.id)" class="fa fa-trash-o fa-fw" title="{{ cleInfoBulleSupprimer | translate }}"></i>
+          </a>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <modal-confirmation id-container="confirm_popup_suppression">
+    <div class="modal-confirm-body modal-body">
+        {{ 'sa-iu-e00015' | translate:{'0':nomAutreSourceInformationASupprimer} }}
+    </div>
+  
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+        id="ok_confirm_button" (click)="deleteAutreSource();">Oui</button>
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+        id="cancel_confirm_button">Non</button>
+    </div>
+  </modal-confirmation>
+
+</div>

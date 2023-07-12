@@ -1,0 +1,63 @@
+.detail-label, .detail-span, .raison-label, .raison-span, .conclusion-label, .conclusion-span, .projet-label, .projet-span {
+  display: inline-block;
+}
+
+.detail-label, .detail-span, .raison-label, .raison-span, .conclusion-label, .conclusion-span, .projet-label, .projet-span {
+  vertical-align: top;
+}
+
+.detail-label {
+  width: 8%;
+}
+
+.detail-span {
+  width: 92%;
+}
+
+.raison-label {
+  width: 27%;
+}
+
+.conclusion-label {
+  width: 27%;
+}
+
+.projet-label {
+  width: 20%;
+}
+
+.pt-0-5 {
+  padding-top: .5rem;
+}
+
+.pb-0-5 {
+  padding-bottom: .5rem;
+}
+
+@media (max-width: 1440px) {
+  .col-md-3 {
+    width: 15%;
+  }
+  .col-md-9 {
+    width: 85%;
+  }
+  .detail-label {
+    width: 11%;
+  }
+  .detail-span {
+    width: 89%;
+  }
+  .raison-label {
+    width: 38%;
+  }
+  .conclusion-label {
+    width: 38%;
+  }
+  .conclusion-span {
+    width: 62%;
+  }
+  .projet-label {
+    width: 28%;
+  }
+
+}

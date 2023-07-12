@@ -1,0 +1,21 @@
+.col-duree-min {
+    width: 90px;
+}
+
+.col-duree-max {
+    width: 75px;
+}
+
+.col-et {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0.5em;
+    text-align: center;
+    width: 15px;
+}
+
+.col-minute {
+    padding-left: 0;
+    padding-top: 0.5em;
+    width: 15px;
+}

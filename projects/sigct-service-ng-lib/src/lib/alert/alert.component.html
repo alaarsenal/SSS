@@ -1,0 +1,19 @@
+<div *ngFor="let alert of alerts; let i = index" #alertView>
+      <div class="row frm-errors alert alert-block"  [class.alert-danger]="alert.type=='ERROR'" [class.alert-light]="alert.type=='WARNING'" [class.alert-warning]="alert.type=='WARNING_FINAL'" [class.alert-success]="alert.type=='SUCCESS'">
+            <div class="col-xs-11">
+                  <div class="labelerror">
+                        <h4>{{alert.title}}</h4>
+                  </div>
+                  <div class="msgerror">
+                        <ul>
+                              <li  *ngFor="let msg of alert.messages; let i = index" >{{msg}}</li>
+                        </ul>
+                  </div>
+            </div>
+            <div class="col-xs-1 text-right">
+                  <a id="closeGlobalMess" target-id="globalErrors" title="Fermer" (click)="alertViewClose(alertView)">
+                        <i class="fa fa-times"></i>
+                  </a>
+            </div>
+      </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-5 pr-0">
+    <msss-sigct-content-zone id="section-identification-usager"
+                             title="{{ 'sigct.ss.f_appel.consultation.identusager' | translate }}">
+      <msss-consultation-fiche-section-usager-identification #sectionIdentification
+                                                             [referencesGroupeAges]="referencesGroupeAges"
+                                                             [consultationUsager]="consultationFicheSectionUsager">
+      </msss-consultation-fiche-section-usager-identification>
+    </msss-sigct-content-zone>
+  </div>
+  <div class="col-md-7 pl-0">
+    <msss-sigct-content-zone id="section-communications-usager"
+                             title="{{ 'sigct.ss.f_appel.consultation.communications' | translate }}">
+      <msss-consultation-fiche-section-usager-communication #sectionCommunication
+                                                            [communications]="communications">
+      </msss-consultation-fiche-section-usager-communication>
+    </msss-sigct-content-zone>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5 pr-0">
+    <msss-sigct-content-zone id="section-informations-supp-usager"
+                             title="{{ 'sigct.ss.f_appel.consultation.infossupp' | translate }}">
+      <msss-consultation-fiche-section-usager-informations-supp #sectionInformationSupp
+                                                                [consultationUsager]="consultationFicheSectionUsager">
+      </msss-consultation-fiche-section-usager-informations-supp>
+    </msss-sigct-content-zone>
+  </div>
+  <div class="col-md-7 pl-0">
+    <msss-sigct-content-zone id="section-adresses-usager"
+                             title="{{ 'sigct.ss.f_appel.consultation.adresses' | translate }}">
+      <msss-consultation-fiche-section-usager-adresse #sectionAdresse
+                                                      [lieuxResidence]="lieuxResidence">
+      </msss-consultation-fiche-section-usager-adresse>
+    </msss-sigct-content-zone>
+  </div>
+</div>

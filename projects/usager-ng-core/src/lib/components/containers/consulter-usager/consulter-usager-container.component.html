@@ -1,0 +1,24 @@
+<msss-form-top-bar *ngIf="topBarreVisible"
+                   label="{{labelMenuTop}}"
+                   detail="{{detailMenuTop}}"
+                   [nomModule]="'usager'"
+                   [options]="formTopBarOptions"
+                   [fixe]="topBarreFixe">
+</msss-form-top-bar>
+
+<div [class.contenu-avec-scrollbar]="topBarreVisible">
+
+  <ng-container *ngIf="alertContainerVisible">
+    <ng-template #alertContainer></ng-template>
+  </ng-container>
+
+  <msss-sigct-content-zone id="usager"
+                           title="{{titreSection}}">
+    <div class="row">
+      <app-consulter-ui-component #appConsulterUiComponent
+                                  [doublonPotentielVisible]="doublonPotentielVisible"
+                                  [listeGroupeDAge]="listeGroupeDAge"
+                                  [listeSexe]="listeSexe"></app-consulter-ui-component>
+    </div>
+  </msss-sigct-content-zone>
+</div>

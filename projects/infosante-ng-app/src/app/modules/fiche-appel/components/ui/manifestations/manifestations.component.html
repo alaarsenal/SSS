@@ -1,0 +1,92 @@
+<div class="col-md-12 enlever-espace no-padding-right" title="">
+    <div class="col-md-6 background-gris no-padding-right">
+        <form name="formManifestation" (ngSubmit)="onSubmitManifestation()" #fCom="ngForm">
+
+            <div class="row">
+
+                <div class="col-sm-4">
+
+                    <msss-sigct-chosen #liste_manifestation label="sigct.sa.f_appel.evaluation.manifestations" name="manifestation" required
+                        id="manifestations" [options]="inputOptionsManifestations" [valide]="isManifestationValide"
+                        [(ngModel)]="manifestation.referenceManifestationId" [title]="infoBulleManifestation" (ngModelChange)="onManifestationChange()"
+                        (optionSelected)="onManifestationValide($event)" [disabled]="isDisabled">
+                    </msss-sigct-chosen>
+                </div>
+
+                <div class="col-sm-1 no-padding-left margin-left-m15">
+
+
+                       <a href="#"  id="btnPre" [style]="setPresenceStyle()" onclick="return false;" (click)="onPresenceClick()" (keyup.space)="onPresenceClick()" >
+                          <i id="pre" class="fa fa-check fa-2x icon presence-offset" title="{{'sigct.sa.f_appel.evaluation.pre' | translate}}" ></i>
+                       </a>
+
+                </div>
+
+                <div class="col-sm-1 no-padding-left margin-left-m25 no-padding-right">
+
+                    <div class="row icon">
+                       <a href="#" id="btnAbs" [style]="setAbsenceStyle()" onclick="return false;" (click)="onAbsenceClick()" (keyup.space)="onAbsenceClick()" >
+                          <i id="abs" class="fa fa-ban fa-2x" title="{{'sigct.sa.f_appel.evaluation.abs' | translate}}"></i>
+                       </a>
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-sm-5 col-sm-5plus no-padding-left no-padding-right margin-left-m10" >
+                    <msss-input-text  id="detailsMa" name="detailsMan" label="sigct.sa.f_appel.evaluation.details" class="no-padding-left"
+                        maxlength="255" [(ngModel)]="manifestation.details" [disabled]="isDisabled" raccourcis=true>
+                    </msss-input-text>
+                </div>
+
+                <div class="col-sm-1 enlever-espace margin-top-15 margin-left-m1 offset">
+                    <div id="manifestationActionIcon">
+                      <button type="submit" style="display:none" #submitManifBtn>Submit</button>
+                      <msss-action-link [actionLinks]="actionLinks" [disableAll]="isDisabled"></msss-action-link>
+                    </div>
+                </div>
+            </div>
+            <div>
+              <a *ngIf="!isDisabled" (click)="ajouterParCategoriePopUp()">{{'sigct.sa.f_appel.evaluation.ajout_man_grp.ajoutpargroup' | translate}}</a>
+              <span *ngIf="isDisabled" class="disabled">{{'sigct.sa.f_appel.evaluation.ajout_man_grp.ajoutpargroup' | translate}}</span>
+            </div>
+
+            <modal-confirmation id-container="confirm_popup_ajout">
+                <div class="modal-confirm-body modal-body">
+                  {{messageConfirmerAjout}}
+                </div>
+
+                <div class="modal-confirm-footer modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible" id="ok_confirm_button"  (click)="remplacerManifestation()" >Oui</button>
+                  <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible" id="cancel_confirm_button">Non</button>
+                </div>
+              </modal-confirmation>
+
+
+
+     </form>
+
+    </div>
+
+    <div class="col-md-6 background-blanc no-padding-right">
+        <msss-list-info-action [list]="this.listeManifestations" [formatAction]="formatActionManifestation" (modifierAction)="confirmerModifierManifestation($event)"
+          editerId="editerBtnMan" supprimerId="supprimerBtnMan" (supprimerAction)="confirmerSupprimerManifestation($event)" [cacherAfficherReduire]="true" [afficherBoutonSupprimer]="true"
+          [idElementModifieSelectionne]="idElementModifieSelectionne"
+          *ngIf="!isDisabled">
+        </msss-list-info-action>
+
+        <modal-confirmation id-container="confirm_popup_modif_man">
+            <div class="modal-confirm-body modal-body">
+              {{ messageConfirmerManifestations }}
+            </div>
+
+            <div class="modal-confirm-footer modal-footer">
+              <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible" id="ok_confirm_button_man"  (click)="remplacerManifestation()" >Oui</button>
+              <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible" id="cancel_confirm_button_man">Non</button>
+            </div>
+        </modal-confirmation>
+
+    
+      </div>
+</div>

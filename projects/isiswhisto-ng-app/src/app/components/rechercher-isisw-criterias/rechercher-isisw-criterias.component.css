@@ -1,0 +1,39 @@
+.row {
+    margin: 0;
+}
+
+.col-small-spacing {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.col-dates {
+    float: left;
+    width: 295px;
+}
+
+.col-nom-prenom {
+    float: left;
+    width: calc(100% - 795px);
+}
+
+.col-autres {
+    float: left;
+    width: 500px;
+}
+
+.col-date-naissance {
+    width: 148px; 
+}
+
+.col-region-professionnel {
+    float: left;
+    width: calc(100% - 648px)
+}
+
+.col-services-ISIS {
+    width: 200px;
+}
+.padding-left-3 {
+    padding-left: 3px;
+}

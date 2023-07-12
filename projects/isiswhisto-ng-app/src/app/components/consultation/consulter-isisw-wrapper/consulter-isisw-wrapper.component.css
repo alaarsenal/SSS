@@ -1,0 +1,35 @@
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.col-md-12 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  border-bottom: solid 2px silver;
+  height: 50px;
+  line-height: 50px;
+}
+
+.actions {
+  text-align: right;
+}
+
+.btn-print {
+  border: .5px solid #555555;
+  font-size: 2rem;
+  padding: .2rem .5rem;
+}
+
+.content {
+  padding-bottom: 1rem;
+}
+
+::ng-deep .mat-checkbox-disabled .mat-checkbox-label {
+  color: #333 !important;
+}

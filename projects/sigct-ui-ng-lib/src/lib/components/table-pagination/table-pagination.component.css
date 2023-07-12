@@ -1,0 +1,76 @@
+.fichesNonTermineesTitle {
+    border-bottom: solid 2px #E8AA31; 
+    font-weight: 700;
+    font-size: larger;
+  }
+
+
+  .margin-bottom-15 {
+    margin-bottom: 15px;;
+  }
+
+  .container {
+    min-height: 30px; 
+    padding-left: 40px;  
+    padding-right: 40px; 
+    padding-top: 30px;
+    margin-left: 0px;
+  }
+  
+  table {
+    width: 100%;
+  }
+
+  .mat-table {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+   }
+
+  .mat-cell {
+    font-size: 12px;
+    white-space: nowrap;
+    padding-right: 35px;
+  }
+
+  .mat-row:nth-child(2n+1){
+    background-color: #f9f9f9;
+  }
+
+  .mat_row:nth-child(4n+1) {
+    background-color: white;
+  }
+
+  .mat-header-cell {
+    color: #000 !important;
+    font-size: 12px!important;
+    font-weight: 700!important;
+    white-space: nowrap;
+    padding-right: 35px;
+    border-bottom: 1px solid #111 !important;
+    border-top: 1px solid #111 !important;
+  }
+
+.btn-default {
+    background-image:none;
+  }
+  
+  .padding-2 {
+    padding: 2px;
+  }
+
+ tr.mat-row, tr.mat-header-row {
+  height: 32px;
+}
+
+.margin-bottom-45 {
+  margin-bottom: 45px;
+}
+
+.label-font-size {
+  font-size: 20px;
+}
+
+.mat-row:hover {
+  background-color:#dddbdb;
+}
+

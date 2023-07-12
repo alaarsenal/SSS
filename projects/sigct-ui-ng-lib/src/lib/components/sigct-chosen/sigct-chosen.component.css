@@ -1,0 +1,79 @@
+:host(.error) > label {
+    border: 1px solid #ed541d!important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #757575;
+}
+
+/* Cela évite d'avoir le chevron de la liste déoulante en rouge lors d'une erreur */
+:host(.error)  mat-icon {
+    color: black!important;
+}
+
+.highlight {
+    font-weight: bold;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button !important;
+}
+
+::ng-deep .mat-option{
+    height: 30px !important;
+    font-size: 14px !important;
+}
+
+mat-icon:hover {
+    cursor: pointer;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+label {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+::ng-deep .disabled  .mat-form-field-outline-start, 
+::ng-deep  .disabled .mat-form-field-outline-gap, 
+::ng-deep .disabled   .mat-form-field-outline-end{
+    background:#eeeeee !important;
+}
+
+::ng-deep .disabled mat-icon { color: #ACACAC!important; }
+
+::ng-deep .label_disabled { color: #aaa !important;}
+
+::ng-deep .mat-option:hover {
+    background-color: #dddbdb!important;
+}
+
+::ng-deep .mat-active {
+    background-color: #dddbdb!important;
+}
+  
+  
+.inactif::before {
+    content: "[";
+}
+.inactif {
+    font-style: italic;
+    /* background-color: lightblue; */
+    /* color: cornflowerblue; */
+    /* color:gray; */
+}
+.inactif::after {
+    content: "]";
+}
+
+.margin-left-3 {
+    margin-left: 3px;
+}
+  
+.mondatory-asterisk {
+    color: #ed541d
+}

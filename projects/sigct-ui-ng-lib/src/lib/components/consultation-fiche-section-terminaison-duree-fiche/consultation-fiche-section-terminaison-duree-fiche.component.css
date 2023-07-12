@@ -1,0 +1,30 @@
+.italic {
+  font-style: italic;
+}
+
+label {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.detail-label, .detail-span {
+  display: inline-block;
+}
+
+.detail-label {
+  vertical-align: top;
+}
+
+.detail-span {
+  width: 78%;
+  word-wrap: break-word;
+}
+
+@media (max-width: 1440px) {
+
+  .detail-span {
+    width: 70%;
+  }
+
+}
+

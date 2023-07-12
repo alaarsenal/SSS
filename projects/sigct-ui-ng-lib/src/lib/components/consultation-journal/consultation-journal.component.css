@@ -1,0 +1,9 @@
+.btn-submit {
+  padding-top: 1.3rem;
+}
+
+.date {
+  max-width: 160px;
+  display: inline-block;
+  padding-right: 30px;
+}

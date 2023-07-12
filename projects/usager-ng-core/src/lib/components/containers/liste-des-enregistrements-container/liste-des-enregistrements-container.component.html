@@ -1,0 +1,9 @@
+<msss-form-top-bar label="{{ 'ss.listes.enregistrements.titre.clientele' | translate }} " [nomModule]="'usager'"></msss-form-top-bar>
+
+<div class="contenu-avec-scrollbar">
+  <ng-template #alertContainer></ng-template>
+  <app-liste-des-enregistrements-ui
+    (onConsulterClick)="actionOnConsulerClick($event)"
+    (onEditerClick)="actionOnEditerClick($event)"
+  ></app-liste-des-enregistrements-ui>
+</div>

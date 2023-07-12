@@ -1,0 +1,8 @@
+<div class="row" *ngIf="_verticalListByTitleDTO?.listObjects?.length > 0">
+    <div class="col-md-2 width-auto no-padding-right"><label>{{_verticalListByTitleDTO.title}} : </label></div>
+    <div class="col-md-10 padding-left-5">
+        <ng-container *ngFor="let item of _verticalListByTitleDTO?.listObjects">
+            <div>{{item.nom}} <span *ngIf="item.detail">(<em>{{item.detail}}</em>)</span></div>
+        </ng-container>
+    </div>
+</div>

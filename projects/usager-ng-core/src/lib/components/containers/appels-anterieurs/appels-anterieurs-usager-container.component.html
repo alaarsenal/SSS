@@ -1,0 +1,13 @@
+<msss-form-top-bar [label]="labelMenuTop"
+                   [options]="formTopBarOptions"
+                   [fixe]="topBarreFixe"
+                   [nomModule]="'usager'"></msss-form-top-bar>
+
+<div class="contenu-avec-scrollbar">
+    <ng-template #alertContainer></ng-template>
+
+    <app-appels-anterieurs-usager-ui #appAppelsAnterieursUsagerUi
+                                     usagerId="{{idUsagerIdent}}"
+                                     (consulterFicheAppel)="onConsulterFicheAppel($event)">
+    </app-appels-anterieurs-usager-ui>
+</div>

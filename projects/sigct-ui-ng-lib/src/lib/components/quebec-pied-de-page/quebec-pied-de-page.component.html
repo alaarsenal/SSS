@@ -1,0 +1,37 @@
+<div id="Quebec-piedDePage" >
+
+
+  <div class="navbar">
+
+    <div class="text-align-right {{CSSBorderTop}}">
+
+
+
+        <div id="div-date-heure"
+             class="font-weight-bolder">
+          <span class="nobreak">{{dateMaintenant | date : 'EEEE' : null : 'fr' | titlecase}}
+            {{dateMaintenant | date : 'd LLLL yyyy HH:mm' : null : 'fr' }}</span>
+        </div>
+
+          Version {{ versionGlobal }} - {{nomSysteme | translate }} V{{ appVersion }}<br>
+          <a href="changelog.html"
+             target="_blank"
+             *ngIf="texteBuild">- build {{texteBuild}}
+          </a>
+
+
+    </div>
+
+    <div class="text-align-center ">
+    <a href="https://www.quebec.ca" target="_blank" title="Site du gouvernement du Québec" >
+      <img src="{{urlImage}}" id="qc_logo" alt="logo Québec">
+    </a>
+    <br>
+    <a href="http://legisquebec.gouv.qc.ca/fr/showdoc/cs/A-2.1" title="Conditions légales d'utilisation et politique de confidentialité" target="_blank" >
+      © Gouvernement du Québec, {{ todayDate | date:'yyyy' }}
+    </a>
+  </div>
+
+</div>
+
+</div>

@@ -1,0 +1,166 @@
+<div class="col-md-12 enlever-espace no-padding-right  pl-1-5" title="">
+  <div class="col-md-6 background-gris no-padding-right  pl-1-5">
+    <form name="formSigneVitaux" (ngSubmit)="onSubmitSigneVitauxForm()" #formSigneVitaux="ngForm">
+
+      <div class="col-md-11  pl-1-5">
+
+        <div class="row">
+
+          <div class="col-md-2">
+            <msss-input-text #glycemie [(ngModel)]="signe.glycemie" id="glycemie" name="glycemie" [autocomplete]="'off'"
+              label="sigct.sa.f_appel.evaluation.signes.glycemie" maxlength="6" (blur)="onChangeInputGlycemie()" [disabled]="isDisabled">
+            </msss-input-text>
+          </div>
+
+          <div class="col-md-1 v-middle">
+            <span [class.disabled]="isDisabled">{{'sigct.sa.f_appel.evaluation.signes.mmol' | translate}}</span>
+          </div>
+
+          <div class="col-md-1">
+            <msss-input-text #temperatureValeur [(ngModel)]="signe.temperatureValeurStr" id="temperatureValeur"
+              name="temperatureValeur" label="sigct.sa.f_appel.evaluation.signes.temperature"
+              title="{{'sigct.sa.f_appel.evaluation.signes.ibtemperature'| translate}}" maxlength="5"
+              [disableNumberCheck]="false" [decimalPatternCheck]="true" [decimalIntegerPrecision]="3" [autocomplete]="'off'"
+              [decimalFractionPrecision]="1" (blur)="onChangeInputTemperature()" [valide]="isTemperatureValeurValide"
+              [disabled]="isDisabled" [forceCommas]="true">
+            </msss-input-text>
+          </div>
+
+          <div class="col-md-2">
+            <div class="v-middle" *ngIf="signe.temperatureUniteMesure">
+              <span class="mr-0-5" [title]="signe.infoBullTemperatureUniteMesure | translate" [class.disable]="isDisabled">
+                °{{signe.temperatureUniteMesure}}
+              </span>
+              <span [class.disabled]="isDisabled">{{signe.temperatureConvertie}}</span>
+            </div>
+          </div>
+
+          <div class="col-md-4 pr-1 temp-voie">
+            <msss-sigct-chosen #temperatureVoie [(ngModel)]="signe.referenceTemperatureVoieId" id="temperatureVoie"
+              name="temperatureVoie" label="sigct.sa.f_appel.evaluation.signes.voie" [title]="infoBullTemperatureVoie"
+              [options]="inputOptionsTemperatureVoies" [valide]="isReferenceTemperatureValide"
+              (ngModelChange)="onChangeTemperatureVoie()"[disabled]="isDisabled">
+            </msss-sigct-chosen>
+          </div>
+
+          <div class="col-md-2 pr-1 tens-group">
+            <div class="tens-item">
+              <msss-input-text #tensionMin [(ngModel)]="signe.tensionArterielleMin" id="tensionMin" name="tensionMin"
+                label="sigct.sa.f_appel.evaluation.signes.tensionart"
+                title="{{'sigct.sa.f_appel.evaluation.signes.ibtensionart' | translate}}" maxlength="3" [disableNumberCheck]="false"
+                [valide]="isTensionArterielleMinValide" [autocomplete]="'off'" [disabled]="isDisabled">
+              </msss-input-text>
+            </div>
+            <span [class.disabled]="isDisabled">/</span>
+            <div class="tens-item">
+              <msss-input-text #tensionMax [(ngModel)]="signe.tensionArterielleMax" id="tensionMax" name="tensionMax" [disableNumberCheck]="false"
+                label="&nbsp;" maxlength="3" [valide]="isTensionArterielleMaxValide" [autocomplete]="'off'" [disabled]="isDisabled">
+              </msss-input-text>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-1 pr-0-5">
+            <msss-input-text #frequenceCardiaque [(ngModel)]="signe.frequenceCardiaque" id="frequenceCardiaque"
+              name="frequenceCardiaque" [disableNumberCheck]="false" label="sigct.sa.f_appel.evaluation.signes.freqcar"
+              title="{{'sigct.sa.f_appel.evaluation.signes.ibfreqcar' | translate}}" maxlength="3" [autocomplete]="'off'"
+              [disabled]="isDisabled">
+            </msss-input-text>
+          </div>
+
+          <div class="col-md-1 pl-0-5">
+            <msss-input-text #frequenceRespiratoire [(ngModel)]="signe.frequenceRespiratoire" id="frequenceRespiratoire"
+              name="frequenceRespiratoire" [disableNumberCheck]="false"
+              label="sigct.sa.f_appel.evaluation.signes.freqresp"
+              title="{{'sigct.sa.f_appel.evaluation.signes.ibfreqresp' | translate}}" maxlength="2" [autocomplete]="'off'"
+              [disabled]="isDisabled">
+            </msss-input-text>
+          </div>
+
+          <div class="col-md-1">
+          </div>
+
+          <div class="col-md-1">
+            <msss-input-text #saturationTaux [(ngModel)]="signe.saturationTaux" id="saturationTaux"
+              name="saturationTaux" label="sigct.sa.f_appel.evaluation.signes.tauxsaturation"
+              title="{{'sigct.sa.f_appel.evaluation.signes.ibtauxsaturation'|translate}}" maxlength="4"
+              [disableNumberCheck]="false" [decimalPatternCheck]="true" [decimalIntegerPrecision]="2"
+              [decimalFractionPrecision]="1" [valide]="isSaturationTauxValide" [autocomplete]="'off'"
+              [disabled]="isDisabled">
+            </msss-input-text>
+          </div>
+
+          <div class="col-md-4 sat-prec">
+            <msss-input-radio #saturationPrecision [(ngModel)]="signe.saturationPrecision" label="&nbsp;"
+              id="saturationPrecision" name="saturationPrecision" [options]="inputOptionsSaturationPrecision"
+              [valide]="isSaturationPrecisionValide"
+              [disabled]="isDisabled">
+            </msss-input-radio>
+          </div>
+
+          <div class="col-md-2">
+            <app-link-glasgow [isDisabled]="isDisabled" link="sigct.sa.f_appel.evaluation.signes.glasgow"></app-link-glasgow>
+            <msss-input-text #glasgow [(ngModel)]="signe.glasgow" id="glasgow" name="glasgow" maxlength="2" [autocomplete]="'off'"
+              [valide]="isGlasgowValide" [disableNumberCheck]="false" (blur)="onChangeInputGlasgow()" [disabled]="isDisabled">
+            </msss-input-text>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-12 pr-1">
+            <msss-input-text #detailsSigne [(ngModel)]="signe.details" id="detailsSigne" name="detailsSignes"
+              label="sigct.sa.f_appel.evaluation.signes.details" maxlength="255" [disabled]="isDisabled"
+              raccourcis=true>
+            </msss-input-text>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-1">
+        <div id="action-ajouter-signe" class="btn-submit-wrapper">
+          <button type="submit" [disabled]="isDisabled">
+            <i class="fa fa-arrow-right fa-2x" [class.disabled]="isDisabled"
+              title="{{ 'sigct.sa.f_appel.evaluation.signes.ibactionajout' | translate }}">
+            </i>
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="col-md-6 background-blanc pl-1-5">
+    <msss-list-info-action [list]="listeSignes" [formatAction]="formaterListInfoActionSigne"
+      (modifierAction)="onActionModifier($event)" editerId="editerBtnMan" supprimerId="supprimerBtnMan"
+      (supprimerAction)="onActionSupprimer($event)" [cacherAfficherReduire]="true" [afficherBoutonSupprimer]="true"
+      [idElementModifieSelectionne]="idElementSelectionneEnCoursModif" *ngIf="!isDisabled">
+    </msss-list-info-action>
+  </div>
+
+  <!--------------------------->
+  <!-- MESSAGES CONFIRMATION -->
+  <!--------------------------->
+
+  <modal-confirmation id-container="confirm-popup-modifier-signe">
+    <div class="modal-confirm-body modal-body">
+      {{ messageConfirmerModifier }}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+        id="btn-ok-modifier-signe" (click)="onConfirmerModifier()">Oui</button>
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+        id="btn-annuler-modifier-signe">Non</button>
+    </div>
+  </modal-confirmation>
+
+
+</div>

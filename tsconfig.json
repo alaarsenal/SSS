@@ -1,0 +1,65 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "downlevelIteration": true,
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "sigct-ui-ng-lib-components": [
+        "dist/sigct-ui-ng-lib-components"
+      ],
+      "sigct-ui-ng-lib-components/*": [
+        "dist/sigct-ui-ng-lib-components/*"
+      ],
+      "sigct-ui-ng-lib": [
+        "dist/sigct-ui-ng-lib"
+      ],
+      "sigct-ui-ng-lib/*": [
+        "dist/sigct-ui-ng-lib/*"
+      ],
+      "sigct-service-ng-lib": [
+        "dist/sigct-service-ng-lib"
+      ],
+      "sigct-service-ng-lib/*": [
+        "dist/sigct-service-ng-lib/*"
+      ],
+      "usager-ng-core": [
+        "dist/usager-ng-core"
+      ],
+      "usager-ng-core/*": [
+        "dist/usager-ng-core/*"
+      ],
+      "infosante-ng-core": [
+        "dist/infosante-ng-core/infosante-ng-core",
+        "dist/infosante-ng-core"
+      ],
+      "infosocial-ng-core": [
+        "dist/infosocial-ng-core/infosocial-ng-core",
+        "dist/infosocial-ng-core"
+      ],
+      "isiswhisto-ng-core": [
+        "dist/isiswhisto-ng-core"
+      ],
+      "isiswhisto-ng-core/*": [
+        "dist/isiswhisto-ng-core/*"
+      ]
+    }
+  }
+}

@@ -1,0 +1,4 @@
+#iframe-avis {
+    border: 1px solid #DDD;
+    height: calc(100vh - 175px);
+}

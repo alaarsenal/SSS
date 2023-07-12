@@ -1,0 +1,61 @@
+::ng-deep .ck-editor__editable_inline {
+  resize: vertical !important;
+  overflow: auto !important;
+  height: 75px;
+  /* min-height: 56px; */
+  /*font-size * (row+1), where row = 1,2,3,...*/
+}
+
+::ng-deep.heigh-28 .ck-editor__editable_inline {
+  min-height: 28px;
+}
+
+::ng-deep.heigh-42 .ck-editor__editable_inline {
+  min-height: 42px;
+}
+
+::ng-deep.heigh-56 .ck-editor__editable_inline {
+  min-height: 56px;
+}
+
+::ng-deep.heigh-70 .ck-editor__editable_inline {
+  min-height: 70px;
+}
+
+::ng-deep.heigh-113 .ck-editor__editable_inline {
+  min-height: 113px;
+}
+
+::ng-deep.heigh-89 .ck-editor__editable_inline {
+  min-height: 89px;
+}
+
+::ng-deep.heigh-400 .ck-editor__editable_inline {
+  min-height: 400px;
+}
+
+::ng-deep .ck.ck-editor__editable_inline>:first-child {
+  margin-top: 5px;
+}
+
+::ng-deep .ck.ck-editor__editable_inline>:last-child, ::ng-deep .ck.ck-editor__editable_inline>p {
+  margin-bottom: 0px;
+}
+
+::ng-deep .ck.ck-editor .ck-editor__top .ck-sticky-panel .ck-toolbar {
+  background-color: #ebebeb !important;
+  height: 30px;
+}
+
+::ng-deep .ck-on {
+  background-color: rgb(181, 181, 181) !important;
+}
+
+::ng-deep .ck.ck-editor{
+  border: 0.5px solid;
+  border-color: #757575;
+}
+
+label {
+  padding-bottom: 5px;
+}

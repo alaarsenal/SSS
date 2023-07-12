@@ -1,0 +1,51 @@
+<msss-sigct-content-zone id="consultation-journal"
+                         title="sigct.ss.f_rapport_journ.section_messages_cti">
+  <form name="form"
+        (ngSubmit)="onSubmit()">
+    <div class="contentZone row">
+      <div class="col-sm-2">
+        <msss-sigct-chosen id="professionnel"
+                           name="professionnel"
+                           label="sigct.ss.f_rapport_journ.professionnel_cti"
+                           [options]="inputOptionsUtilisateur"
+                           [valide]="isUtilisateurValide"
+                           [(ngModel)]="dto.codeUtilisateur">
+        </msss-sigct-chosen>
+      </div>
+      <div class="col-sm-6">
+        <div class="inline date">
+          <msss-sigct-datepicker id="calendarDebut"
+                                 label="sigct.ss.f_rapport_journ.datedebut_cti"
+                                 [(ngModel)]="dto.dateDebut"
+                                 dateFormat="yyyy-mm-dd"
+                                 placeHolder="aaaa-mm-jj"
+                                 [ngModelOptions]="{standalone:true}"
+                                 [endDate]="endDate"
+                                 [valide]="dateDebutValide"
+                                 required>
+          </msss-sigct-datepicker>
+        </div>
+        <div class="inline date">
+          <msss-sigct-datepicker id="calendarFin"
+                                 label="sigct.ss.f_rapport_journ.datefin_cti"
+                                 [(ngModel)]="dto.dateFin"
+                                 dateFormat="yyyy-mm-dd"
+                                 placeHolder="aaaa-mm-jj"
+                                 [ngModelOptions]="{standalone:true}"
+                                 [endDate]="endDate"
+                                 [valide]="dateFinValide"
+                                 required>
+          </msss-sigct-datepicker>
+        </div>
+      </div>
+      <div class="col-sm-4 btn-submit">
+        <button id="idBtnSubmit"
+                type="submit"
+                class="btn btn-primary btn-sm btn-key-action pull-right"
+                title="{{'sigct.ss.f_rapport_journ.genererinfobulle_cti' | translate}}">
+          {{'sigct.ss.f_rapport_journ.generer_cti' | translate}}
+        </button>
+      </div>
+    </div>
+  </form>
+</msss-sigct-content-zone>

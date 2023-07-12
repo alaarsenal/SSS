@@ -1,0 +1,23 @@
+<div class="main">
+  <div class="left-menu">
+    <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+  </div>
+  <div class="conteneur">
+    <div class="form-top-bar">
+      <msss-form-top-bar label="{{'sigct.ss.r_appel.consultation.titre' | translate}}"
+                         [options]="formTopBarOptions"
+                         nomModule="infosante"></msss-form-top-bar>
+    </div>
+
+    <div class="compos">
+      <ng-template #alertContainer></ng-template>
+      <sa-consultation-fiche-container #saConsultationFicheContainer
+                                       [afficherBoutonCorrigerFicheAppel]="true"
+                                       [idFicheAppel]="ficheAppelDto?.id"
+                                       [idAppel]="ficheAppelDto?.idAppel"
+                                       [statutFiche]="ficheAppelDto?.statut"
+                                       (corrigerFicheAppelEvent)="onCorrigerFicheAppelEvent()">
+      </sa-consultation-fiche-container>
+    </div>
+  </div>
+</div>

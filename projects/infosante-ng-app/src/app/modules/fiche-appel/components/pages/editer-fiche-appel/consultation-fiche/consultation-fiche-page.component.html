@@ -1,0 +1,25 @@
+<sa-consultation-fiche-container #saConsultationFicheContainer
+                                 [resetState]="false"
+                                 [idFicheAppel]="ficheAppelActive?.id"
+                                 [idAppel]="ficheAppelActive?.idAppel"
+                                 [statutFiche]="ficheAppelActive?.statut"
+                                 (supprimerFicheApple)="confirmerSuppressionFicheAppel($event)">
+</sa-consultation-fiche-container>
+
+<modal-confirmation id-container="confirm_popup_supp_fiche_appel">
+  <div class="modal-confirm-body modal-body">
+    {{ messageConfirmSuppressionFicheAppel }}
+  </div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button id="supp_fiche_appel_btn_oui"
+            type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-sm btn-key-action visibility-visible"
+            (click)="supprimerFicheAppel()">Oui</button>
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="cancel_supp_button_fiche_appel">Non</button>
+  </div>
+</modal-confirmation>

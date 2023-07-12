@@ -1,0 +1,28 @@
+.list-label {
+  width: 12%;
+}
+
+.list-detail-middle {
+  width: 38%;
+}
+
+.pt-0-5 {
+  padding-top: .5rem;
+}
+
+label {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+@media (max-width: 1440px) {
+  .list-label {
+    width: 16%;
+  }
+  .list-detail-middle {
+    width: 34%;
+  }
+  .col-md-10 {
+    width: 84%;
+  }
+}

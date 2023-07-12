@@ -1,0 +1,68 @@
+<ng-container
+              *ngIf="cadreTextDto.titleValue || cadreTextDto.plainText || (cadreTextDto.infoList && cadreTextDto.infoList.length > 0)">
+
+    <div class="row margin-bottom-8">
+        <div class="col-md-12">
+
+            <ng-container *ngIf="cadreTextDto.plainText; else noPlainText">
+
+                <div class="row margin-bottom-2">
+                    <div class="col-md-12">
+                        <label class="display-inline padding-right-15">
+                            {{ cadreTextDto.titleLabel }} :
+                        </label>{{ cadreTextDto.titleValue }}
+                    </div>
+                </div>
+
+                <ng-template [ngTemplateOutlet]="listInfo"></ng-template>
+
+                <mat-form-field class="width-100-percent">
+
+                    <textarea class="overflow-hidden padding-left-3 width-100-percent text-indent-59 border-gray"
+                              readonly
+                              matInput
+                              matTextareaAutosize
+                              matAutosizeMinRows="2"
+                              matAutosizeMaxRows="50000"
+                              [attr.aria-label]="cadreTextDto.titleLabel">
+                     {{cadreTextDto.plainText}}
+                </textarea>
+
+                </mat-form-field>
+
+            </ng-container>
+
+            <ng-template #noPlainText>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="display-inline  padding-right-15">
+                            {{ cadreTextDto.titleLabel }} :
+                        </label>{{ cadreTextDto.titleValue }}
+                    </div>
+                </div>
+
+                <ng-template [ngTemplateOutlet]="listInfo"></ng-template>
+
+            </ng-template>
+        </div>
+    </div>
+
+
+</ng-container>
+
+<ng-template #listInfo>
+    <ng-container *ngIf="cadreTextDto.infoList && cadreTextDto.infoList.length > 0">
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="dashed padding-left-6 margin-top-3 margin-bottom-2">
+                    <ng-container *ngFor="let item of cadreTextDto.infoList">
+                        <li>{{item}}</li>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+
+    </ng-container>
+
+</ng-template>

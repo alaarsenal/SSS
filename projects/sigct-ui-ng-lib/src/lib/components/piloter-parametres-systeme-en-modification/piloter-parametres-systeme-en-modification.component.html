@@ -1,0 +1,100 @@
+<div class="piloter-parametre-systeme-en-modif-component">
+    <div class="container">
+
+        <div class="{{css}}">
+            <div class="col-md-9">
+                <h1 class="label-font-size">
+                    <i class="fa fa-wrench fa-lg margin-right-10"></i>{{ parametreSystemeDTO.code }}
+                </h1>
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="float-right">
+                    <button (click)="sauvegarderParamSystemeBtn()"
+                            class="btn btn-primary"
+                            title="{{'sigct.sa.pilotage.parametresys.edition.sauvegarderinfobulle'|translate}}">
+                            {{'sigct.sa.pilotage.parametresys.edition.sauvegarder'|translate}}
+                    </button>
+
+                    <button (click)="confirmerAnnulerModifParamSysteme()"
+                            class="btn btn-default margin-left-5"
+                            title="{{'sigct.sa.pilotage.parametresys.edition.annulerinfobulle'|translate}}">
+                            {{'sigct.sa.pilotage.parametresys.edition.annuler'|translate}}
+                    </button>
+
+                    <button (click)="confirmBackToParamsSystemePagination()"
+                            class="btn btn-default margin-left-5"
+                            title="{{'sigct.sa.pilotage.parametresys.edition.revenirliste'|translate}}">
+                            <i class="fa fa-lg fa-times ng-star-inserted"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <ng-template #alertContainer></ng-template>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ng-container *ngIf="parametreSystemeDTO.textRich === 1; else simpleTextArea">
+                    <msss-ckeditor id="contentParamSystm"
+                                maxlength="500000"
+                                [height]="heightFieldContentParamSystm"
+                                [(value)]="parametreSystemeDTO.contenu">
+                    </msss-ckeditor>
+                </ng-container>
+
+                <ng-template #simpleTextArea>
+                    <msss-input-textarea id="competenceRessourceDemandeAnalyse"
+                                        maxlength="500000"
+                                        rows="5"
+                                        CSSResize="vertical"
+                                        [(ngModel)]="parametreSystemeDTO.contenu">
+                    </msss-input-textarea>
+
+                </ng-template>
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<modal-confirmation id-container="confirm_popup_annuler-modif">
+    <div class="modal-confirm-body modal-body">
+        {{'ss-iu-c70005'|translate}}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+        <button type="button"
+                data-dismiss="modal"
+                class="btn btn-primary btn-sm btn-key-action visibility-visible"
+                id="ok_confirm_button"
+                (click)="annulerModifParamSysteme()">Oui</button>
+        <button type="button"
+                data-dismiss="modal"
+                class="btn btn-sm btn-key-action hidePopup visibility-visible"
+                id="cancel_confirm_button">Non</button>
+    </div>
+</modal-confirmation>
+
+<modal-confirmation id-container="confirm_popup_annuler-modif_et_retour_list_recherche">
+    <div class="modal-confirm-body modal-body">
+        {{'ss-iu-c70005'|translate}}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+        <button type="button"
+                data-dismiss="modal"
+                class="btn btn-primary btn-sm btn-key-action visibility-visible"
+                id="ok_confirm_button"
+                (click)="annulerModifEtRetourListeRechercheParamSysteme()">Oui</button>
+        <button type="button"
+                data-dismiss="modal"
+                class="btn btn-sm btn-key-action hidePopup visibility-visible"
+                id="cancel_confirm_button">Non</button>
+    </div>
+</modal-confirmation>

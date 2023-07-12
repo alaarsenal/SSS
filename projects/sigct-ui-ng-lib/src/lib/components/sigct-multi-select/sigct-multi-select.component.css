@@ -1,0 +1,60 @@
+::ng-deep .label-disabled { 
+  color: #AAA !important;
+}
+::ng-deep .disabled mat-icon { 
+  color: #ACACAC!important; 
+}
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+::ng-deep .mat-option-multiple:hover {
+  background-color: #DDDBDB!important;
+}
+::ng-deep .mat-active {
+  background-color: #DDDBDB!important;
+}
+
+/* Visuellement le 2em serait préférable, mais ça cause un problème de positionnement 
+   dans la liste lorsqu'on sélectionne un item.*/
+::ng-deep .mat-select-panel .mat-option-multiple {
+  line-height: 3em !important;
+  height: 3em !important;
+}
+
+/* Visuellement 80vh qui suit serait préférable, mais ça cause un problème de positionnement 
+   dans la liste lorsqu'on sélectionne un item. */
+::ng-deep .mat-select-panel {
+  /* max-height: 80vh !important; */
+  max-height: calc(256px + 3em) !important; /* Permet à flèche bas d'accéder au dernier option de la liste */
+}
+
+.additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+input.mat-input-element {
+  border: 1px solid #AAA;
+  border-radius: 5px;
+  height: 100%;
+  margin: 0 0 5px -5px;
+  padding-left: 10px;
+}
+/* ::ng-deep .mat-select-panel .mat-optgroup-label{
+  font-size: inherit !important;
+  line-height: inherit !important;
+  height: unset !important;
+} */
+.asterisk, .error {
+  color: red;
+}
+.tooltip-crlf {
+  white-space: pre-line;
+}
+.width-100-pourcent {
+  width: 100% !important;
+}
+.filterTextbox {
+  height: 3em;
+  padding: 10px 0 0 12px;
+  width: 100%;
+}

@@ -1,0 +1,16 @@
+<label>{{label | translate}}</label>
+
+<mat-form-field appearance="outline" style="width:100% !important">
+  <input matInput [matAutocomplete]="auto" [formControl]="formControl" maxlength="{{maxlength}}" (blur)="onBlur($event)" (keydown)="onKeydown($event)" [attr.aria-label]="label | translate"/>
+</mat-form-field>
+
+<mat-autocomplete #matAutocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn">
+  <mat-option *ngIf="isLoading" class="is-loading">
+    <mat-spinner diameter="20"></mat-spinner>
+  </mat-option>
+  <ng-container *ngIf="!isLoading">
+    <mat-option *ngFor="let item of autoCompleteItems" [value]="item.nom" (onSelectionChange)="onSelected(item)">
+      <span id="option" [innerHTML]="getAutoCompleteDisplay(item) | highlight: textToHighlight"></span>
+    </mat-option>
+  </ng-container>
+</mat-autocomplete>

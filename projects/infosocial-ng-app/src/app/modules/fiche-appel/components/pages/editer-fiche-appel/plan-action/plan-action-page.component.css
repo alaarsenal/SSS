@@ -1,0 +1,18 @@
+div.enlever-espace-droite-gauche {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+/* Permet de reduire l'espace entre la zone Moyens, Modalités et le textarea Objectif ... */
+:host ::ng-deep msss-sigct-content-zone#moyenModaliteContentZone div#moyenModaliteContentZone.panel {
+    margin-top: 0px;
+}
+
+::ng-deep div#suiteIntervetionContentZone > div.panel-body {
+    margin-top: -15px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+  

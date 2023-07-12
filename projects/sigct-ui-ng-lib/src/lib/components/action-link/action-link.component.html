@@ -1,0 +1,8 @@
+<div>
+    <ng-container *ngFor="let item of actionLinks">
+        <a href="#" onclick="return false;" (click)="lancerAction(item)">
+            <i title ="{{item.label}}" class="{{item.icon}} {{item.disabled ? 'text-muted' : ''}}" id="{{item.id}}"></i>
+            <span class="sr-only">{{item.label}}</span> 
+        </a>
+    </ng-container>
+<div>

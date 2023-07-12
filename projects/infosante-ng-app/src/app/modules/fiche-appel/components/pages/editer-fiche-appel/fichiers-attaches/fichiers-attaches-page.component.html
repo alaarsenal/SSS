@@ -1,0 +1,29 @@
+<div class="row enlever-espace-droite-gauche">
+  <div class="col-md-12">
+    <h4 class="h4center">{{ 'sigct.ss.f_appel.consultation.fichiersattaches' | translate }}</h4>
+  </div>
+</div>
+
+<msss-sigct-content-zone id="fichierAttache"
+                         title="{{ 'sigct.ss.f_appel.consultation.fichiersattaches' | translate }}">
+  <p class="padding-left-15 padding-right-15">
+    <msss-editer-fichiers-attaches class="no-padding-left no-padding-right"
+                                   [showListeProfile]="showListeProfile"
+                                   [showColReference]="showColReference"
+                                   [showColTitre]="showColTitre"
+                                   [showColDescription]="showColDescription"
+                                   [listeFichiers]="listeFichiers"
+                                   [titreSection]="titreSection"
+                                   (onAjouterFichier)="onAjouterFichier($event)"
+                                   (onSupprimerFichier)="onSupprimerFichier($event)"
+                                   (onListFichier)="onListFichier($event)"
+                                   (onTelechargerFichier)="onTelechargerFichier($event)"
+                                   [typeFichierAccepter]="typeFichierAccepter"
+                                   [idFichier]="idFichier"
+                                   [fichierService]="fichierService"
+                                   [urlBaseMiniatureImg]="urlBaseMiniatureImg">
+
+    </msss-editer-fichiers-attaches>
+
+  </p>
+</msss-sigct-content-zone>

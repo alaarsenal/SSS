@@ -1,0 +1,52 @@
+<div class="col-md-12 enlever-espace no_padding-left no-padding-right bordures" title="">
+    <div class="col-md-6 no-padding-right background-gris">
+        <form name="formProjetRecherche" (ngSubmit)="onSubmitProjetRecherche()" #fCom="ngForm">
+
+            <div class="col-md-11 padding-left-15 no-padding-right">
+
+                <div class="row">
+
+                    <div class="col-md-12 no-padding-left no-padding-right">
+
+                        <msss-sigct-chosen #liste_projet
+                            label="sigct.sa.f_appel.terminaison.validfinintervention.projetrech" name="projet" required
+                            id="projet" [options]="inputOptionsProjetRecherche" [valide]="isProjetRechercheValide"
+                            [(ngModel)]="projetRecherche.referenceProjetRechercheCode"
+                            (ngModelChange)="onProjetChange()"
+                            (optionSelected)="onProjetValide($event)" [disabled]=isDisabled>
+                        </msss-sigct-chosen>
+                    </div>
+
+                </div>
+                <br/>
+            </div>
+
+
+            <div class="col-md-1 col-btn">
+
+                <div class="col-sm-1 enlever-espace margin-top-15 margin-left-m1">
+                    <div id="rechProjetActionIcon">
+                        <button type="submit" style="display:none" #submitRechProjetBtn>Submit</button>
+                        <msss-action-link [actionLinks]="actionLinks" [disableAll]="isDisabled"></msss-action-link>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+        </form>
+
+    </div>
+    <div class="col-md-6 col-md-6m background-blanc no-padding-right">
+        <msss-list-info-action  [list]="this.listeProjetRecherche" [formatAction]="formatActionProjetRecherche"
+            supprimerId="supprimerBtnProjetRecherche" (supprimerAction)="confirmerSupprimerProjetRecherche($event)"
+            [cacherAfficherReduire]="true" [afficherBoutonSupprimer]="true"
+            [idElementModifieSelectionne]="idElementModifieSelectionne" *ngIf="!isDisabled">
+        </msss-list-info-action>
+
+
+    </div>
+</div>

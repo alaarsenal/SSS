@@ -1,0 +1,13 @@
+.content {
+  margin-top: -.8rem;
+  padding-bottom: .5rem;
+}
+
+.align-right {
+  text-align: right;
+}
+
+label {
+  display: inline-block;
+  margin-right: 1rem;
+}

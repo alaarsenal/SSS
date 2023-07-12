@@ -1,0 +1,10 @@
+<ng-container  *ngFor="let boutonItem of listeBouton; let i=index">
+        <input type="radio"
+            [value]="boutonItem.code"
+            [ngModel]="value"
+            (ngModelChange)="change($event)"
+            id="radio-{{idComposant}}-{{i}}"
+            name="radios-{{idComposant}}"
+            />
+        <label for="radio-{{idComposant}}-{{i}}" [style]="getBackGroundColor(i)" (click)="change(boutonItem.code)" [title]="getInfoBulle(i)">{{boutonItem.nom}}</label>
+</ng-container>

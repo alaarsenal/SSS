@@ -1,0 +1,80 @@
+.fa-power-off{
+    cursor: pointer;
+}
+
+#span-titre {
+    color: silver;
+    font-family: 'Arial Black', Impact, Haettenschweiler, 'Arial Narrow', sans-serif;
+    font-size: 160%;
+}
+
+#div-titre {
+    text-align: center;
+    margin:0 auto;
+    height: 40px;
+    line-height: 40px; 
+    white-space: nowrap;
+}
+
+#probleme-serveur {
+    color: orange;
+    font-size: 175%;
+    padding-left: 15px;
+}
+.blinking{
+    animation: blinking 2s infinite;
+}
+@keyframes blinking{
+    /* from { opacity: 1.0; }
+    50% { opacity: 0.25; }
+    to { opacity: 1.0; } */
+
+    50% {opacity: 0;}
+}
+
+/* Ajustement à la baisse du z-index de navbar afin que le glass panel d'un dialog box le recouvre. */
+.navbar-z-index {
+    z-index: 500;
+}
+
+.border-bottom-usager{
+    border-bottom: solid 4px #458BC7 !important;
+    margin-right: 0px;
+}
+
+.border-bottom-infosante{
+    border-bottom: solid 4px #C9DC87 !important;
+    margin-right: 0px;
+}
+
+.border-bottom-infosocial{
+    border-bottom: solid 4px #E8AA31 !important;
+    margin-right: 0px;
+}
+
+.displayBlock {
+    display: block!important;
+}
+
+.displayNone {
+    display: none!important;
+}
+
+/* Pour la propriété d'un menu selon si est disabled a true ou false*/
+ul>li>a.readonly {
+	cursor: default;
+	pointer-events: none;
+}
+
+.navbar-inverse {
+    background-image: linear-gradient(to bottom,#222,#222 100%)!important;
+}
+
+ .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {
+    color: #fff;
+    background-color: #080808;
+} 
+
+.navbar-inverse .navbar-nav>.active>a {
+     background-image: linear-gradient(to bottom,#080808,#080808 100%)!important; 
+}

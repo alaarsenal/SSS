@@ -1,0 +1,24 @@
+<div class="relance-page">
+  <div class="wrapper">
+    <div class="title {{getModule()}}">
+      <i class="fa fa-lg fa-bell"></i>
+      <h1>{{ 'sigct.ss.listerelance.titre' | translate }}</h1>
+    </div>
+    <div class="filter">
+      <div class="input-radio">
+        <msss-input-radio id="inputOptionsFilterRelances"
+                          name="inputOptionsFilterRelances"
+                          [options]="inputOptionsFilterRelances"
+                          [(ngModel)]="filterRechercheRelance"
+                          (ngModelChange)="onChangeFilterRechercheRelances($event)">
+        </msss-input-radio>
+      </div>
+    </div>
+    <div class="results">
+      <app-liste-relances [relances]="relances"
+                          [allColumns]="true"
+                          (consulterFicheEvent)="onConsulterFicheEvent($event)">
+      </app-liste-relances>
+    </div>
+  </div>
+</div>

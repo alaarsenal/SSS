@@ -1,0 +1,29 @@
+<div class="main">
+  <div class="left-menu">
+      <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+  </div>
+  <div class="conteneur">
+
+      <app-liste-des-enregistrements-container
+            [hidden]="!isRechercher()"
+            (onConsuterClick)="onConsulterClick($event)"
+            (onEditerClick)="onEditerClick($event)">
+      </app-liste-des-enregistrements-container>
+
+      <sigct-usager-enregistement-consultation
+            *ngIf="isConsulter()"
+            [idUsager]="itemSelectione.idUsager"
+            [idEnregistrement]="itemSelectione.idEnregistrement"
+            (retourListeEnregistrements)="onRechercherClick()"
+            (editerEnregistrement)="onEditerClick(itemSelectione)">
+      </sigct-usager-enregistement-consultation>
+
+      <sigct-usager-enregistement-ajout
+            *ngIf="isEditer()"
+            [idUsager]="itemSelectione.idUsager"
+            [idEnregistrement]="itemSelectione.idEnregistrement"
+            (retourListeEnregistrements)="onRechercherClick()"
+            (consulterEnregistrement)="onConsulterClick(itemSelectione)">
+        </sigct-usager-enregistement-ajout>
+  </div>
+</div>

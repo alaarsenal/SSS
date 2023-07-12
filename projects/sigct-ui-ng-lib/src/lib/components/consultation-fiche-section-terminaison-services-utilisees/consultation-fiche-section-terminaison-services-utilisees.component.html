@@ -1,0 +1,30 @@
+<msss-sigct-field-set *ngIf="displaySection"
+                      id="sectionServicesUtilises"
+                      titleFieldset="{{ 'sigct.ss.f_appel.consultation.terminaison.servicesutilises' | translate}}">
+  <div class="row">
+    <div class="col-md-6"
+         *ngIf="displayServicesInterprete">
+      <div class="detail-label">
+        <label>{{ 'sigct.ss.f_appel.consultation.terminaison.servicesutilises.servicesinterprete' | translate}}
+          :</label>
+      </div>
+      <div class="detail-span">
+        <span>{{labelServicesInterprete}} </span>
+        <span class="italic"
+              *ngIf="displayDetailsInterprete">({{detailsInterprete}})</span>
+      </div>
+    </div>
+    <div class="col-md-6"
+         *ngIf="displayServiceRelaisBell">
+      <div class="detail-label">
+        <label>{{ 'sigct.ss.f_appel.consultation.terminaison.servicesutilises.servicesrelaisbell' | translate}}
+          :</label>
+      </div>
+      <div class="detail-span-2">
+        <span>{{labelServicesRelaisBell}} </span>
+        <span class="italic"
+              *ngIf="displayDetailsRelaisBell">({{detailsRelaisBell}})</span>
+      </div>
+    </div>
+  </div>
+</msss-sigct-field-set>

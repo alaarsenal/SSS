@@ -1,0 +1,50 @@
+.boutons-action {
+    text-align: right;
+    padding-top: .5rem;
+    padding-right: 2rem;
+}
+
+.padding-right-15 {
+    padding-right: 15px !important;
+}
+
+.consentement {
+    margin-top: -15px;
+    padding-bottom: 10px;
+}
+
+.btn-retour {
+    border: 1px solid #BBB;
+    margin-left: 5px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: larger;
+  margin: 1rem 0rem 1.5rem 0rem;
+}
+
+.title .col-md-6 {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.title h1 {
+  font-size: 20px;
+  display: inline-block;
+  margin-left: 2rem;
+  margin-top: 5px;
+}
+
+.sa {
+  border-bottom: solid 2px #C9DC87;
+}
+
+.so {
+  border-bottom: solid 2px #E8AA31;
+}
+
+.actions {
+  text-align: right;
+  margin-bottom: 1rem;
+}

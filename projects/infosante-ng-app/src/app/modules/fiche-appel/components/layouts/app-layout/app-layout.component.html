@@ -1,0 +1,33 @@
+<div class="main-sante">
+  <div class="top-menu">
+    <msss-top-menu [topMenuItemsLeft]="topLeftMenuItems"
+                   [topMenuItemsRight]="topRightMenuItems"
+                   [titreSite]="'sigct.sa.f_accueil.titre'"
+                   [urlApi]="urlSanteApi"
+                   [prefixeUrlAideEnLigne]="prefixeUrlAideEnLigne"
+                   [totalRelancesARealiser]="totalRelancesARealiser">
+    </msss-top-menu>
+  </div>
+
+  <div class="conteneur">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<modal-confirmation id-container="confirm_popup_deconnexion_layout">
+  <div class="modal-confirm-body modal-body">
+    {{'ss-iu-a00016' | translate}}
+  </div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-sm btn-key-action visibility-visible"
+            id="ok_confirm_button"
+            (click)="confirmDeconnexion();">Oui</button>
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="cancel_confirm_button">Non</button>
+  </div>
+</modal-confirmation>

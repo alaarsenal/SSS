@@ -1,0 +1,139 @@
+<div>
+  <div class="row enlever-espace-droite-gauche">
+    <div class="col-md-12">
+        <h4 class="h4center">{{ 'sigct.so.f_appel.menuver.terminaison' | translate }}</h4>
+    </div>
+  </div>
+
+
+  <div class="row btn-terminer">
+    <button class="btn btn-primary"
+            (click)="onBtnTerminerClick()"
+            title="{{'sigct.ss.menugrise.btntrmnrdinfobulle'|translate}}">{{'sigct.ss.menugrise.btntrmnr'|translate}}</button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <msss-sigct-content-zone id="validationFinIntervention"
+                               title="{{ 'sigct.so.f_appel.terminaison.validfinintervention' | translate }}">
+
+        <div class="contentZone">
+          <app-validation-fin-intervention #appValidationFinIntervention
+                                           [idFicheAppel]="ficheAppel.id"
+                                           [referencesValidationsInput]="referencesValidations"
+                                           [validationFinInterventionInput]="validationFinInterventionDTO">
+          </app-validation-fin-intervention>
+        </div>
+
+      </msss-sigct-content-zone>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <msss-sigct-content-zone id="terminaison"
+                               title="{{ 'sigct.ss.f_appel.terminaison.statistiques' | translate }}">
+        <div class="contentZone">
+
+          <app-statistiques #appStatistiques
+                            [listeRaisonAppel]="listeRaisonAppel"
+                            [listeReferenceRaison]="listeReferenceRaison"
+                            [listeReferenceRole]="listeReferenceRole"
+                            (raisonAppelSave)="onRaisonAppelSave($event)"
+                            (raisonAppelDelete)="onRaisonAppelDelete($event)"
+                            [listeRoleAction]="listeRoleAction"
+                            (roleActionSave)="onRoleActionSave($event)"
+                            (roleActionDelete)="onRoleActionDelete($event)"
+                            [isDisabled]="typeFiche.isNomPert()">
+          </app-statistiques>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 padding-left-15 no-padding-right">
+
+            <msss-sigct-chosen #liste_langue
+                               label="sigct.ss.f_appel.terminaison.statistiques.langueconsultation"
+                               name="langue"
+                               required
+                               id="langue"
+                               [required]="true"
+                               [options]="inputOptionsLangue"
+                               [valide]="isLangueValide"
+                               [(ngModel)]="ficheAppel.referenceLangueAppelCode"
+                               (optionSelected)="onLangueChange($event)">
+            </msss-sigct-chosen>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 padding-left-15 no-padding-right">
+
+            <msss-sigct-chosen #liste_centre_activite
+                               label="sigct.ss.f_appel.terminaison.statistiques.centreactivite"
+                               name="centreactivite"
+                               required
+                               id="centreactivite"
+                               [required]="!typeFiche.isNomPert()"
+                               [options]="inputOptionsCentreActivite"
+                               [valide]="isCentreActiviteValide"
+                               [(ngModel)]="ficheAppel.referenceCentreActiviteCode"
+                               (optionSelected)="onCentreActiviteChange($event)"
+                               [disabled]="typeFiche.isNomPert() ">
+            </msss-sigct-chosen>
+
+          </div>
+        </div>
+
+      </msss-sigct-content-zone>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 no-padding-right">
+      <msss-sigct-content-zone id="dureeFicheAppel"
+                               title="{{ 'sigct.ss.f_appel.terminaison.dureefiche' | translate }}">
+        <div class="contentZone">
+          <msss-duree-fiche-appel #appDureeFicheAppel
+                                  [dureeFicheAppel]="dureeFicheAppelDto"
+                                  (onClickConfirmerDureeEvent)="onBtnConfirmerDureeClick($event)">
+          </msss-duree-fiche-appel>
+        </div>
+      </msss-sigct-content-zone>
+    </div>
+    <div class="col-md-6 no-padding-left">
+
+      <msss-sigct-content-zone id="servicesUtilises"
+                               title="{{ 'sigct.so.f_appel.terminaison.servicesutilises' | translate }}">
+        <div class="contentZone">
+          <msss-services-utilises #appServicesUtilises
+                                  [inputServicesUtilises]="servicesUtilisesDTO"
+                                  [isDisabled]="typeFiche.isNomPert()">
+          </msss-services-utilises>
+        </div>
+      </msss-sigct-content-zone>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 no-padding-right no-padding-left">
+      <msss-sigct-content-zone id="interaction"
+                               title="sigct.ss.f_appel.consultation.terminaison.interaction">
+        <div class="contentZone">
+          <msss-interaction-terminaison [appelDto]="appelDTO">
+          </msss-interaction-terminaison>
+        </div>
+      </msss-sigct-content-zone>
+    </div>
+  </div>
+</div>
+

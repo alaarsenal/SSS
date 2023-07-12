@@ -1,0 +1,166 @@
+<msss-sigct-content-zone id="section-notes-complementaires"
+                         title="{{'sigct.ss.f_appel.consultation.notescomplementaires' | translate}}">
+    <div class="col-md-12"
+         title="">
+
+        <div class="row">
+            <div *ngIf="isListeVide == false">
+                <div *ngFor="let note of liste; let isLast = last; let i = index">
+                    <div class="row col-md-9">
+
+                        <div class="row col-md-5">
+                            <div *ngIf="note.strTypeNoteCode">
+                                <strong class="black">{{note.strTypeNoteCode}}</strong>
+                            </div>
+
+                        </div>
+                        <div class="row col-md-2">
+                            <div *ngIf="note.listeVisible == true">
+                                <table>
+                                    <tr>
+                                        <td> <strong class="black">{{'sigct.ss.f_appel.notecompl.langue' |
+                                                translate}}</strong>&nbsp;:</td>
+                                        <td>{{note.strLangueAppelCode}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row col-md-5">
+                            <div *ngIf="note.listeVisible == true">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <strong class="black">{{'sigct.ss.f_appel.notecompl.typeinterlocuteur' |
+                                                translate}}</strong>&nbsp;:
+                                        </td>
+                                        <td>
+                                            {{note.strInterlocuteurCode}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row col-md-12"></div>
+                        <div class="row col-md-12 formatHTML"
+                             [innerHTML]="note.notecompl"></div>
+                        <div class="row col-md-12 consentement"
+                             *ngIf="note.consentementenFicheEnregistreur">
+                            <strong>{{'sigct.ss.f_appel.notecompl.consentementenregistreurs' | translate}} : </strong>
+                            <span>Oui</span>
+                        </div>
+                        <div class="row col-md-12"></div>
+                        <div class="row col-md-12">
+                            <span> {{ note.signature }}</span>
+                        </div>
+                    </div>
+                    <div class="row col-md-3">
+
+                        <div *ngIf="note.dateDebut"
+                             class="row col-md-12">
+                            <table>
+                                <tr>
+                                    <td class="col-md-5  nobreak"><strong
+                                                class="black">{{'sigct.ss.f_appel.notecompl.notecreeele' |
+                                            translate}}</strong>&nbsp;:&nbsp;</td>
+                                    <td class="col-md-7 nobreakl">{{note.dateDebut | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                                </tr>
+                                <tr *ngIf="note.dateFin">
+                                    <td class="col-md-5  nobreak">
+                                        <strong class="black">{{'sigct.ss.f_appel.consultation.notecompl.notefermeele' |
+                                            translate}}</strong>&nbsp;:&nbsp;
+                                    </td>
+                                    <td class="col-md-7 nobreakl">
+                                        {{note.dateFin | date: 'yyyy-MM-dd HH:mm:ss'}}
+                                    </td>
+                                </tr>
+                                <tr *ngIf="note.strDureeCalculee">
+                                    <td class="col-md-5  nobreak">
+                                        <strong class="black">{{'sigct.ss.f_appel.terminaison.dureefiche.dureecalculee'
+                                            | translate}}</strong>&nbsp;:&nbsp;
+                                    </td>
+                                    <td class="col-md-7 nobreakl">
+                                        {{note.strDureeCalculee}}
+                                    </td>
+                                </tr>
+                                <tr *ngIf="note.strDureeCorrigee">
+                                    <td>
+                                        <div *ngIf="note.strDureeCorrigee"
+                                             class="col-md-5  nobreak">
+                                            <strong
+                                                    class="black">{{'sigct.ss.f_appel.terminaison.dureefiche.dureecorrigee'
+                                                | translate}}</strong>&nbsp;:&nbsp;
+                                        </div>
+                                        <div *ngIf="note.strDureeCorrigee === null || note.strDureeCorrigee === undefined"
+                                             class="col-md-5  nobreak">&nbsp;
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-7 no-padding-left">{{note.strDureeCorrigee}}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        
+                        <div class="row col-md-12">
+                            <br /><br />
+                            <div class="row">
+                                <div class="col-md-5  nobreak">&nbsp;</div>
+                                <div class="col-md-7"
+                                     *ngIf="note.details">(<i>{{note.details}}</i>) </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row fileFieldsetContainer" *ngIf="isFilesPresent(note.id)">
+                        <div class="col-md-12 margin-top-8">
+                            <msss-sigct-field-set titleFieldset="{{ 'sigct.ss.f_appel.consultation.fichiersattaches' | translate}}">
+                                <div class="row">
+                                    <div class="col-md-3"><label>{{ 'usager.enregistrement.sec.fichier.nom' | translate}}</label></div> 
+                                    <div class="col-md-3"><label>{{ 'usager.enregistrement.sec.fichier.titreliste' | translate}}</label></div>
+                                    <div class="col-md-6"><label>{{ 'usager.enregistrement.sec.fichier.description' | translate}}</label></div>
+                                </div>
+                                <ng-container *ngFor="let file of getFilesAttachedByNoteId(note.id)">
+                                    <div class="row margin-top-5">
+                                        <div class="col-md-3 word-break">
+                                            <a (click)="onTelechargerFichier(file.id)" target="_blank" class="cursor-pointer">
+                                                {{file.nom}}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">{{file.titre}}</div>
+                                        <div class="col-md-6">{{file.description}}</div>
+                                    </div>
+                                </ng-container>
+                            </msss-sigct-field-set>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row" *ngIf="!isLast">
+                        <div  class="col-md-12">
+                           
+                                <hr class="gris" />
+                           
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div *ngIf="isListeVide == true">
+                <div class="row padding-left-15">
+
+                    <p>{{'sigct.ss.f_appel.consultation.notecompl.aucunenote' | translate}}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</msss-sigct-content-zone>

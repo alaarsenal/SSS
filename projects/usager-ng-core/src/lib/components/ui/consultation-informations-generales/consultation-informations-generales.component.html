@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12 margin-bottom-1">
+        <label>
+            {{'usager.enregistrement.sec.titre.info.profil' | translate}} : <span class="display-inline-block"> {{ informationsGenerales.profil }}</span>
+        </label> 
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 margin-bottom-1">
+        <label>
+            {{'usager.enregistrement.sec.titre.info.milieu' | translate}} : <span class="display-inline-block"> {{ informationsGenerales.milieuVie }}</span>
+        </label> 
+    </div>
+</div>
+<div class="row">
+        <div class="col-md-12 margin-bottom-10">
+            <label>
+                {{'usager.enregistrement.sec.titre.info.commentaire' | translate}} : <span class="display-inline-block"> {{ informationsGenerales.commentaire }}</span>
+            </label> 
+        </div>
+    </div>
+<div class="row">
+    <div class="col-md-12 margin-bottom-1">
+        <label>
+            {{'usager.enregistrement.sec.titre.info.diagnostic' | translate}} :
+        </label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" [innerHTML]="safeHTML(informationsGenerales.diagnostic)"></div>
+</div>
+<div class="row">
+    <div class="col-md-12 margin-bottom-1">
+        <label>
+            {{'usager.enregistrement.sec.titre.info.allergies' | translate}} :
+        </label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" [innerHTML]="safeHTML(informationsGenerales.allergie)"></div>
+</div>
+<div class="row">
+    <div class="col-md-12 margin-bottom-1">
+        <label>
+            {{'usager.enregistrement.sec.titre.info.precautions' | translate}} :
+        </label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" [innerHTML]="safeHTML(informationsGenerales.precaution)"></div>
+</div>
+<div class="row">
+    <div class="col-md-12 margin-bottom-1">
+        <label>
+            {{'usager.enregistrement.sec.titre.info.conduite' | translate}} :
+        </label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" [innerHTML]="safeHTML(informationsGenerales.conduite)"></div>
+</div>

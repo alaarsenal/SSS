@@ -1,0 +1,170 @@
+<div class="header"
+     mat-dialog-title>
+    <div class="pull-left header-title">
+        <i class="fa fa-compress"></i>
+        <span>{{"sigct.usager.fusion.editcomm.titre" | translate}}</span>
+    </div>
+    <div class="pull-right header-actions">
+        <button id="btn-sauvegarder"
+                class="btn btn-sm btn-primary"
+                (click)="onSauvegarderClick()"
+                title="{{'sigct.usager.fusion.editcomm.btnsauvegarderinfobulle' | translate}}">
+            {{"sigct.usager.fusion.editcomm.btnsauvegarder" | translate}}
+        </button>
+        <button id="btn-annuler"
+                class="btn btn-sm btn-default"
+                (click)="onAnnulerClick()"
+                title="{{'sigct.usager.fusion.editcomm.btnannulerinfobulle' | translate}}">
+            {{"sigct.usager.fusion.editcomm.btnannuler" | translate}}
+        </button>
+        <button id="btn-retour"
+                class="btn btn-sm btn-default"
+                (click)="onRetourFusionClick()"
+                title="{{'sigct.usager.fusion.editcomm.btnrevenirinfobulle' | translate}}">
+            <i class="fa fa-lg fa-times"></i>
+        </button>
+    </div>
+</div>
+
+<mat-dialog-content>
+    <ng-template #alertContainer></ng-template>
+
+    <div class="col-md-12">
+        <table id="tbl-usager-comm"
+               class="table">
+            <colgroup>
+                <col style="width: 15%;" />
+                <col style="width: 30%;" />
+                <col style="width: 30%;" />
+                <col style="width: 25%;" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="text-center">{{"sigct.usager.fusion.usager" | translate}}
+                        #{{idUsagerIdent1}}</th>
+                    <th class="text-center">{{"sigct.usager.fusion.usager" | translate}}
+                        #{{idUsagerIdent2}}</th>
+                    <th class="text-center">{{"sigct.usager.fusion.infofusion" | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="usagerCommFusionDto?.codeTypeEquipComm != COURELEC">
+                    <th>{{'sigct.usager.fusion.editcomm.numero' | translate}}</th>
+                    <td [class.archive]="!usagerComm1Dto?.actif">{{usagerComm1Dto?.numero | telephonePipe: false}}</td>
+                    <td [class.archive]="!usagerComm2Dto?.actif">{{usagerComm2Dto?.numero | telephonePipe: false}}</td>
+                    <td>
+                        <msss-sigct-chosen id="usager-comm-fusion-numero"
+                                           [placeholder]="usagerComm1Dto?.numero || usagerComm2Dto?.numero ? selectionnezLabel : ''"
+                                           [disabled]="!(usagerComm1Dto?.numero && usagerComm2Dto?.numero && usagerComm1Dto?.numero != usagerComm2Dto?.numero)"
+                                           [(ngModel)]="usagerCommFusionDto.numero"
+                                           [options]="numeroOptions">
+                        </msss-sigct-chosen>
+                    </td>
+                </tr>
+                <tr *ngIf="usagerComm1Dto?.poste || usagerComm2Dto?.poste">
+                    <th>{{'sigct.usager.fusion.editcomm.poste' | translate}}</th>
+                    <td [class.archive]="!usagerComm1Dto?.actif">{{usagerComm1Dto?.poste}}</td>
+                    <td [class.archive]="!usagerComm2Dto?.actif">{{usagerComm2Dto?.poste}}</td>
+                    <td>
+                        <msss-sigct-chosen id="usager-comm-fusion-poste"
+                                           [placeholder]="usagerComm1Dto?.poste && usagerComm2Dto?.poste && (!usagerCommFusionDto?.codeTypeEquipComm || usagerCommFusionDto?.codeTypeEquipComm == TEL || usagerCommFusionDto?.codeTypeEquipComm == TEL2) ? selectionnezLabel : ''"
+                                           [disabled]="!(usagerComm1Dto?.poste && usagerComm2Dto?.poste && usagerComm1Dto?.poste != usagerComm2Dto?.poste) || (usagerCommFusionDto?.codeTypeEquipComm && usagerCommFusionDto?.codeTypeEquipComm != TEL && usagerCommFusionDto?.codeTypeEquipComm != TEL2)"
+                                           [valide]="isPosteValide"
+                                           [(ngModel)]="usagerCommFusionDto.poste"
+                                           [options]="posteOptions">
+                        </msss-sigct-chosen>
+                    </td>
+                </tr>
+                <tr *ngIf="usagerCommFusionDto?.codeTypeEquipComm == COURELEC">
+                    <th>{{'sigct.usager.fusion.editcomm.courriel' | translate}}</th>
+                    <td [class.archive]="!usagerComm1Dto?.actif">{{usagerComm1Dto?.courriel}}</td>
+                    <td [class.archive]="!usagerComm2Dto?.actif">{{usagerComm2Dto?.courriel}}</td>
+                    <td>
+                        <msss-sigct-chosen id="usager-comm-fusion-courriel"
+                                           [disabled]="true"
+                                           [(ngModel)]="usagerCommFusionDto.courriel"
+                                           [options]="courrielOptions">
+                        </msss-sigct-chosen>
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{'sigct.usager.fusion.editcomm.moyen' | translate}}</th>
+                    <td [class.archive]="!usagerComm1Dto?.actif">{{usagerComm1Dto?.nomTypeEquipComm}}</td>
+                    <td [class.archive]="!usagerComm2Dto?.actif">{{usagerComm2Dto?.nomTypeEquipComm}}</td>
+                    <td>
+                        <msss-sigct-chosen #chosenTypeEquipement
+                                           id="usager-comm-fusion-type-equipement"
+                                           [placeholder]="usagerComm1Dto?.codeTypeEquipComm || usagerComm2Dto?.codeTypeEquipComm ? selectionnezLabel : ''"
+                                           [disabled]="usagerCommFusionDto.codeTypeEquipComm == COURELEC"
+                                           [valide]="isTypeEquipementValide"
+                                           [(ngModel)]="usagerCommFusionDto.codeTypeEquipComm"
+                                           [options]="typeEquipCommOptions"
+                                           (optionSelected)="onTypeEquipementSelected($event)">
+                        </msss-sigct-chosen>
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{'sigct.usager.fusion.editcomm.type' | translate}}</th>
+                    <td [class.archive]="!usagerComm1Dto?.actif">{{usagerComm1Dto?.nomTypeCoordComm}}</td>
+                    <td [class.archive]="!usagerComm2Dto?.actif">{{usagerComm2Dto?.nomTypeCoordComm}}</td>
+                    <td>
+                        <msss-sigct-chosen id="usager-comm-fusion-type-coordonnee"
+                                           [placeholder]="usagerComm1Dto?.codeTypeCoordComm || usagerComm2Dto?.codeTypeCoordComm ? selectionnezLabel : ''"
+                                           [valide]="isTypeCoordonneeValide"
+                                           [(ngModel)]="usagerCommFusionDto.codeTypeCoordComm"
+                                           [options]="typeCoordCommOptions">
+                        </msss-sigct-chosen>
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{'sigct.usager.fusion.editcomm.details' | translate}}</th>
+                    <td [class.archive]="!usagerComm1Dto?.actif">
+                        <!-- Affiche une case à cocher uniquement si les détails de U1 et U2 sont présents et différents, sinon c'est du texte -->
+                        <mat-checkbox *ngIf="usagerComm1Dto?.detail && usagerComm2Dto?.detail && usagerComm1Dto?.detail != usagerComm2Dto?.detail else txtUsagerComm1DtoDetail"
+                                      id="chk-usager-comm1-detail"
+                                      color='primary'
+                                      [(ngModel)]="usagerComm1DetailChecked"
+                                      (change)="onPopupUsagerComm1DetailClick($event)">{{usagerComm1Dto?.detail}}
+                        </mat-checkbox>
+                        <ng-template #txtUsagerComm1DtoDetail>{{usagerComm1Dto?.detail}}</ng-template>
+                    </td>
+                    <td [class.archive]="!usagerComm2Dto?.actif">
+                        <!-- Affiche une case à cocher uniquement si les détails de U1 et U2 sont présents et différents, sinon c'est du texte -->
+                        <mat-checkbox *ngIf="usagerComm1Dto?.detail && usagerComm2Dto?.detail && usagerComm1Dto?.detail != usagerComm2Dto?.detail else txtUsagerComm2DtoDetail"
+                                      id="chk-usager-comm2-detail"
+                                      color='primary'
+                                      [(ngModel)]="usagerComm2DetailChecked"
+                                      (change)="onPopupUsagerComm2DetailClick($event)">{{usagerComm2Dto?.detail}}
+                        </mat-checkbox>
+                        <ng-template #txtUsagerComm2DtoDetail>{{usagerComm2Dto?.detail}}</ng-template>
+                    </td>
+                    <td class="padding-top-5">
+                        <textarea id="usager-comm-fusion-detail"
+                                  disabled
+                                  [(ngModel)]="usagerCommFusionDto.detail"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{'sigct.usager.fusion.editcomm.archivee' | translate}}</th>
+                    <td [class.archive]="!usagerComm1Dto?.actif">
+                        <span *ngIf="usagerComm1Dto?.archive === 'true'">{{ouiLabel}}</span>
+                        <span *ngIf="usagerComm1Dto?.archive === 'false'">{{nonLabel}}</span>
+                    </td>
+                    <td [class.archive]="!usagerComm2Dto?.actif">
+                        <span *ngIf="usagerComm2Dto?.archive === 'true'">{{ouiLabel}}</span>
+                        <span *ngIf="usagerComm2Dto?.archive === 'false'">{{nonLabel}}</span>
+                    </td>
+                    <td>
+                        <msss-sigct-chosen id="usager-fusion-archive"
+                                           [placeholder]="usagerComm1Dto?.archive || usagerComm2Dto?.archive ? selectionnezLabel : ''"
+                                           [valide]="isActifValide"
+                                           [(ngModel)]="usagerCommFusionDto.archive"
+                                           [options]="ouiNonOptions">
+                        </msss-sigct-chosen>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</mat-dialog-content>

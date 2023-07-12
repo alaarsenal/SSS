@@ -1,0 +1,110 @@
+<div class="padding-left-12 padding-right-12 padding-buttum-15">
+  <div class="row">
+    <div class="col-md-6 padding-top-10  border-solid-thin border-color-ddd" style="background-color: lightgray;">
+      <form name="form" (ngSubmit)="onSubmit(fCom)" #fCom="ngForm">
+
+
+        <div class="row">
+          <div class="col-md-11">
+            <div class="row">
+              <div class="col-md-6">
+                <msss-sigct-chosen label="sigct.ss.f_appel.aplntusag.moyencomm" id="idCombinedToCodeTypeEquip" name="idCombinedToCodeTypeEquip" required
+                  [valide]="isTypeEquipValide" [(ngModel)]="appelantCommDTO.idCombinedToCodeTypeEquip"
+                  [options]="inputOptionMoyenCommunication" (ngModelChange)="changeMoyen($event)" (focus)="onFocus($event)"
+                  [disabled] = "isDisabled">
+                </msss-sigct-chosen>
+
+              </div>
+              <div class="col-md-6">
+                <msss-sigct-chosen label="sigct.ss.f_appel.aplntusag.typecomm" id="idCombinedToCodeTypeCoord" name="idCombinedToCodeTypeCoord" required
+                [valide]="isTypeCoordValide" [(ngModel)]="appelantCommDTO.idCombinedToCodeTypeCoord"
+                  [options]="inputOptionTypeCoordMoyenCommunication" (focus)="onFocus($event)"
+                  [disabled] = "isDisabled">
+                </msss-sigct-chosen>
+              </div>
+
+              <div class="col-md-6" *ngIf="isNumberVisible">
+                <msss-input-text id="numeroApp" name="numero" label="sigct.ss.f_appel.aplntusag.numerocomm" required
+                  [(ngModel)]="appelantCommDTO.numero" [patternMask]="patternMaskNumero"  [valide]="isNumeroValide"
+                  [validationMask]="false" (focus)="onFocus($event)" (click)="onClick($event)"
+                  [disabled] = "isDisabled">
+                </msss-input-text>
+              </div>
+
+              <div class="col-md-6" *ngIf="isPosteVisible">
+                <msss-input-text id="posteApp" name="poste" label="sigct.ss.f_appel.aplntusag.postecomm" maxlength="15"
+                  [(ngModel)]="appelantCommDTO.poste" #poste="ngModel"
+                  [patternMask]="patternMaskPoste" [validationMask]="false" [disableNumberCheck]="false"
+                  [disabled] = "isDisabled">
+                </msss-input-text>
+              </div>
+
+              <div class="col-md-6" *ngIf="isEmailVisible">
+                <msss-input-text id="courrielApp" name="courriel" label="sigct.ss.f_appel.aplntusag.courrielcomm" required
+                  maxlength="75" [(ngModel)]="appelantCommDTO.courriel" #courriel="ngModel" [valide]="isCourrielValid"
+                  [validationMask]="false" (focus)="onFocus($event)" (click)="onClick($event)"
+                  [disabled] = "isDisabled"></msss-input-text>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <msss-input-text [(ngModel)]="appelantCommDTO.detail" #detail="ngModel" id="detailApp"
+                  name="detail" label="sigct.ss.f_appel.aplntusag.detailscomm" maxlength="255"
+                  [disabled] = "isDisabled" raccourcis=true>
+                </msss-input-text>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-1 no-padding-left">
+            <div class="padding-left-8" style="padding-top:65px;" id="usgActionIconApp">
+              <button type="submit" style="display:none" #submitBtn>Submit</button>
+              <msss-action-link [actionLinks]="actionLinks" [disableAll] = "isDisabled"></msss-action-link>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <div class="col-md-6 border-solid-thin-without-left min-height-187 border-color-ddd padding-top-10">
+
+
+      <msss-list-info-action [list]="_appelantCommunications" [formatAction]="formatActionAppelantCommunication"
+        (modifierAction)="confirmerModifierCommunication($event)" editerId="editerBtnCom" [dispalyArchiveIcon]="false"
+        [idElementModifieSelectionne]="idElementModifieSelectionne" afficherId="afficherBtnCom"
+        [dispalyReductAndShowLinks]="false"
+        ariaLabel="communications">
+      </msss-list-info-action>
+
+      <modal-confirmation id-container="confirm_popup_modif">
+        <div class="modal-confirm-body modal-body">
+          {{ 'us-iu-a00017' | translate }}
+        </div>
+
+        <div class="modal-confirm-footer modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+            id="ok_confirm_button" (click)="selectionnerCommunicationEditer()">Oui</button>
+          <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="cancel_confirm_button">Non</button>
+        </div>
+      </modal-confirmation>
+
+      <modal-confirmation id-container="confirm_popup_remplacer">
+        <div class="modal-confirm-body modal-body">
+          {{ messageConfirmerRemplacer }}
+        </div>
+
+        <div class="modal-confirm-footer modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+            id="ok_confirm_button" (click)="forwardUpdateAppelantCommEvent()">Oui</button>
+          <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="cancel_confirm_button">Non</button>
+        </div>
+      </modal-confirmation>
+
+
+    </div>
+  </div>
+</div>

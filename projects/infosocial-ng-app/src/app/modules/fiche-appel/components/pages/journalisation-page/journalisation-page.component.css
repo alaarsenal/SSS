@@ -1,0 +1,9 @@
+.navbar-fixed-bottom {
+    z-index: 1065;
+    max-height: 50px;
+}
+
+.border-bottom-infosante{
+    border-bottom: solid 2px #e8aa31 !important;
+    padding-left: 15px !important;
+}

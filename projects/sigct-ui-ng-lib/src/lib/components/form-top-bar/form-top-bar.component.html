@@ -1,0 +1,25 @@
+<div class="topbar" id="{{topBarContainer}}" [class.relative]="!fixe" >
+    <h1 class="row page-header min-height-40 {{CSSBorderBottom}}">
+        <div class="pull-left">
+            <i class="{{options?.title?.icon}}">&nbsp;</i>
+        </div>
+        <div *ngIf="label.length < 60 && detail" class="col-md-4 pull-left" id="titleContainer" >{{label}}</div>
+        <div *ngIf="label.length >= 60 && detail" class="col-md-7 pull-left elipsis" id="titleContainer" >{{label}}</div>
+        <div *ngIf="label.length < 60 && !detail" class="col-md-6 pull-left" id="titleContainer" >{{label}}</div>
+        <div *ngIf="label.length >= 60 && !detail" class="col-md-9 pull-left elipsis" id="titleContainer" >{{label}}</div>
+        <div *ngIf="detail" class="col-md-2 center pull-left no-padding">{{detail}}</div>
+
+        <span class="pull-right titleactions">
+            <input type="hidden" id="errorCount" value="">
+            <input type="hidden" id="warningCount" value="">
+            <a href="#" onclick="return false" class="btn-sm btn {{item.extraClass}}"  *ngFor="let item of options?.actions;let i = index" id="{{item.compId}}"
+            title="{{item.tooltip ? item.tooltip : item.label}}"  (click)="item.actionFunction($event)">
+               <i *ngIf="item?.icon" class="{{item?.icon}}"></i>
+               <span *ngIf="!item?.icon">{{item.label}}</span>
+            </a>
+        </span>
+        <span class="sr-only">barre du haut</span>
+    </h1>
+</div>
+
+<div *ngIf="fixe" id="topBarContainerSep"></div>

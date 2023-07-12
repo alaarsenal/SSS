@@ -1,0 +1,42 @@
+#id_dateNaissance {
+    width: calc(100% - 40px) !important;
+}
+
+.table-conteneur .input-sm {
+    margin-right: 5px!important;
+}
+.input-sm {
+    width: 40px!important;
+    text-align: center;
+    padding: 1px!important;
+    margin: 0px!important;
+    font-size: 14px!important;
+}
+
+.sous-label-amj {
+    padding-left: 8px;
+    margin: 0px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+
+/* Cette classe permet de changer la couleur des cadres et labels de groupe age en cas d'erreur */
+::ng-deep.error .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    color:#f44336;
+    opacity: 1;
+  }
+  
+/* Lors qu'il y a erreur (voir classe au dessus) le texte devient rouge, avec cette classe il reste noir */  
+::ng-deep.error .mat-form-field-appearance-outline{
+  color:#0d0e0d;
+}
+
+.amj {
+    min-width: 20px;
+}
+
+.amjLabel {
+    white-space: nowrap;
+}

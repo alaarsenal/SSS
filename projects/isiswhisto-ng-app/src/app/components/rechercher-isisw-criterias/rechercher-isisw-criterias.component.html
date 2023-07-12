@@ -1,0 +1,160 @@
+<div class="row">
+    <div class="col-dates">
+        <div class="row">
+            <div class="col-md-12 padding-left-3">
+                <strong>{{'sigct.ss.r_appelsisisw.dhdbtperiodeappel'| translate}}</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-small-spacing">
+                <msss-sigct-datepicker #dateDebutFicheAppelMin
+                                       id="dateDebutFicheAppelMin"
+                                       label=""
+                                       [(ngModel)]="critereRechercheDto.dateAppelMin"
+                                       dateFormat="yyyy-mm-dd"
+                                       placeHolder="aaaa-mm-jj"
+                                       [ngModelOptions]="{standalone:true}"
+                                       [endDate]="demain"
+                                       [valide]="isDateAppelMinValide"
+                                       (keydown.enter)="onExecuterRecherche()"
+                                       ariaLabel="date début">
+                </msss-sigct-datepicker>
+            </div>
+
+            <div class="col-md-6 col-small-spacing">
+                <msss-sigct-datepicker #dateDebutFicheAppelMax
+                                       id="dateDebutFicheAppelMax"
+                                       label=""
+                                       [(ngModel)]="critereRechercheDto.dateAppelMax"
+                                       dateFormat="yyyy-mm-dd"
+                                       placeHolder="aaaa-mm-jj"
+                                       [ngModelOptions]="{standalone:true}"
+                                       [endDate]="demain"
+                                       (keydown.enter)="onExecuterRecherche()"
+                                       ariaLabel="date fin">
+                </msss-sigct-datepicker>
+            </div>
+        </div>
+    </div>
+    <div class="col-nom-prenom">
+        <div class="col-md-6 col-small-spacing">
+            <msss-input-text #nom
+                             label="sigct.ss.r_appelsisisw.nom"
+                             id="nom"
+                             maxlength="50"
+                             [(ngModel)]="critereRechercheDto.nom"
+                             [valide]="isNomValide"
+                             (keydown.enter)="onExecuterRecherche()"
+                             ariaLabel="nom">
+            </msss-input-text>
+        </div>
+
+        <div class="col-md-6 col-small-spacing">
+            <msss-input-text #prenom
+                             label="sigct.ss.r_appelsisisw.prenom"
+                             id="prenom"
+                             maxlength="50"
+                             [(ngModel)]="critereRechercheDto.prenom"
+                             [valide]="isPrenomValide"
+                             (keydown.enter)="onExecuterRecherche()"
+                             ariaLabel="prénom">
+            </msss-input-text>
+        </div>
+    </div>
+    <div class="col-autres">
+        <div class="col-md-4 col-small-spacing">
+            <msss-sigct-chosen #sexe
+                               id="sexe"
+                               label="sigct.ss.r_appelsisisw.sexe"
+                               name="sexe"
+                               [options]="listeSexe"
+                               [(ngModel)]="critereRechercheDto.sexeCode"
+                               (keydown.enter)="onExecuterRecherche()"
+                               ariaLabel="sexe">
+            </msss-sigct-chosen>
+        </div>
+
+        <div class="col-md-4 col-small-spacing">
+            <msss-input-text #telephone
+                             id="telephone"
+                             label="sigct.ss.r_appelsisisw.telephonique"
+                             placeHolder="(999) 999-9999"
+                             patternMask="000 000-0000"
+                             [(ngModel)]="critereRechercheDto.telephone"
+                             [validationMask]="false"
+                             [valide]="isTelephoneValide"
+                             (keydown.enter)="onExecuterRecherche()"
+                             ariaLabel="téléphone">
+            </msss-input-text>
+        </div>
+
+        <div class="col-md-4 col-small-spacing">
+            <msss-input-text id="idAppel"
+                             name="idAppel"
+                             label="sigct.ss.r_appelsisisw.identifiantfiche"
+                             [(ngModel)]="critereRechercheDto.idAppel"
+                             [patternMask]="'0999999999'"
+                             [disableNumberCheck]="false"
+                             [decimalPatternCheck]="false"
+                             maxlength="10"
+                             (keydown.enter)="onExecuterRecherche()"
+                             [autocomplete]="'off'"
+                             ariaLabel="identifiant de la fiche">
+            </msss-input-text>
+        </div>
+    </div>
+</div>
+<!-- second line criterias -->
+<div class="row">
+        <div class="col-date-naissance col-md-6 col-small-spacing">
+            <msss-sigct-datepicker #dtNaissance
+                                   id="dtNaissance"
+                                   label="sigct.ss.r_appelsisisw.datnaissisisw"
+                                   [(ngModel)]="critereRechercheDto.dateNaissance"
+                                   dateFormat="yyyy-mm-dd"
+                                   placeHolder="aaaa-mm-jj"
+                                   [ngModelOptions]="{standalone:true}"
+                                   [endDate]="demain"
+                                   (keydown.enter)="onExecuterRecherche()"
+                                   ariaLabel="date de naissance">
+            </msss-sigct-datepicker>
+        </div>
+    <div class="col-region-professionnel">
+        <div class="col-md-6 col-small-spacing">
+            <msss-sigct-chosen #regionResidence
+                               id="regionResidence"
+                               label="sigct.ss.r_appelsisisw.regionresidence"
+                               name="regionResidence"
+                               [options]="listeRegionResidence"
+                               [(ngModel)]="critereRechercheDto.idRegion"
+                               (keydown.enter)="onExecuterRecherche()">
+            </msss-sigct-chosen>
+        </div>
+
+        <div class="col-md-6 col-small-spacing">
+            <msss-sigct-chosen #professionnel
+                               id="professionnel"
+                               label="sigct.ss.r_appelsisisw.sctn_criteres_consultation.prfsnl"
+                               name="professionnel"
+                               [disabled]="!critereRechercheDto.idRegionTraitAppel"
+                               [options]="listeProfessionnel"
+                               [(ngModel)]="critereRechercheDto.createdUsername"
+                               (keydown.enter)="onExecuterRecherche()">
+            </msss-sigct-chosen>
+        </div>
+    </div>
+    <div class="col-autres">
+        <div class="col-md-12 col-small-spacing">
+            <msss-sigct-chosen #service
+                               id="service"
+                               label="sigct.ss.r_appelsisisw.regiontraitappel"
+                               name="service"
+                               [disabled]="!isRechercheTous"
+                               [options]="listeService"
+                               [(ngModel)]="critereRechercheDto.idRegionTraitAppel"
+                               (keydown.enter)="onExecuterRecherche()"
+                               (optionSelected)="onServiceSelected($event)">
+            </msss-sigct-chosen>
+        </div>
+    </div>
+</div>

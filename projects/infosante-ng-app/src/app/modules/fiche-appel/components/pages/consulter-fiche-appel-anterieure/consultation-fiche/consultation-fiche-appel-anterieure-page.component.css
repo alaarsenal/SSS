@@ -1,0 +1,34 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 50px);
+    margin: 0;
+}
+
+.left-menu {
+    background-color: black;
+    margin-top: 42px;
+    position: sticky;
+    width: 45px;
+}
+
+.conteneur {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-top-bar {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.compos {
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+::ng-deep html > body { 
+    overflow-y: hidden;
+}

@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row {{CSSclasseCouleurCadre}}">
+
+    <div id="div-logo"
+           class="min-height-117 col-lg-6">
+      <div class="row">
+
+        <div class="col-lg-4"
+             *ngIf="urlImageLogo">
+          <img style="height: 80px;;"
+               src="{{urlImageLogo}}" alt="logo"/>
+        </div>
+
+        <div class="col-lg-8 text-align-center font-size-8 padding-right-15 padding-top-10">
+          <strong><span id="systeme-logo">{{nomSysteme | translate }}</span><br></strong>
+          <div id="div-nomEnvironnement">
+            <span>Environnement {{nomEnvironnement}}</span> <br>
+          </div>
+      </div>
+
+      </div>
+    </div>
+
+    <div id="div-userOrganisme"
+         class="color-white min-height-117  text-align-center col-lg-6">
+      <div>
+        <div class="nameTop" id="userInfo">
+          <strong>{{ bienvenueMot | translate}}&nbsp;{{prenomNomUtilisateur}}</strong>
+        </div>
+        <br>
+        <div>
+          <span id="nomEquipe"><strong>{{nomOrganismeCourant}}&nbsp;-&nbsp;{{nomRegionOrganismeCourant}}</strong></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,31 @@
+/* Comme dans l'appelant on sait qu'on a 5 boutons et que l'espace (margin) entre chaque bouton est 10 px sauf le dernier
+   On obtient la formule suivante pour la largeur de chaque bouton (100% - (x * 10px) / x)
+   x est le nombre de bouton, donc pour 5 boutons on a :
+   (100% - 40px) / 5
+   Ainsi les boutons prennent tout l'espace
+*/
+:host ::ng-deep msss-sigct-content-zone#analyseSituationContentZone msss-bouton-radio-couleur label  {
+  width: calc( (100% - 40px) / 5) !important;
+}
+
+/* Permet de reduire l'espace entre la zone AnalyseSituation et le textarea Accueil*/
+:host ::ng-deep msss-sigct-content-zone#analyseSituationContentZone div#analyseSituationContentZone.panel {
+  margin-top: 0px;
+}
+
+div.enlever-espace-droite-gauche {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+}
+
+.block-consent {
+  padding-bottom: 0.7rem;
+  margin-top: -0.7rem;
+}
+.mandatory {
+  color: red;
+}
+
+.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

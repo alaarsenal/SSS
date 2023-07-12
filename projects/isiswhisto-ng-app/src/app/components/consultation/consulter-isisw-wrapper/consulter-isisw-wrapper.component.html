@@ -1,0 +1,68 @@
+<div class="wrapper">
+  <div class="row title">
+    <div class="col-md-6">
+      <span>{{'sigct.ss.c_appelsisisw.titreisisw' | translate}}</span>
+    </div>
+    <div class="col-md-6 actions">
+      <button id="btn-imprimer-fiche"
+              class="btn btn-outline-primary btn-print"
+              (click)="onBtnGenererPdfClick()">
+        <i class="fa fa-lg fa-file-pdf-o"
+           title="{{ 'sigct.ss.c_appelsisisw.infobullepdf' | translate }}">
+        </i>
+      </button>
+    </div>
+  </div>
+  <div class="row content">
+    <div class="col-md-12">
+      <msss-consulter-isisw-usager #sectionUsager
+                                   [sectionData]="consulterIsiswWrapper.sectionUsager">
+      </msss-consulter-isisw-usager>
+    </div>
+    <div class="col-md-12">
+      <msss-consulter-isisw-centre-activites #sectionCentreActivite
+                                             [sectionData]="consulterIsiswWrapper.sectionCentreActivite">
+      </msss-consulter-isisw-centre-activites>
+    </div>
+    <div class="col-md-12">
+      <msss-consulter-isisw-collecte-donnees #sectionCollecteDonnees
+                                             [sectionData]="consulterIsiswWrapper.sectionCollecteDonnees">
+      </msss-consulter-isisw-collecte-donnees>
+    </div>
+    <div class="col-md-12">
+      <msss-consulter-isisw-intervention #sectionIntervention
+                                         [sectionData]="consulterIsiswWrapper.sectionIntervention">
+      </msss-consulter-isisw-intervention>
+    </div>
+    <div class="col-md-12">
+      <msss-consulter-isisw-reference #sectionReference
+                                      [sectionData]="consulterIsiswWrapper.sectionReference">
+      </msss-consulter-isisw-reference>
+    </div>
+    <div class="col-md-12">
+      <msss-consulter-isisw-evaluation #sectionEvaluation
+                                       [sectionData]="consulterIsiswWrapper.sectionEvaluation">
+      </msss-consulter-isisw-evaluation>
+    </div>
+    <div class="col-md-12">
+      <msss-consulter-isisw-notes-complementaires #sectionNotesComplementaire
+                                                  [sectionData]="consulterIsiswWrapper.sectionNotesComplementaire">
+      </msss-consulter-isisw-notes-complementaires>
+    </div>
+    <div class="col-md-12">
+      <msss-consulter-isisw-note-suivi #sectionNoteSuivi
+                                       [sectionData]="consulterIsiswWrapper.sectionNoteSuivi">
+      </msss-consulter-isisw-note-suivi>
+    </div>
+    <div class="col-md-12">
+      <msss-consulter-isisw-professionnel #sectionProfessionnel
+                                          [sectionData]="consulterIsiswWrapper.sectionProfessionnel">
+      </msss-consulter-isisw-professionnel>
+    </div>
+    <div class="col-md-12">
+      <msss-consulter-isisw-historique #sectionHistorique
+                                       [sectionData]="consulterIsiswWrapper.sectionHistorique">
+      </msss-consulter-isisw-historique>
+    </div>
+  </div>
+</div>

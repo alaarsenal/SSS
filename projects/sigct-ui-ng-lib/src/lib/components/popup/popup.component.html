@@ -1,0 +1,25 @@
+<ng-template #popupContainer>
+  <div class="popup-container">
+    <div mat-dialog-actions
+         class="icone">
+      <a mat-dialog-close
+         title="Fermer la page">
+        <i class="fa fa-times-circle-o fa-2x"
+           aria-hidden="true">
+        </i>
+      </a>
+    </div>
+    <br />
+    <br />
+    <hr />
+    <ng-content></ng-content>
+    <hr />
+    <div class="align-right">
+      <button class="btn-primary ng-star-inserted btn btn-default btn-sm form-btn"
+              [title]="buttonCloseTitle"
+              mat-dialog-close>
+        {{buttonCloseLabel}}
+      </button>
+    </div>
+  </div>
+</ng-template>

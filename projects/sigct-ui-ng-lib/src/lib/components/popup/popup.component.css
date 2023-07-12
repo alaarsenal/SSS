@@ -1,0 +1,17 @@
+.align-right {
+  text-align: right;
+}
+
+.icone {
+  float: right;
+  cursor: pointer;
+}
+
+.icone a {
+  color: rgb(170, 170, 170) !important;
+}
+
+.popup-container {
+  padding: 0px 1.5rem !important;
+  margin: -24px;
+}

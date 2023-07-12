@@ -1,0 +1,122 @@
+/* Structure */
+.container {
+	position: relative;
+}
+.marginL-0 {
+	margin-left: 0px !important;
+}
+.marginB-0 {
+	margin-bottom: 0px;
+}
+.table-container {
+	position: relative;
+	overflow: auto;
+}
+.mat-table {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 12px;
+}
+.mat-cell, .mat-footer-cell {
+	font-size: 14px;
+	width: 80px;
+	padding: 0 8px !important;
+}
+tr.mat-header-row {
+	height: 28px;
+}
+tr.mat-footer-row, tr.mat-row {
+	height: 24px;
+}
+.loading-shade {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 56px;
+	right: 0;
+	background: rgba(0, 0, 0, 0.15);
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/* Column Widths */
+.mat-column-number, .mat-column-state {
+	max-width: 64px;
+}
+.mat-column-created {
+	max-width: 124px;
+}
+th {
+	font-weight: 600;
+	color: rgba(0,0,0,.87);
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	padding-bottom: 2px !important;
+}
+a {
+	cursor: pointer;
+}
+.mat-row:nth-child(2n+1) {
+	background-color: #f9f9f9;
+}
+.mat_row:nth-child(4n+1) {
+	background-color: white;
+}
+::ng-deep .mat-paginator-page-size-select {
+	line-height: 3.125!important;
+}
+::ng-deep .form-group {
+	margin-bottom: 0px !important;
+}
+::ng-deep .mat-form-field-infix {
+	line-height: 12px;
+}
+::ng-deep .mat-toolbar-multiple-rows {
+	min-height: auto !important;
+}
+.btn-default {
+	background-image: none;
+}
+.padding-3 {
+	padding: 3px;
+}
+.padding-2 {
+	padding: 2px;
+}
+.paddingL-2:first-of-type {
+	padding-left: 2px !important;
+}
+.paddingR-0 {
+	padding-right: 0 !important;
+}
+.paddingL-0 {
+	padding-left: 0 !important;
+}
+
+.marginT-0 {
+	margin-top: 0px !important;
+}
+
+.paddingT-0 {
+	padding-top: 0px !important;
+}
+
+.w-full {
+	width: 100%;
+}
+.th-left {
+	text-align: left;
+}
+.th-right {
+	text-align: right;
+}
+tr.mat-footer-row {
+	border: 1px solid #e7e7e7;
+	font-weight: bold;
+	height: 0px !important;
+}
+
+.aucune-donnee {
+	margin-top: 8px;
+    margin-bottom: 10px;
+}

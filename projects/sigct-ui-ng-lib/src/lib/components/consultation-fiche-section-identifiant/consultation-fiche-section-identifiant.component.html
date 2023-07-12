@@ -1,0 +1,38 @@
+<msss-sigct-content-zone id="section-identifiant"
+                         title="{{'sigct.ss.f_appel.consultation.identifiants' | translate}}">
+  <ng-container *ngIf="_identifiantDTO">
+    <div class="row margin-bottom-5"
+         *ngIf="_identifiantDTO.idUsagerIdent || _identifiantDTO.idFicheAppel">
+      <div class="col-md-2 width-auto no-padding-right"
+           *ngIf="_identifiantDTO.idUsagerIdent">
+        <label>{{ 'sigct.ss.f_appel.consultation.identifiantusager' | translate }} : </label>
+      </div>
+      <div class="col-md-2 width-auto padding-left-6"
+           *ngIf="_identifiantDTO.idUsagerIdent">{{_identifiantDTO.idUsagerIdent}}</div>
+      <div class="col-md-2 width-auto no-padding-right"
+           *ngIf="_identifiantDTO.idFicheAppel">
+        <label>{{ 'sigct.ss.f_appel.consultation.identifiantfiche' | translate }} : </label>
+      </div>
+      <div class="col-md-2 width-auto padding-left-6"
+           *ngIf="_identifiantDTO.idFicheAppel">{{_identifiantDTO.idFicheAppel}}</div>
+    </div>
+
+    <div class="row margin-bottom-5"
+         *ngIf="_identifiantDTO.autresFichesReliees ">
+      <div class="col-md-2 width-auto no-padding-right">
+        <label>{{ 'sigct.ss.f_appel.consultation.autresfichesreliees' | translate }} : </label>
+      </div>
+      <div class="col-md-10 padding-left-6">
+        {{_identifiantDTO.autresFichesReliees}}
+      </div>
+    </div>
+
+    <div class="row margin-bottom-9">
+      <div class="col-md-2 width-auto no-padding-right">
+        <label>{{ 'sigct.'+ domaine.toLowerCase() +'.f_appel.consultation.identifiants.dureecompleteappel' | translate }} :
+        </label>
+      </div>
+      <div class="col-md-2 width-auto padding-left-6">{{_identifiantDTO.dureeCompleteAppel}}</div>
+    </div>
+  </ng-container>
+</msss-sigct-content-zone>

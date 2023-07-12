@@ -1,0 +1,218 @@
+.cell-btn-ajouter{
+
+    width: 4%;
+    padding-left:5px !important;
+    text-align: center;
+  }
+
+  .tab-fichier{
+    background-color: #F5F5F5;
+  }
+
+
+
+  .cell-selectfichier {
+    width: 66%;
+  }
+
+  .cell-btn-parcourir {
+    width: 3%;
+    padding-right: 13px;
+  }
+
+  .cell-btn-parcourir button{
+    width: 108px;
+  }
+  .cell-aprecu {
+    width: 3%;
+  }
+
+  .w-70pc{
+    width: 70%;
+  }
+
+  /* Structure */
+  .container {
+      position: relative;
+  }
+  .marginL-0 {
+      margin-left: 0px !important;
+  }
+  .marginB-0 {
+      margin-bottom: 0px;
+  }
+  .marginT-0 {
+      margin-top: 0px;
+      border-bottom: 0px;
+      border-top: 0px;
+  }
+  .table-container {
+      position: relative;
+      overflow: auto;
+  }
+  .mat-table {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+  }
+  .mat-cell, .mat-footer-cell {
+      font-size: 14px;
+      width: 80px;
+      padding: 0 8px !important;
+  }
+  tr.mat-header-row {
+      height: 28px;
+  }
+  tr.mat-footer-row, tr.mat-row {
+      height: 24px;
+  }
+  .loading-shade {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 56px;
+      right: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  /* Column Widths */
+  .mat-column-number, .mat-column-state {
+      max-width: 64px;
+  }
+  .mat-column-created {
+      max-width: 124px;
+  }
+  th {
+      font-weight: 600;
+      color: rgba(0,0,0,.87);
+      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-size: 14px;
+      padding-bottom: 2px !important;
+  }
+  a {
+      cursor: pointer;
+  }
+  .mat-row:nth-child(2n+1) {
+      background-color: #f9f9f9;
+  }
+  .mat_row:nth-child(4n+1) {
+      background-color: white;
+  }
+  ::ng-deep .mat-paginator-page-size-select {
+      line-height: 3.125!important;
+  }
+  ::ng-deep .form-group {
+      margin-bottom: 0px !important;
+  }
+  ::ng-deep .mat-form-field-infix {
+      line-height: 12px;
+  }
+  ::ng-deep .mat-toolbar-multiple-rows {
+      min-height: auto !important;
+  }
+  .btn-default {
+      background-image: none;
+  }
+  .padding-3 {
+      padding: 3px;
+  }
+  .padding-2 {
+      padding: 2px;
+  }
+  .paddingL-2:first-of-type {
+      padding-left: 2px !important;
+  }
+  .paddingR-0 {
+      padding-right: 0 !important;
+  }
+  .paddingL-0 {
+      padding-left: 0 !important;
+  }
+
+  .w-31 {
+      max-width: 31px;
+  }
+
+  .w-78 {
+      max-width: 78px;
+  }
+
+  .w-85 {
+      max-width: 85px;
+  }
+
+  .w-116 {
+      max-width: 116px;
+  }
+  .w-122 {
+      max-width: 122px;
+  }
+  .w-145 {
+      max-width: 145px;
+  }
+  .w-150 {
+      max-width: 150px;
+  }
+  .w-200 {
+      max-width: 200px;
+  }
+  .w-209 {
+      max-width: 209px;
+  }
+  .w-300 {
+      min-width: 300px;
+  }
+
+  .w-full {
+      width: 100%;
+  }
+
+  .w-action {
+      width: 3%;
+  }
+
+  .w-actif {
+      width: 3%;
+  }
+  .th-center, .w-center {
+      text-align: center;
+  }
+  .th-left {
+      text-align: left;
+  }
+  .th-right {
+      text-align: right;
+  }
+  .w-action-col {
+      width: 1%;
+      padding-right: 8px !important;
+  }
+  .toolbar-medication-add {
+      padding: 0px;
+      height: 35px;
+  }
+  .btn-add-medication {
+      font-size: 11px;
+      padding: 4px 10px;
+  }
+  .btn-delete-medication {
+      padding: 3px 5px;
+      margin-top: 3px;
+  }
+  .btn-delete-medication i {
+      font-size: 13px;
+  }
+  .margin-bottom-10 {
+      margin-bottom: 10px;
+  }
+
+  tr.mat-footer-row {
+      border: 1px solid #e7e7e7;
+      font-weight: bold;
+      height: 0px !important;
+  }
+
+  ::ng-deep.tp-radio-group {
+      padding-bottom: 0px!important;
+  }

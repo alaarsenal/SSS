@@ -1,0 +1,6 @@
+.contenu-avec-scrollbar {
+  height: calc(100% - 45px);
+  width: 100%;
+  overflow-y: auto;
+}
+

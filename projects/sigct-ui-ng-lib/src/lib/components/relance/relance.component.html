@@ -1,0 +1,141 @@
+<div class="wrapper">
+  <form #formRelance="ngForm"
+        name="formRelance"
+        (ngSubmit)="onSubmit()">
+    <div class="row title {{getTitleCssSelonModule()}}">
+      <div class="col-md-6">
+        <i class="fa fa-lg fa-bell"></i>
+        <h1>{{ titreInterface | translate }}</h1>
+      </div>
+      <div class="col-md-6 actions">
+        <button id="btnSauvegarder"
+                class="btn btn-primary margin-left-5"
+                type="submit"
+                title="{{'sigct.ss.f_appel.consultation.relance.edition.sauvegarderetfermerinfobulle'|translate}}">
+          {{'sigct.ss.f_appel.consultation.relance.edition.sauvegarderetfermer'|translate}}
+        </button>
+        <button id="btnAnnuler"
+                class="btn btn-secundary margin-left-5"
+                type="button"
+                title="{{'sigct.ss.f_appel.consultation.relance.edition.annulerinfobulle'|translate}}"
+                (click)="onCancel()">
+          {{'sigct.ss.f_appel.consultation.relance.edition.annuler'|translate}}
+        </button>
+        <button id="btnRetourner"
+                class="btn btn-outline-primary margin-left-5 btn-print"
+                type="button"
+                title="{{'sigct.ss.f_appel.consultation.relance.edition.revenirconsultinfobulle'|translate}}"
+                (click)="onReturn()">
+          <i class="fa fa-lg fa-times"
+             title="{{ 'sigct.ss.f_appel.consultation.relance.edition.revenirconsultinfobulle' | translate }}">
+          </i>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <ng-template [ngIf]="!dto.id">
+          <div class="calendar-date">
+            <msss-sigct-datepicker #inputDateDebut
+                                   id="dateDebut"
+                                   label="sigct.ss.f_appel.consultation.relance.edition.dtdebut"
+                                   dateFormat="yyyy-mm-dd"
+                                   placeHolder="aaaa-mm-jj"
+                                   [ngModelOptions]="{standalone:true}"
+                                   [startDate]="startDate"
+                                   [isRequired]="true"
+                                   [valide]="isDateDebutValide"
+                                   [(ngModel)]="dto.dateHeureDebut"
+                                   (ngModelChange)="onDateDebutChange()"
+                                   required>
+            </msss-sigct-datepicker>
+          </div>
+          <div class="input-heure pl-1">
+            <msss-input-text id="heureDebut"
+                             name="heureDebut"
+                             maxlength="5"
+                             placeholder="hh:mm"
+                             [patternMask]="'00:00'"
+                             [valide]="isDateDebutValide"
+                             [(ngModel)]="dto.heureDebut"
+                             (ngModelChange)="onHeureDebutChange()"
+                             (blur)="onHeureDebutBlur()">
+            </msss-input-text>
+          </div>
+        </ng-template>
+        <ng-template [ngIf]="dto.id">
+          <label class="mb-1">{{'sigct.ss.f_appel.consultation.relance.edition.dtdebut' | translate}}</label>
+          <span class="mr-1">{{dto.dateHeureDebut | date:'yyyy-MM-dd'}}</span>
+          <span>{{dto.dateHeureDebut | date:'HH:mm'}}</span>
+        </ng-template>
+      </div>
+      <div class="col-md-2">
+        <ng-template [ngIf]="!dto.id">
+          <div class="calendar-date">
+            <msss-sigct-datepicker id="dateFin"
+                                   label="sigct.ss.f_appel.consultation.relance.edition.dtfin"
+                                   dateFormat="yyyy-mm-dd"
+                                   placeHolder="aaaa-mm-jj"
+                                   [ngModelOptions]="{standalone:true}"
+                                   [startDate]="dateFinStartDate"
+                                   [valide]="isDateFinValide"
+                                   [isRequired]="true"
+                                   [(ngModel)]="dto.dateHeureFin"
+                                   required>
+            </msss-sigct-datepicker>
+          </div>
+          <div class="input-heure pl-1">
+            <msss-input-text id="heureFin"
+                             name="heureFin"
+                             maxlength="5"
+                             placeholder="hh:mm"
+                             [patternMask]="'00:00'"
+                             [valide]="isDateFinValide"
+                             [(ngModel)]="dto.heureFin"
+                             (ngModelChange)="onHeureFinChange()"
+                             (blur)="onHeureFinBlur()">
+            </msss-input-text>
+          </div>
+        </ng-template>
+        <ng-template [ngIf]="dto.id">
+          <label class="mb-1">{{'sigct.ss.f_appel.consultation.relance.edition.dtfin' | translate}}</label>
+          <span class="mr-1">{{dto.dateHeureFin | date:'yyyy-MM-dd'}}</span>
+          <span>{{dto.dateHeureFin | date:'HH:mm'}}</span>
+        </ng-template>
+      </div>
+      <div class="col-md-2">
+        <msss-sigct-chosen id="statut"
+                           name="statut"
+                           label="sigct.ss.f_appel.consultation.relance.edition.statut"
+                           [options]="inputOptionsStatut"
+                           [valide]="isReferenceStatutRelanceValide"
+                           [required]="true"
+                           [(ngModel)]="dto.referenceStatutRelanceId">
+        </msss-sigct-chosen>
+      </div>
+      <div class="col-md-6"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 assignation">
+        <msss-sigct-chosen id="assignation"
+                           name="assignation"
+                           label="sigct.ss.f_appel.consultation.relance.edition.assignation"
+                           [options]="inputOptionsAssignation"
+                           [(ngModel)]="dto.assigneUsername">
+        </msss-sigct-chosen>
+      </div>
+      <div class="col-md-6"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <msss-input-text id="details"
+                         name="details"
+                         label="sigct.ss.f_appel.consultation.relance.edition.details"
+                         maxlength="255"
+                         [(ngModel)]="dto.details"
+                         raccourcis=true>
+        </msss-input-text>
+      </div>
+    </div>
+  </form>
+</div>

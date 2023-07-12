@@ -1,0 +1,43 @@
+<div class="{{css}}"
+     title="">
+  <div id="{{id}}"
+       class="panel panel-default contentZone "
+       #contentZon>
+    <div class="{{titleBorderColor}}">
+      <a href="#"
+      *ngIf="isCollapsible"
+
+         onclick="return false;"
+         class="czAction"
+         attr.target-zone="{{id}}"
+         id="lnkState_{{id}}"
+         (click)="czActionClick()"
+         title="{{title | translate}}">
+        <i class="fa"
+           [class.fa-chevron-down]="!collapsed"
+           [class.fa-chevron-up]="collapsed"
+           id="czStateIco_{{id}}"
+           #expandCollapseIcon></i>&nbsp;{{title | translate}}&nbsp;
+     </a>
+      <span
+      *ngIf="!isCollapsible"
+        attr.target-zone="{{id}}"
+         id="lnkState_{{id}}"
+        title="{{title | translate}}">
+        <i
+           id="czStateIco_{{id}}"
+           #expandCollapseIcon></i>&nbsp;{{title | translate}}&nbsp;
+      </span>
+      <span class="badge badge_content_zone"></span>
+      <span class="float-right"></span>
+      <span class="mandatory-indicator" *ngIf="isRequired">*</span>
+    </div>
+
+    <div class="panel-body "
+         [hidden]="collapsed"
+         [ngStyle]="contentStyles">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
+<div style="clear:both;"></div>

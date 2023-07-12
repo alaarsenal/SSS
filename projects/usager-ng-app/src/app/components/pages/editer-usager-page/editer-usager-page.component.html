@@ -1,0 +1,11 @@
+<div class="main">
+  <div class="left-menu">
+    <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+  </div>
+  <div class="conteneur">
+    <sigct-usager-edition idUsager="{{idUsager}}"
+                          #usagerEdition
+                          (retourListe)="onRetourListe()"
+                          (modifierUsager)="onModifierUsager($event)"></sigct-usager-edition>
+  </div>
+</div>

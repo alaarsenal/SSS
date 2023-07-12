@@ -1,0 +1,63 @@
+<msss-sigct-content-zone id="consulter-isisw-section-usager"
+                         title="{{ 'sigct.ss.c_appelsisisw.titrecollectedonnees' | translate }}">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.soustitremotifappel' | translate}} :
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div [innerHTML]="dto.motifAppel"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.demarchesanterieures' | translate}} :
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <label>{{'sigct.ss.c_appelsisisw.aconsutle' | translate}} :</label>
+          <span>{{dto.aconsulter}}</span>
+        </div>
+        <div class="col-md-6">
+          <label>{{'sigct.ss.c_appelsisisw.quand' | translate}} :</label>
+          <span>{{dto.quand}}</span>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-12">
+          <label>{{'sigct.ss.c_appelsisisw.traitsuivi' | translate}} :</label>
+          <span>{{dto.traitementSuivi}}</span>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-12">
+          <label>{{'sigct.ss.c_appelsisisw.resultatobtenu' | translate}} :</label>
+          <span>{{dto.resultatObtenu}}</span>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-12">
+          <label>{{'sigct.ss.c_appelsisisw.precisions' | translate}} :</label>
+          <span>{{dto.precisions}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>{{'sigct.ss.c_appelsisisw.raison' | translate}} :</label>
+      </div>
+      <div class="col-md-12"
+           *ngFor="let raison of dto.listeRaison">
+        <span>{{raison}}</span>
+      </div>
+    </div>
+  </div>
+</msss-sigct-content-zone>

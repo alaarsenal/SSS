@@ -1,0 +1,30 @@
+<msss-sigct-content-zone id="section-signature"
+                         title="{{'sigct.ss.f_appel.consultation.signature' | translate}}">
+  <p>{{ signatureLigne1 }}</p>
+  <p *ngIf="signatureLigne2">
+    {{'sigct.ss.f_appel.consultation.signature.saisiepar' | translate}} : {{ signatureLigne2 }}
+  </p>
+  <div *ngFor="let item of listeCorrectionsFicheAppel"
+       class="pb-space">
+    <div class="correction-fiche">
+      <hr />
+      <div>
+        <label>
+          {{'sigct.ss.f_appel.consultation.signature.fichecorrigeepar' | translate}} :
+        </label>
+        <span class="mr-space">{{item.signatureUtilisateur}}</span>
+        <label>
+          {{'sigct.ss.f_appel.consultation.signature.fichecorrigeele' | translate}} :
+        </label>
+        <span>{{item.dateCorrection | date : 'yyyy-MM-dd HH:mm'}}</span>
+      </div>
+      <div class="mt-space raison-correction">
+        <label>
+          {{'sigct.ss.f_appel.consultation.signature.raison' | translate}} :
+        </label>
+        <div class="valeur"
+             [innerHTML]="item.raisonCorrection"></div>
+      </div>
+    </div>
+  </div>
+</msss-sigct-content-zone>

@@ -1,0 +1,162 @@
+<div class=" col-md-12">
+    <div id="usager" class="panel panel-default contentZone" #contentZone title="{{contentZoneTitle}}">
+      <div class="panel-heading ">
+        <span>
+          <i class="fa fa-list fa-fw"></i>
+          Affichage {{(paginator.pageIndex * paginator.pageSize) + 1}} à
+          {{(paginator.pageIndex + 1) * paginator.pageSize}} sur
+          <span class="badge" id="total-records">{{paginator.length}}</span> résultat(s)
+        </span>
+        <span class="badge badge_content_zone"></span>
+        <span class="float-right"></span>
+      </div>
+
+      <div class="container marginL-0 mat-elevation-z8">
+        <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+          <!--mat-spinner *ngIf="isLoadingResults"></mat-spinner-->
+          <div class="rate-limit-reached" *ngIf="isRateLimitReached && (nbRecherche > 0 )">
+           {{ 'usager.enregistrement.liste.aucunedonnees' | translate }}
+          </div>
+        </div>
+
+        <div class="table-container pn">
+
+          <table mat-table [dataSource]="inputListData" class="table" matSort matSortActive="nom" matSortDisableClear
+            matSortDirection="asc">
+
+            <!-- State Column -->
+            <ng-container matColumnDef="sections">
+              <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+              <td mat-cell *matCellDef="let row">
+              </td>
+            </ng-container>
+
+
+            <!-- State Column -->
+            <ng-container matColumnDef="dateCreation">
+              <th mat-header-cell *matHeaderCellDef disableClear>{{ 'usager.enregistrement.liste.creele' | translate }}</th>
+              <td mat-cell *matCellDef="let row">{{ datePipe.transform(row.dateCreation, 'yyyy-MM-dd')}}</td>
+            </ng-container>
+
+            <!-- State Column -->
+            <ng-container matColumnDef="dateModifie">
+              <th mat-header-cell *matHeaderCellDef  disableClear>{{ 'usager.enregistrement.liste.maj' | translate }}</th>
+              <td mat-cell *matCellDef="let row">{{ datePipe.transform(row.dateModifie, 'yyyy-MM-dd')}}</td>
+            </ng-container>
+
+            <!-- Created Column -->
+            <ng-container matColumnDef="dateFermeture">
+              <th mat-header-cell *matHeaderCellDef  disableClear>
+                {{ 'usager.enregistrement.liste.fermeture' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let row">{{ datePipe.transform(row.dateFermuture, 'yyyy-MM-dd')}}</td>
+            </ng-container>
+
+            <!-- Created Column -->
+            <ng-container matColumnDef="region">
+              <th mat-header-cell *matHeaderCellDef  disableClear>
+                {{ 'usager.enregistrement.liste.region' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let row">{{row.codRegion}} {{row.nomRegion}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="organisme">
+              <th mat-header-cell *matHeaderCellDef  disableClear>
+                {{ 'usager.enregistrement.liste.organisme_site' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <ng-container *ngFor="let item of row.organismes">
+                  {{item.nomOrganisme}} <br *ngIf="item.nomSite!=null" /> {{item.nomSite}} <br />
+                </ng-container>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef  disableClear>
+                {{ 'usager.enregistrement.liste.type' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <ng-container *ngFor="let item of row.organismes">
+                  {{getTypeOrganisme( item)}} <br /> <br *ngIf="item.nomSite!=null" />
+                </ng-container>
+              </td>
+            </ng-container>
+
+            <!-- Created Column -->
+            <ng-container matColumnDef="actions" align="right">
+              <th mat-header-cell *matHeaderCellDef disableClear>
+                {{ 'usager.enregistrement.liste.actions' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let row" class="padding-3">
+                <button [style.visibility]="row.consultable ? 'visible' : 'hidden'" type="button" class="btn btn-default btn-sm padding-2" id="consuler_button"
+                  (click)="afficherDetailsEnregistrement(row);" title="{{ 'usager.enregistrement.liste.btnconsulter' | translate }}">
+                  <i class="fa fa-file-text-o fa-lg"></i></button>&nbsp;
+                <button  [style.visibility]="(row.actif && row.modifiable) ? 'visible' : 'hidden'" type="button" class="btn btn-default btn-sm padding-2" id="modifier_button"
+                  (click)="modifierDetailsEnregistrement(row);" title="{{ 'usager.enregistrement.liste.btnmodifier' | translate }}">
+                  <i class="fa fa-edit fa-lg"></i></button>&nbsp;
+                <button [style.visibility]=" row.copiable ? 'visible': 'hidden'" type="button" class="btn btn-default btn-sm padding-2" id="ajouter_button"
+                (click)="copierDetailsEnregistrement(row);"
+                  title="{{ 'usager.enregistrement.liste.btnajouter' | translate }}">
+                  <i class="fa fa-copy fa-lg"></i></button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" (click)="paginator.firstPage();"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <div *ngIf="inputListData===null || inputListData===undefined  ||inputListData.length === 0" class="no-records mat-row">
+            {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+          </div>
+        </div>
+
+        <mat-paginator  [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[5,10,15,20,25,50,100]"
+        [showFirstLastButtons]="true"></mat-paginator>
+      </div>
+    </div>
+
+
+    <modal-confirmation id-container="confirm_popup_copier_fiche">
+      <div class="modal-confirm-body modal-body" *ngIf="adressePrincipaleUsager">
+          {{ 'us-c90021' | translate : { '0': adressePrincipaleUsager.codeRegion, '1': adressePrincipaleUsager.nomRegion } }}
+
+
+      </div>
+
+      <div class="modal-confirm-footer modal-footer">
+          <button id="confi_copier_fiche_btn_oui" type="button" data-dismiss="modal"
+              class="btn btn-primary btn-sm btn-key-action visibility-visible"
+              (click)="confirmerCopierFiche()">Oui</button>
+          <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+              id="cancel_confirm_button">Non</button>
+          </div>
+    </modal-confirmation>
+
+    <modal-confirmation id-container="confirm_popup_consulter_fiche">
+      <div class="modal-confirm-body modal-body">
+        {{ 'us-a40003' | translate }}
+
+      </div>
+
+      <div class="modal-confirm-footer modal-footer">
+          <button id="confi_consulter_fiche_btn_oui" type="button" data-dismiss="modal"
+              class="btn btn-primary btn-sm btn-key-action visibility-visible"
+              (click)="confirmerConsulterFiche()">Oui</button>
+          <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+              id="cancel_confirm_button">Non</button>
+          </div>
+    </modal-confirmation>
+
+    <modal-confirmation id-container="confirm_popup_modifier_fiche">
+      <div class="modal-confirm-body modal-body">
+        {{ 'us-a40003' | translate }}
+
+      </div>
+
+      <div class="modal-confirm-footer modal-footer">
+          <button id="confi_modifier_fiche_btn_oui" type="button" data-dismiss="modal"
+              class="btn btn-primary btn-sm btn-key-action visibility-visible"
+              (click)="confirmerModifierFiche()">Oui</button>
+          <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+              id="cancel_confirm_button">Non</button>
+          </div>
+    </modal-confirmation>

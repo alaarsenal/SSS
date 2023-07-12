@@ -1,0 +1,28 @@
+<div class="rechercher-isisw-page">
+    <div class="left-menu">
+        <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+    </div>
+    <div class="page">
+        <div class=form-top-bar>
+            <msss-form-top-bar label="{{'sigct.ss.r_appelsisisw.titre' | translate}}"
+                               nomModule="isiswhisto"
+                               [options]="formTopBarOptions"
+                               [fixe]="false">
+            </msss-form-top-bar>
+        </div>
+
+        <div class="conteneur"
+             cdkScrollable>
+            <div class="alertes"><ng-template #alertContainer></ng-template></div>
+
+            <msss-rechercher-isisw-wrapper [critereRechercheDto]="critereRechercheDto"
+                                           [inputOptionCollections]="rechercheIsiswCollectionsDto"
+                                           [resultatRechercheDto]="resultatRechercheDto"
+                                           (consulterAppel)="onConsulterAppel($event)"
+                                           (serviceChange)="onServiceChange($event)"
+                                           (rechercherAppels)="onRechercher($event)"
+                                           (reinitialiserCriteres)="onReinitialiserCriteres()">
+            </msss-rechercher-isisw-wrapper>
+        </div>
+    </div>
+</div>

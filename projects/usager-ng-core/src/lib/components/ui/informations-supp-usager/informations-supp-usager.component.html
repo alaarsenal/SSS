@@ -1,0 +1,73 @@
+<form name="form" (ngSubmit)="onSubmit(fInfoSupp)" #fInfoSupp="ngForm">
+  <div class="row">
+    <div class="col-md-2 no-padding-right">
+      <msss-input-text label="usager.info.supp.nam" name="nam" id="nam" #numeroAssuranceMaladie="ngModel"
+        [(ngModel)]="usagerDTO.nam" [valide]="bindingErrors['nam']==undefined" [patternMask]="'SSSS-0000-0000'"
+        [validationMask]="false" (click)="onClick($event)" (focus)="onFocus($event)" (keyup)="onKeyupNAM()">
+      </msss-input-text>
+    </div>
+
+    <div class="col-md-1 no-padding-right">
+      <msss-input-text name="anneeExpr" #anneeExpr="ngModel" (click)="onClick($event)" (focus)="onFocus($event)" 
+        [validationMask]="false" [valide]="bindingErrors['anneeExpr']==undefined" [(ngModel)]="usagerDTO.anneeExpr"
+        placeholder="Année" [patternMask]="'0000'" id="anneeExpr" label="usager.info.supp.expiration">
+      </msss-input-text>
+    </div>
+
+    <div class="col-md-1 no-padding-right">
+      <label><span class="sr-only">mois expiration</span>&nbsp;</label>
+      <msss-input-text name="moisExpr" #moisExpr="ngModel" (click)="onClick($event)" (focus)="onFocus($event)"
+      [validationMask]="false" [valide]="bindingErrors['moisExpr']==undefined" [(ngModel)]="usagerDTO.moisExpr" 
+        placeholder="Mois" [patternMask]="'00'"  id="moisExpr" ariaLabel="mois expiration">
+      </msss-input-text>
+    </div>
+
+    <div class="col-md-4 padding-right-10 padding-left-15" id="usgLangue">
+      <msss-sigct-chosen label="usager.info.supp.langue" name="langueCode" id="langueCode" #langueCode="ngModel"
+        [(ngModel)]="usagerDTO.langueCode" [ngClass]="{ 'error': fInfoSupp.submitted && langueCode.invalid }"
+        [class.error]="bindingErrors['langueCode']!=undefined" [options]="inputOptionLangue" #langue>
+      </msss-sigct-chosen>
+    </div>
+
+
+    <div class="col-md-2">
+      <div class="form-group padding-top-20">
+        <msss-input-checkbox id="malentendant" name="malentendant" [options]="inputOptionMalentendant"
+          [(ngModel)]="usagerDTO.malentendant" #malentendant="ngModel"></msss-input-checkbox>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="form-group padding-top-20">
+        <msss-input-checkbox id="doublonPotentiel" name="doublonPotentiel" [options]="inputOptionDoublonPotentiel"
+          [(ngModel)]="usagerDTO.doublonPotentiel" #doublonPotentiel="ngModel"></msss-input-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 no-padding-right">
+      <msss-input-text label="usager.info.supp.nom.mere" name="nomMere" id="nomMere" #nomMere="ngModel" (keyup)="onKey($event)"
+        [(ngModel)]="usagerDTO.nomMere" maxlength="50">
+      </msss-input-text>
+    </div>
+
+    <div class="col-md-3 no-padding-right padding-left-5">
+      <msss-input-text label="usager.info.supp.prenom.mere" name="prenomMere" #prenomMere="ngModel" id="prenomMere" (keyup)="onKey($event)"
+        [(ngModel)]="usagerDTO.prenomMere" maxlength="50">
+      </msss-input-text>
+    </div>
+
+    <div class="col-md-3 no-padding-right">
+      <msss-input-text label="usager.info.supp.nom.pere" name="nomPere" id="nomPere" #nomPere="ngModel" (keyup)="onKey($event)"
+        [(ngModel)]="usagerDTO.nomPere" maxlength="50">
+      </msss-input-text>
+    </div>
+
+    <div class="col-md-3 padding-left-5">
+      <msss-input-text label="usager.info.supp.prenom.pere" name="prenomPere" #prenomPere="ngModel" id="prenomPere" (keyup)="onKey($event)"
+        [(ngModel)]="usagerDTO.prenomPere" maxlength="50">
+      </msss-input-text>
+    </div>
+  </div>
+</form>

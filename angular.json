@@ -1,0 +1,837 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "sigct-ui-ng-lib": {
+      "root": "projects/sigct-ui-ng-lib",
+      "sourceRoot": "projects/sigct-ui-ng-lib/src",
+      "projectType": "library",
+      "prefix": "msss",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/sigct-ui-ng-lib/tsconfig.lib.json",
+            "project": "projects/sigct-ui-ng-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/sigct-ui-ng-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sigct-ui-ng-lib/src/test.ts",
+            "tsConfig": "projects/sigct-ui-ng-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/sigct-ui-ng-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sigct-ui-ng-lib/tsconfig.lib.json",
+              "projects/sigct-ui-ng-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "usager-ng-app": {
+      "root": "projects/usager-ng-app/",
+      "sourceRoot": "projects/usager-ng-app/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "outputPath": "dist/usager-ng-app",
+            "index": "projects/usager-ng-app/src/index.html",
+            "main": "projects/usager-ng-app/src/main.ts",
+            "polyfills": "projects/usager-ng-app/src/polyfills.ts",
+            "tsConfig": "projects/usager-ng-app/tsconfig.app.json",
+            "assets": [
+              "projects/usager-ng-app/src/favicon.ico",
+              "projects/usager-ng-app/src/assets"
+            ],
+            "styles": [
+              "./legacy/font-awesome/css/font-awesome.min.css",
+              "./legacy/bootstrap-3.2.0-dist/css/bootstrap.min.css",
+              "./legacy/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css",
+              "./legacy/sigct.css",
+              "./custom_styles/font-address-card/style.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
+            "scripts": [
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            },
+            "dev": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "15kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "usager-ng-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "usager-ng-app:build:production"
+            },
+            "dev": {
+              "browserTarget": "usager-ng-app:build:dev"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "usager-ng-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/usager-ng-app/src/test.ts",
+            "polyfills": "projects/usager-ng-app/src/polyfills.ts",
+            "tsConfig": "projects/usager-ng-app/tsconfig.spec.json",
+            "karmaConfig": "projects/usager-ng-app/karma.conf.js",
+            "styles": [
+              "projects/usager-ng-app/src/styles.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/usager-ng-app/src/favicon.ico",
+              "projects/usager-ng-app/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/usager-ng-app/tsconfig.app.json",
+              "projects/usager-ng-app/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "usager-ng-app-e2e": {
+      "root": "projects/usager-ng-app-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/usager-ng-app-e2e/protractor.conf.js",
+            "devServerTarget": "usager-ng-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "usager-ng-app:serve:production"
+            },
+            "dev": {
+              "devServerTarget": "usager-ng-app:serve:dev"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/usager-ng-app-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "infosante-ng-app": {
+      "root": "projects/infosante-ng-app/",
+      "sourceRoot": "projects/infosante-ng-app/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "outputPath": "dist/infosante-ng-app",
+            "index": "projects/infosante-ng-app/src/index.html",
+            "main": "projects/infosante-ng-app/src/main.ts",
+            "polyfills": "projects/infosante-ng-app/src/polyfills.ts",
+            "tsConfig": "projects/infosante-ng-app/tsconfig.app.json",
+            "assets": [
+              { "glob": "favicon.ico", "input": "src/", "output": "/" },
+              "projects/infosante-ng-app/src/assets"
+            ],
+            "styles": [
+              "./legacy/font-awesome/css/font-awesome.min.css",
+              "./legacy/bootstrap-3.2.0-dist/css/bootstrap.min.css",
+              "./legacy/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css",
+              "./legacy/sigct.css",
+              "./custom_styles/font-address-card/style.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
+            "scripts": [
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            },
+            "dev": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "15kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "infosante-ng-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "infosante-ng-app:build:production"
+            },
+            "dev": {
+              "browserTarget": "infosante-ng-app:build:dev"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "infosante-ng-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/infosante-ng-app/src/test.ts",
+            "polyfills": "projects/infosante-ng-app/src/polyfills.ts",
+            "tsConfig": "projects/infosante-ng-app/tsconfig.spec.json",
+            "karmaConfig": "projects/infosante-ng-app/karma.conf.js",
+            "styles": [
+              "projects/infosante-ng-app/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/infosante-ng-app/src/favicon.ico",
+              "projects/infosante-ng-app/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/infosante-ng-app/tsconfig.app.json",
+              "projects/infosante-ng-app/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "infosante-ng-app-e2e": {
+      "root": "projects/infosante-ng-app-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/infosante-ng-app-e2e/protractor.conf.js",
+            "devServerTarget": "infosante-ng-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "infosante-ng-app:serve:production"
+            },
+            "dev": {
+              "devServerTarget": "infosante-ng-app:serve:dev"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/infosante-ng-app-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "infosocial-ng-app": {
+      "root": "projects/infosocial-ng-app/",
+      "sourceRoot": "projects/infosocial-ng-app/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "outputPath": "dist/infosocial-ng-app",
+            "index": "projects/infosocial-ng-app/src/index.html",
+            "main": "projects/infosocial-ng-app/src/main.ts",
+            "polyfills": "projects/infosocial-ng-app/src/polyfills.ts",
+            "tsConfig": "projects/infosocial-ng-app/tsconfig.app.json",
+            "assets": [
+              "projects/infosocial-ng-app/src/favicon.ico",
+              "projects/infosocial-ng-app/src/assets"
+            ],
+            "styles": [
+              "./legacy/font-awesome/css/font-awesome.min.css",
+              "./legacy/bootstrap-3.2.0-dist/css/bootstrap.min.css",
+              "./legacy/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css",
+              "./legacy/sigct.css",
+              "./custom_styles/font-address-card/style.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
+            "scripts": [
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            },
+            "dev": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "infosocial-ng-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "infosocial-ng-app:build:production"
+            },
+            "dev": {
+              "browserTarget": "infosocial-ng-app:build:dev"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "infosocial-ng-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/infosocial-ng-app/src/test.ts",
+            "polyfills": "projects/infosocial-ng-app/src/polyfills.ts",
+            "tsConfig": "projects/infosocial-ng-app/tsconfig.spec.json",
+            "karmaConfig": "projects/infosocial-ng-app/karma.conf.js",
+            "styles": [
+              "projects/infosocial-ng-app/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/infosocial-ng-app/src/favicon.ico",
+              "projects/infosocial-ng-app/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/infosocial-ng-app/tsconfig.app.json",
+              "projects/infosocial-ng-app/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "infosocial-ng-app-e2e": {
+      "root": "projects/infosocial-ng-app-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/infosocial-ng-app-e2e/protractor.conf.js",
+            "devServerTarget": "infosocial-ng-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "infosocial-ng-app:serve:production"
+            },
+            "dev": {
+              "devServerTarget": "infosocial-ng-app:serve:dev"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/infosocial-ng-app-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "isiswhisto-ng-app": {
+      "root": "projects/isiswhisto-ng-app/",
+      "sourceRoot": "projects/isiswhisto-ng-app/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "outputPath": "dist/isiswhisto-ng-app",
+            "index": "projects/isiswhisto-ng-app/src/index.html",
+            "main": "projects/isiswhisto-ng-app/src/main.ts",
+            "polyfills": "projects/isiswhisto-ng-app/src/polyfills.ts",
+            "tsConfig": "projects/isiswhisto-ng-app/tsconfig.app.json",
+            "assets": [
+              "projects/isiswhisto-ng-app/src/favicon.ico",
+              "projects/isiswhisto-ng-app/src/assets"
+            ],
+            "styles": [
+              "./legacy/font-awesome/css/font-awesome.min.css",
+              "./legacy/bootstrap-3.2.0-dist/css/bootstrap.min.css",
+              "./legacy/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css",
+              "./legacy/sigct.css",
+              "./custom_styles/font-address-card/style.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
+            "scripts": [
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            },
+            "dev": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "15kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "isiswhisto-ng-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "isiswhisto-ng-app:build:production"
+            },
+            "dev": {
+              "browserTarget": "isiswhisto-ng-app:build:dev"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "isiswhisto-ng-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/isiswhisto-ng-app/src/test.ts",
+            "polyfills": "projects/isiswhisto-ng-app/src/polyfills.ts",
+            "tsConfig": "projects/isiswhisto-ng-app/tsconfig.spec.json",
+            "karmaConfig": "projects/isiswhisto-ng-app/karma.conf.js",
+            "styles": [
+              "projects/isiswhisto-ng-app/src/styles.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/isiswhisto-ng-app/src/favicon.ico",
+              "projects/isiswhisto-ng-app/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/isiswhisto-ng-app/tsconfig.app.json",
+              "projects/isiswhisto-ng-app/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "isiswhisto-ng-app-e2e": {
+      "root": "projects/isiswhisto-ng-app-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/isiswhisto-ng-app-e2e/protractor.conf.js",
+            "devServerTarget": "isiswhisto-ng-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "isiswhisto-ng-app:serve:production"
+            },
+            "dev": {
+              "devServerTarget": "isiswhisto-ng-app:serve:dev"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/isiswhisto-ng-app-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "sigct-service-ng-lib": {
+      "root": "projects/sigct-service-ng-lib",
+      "sourceRoot": "projects/sigct-service-ng-lib/src",
+      "projectType": "library",
+      "prefix": "msss",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/sigct-service-ng-lib/tsconfig.lib.json",
+            "project": "projects/sigct-service-ng-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/sigct-service-ng-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sigct-service-ng-lib/src/test.ts",
+            "tsConfig": "projects/sigct-service-ng-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/sigct-service-ng-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sigct-service-ng-lib/tsconfig.lib.json",
+              "projects/sigct-service-ng-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "usager-ng-core": {
+      "root": "projects/usager-ng-core",
+      "sourceRoot": "projects/usager-ng-core/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/usager-ng-core/tsconfig.lib.json",
+            "project": "projects/usager-ng-core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/usager-ng-core/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/usager-ng-core/src/test.ts",
+            "tsConfig": "projects/usager-ng-core/tsconfig.spec.json",
+            "karmaConfig": "projects/usager-ng-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/usager-ng-core/tsconfig.lib.json",
+              "projects/usager-ng-core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "infosante-ng-core": {
+      "projectType": "library",
+      "root": "projects/infosante-ng-core",
+      "sourceRoot": "projects/infosante-ng-core/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/infosante-ng-core/tsconfig.lib.json",
+            "project": "projects/infosante-ng-core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/infosante-ng-core/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/infosante-ng-core/src/test.ts",
+            "tsConfig": "projects/infosante-ng-core/tsconfig.spec.json",
+            "karmaConfig": "projects/infosante-ng-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/infosante-ng-core/tsconfig.lib.json",
+              "projects/infosante-ng-core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "infosocial-ng-core": {
+      "projectType": "library",
+      "root": "projects/infosocial-ng-core",
+      "sourceRoot": "projects/infosocial-ng-core/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/infosocial-ng-core/tsconfig.lib.json",
+            "project": "projects/infosocial-ng-core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/infosocial-ng-core/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/infosocial-ng-core/src/test.ts",
+            "tsConfig": "projects/infosocial-ng-core/tsconfig.spec.json",
+            "karmaConfig": "projects/infosocial-ng-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/infosocial-ng-core/tsconfig.lib.json",
+              "projects/infosocial-ng-core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "isiswhisto-ng-core": {
+      "root": "projects/isiswhisto-ng-core",
+      "sourceRoot": "projects/isiswhisto-ng-core/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/isiswhisto-ng-core/tsconfig.lib.json",
+            "project": "projects/isiswhisto-ng-core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/isiswhisto-ng-core/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/isiswhisto-ng-core/src/test.ts",
+            "tsConfig": "projects/isiswhisto-ng-core/tsconfig.spec.json",
+            "karmaConfig": "projects/isiswhisto-ng-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/isiswhisto-ng-core/tsconfig.lib.json",
+              "projects/isiswhisto-ng-core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "sigct-ui-ng-lib",
+  "cli": {
+    "analytics": "3ff1575d-fac5-476a-8483-5f40f2ea87d5"
+  }
+}

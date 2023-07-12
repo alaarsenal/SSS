@@ -1,0 +1,61 @@
+<msss-form-top-bar label="{{labelMenuTop}}" [options]="formTopBarOptions" [fixe]="topBarreFixe" [nomModule]="'usager'"></msss-form-top-bar>
+
+<div #contenuScroll id="contenuScroll" class="contenu-avec-scrollbar">
+
+    <div class="bande-flottante-container">
+        <msss-bande-flottante #bandeflottante [toutOuvrirLb]="'usager.tout.ouvrir' | translate"
+            [toutFermerLb]="'usager.tout.fermer' | translate" [basPageLb]="'usager.bas.page' | translate"
+            [hautPageLb]="'usager.haut.page' | translate" [divToScroll]="contenuScroll"
+            [contentZones]="sectionsContentZones">
+        </msss-bande-flottante>
+    </div>
+
+  <ng-template #alertPagContainer></ng-template>
+
+    <!-- section usager -->
+    <msss-consultation-fiche-section-usager #consultationFicheSectionUsager
+            [consultationUsager]="consultationFicheSectionUsagerDTO">
+    </msss-consultation-fiche-section-usager>
+    <!-- section dates -->
+    <msss-sigct-content-zone #datesZone id="consulter-dates-enregistrement" title="{{'usager.enregistrement.sec.titre.dates' | translate}}">
+        <app-consultation-dates  [idEnregistrement]="idEnregistrementIdent"></app-consultation-dates >
+    </msss-sigct-content-zone>
+    <!-- section organismes -->
+    <msss-sigct-content-zone #organismeZone id="consulter-organisme-enregistrement-usager" title="{{'usager.enregistrement.sec.organisme.titre' | translate}}">
+        <app-consultation-organismes-enregistrement  [idEnregistrement]="idEnregistrementIdent"></app-consultation-organismes-enregistrement >
+    </msss-sigct-content-zone>
+    <!-- section Informations générales -->
+    <msss-sigct-content-zone #informationsZone id="consulter-informations-generales-enregistrement" title="{{'usager.enregistrement.sec.titre.info' | translate}}">
+        <app-consultation-informations-generales  [idEnregistrement]="idEnregistrementIdent"></app-consultation-informations-generales >   
+    </msss-sigct-content-zone>
+    <!-- section ressources professionelles et sociales -->
+    <msss-sigct-content-zone #ressourcesZone id="consulter-ressources-pro-usager" title="{{'usager.enregistrement.sec.ress.prof.titre' | translate}}">
+        <app-consultation-ressources-professionnelles  [idEnregistrement]="idEnregistrementIdent"></app-consultation-ressources-professionnelles >  
+    </msss-sigct-content-zone>
+
+    <!-- section Médications -->
+    <msss-sigct-content-zone #medicationsZone id="consulter-medications-usager" title="{{'usager.enregistrement.sec.medication.titre' | translate}}">
+        <app-consultation-medications  [idEnregistrement]="idEnregistrementIdent"></app-consultation-medications > 
+    </msss-sigct-content-zone>
+
+    <!-- section Soins et Services -->
+    <msss-sigct-content-zone #soinsZone id="consulter-soins-service" title="{{'usager.enregistrement.sec.soins.titre' | translate}}">
+        <app-consultation-soins-services [idEnregistrement]="idEnregistrementIdent"></app-consultation-soins-services >
+    </msss-sigct-content-zone>
+
+    <!-- section indicateurs pour mesures de sécurité -->
+    <msss-sigct-content-zone #indicateursZone id="consulter-indicateurs-mesures-securite" title="{{'usager.enregistrement.sec.indicateur.titre' | translate}}">
+        <app-consultation-mesures-securite [idEnregistrement]="idEnregistrementIdent"></app-consultation-mesures-securite >
+    </msss-sigct-content-zone>
+
+
+    <!-- section autres informations -->
+    <msss-sigct-content-zone #autresZone id="consulter-autres-informations-enregistrement" title="{{'usager.enregistrement.sec.autres.titre' | translate}}">
+        <app-consultation-autres-informations [idEnregistrement]="idEnregistrementIdent"></app-consultation-autres-informations >
+    </msss-sigct-content-zone>
+</div>
+
+
+
+
+

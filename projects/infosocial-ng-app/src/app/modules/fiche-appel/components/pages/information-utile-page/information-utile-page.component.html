@@ -1,0 +1,43 @@
+<div class="information-utile-page">
+    <div class="container">
+        <div class="row margin-bottom-15">
+            <div class="col-md-12 piloterTablesRefTitle">
+                <h1 class="label-font-size">
+                    <i class="fa fa-wrench fa-lg margin-right-10"></i>{{ 'sigct.ss.pilotage.info_utile.liste.titre' |
+                    translate }}
+                </h1>
+            </div>
+            <div id="action-ajouter-info-util"
+                title="{{ 'sigct.ss.pilotage.info_utile.liste.ajouterinfobulle' | translate }}">
+                <button type="button" id="ajouter-info-utile-btn" #ajouterinfoutil
+                        title="{{ 'sigct.sa.pilotage.info_utile.liste.ajouterinfobulle' | translate }}"
+                        class="btn-ajouter float-right btn-sm btn btn-primary form-btn"
+                        (click)="onAjouterInfoUtileClick()">
+                    {{ 'sigct.so.pilotage.info_utile.liste.ajouter' | translate }}
+                </button>
+            </div>
+
+        </div>
+
+        <msss-piloter-informations-utiles #listeutile (supprimerElement)="onSupprimerElement($event)"></msss-piloter-informations-utiles>
+
+        <modal-confirmation id-container="confirm_popup_supprimer_infor_util">
+            <div class="modal-confirm-body modal-body">
+                {{messageSupprimer}}
+            </div>
+        
+            <div class="modal-confirm-footer modal-footer">
+                <button type="button"
+                        data-dismiss="modal"
+                        class="btn btn-primary btn-sm btn-key-action visibility-visible"
+                        id="ok_confirm_button"
+                        (click)="supprimerInforUtile()">Oui</button>
+                <button type="button"
+                        data-dismiss="modal"
+                        class="btn btn-sm btn-key-action hidePopup visibility-visible"
+                        id="cancel_confirm_button">Non</button>
+            </div>
+        </modal-confirmation>
+
+    </div>
+</div>

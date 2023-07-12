@@ -1,0 +1,9 @@
+
+
+::ng-deep #demandeAnalyse .panel-body {
+    padding-top:11px!important;
+}
+
+.pb-1 {
+  padding-bottom: 1rem;
+}

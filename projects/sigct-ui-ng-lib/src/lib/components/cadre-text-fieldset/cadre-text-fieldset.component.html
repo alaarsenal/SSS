@@ -1,0 +1,78 @@
+<ng-container
+              *ngIf="cadreTextDto.titleValue || cadreTextDto.plainText || (cadreTextDto.infoList && cadreTextDto.infoList.length > 0)">
+
+    <div class="row margin-bottom-8">
+        <div class="col-md-12">
+
+            <ng-container *ngIf="cadreTextDto.plainText; else noPlainText">
+
+                <msss-sigct-field-set [titleFieldset]="cadreTextDto.titleFieldset">
+
+                    <ng-template [ngTemplateOutlet]="listInfo"></ng-template>
+
+                    <mat-form-field class="width-100-percent">
+
+                        <textarea class="overflow-hidden padding-left-3 width-100-percent text-indent-59 border-gray"
+                                  readonly
+                                  matInput
+                                  matTextareaAutosize
+                                  matAutosizeMinRows="2"
+                                  matAutosizeMaxRows="50000"
+                                  [attr.aria-label]="cadreTextDto.titleFieldset">
+                                      {{cadreTextDto.plainText}}
+                        </textarea>
+
+                    </mat-form-field>
+
+                </msss-sigct-field-set>
+
+            </ng-container>
+
+            <ng-template #noPlainText>
+                <msss-sigct-field-set [titleFieldset]="cadreTextDto.titleFieldset">
+                    <ng-template [ngTemplateOutlet]="listInfo"></ng-template>
+                </msss-sigct-field-set>
+            
+            </ng-template>
+
+        </div>
+
+    </div>
+
+</ng-container>
+
+<ng-template #listInfo>
+    <ng-container *ngIf="cadreTextDto.infoList && cadreTextDto.infoList.length > 0">
+
+        <div class="row margin-bottom-2">
+            <div class="col-md-12">
+
+                <label class="display-inline padding-right-15">
+                    {{ cadreTextDto.titleLabel }} :
+                </label>{{ cadreTextDto.titleValue }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="dashed padding-left-6 margin-top-3 margin-bottom-2">
+        
+                    <ng-container *ngFor="let item of cadreTextDto.infoList">
+
+                        <ng-container *ngIf="cadreTextDto.isFicheAppelOuvert; else fermer">
+                            <li><a (click)="onConsultReferentielClick(item)">{{item}}</a></li>
+                        </ng-container>
+
+                        <ng-template #fermer>
+                            <li><a (click)="onConsultReferentielPdfClick(item)">{{item}}</a></li>
+                        </ng-template>
+
+                    </ng-container>
+        
+                </ul>
+            </div>
+        </div>
+
+    </ng-container>
+
+</ng-template>

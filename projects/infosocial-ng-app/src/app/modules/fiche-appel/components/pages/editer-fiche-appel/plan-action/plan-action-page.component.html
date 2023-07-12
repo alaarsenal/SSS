@@ -1,0 +1,160 @@
+<div class="row enlever-espace-droite-gauche">
+  <div class="col-md-12">
+      <h4 class="h4center">{{ 'sigct.so.f_appel.menuver.planaction' | translate }}</h4>
+  </div>
+</div>
+
+<div class="row enlever-espace-droite-gauche margin-bottom-10">
+      <msss-sigct-content-zone id="avis"
+                              title="{{ 'sigct.ss.f_appel.aviscommuniques' | translate }}">
+        <app-avis-communiques [idFicheAppel]="ficheAppelSocialDto.id"
+          (consulterAvis)="onConsulterAvis($event)">
+        </app-avis-communiques>
+      </msss-sigct-content-zone>
+</div>
+
+<div class="row enlever-espace-droite-gauche">
+  <div class="col-md-12">
+      <msss-input-textarea id="difficultePriorisee"
+                              #PremierElem
+                              label="sigct.so.f_appel.planaction.difficultepriorisee"
+                              maxlength="4000"
+                              rows="4"
+                              [required]="mandatoryFields.includes('difficultePriorisee')"
+                              CSSResize="vertical"
+                              [(ngModel)]="ficheAppelSocialDto.difficultePriorisee">
+      </msss-input-textarea>
+  </div>
+</div>
+
+<div class="row enlever-espace-droite-gauche">
+  <div class="col-md-12">
+      <msss-input-textarea id="objectifAatteindre"
+                              #objectifAatteindre
+                              label="sigct.so.f_appel.planaction.objectif"
+                              maxlength="4000"
+                              rows="4"
+                              [required]="mandatoryFields.includes('objectifAatteindre')"
+                              CSSResize="vertical"
+                              [(ngModel)]="ficheAppelSocialDto.objectif">
+      </msss-input-textarea>
+  </div>
+</div>
+
+<div class="row enlever-espace-droite-gauche">
+    <msss-sigct-content-zone title="{{ 'sigct.so.f_appel.planaction.moyensmodalites' | translate }}"
+                                id="moyenModaliteContentZone">
+
+      <!-- ===================== Les hyperliens vers les guides se placeront ici ! ===================== -->
+      <app-consultation-liste-referentiels [moyenSocialDTOs]="moyenSocialDTOs"
+                                           (referentielConsultAction)="consultReferentiel($event)"
+                                           (referentielDeleteAction)="confirmerDeleteReferentiel($event)">
+      </app-consultation-liste-referentiels>
+
+      <msss-input-textarea id="objectif"
+                            #objectif
+                            rows="15"
+                            maxlength="32767"
+                            CSSResize="vertical"
+                            [(ngModel)]="ficheAppelSocialDto.intervention"
+                            ariaLabel="{{'sigct.so.f_appel.planaction.moyensmodalites' | translate }}">
+      </msss-input-textarea>
+
+    </msss-sigct-content-zone>
+</div>
+
+<div class="row enlever-espace-droite-gauche">
+
+  <msss-sigct-content-zone title="{{ 'sigct.so.f_appel.planaction.suitesintervention' | translate }}"
+                              id="suiteIntervetionContentZone" [required]="true">
+
+    <div class="row no-padding-left">
+      <div class="col-md-12">
+        <msss-input-checkbox id="aucuneSuite"
+                             name="acunesuite"
+                             [options]="inputOptionAucuneSuite"
+                             [(ngModel)]="ficheAppelSocialDto.aucuneSuite"
+                             #aucuneSuite="ngModel"
+                             [disabled]="aucuneSuiteDisabled">
+        </msss-input-checkbox>
+      </div>
+    </div>
+
+    <div class="row enlever-espace-droite-gauche">
+      <app-orientation-suites-intervention  #orientation
+                                            idFicheAppel="ficheAppelSocialDto.id"
+                                            [listeRefOrientationSuitesIntervention]="listeRefOrientationSocial"
+                                            [listeOrientationRrss]="listeOrientationRrss"
+                                            (orientationSave)="onOrientationSave($event)"
+                                            (orientationDelete)="onOrientationDelete($event)">
+      </app-orientation-suites-intervention>
+    </div>
+
+    <div class="row enlever-espace-droite-gauche padding-top-10">
+      <app-reference-suites-intervention  #referenceSuitesIntervention
+                                          (onSubmit)="onAjoutReferenceSuitesIntervention($event)"
+                                          (onDelete)="onSupprimerReferenceSuitesIntervention($event)"
+                                          [idFicheAppel]="ficheAppelSocialDto.id"
+                                          [listeReferenceSuitesIntervention]="listeReferenceSuitesIntervention"
+                                          [listeRefReferenceSuiteIntervention]="listeRefReferenceSuitesIntervention">
+      </app-reference-suites-intervention>
+    </div>
+
+    <div class="row no-padding-left">
+      <div class="col-md-12">
+        <msss-input-checkbox  #autorisationTransmissionCheck
+                              id="autorisationTransmission"
+                              name="autorisationtransmission"
+                              [options]="inputOptionAutorisationTransmission"
+                              [(ngModel)]="ficheAppelSocialDto.autorisationTransmission"
+                              [disabled]="autorisationTransmissionDisabled"
+                              #autorisationTransmission="ngModel">
+        </msss-input-checkbox>
+      </div>
+    </div>
+
+    <div class="row no-padding-left">
+      <div class="col-md-12 margin-bottom-10">
+        <msss-input-checkbox  #consentementenFicheEnregistreur
+                              id="consentementenFicheEnregistreur"
+                              name="consentementenFicheEnregistreur"
+                              [options]="inputOptionConsentementenFicheEnregistreur"
+                              [(ngModel)]="ficheAppelSocialDto.consentementenFicheEnregistreur"
+                              [disabled]="consentementenFicheEnregistreurDisabled"
+                              #autorisationTransmission="ngModel">
+        </msss-input-checkbox>
+      </div>
+    </div>
+
+  </msss-sigct-content-zone>
+</div>
+
+<msss-grise-automatique-selon-type-intervention
+    #griseAutomatique
+    [alertCofirmationChangement]="false"
+    [codeReferenceTypeFiche] = "ficheAppelSocialDto.codeReferenceTypeFiche"
+    (onChangementTypeConfirme) = "onChangmentTypeConfirme($event)"
+    [abregDiabledList] = "[PremierElem]"
+
+    [nomPertDiabledList] = "[PremierElem,
+                            objectifAatteindre,
+                            objectif,
+                            autorisationTransmissionCheck,
+                            consentementenFicheEnregistreur]" >
+  </msss-grise-automatique-selon-type-intervention>
+
+<modal-confirmation id-container="confirm_popup_delete_referentiel">
+  <div class="modal-confirm-body modal-body">
+    {{ messageConfirmDeleteReferentiel }}
+  </div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button id="delete_moyen_btn_oui" type="button" data-dismiss="modal"
+      class="btn btn-primary btn-sm btn-key-action visibility-visible" (click)="deleteReferentiel()">Oui</button>
+    <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+      id="cancel_delete_button_moyen">Non</button>
+  </div>
+</modal-confirmation>
+
+
+

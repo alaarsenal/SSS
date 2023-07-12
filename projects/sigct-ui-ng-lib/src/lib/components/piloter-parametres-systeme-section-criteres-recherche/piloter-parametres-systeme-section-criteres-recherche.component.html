@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info contentZone" #contentZone>
+            <div class="panel-heading " style="height:50px;">
+              <span><i class="fa fa-filter fa-fw"></i><b>{{ "sigct.sa.pilotage.parametresys.filtrerecherche" | translate }}</b></span>
+              <span class="badge badge_content_zone"></span>
+              <span class="pull-right">
+                <button type="button"
+                        class="btn-sm btn btn-primary form-btn"
+                        title="{{ 'sigct.sa.pilotage.parametresys.rechercherinfobulle' | translate }}"
+                        id="recherche_btn"
+                        (click)="onRechercherBtn();">{{ 'sigct.sa.pilotage.parametresys.rechercher' | translate }}</button>&nbsp;
+                <button type="button"
+                        class="btn-sm btn btn-default form-btn"
+                        title="{{ 'sigct.sa.pilotage.parametresys.reinitialiserinfobulle' | translate }}"
+                        id="reinit_btn"
+                        (click)="onReinitialiserBtn();">{{ 'sigct.sa.pilotage.parametresys.reinitialiser' | translate }}</button>
+              </span>
+            </div>
+            <div class="panel-body">
+                <form name="form" #fCriteres="ngForm" novalidate>
+                    <div class="row" #boiteFiltreRecherche>
+                        <div class="col-md-4">
+                          <msss-input-text label="sigct.sa.pilotage.parametresys.code"
+                                           [(ngModel)]="criteresParamSystm.code"
+                                           #code
+                                           id="code"
+                                           (keydown)="onKeydown($event)"
+                                           [ngModelOptions]="{standalone:true}"
+                                           maxlength="50">
+                          </msss-input-text>
+                        </div>
+                    </div>
+                </form>
+            </div>
+          </div>
+    </div>
+</div>

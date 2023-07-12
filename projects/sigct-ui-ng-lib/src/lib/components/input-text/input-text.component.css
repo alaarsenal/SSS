@@ -1,0 +1,80 @@
+
+:host(.error)  label{
+  color: red!important;
+}
+
+/* Cela évite d'avoir le texte en rouge lors d'une erreur */
+:host(.error)  input{
+  color: black!important;
+}
+
+label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sous-label-amj {
+  padding-left: 8px;
+  margin: 0px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+/* Réaffiche le "x" que bootstrap retire des champs de type "search" */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button !important;
+}
+
+.mat-form-field-infix {
+  width: 100% !important;
+}
+
+::ng-deep .mat-input-wrapper{
+  width:400px !important;
+
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 10px 0 5px 0;
+  border-top: none;
+}
+
+.mat-input-sigct {
+  width:100% !important;
+}
+
+::ng-deep .mat-form-field-wrapper{
+  padding-bottom: 0px !important;
+}
+
+::ng-deep .mat-form-field-outline-start,
+::ng-deep .mat-form-field-outline-gap,
+::ng-deep .mat-form-field-outline-end {
+  background-color: white;
+}
+
+label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.margin-left-3 {
+  margin-left: 3px;
+}
+
+.mondatory-asterisk {
+  color: #ed541d
+}
+
+::ng-deep .disabled  .mat-form-field-outline-start,
+::ng-deep  .disabled .mat-form-field-outline-gap,
+::ng-deep .disabled   .mat-form-field-outline-end{
+    background:#eeeeee !important;
+}
+
+::ng-deep .disabled mat-icon { color: #ACACAC!important; }
+
+::ng-deep .label_disabled { color: #aaa !important;}

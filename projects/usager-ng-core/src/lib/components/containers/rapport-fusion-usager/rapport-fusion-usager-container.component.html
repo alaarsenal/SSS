@@ -1,0 +1,17 @@
+<msss-form-top-bar detail=""
+                   nomModule="usager"
+                   label="{{'sigct.rapport.fusionusager.titre' | translate}}"
+                   [options]="formTopBarOptions">
+</msss-form-top-bar>
+
+<div class="contenu-avec-scrollbar">
+    <ng-template #alertContainer></ng-template>
+
+    <rapport-fusion-usager-ui #rapportFusionUsagerUi
+                              [listeIntervenant]="listeIntervenant"
+                              [listeOrganisme]="listeOrganisme"
+                              [resultatDto]="rechercheFusionUsagerResultatDto"
+                              (rechercherFusion)="onRechercherFusion($event)"
+                              (exporterUsagerFusionResults)="exporter($event)">
+    </rapport-fusion-usager-ui>
+</div>

@@ -1,0 +1,11 @@
+<div class="main">
+    <div class="left-menu">
+        <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+    </div>
+    <div class="conteneur">
+        <sigct-usager-enregistement-consultation idUsager="{{idUsager}}" idEnregistrement="{{idEnregistrement}}"
+            (retourListeEnregistrements)="onConsulterEnregistrements($event)"
+            (editerEnregistrement)="onEditerEnregistrement($event)">
+        </sigct-usager-enregistement-consultation>
+    </div>
+</div>

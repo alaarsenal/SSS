@@ -1,0 +1,137 @@
+<msss-sigct-content-zone id="consulter-isisw-section-usager"
+                         title="{{ 'sigct.ss.c_appelsisisw.titreevaluation' | translate }}">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12 align-right">
+        <msss-input-checkbox name="usagerCapable"
+                             [options]="inputOptionUsagerCapable"
+                             [(ngModel)]="dto.usagerCapable"
+                             [disabled]="true">
+        </msss-input-checkbox>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 align-right">
+        <msss-input-checkbox name="usagerSatisfait"
+                             [options]="inputOptionUsagerSatisfait"
+                             [(ngModel)]="dto.usagerSatisfait"
+                             [disabled]="true">
+        </msss-input-checkbox>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.precision' | translate}} :
+        </label>
+      </div>
+      <div class="col-md-12">
+        <span>{{dto.precision}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.catgrappelant' | translate}} :
+        </label>
+      </div>
+      <div class="col-md-12">
+        <span>{{dto.categorieAppelant}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>
+          {{'sigct.ss.c_appelsisisw.nomappelantsidiff' | translate}} :
+        </label>
+        <span>{{dto.nomAppelant}}</span>
+      </div>
+      <div class="col-md-6">
+        <label>
+          {{'sigct.ss.c_appelsisisw.lien' | translate}} :
+        </label>
+        <span>{{dto.lienAppelant}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>
+          {{'sigct.ss.c_appelsisisw.telephone' | translate}} :
+        </label>
+        <span>{{dto.telephoneAppelant}}</span>
+      </div>
+      <div class="col-md-6">
+        <label>
+          {{'sigct.ss.c_appelsisisw.ats' | translate}} :
+        </label>
+        <span>{{dto.atsAppelant}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>
+          {{'sigct.ss.c_appelsisisw.organisme' | translate}} :
+        </label>
+        <span>{{dto.organismeAppelant}}</span>
+      </div>
+      <div class="col-md-6">
+        <label>
+          {{'sigct.ss.c_appelsisisw.langueappel' | translate}} :
+        </label>
+        <span>{{dto.langueAppel}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label *ngIf="dto.commentaire1">
+          <span>{{dto.commentairePrompt1}} :</span>
+        </label>
+      </div>
+      <div class="col-md-6">
+        <label *ngIf="dto.commentaire2">
+          <span>{{dto.commentairePrompt2}} :</span>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <span>{{dto.commentaire1}}</span>
+      </div>
+      <div class="col-md-6">
+        <span>{{dto.commentaire2}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>
+          <span>{{dto.champsPrompt1}} :</span>
+        </label>
+      </div>
+      <div class="col-md-6">
+        <label>
+          <span>{{dto.champsPrompt2}} :</span>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <span>{{dto.champs1}}</span>
+      </div>
+      <div class="col-md-6">
+        <span>{{dto.champs2}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          <span>{{dto.champsPrompt3}} :</span>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <span>{{dto.champs3}}</span>
+      </div>
+    </div>
+  </div>
+</msss-sigct-content-zone>

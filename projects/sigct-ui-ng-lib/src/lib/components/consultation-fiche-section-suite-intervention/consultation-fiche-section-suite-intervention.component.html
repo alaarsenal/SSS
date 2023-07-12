@@ -1,0 +1,96 @@
+
+
+<msss-sigct-field-set titleFieldset="{{ 'sigct.ss.f_appel.consultation.suitesintervention' | translate}}">
+
+    <ng-container *ngIf="_consultationFicheSectionSuiteInterventionDto">
+
+        <ng-container *ngIf="_consultationFicheSectionSuiteInterventionDto.aucuneSuite">
+            <div class="row margin-bottom-8">
+                <div class="col-md-12">
+                    {{ 'sigct.ss.f_appel.consultation.suitesintervention.aucunesuite' | translate }}
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="_consultationFicheSectionSuiteInterventionDto.orientations?.length > 0">
+
+            <div class="row">
+                <div class="col-md-2 width-auto"><label>{{ 'sigct.ss.f_appel.consultation.suitesintervention.orientations' | translate }}:</label></div>
+                <div class="col-md-10">
+                    <ng-container *ngFor="let orientation of _consultationFicheSectionSuiteInterventionDto.orientations">
+                        <ng-container
+                                      *ngTemplateOutlet="affichageTemplate; context: { detailsData: orientation.details, progServiceData: orientation.programmeService,nomData: orientation.nomReferenceOrientation, codeCnData: orientation.codeCnReferenceOrientation, rrssDTOsData: orientation.rrssDTOs}">
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+
+        </ng-container>
+
+        <ng-container *ngIf=" _consultationFicheSectionSuiteInterventionDto.references?.length > 0">
+
+            <div class="row">
+                <div class="col-md-2 width-auto padding-right-22">
+                    <label>{{ 'sigct.ss.f_appel.consultation.suitesintervention.references' | translate }}:</label></div>
+                <div class="col-md-10">
+                    <ng-container *ngFor="let reference of _consultationFicheSectionSuiteInterventionDto.references">
+                        <ng-container
+                                      *ngTemplateOutlet="affichageTemplate; context: { detailsData: reference.details, progServiceData: reference.programmeService,nomData: reference.nomReferenceReference,codeCnData: reference.codeCnReferenceReference, rrssDTOsData: reference.rrssDTOs}">
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+
+        </ng-container>
+
+        <div class="row">
+            <div class="col-md-11 width-auto">
+                <label>{{ 'sigct.ss.f_appel.consultation.suitesintervention.autorisation' | translate }}: </label>
+            </div>
+            <div class="col-md-1 width-auto">
+                {{_consultationFicheSectionSuiteInterventionDto.autorisationTransmission ? 'Oui' : 'Non'}}
+            </div>
+        </div>
+
+        <div class="row margin-top-5 margin-bottom-5" *ngIf="_consultationFicheSectionSuiteInterventionDto.consentementenFicheEnregistreur">
+            <div class="col-md-11 width-auto">
+                <label>{{ 'sigct.ss.f_appel.consultation.consentementenregistreurs' | translate }}: </label>
+            </div>
+            <div class="col-md-1 width-auto">Oui</div>
+        </div>
+
+    </ng-container>
+
+    
+
+</msss-sigct-field-set>
+
+
+<ng-template #affichageTemplate
+             let-codeCn="codeCnData"
+             let-nom="nomData"
+             let-progService="progServiceData"
+             let-details="detailsData"
+             let-rrssDTOs="rrssDTOsData">
+
+    <div class="row">
+        <div class="col-md-12">
+            <ng-container *ngIf="codeCn; else onlyName;">
+                {{ codeCn }} - {{ nom }}
+            </ng-container>
+            <ng-template  #onlyName>
+                {{ nom }}
+            </ng-template>
+        </div>
+        <div class="col-md-11">
+            <ul class="dashed">
+                <ng-container *ngFor="let item of rrssDTOs">
+                    <li>{{item.rrssNom}}</li>
+                </ng-container>
+                {{ progService }} <ng-container *ngIf="details"><span class="font-style-italic">({{ details }})</span>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+</ng-template>
+

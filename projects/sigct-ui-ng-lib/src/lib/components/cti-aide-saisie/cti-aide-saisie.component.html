@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-md-2"
+         [style]="colsStyle">
+        <div>&nbsp;</div>
+        <div class="row-buttons">
+            <label>{{"sigct.ss.usager.telephonie" | translate}}</label>
+        </div>
+    </div>
+
+    <div class="col-md-6"
+         [style]="colsStyle">
+        <div>
+            <label>{{"sigct.ss.usager.telephonie.nom" | translate}}</label>
+        </div>
+        <div class="row-buttons">
+            <span *ngIf="isNomAnonyme">{{"sigct.ss.usager.telephonie.nom.anonyme" | translate}}</span>
+            <ng-template ngFor
+                         let-item
+                         [ngForOf]="listeNomPrenom"
+                         let-i="index">
+                <button mat-button
+                        id="btn-copie-nom-prenom-{{i}}"
+                        class="btn btn-xs btn-copie btn-default active"
+                        [title]="item"
+                        [matMenuTriggerFor]="btnCopieMenu">{{item}}&nbsp;<b class="caret"></b></button>
+                <mat-menu #btnCopieMenu>
+                    <button mat-menu-item
+                            class="menu-item"
+                            (click)="onMenuNomClick(item)">{{labelMenuNom}}</button>
+                    <button mat-menu-item
+                            class="menu-item"
+                            (click)="onMenuPrenomClick(item)">{{labelMenuPrenom}}</button>
+                </mat-menu>
+            </ng-template>
+        </div>
+    </div>
+    <div class="col-md-4"
+         [style]="colsStyle">
+        <div>
+            <label>{{"sigct.ss.usager.telephonie.telephone" | translate}}</label>
+        </div>
+        <div class="row-buttons">
+            <span *ngIf="isTelAnonyme">{{"sigct.ss.usager.telephonie.telephone.anonyme" | translate}}</span>
+            <span *ngIf="noTel">
+                <button mat-button
+                        id="btn-copie-telephone"
+                        class="btn btn-xs btn-copie btn-default active"
+                        [title]="noTel"
+                        (click)="onBtnNoTelClick(noTel)">{{noTel}}</button>
+            </span>
+        </div>
+    </div>
+</div>

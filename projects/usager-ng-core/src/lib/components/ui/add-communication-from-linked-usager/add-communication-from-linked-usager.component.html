@@ -1,0 +1,25 @@
+<msss-form-top-bar label="{{ 'usager.importation.communication' | translate}}" [options]="formTopBarOptions"
+  [fixe]="topBarreFixe" [nomModule]="'usager'">
+</msss-form-top-bar>
+
+<div class="contenu-avec-scrollbar" cdkScrollable>
+
+  <ng-container *ngIf="communications?.length == 0; else validComm">
+    <label class="aucuneComm">{{ 'usager.importation.communication.aucune' | translate}}</label>
+  </ng-container>
+
+  <ng-template #validComm>
+    <ng-container *ngFor="let comm of communications;">
+      <div class="row comm">
+        <div class="col-md-11 commInfo" [innerHTML]="formatActionUsagerCommunication(comm)"></div>
+  
+        <div class="col-md-1 plus-container">
+          <a title="{{ 'usager.importation.importer' | translate}}" class="addComm">
+            <i class="fa fa-plus plus-color" (click)="forwardCommunication(comm)"></i>
+          </a>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+  
+</div>

@@ -1,0 +1,42 @@
+textarea {
+  resize: none;
+}
+
+.border-1 {
+  border: #ddd 1px solid !important;
+}
+
+.enlever-espace {
+  margin-top: -15px !important;
+  margin-left: -15px !important;
+  margin-right: -15px !important;
+}
+
+.enlever-espace-bas {
+  margin-bottom: -15px !important;
+}
+
+.margin-left-4 {
+  margin-left: 4px !important;
+}
+
+.col-date {
+  width: 175px !important;
+}
+
+.col-heure {
+  width: 100px !important;
+}
+
+.col-detail {
+  width: 28.43333333% !important;
+}
+
+.pb-1 {
+  padding-bottom: 0.5rem;
+}
+
+.poubelle {
+  margin-top: 23px !important;
+}
+

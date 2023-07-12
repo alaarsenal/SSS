@@ -1,0 +1,57 @@
+.wrapper {
+  padding: 1rem 2rem;
+}
+
+.title {
+  border-bottom: solid 2px #E8AA31;
+  font-weight: 700;
+  font-size: larger;
+  margin: 1rem 0rem 1.5rem 0rem;
+}
+
+.title .col-md-6 {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.title h1 {
+  font-size: 20px;
+  display: inline-block;
+  margin-left: 2rem;
+  margin-top: 5px;
+}
+
+.actions {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.px-none {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.mt-less {
+  margin-top: -10px;
+}
+
+.mt-less-15 {
+  margin-top: -15px;
+}
+
+.mt-space {
+  margin-top: 1rem;
+}
+
+.px-space {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.pl-space {
+  padding-left: 15px;
+}
+
+.pr-space {
+  padding-right: 15px;
+}

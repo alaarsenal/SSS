@@ -1,0 +1,105 @@
+<div class="row">
+  <ng-template [ngIf]="!correctionFicheAppel">
+    <div class="col-md-3 min-width-200">
+      <label class="control-label"
+             [ngClass]="isDisabled ? 'control-label label_disabled' : 'control-label'">{{libelleCreeLe | translate}}
+      </label>
+      <div [ngClass]="isDisabled ? 'control-label label_disabled' : 'control-label'">
+        {{dureeFicheAppelDto.dateDebut | date : 'yyyy-MM-dd HH:mm:ss' }}
+      </div>
+    </div>
+  </ng-template>
+  <ng-template [ngIf]="!correctionFicheAppel">
+    <div class="col-md-3">
+      <label [ngClass]="isDisabled ? 'control-label label_disabled' : 'control-label'">
+        {{labelDureeCalculee | translate}}
+      </label>
+      <div [ngClass]="isDisabled ? 'disabled' : ''">{{dureeCalculee}}</div>
+    </div>
+  </ng-template>
+  <div class="col-md-3 min-width-210">
+    <label
+           [ngClass]="isDisabled ? 'control-label label_disabled' : 'control-label'">{{"sigct.ss.f_appel.terminaison.dureefiche.dureecorrigee"
+      | translate }}
+    </label>
+    <div class="row">
+      <div class="col-md-3 no-padding-right input-time">
+        <msss-input-text [(ngModel)]="dureeCorrigeeHH"
+                         id="dureeCorrigeeHH"
+                         name="dureeCorrigeeHH"
+                         [disableNumberCheck]="false"
+                         [decimalPatternCheck]="false"
+                         (blur)="onDureeCorrigeeHHBlur()"
+                         [autocomplete]="'off'"
+                         maxlength="2"
+                         [disabled]="isDisabled"
+                         ariaLabel="{{'sigct.ss.f_appel.terminaison.dureefiche.dureecorrigee.hre' | translate}}">
+        </msss-input-text>
+        <div [ngClass]="isDisabled ? 'hhmmss disabled' : 'hhmmss'">
+          {{"sigct.ss.f_appel.terminaison.dureefiche.dureecorrigee.hre" | translate }}</div>
+      </div>
+      <div class="col-md-3 no-padding-right input-time">
+        <msss-input-text [(ngModel)]="dureeCorrigeeMM"
+                         id="dureeCorrigeeMM"
+                         name="dureeCorrigeeMM"
+                         [disableNumberCheck]="false"
+                         [decimalPatternCheck]="false"
+                         (blur)="onDureeCorrigeeMMBlur()"
+                         [autocomplete]="'off'"
+                         maxlength="2"
+                         [disabled]="isDisabled"
+                         ariaLabel="{{'sigct.ss.f_appel.terminaison.dureefiche.dureecorrigee.min' | translate}}">
+        </msss-input-text>
+        <div [ngClass]="isDisabled ? 'hhmmss disabled' : 'hhmmss'">
+          {{"sigct.ss.f_appel.terminaison.dureefiche.dureecorrigee.min" | translate }}</div>
+      </div>
+      <div class="col-md-3 no-padding-right input-time">
+        <msss-input-text [(ngModel)]="dureeCorrigeeSS"
+                         id="dureeCorrigeeSS"
+                         name="dureeCorrigeeSS"
+                         [disableNumberCheck]="false"
+                         [decimalPatternCheck]="false"
+                         (blur)="onDureeCorrigeeSSBlur()"
+                         [autocomplete]="'off'"
+                         maxlength="2"
+                         [disabled]="isDisabled"
+                         ariaLabel="{{'sigct.ss.f_appel.terminaison.dureefiche.dureecorrigee.sec' | translate}}">
+        </msss-input-text>
+        <div [ngClass]="isDisabled ? 'hhmmss disabled' : 'hhmmss'">
+          {{"sigct.ss.f_appel.terminaison.dureefiche.dureecorrigee.sec" | translate}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template [ngIf]="!correctionFicheAppel">
+  <div class="row">
+    <div class="col-md-12">
+      <msss-input-text #detailsDureeCorrigee
+                       [(ngModel)]="dureeFicheAppelDto.detailsDureeCorrigee"
+                       id="detailsDureeCorrigee"
+                       name="detailsDureeCorrigee"
+                       label="sigct.ss.f_appel.terminaison.dureefiche.details"
+                       maxlength="255"
+                       [disabled]="isDisabled"
+                       raccourcis=true>
+      </msss-input-text>
+    </div>
+  </div>
+</ng-template>
+
+<modal-confirmation id-container="confirmer-duree-popup">
+  <div class="modal-confirm-body modal-body">{{ msgConfirmerDureePopup }}</div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-sm btn-key-action hidePopup visibility-visible"
+            id="confirmer-duree-btn-oui"
+            (click)="onBtnConfirmerDureeClick(true)">Oui</button>
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="confirmer-duree-btn-non"
+            (click)="onBtnConfirmerDureeClick(false)">Non</button>
+  </div>
+</modal-confirmation>

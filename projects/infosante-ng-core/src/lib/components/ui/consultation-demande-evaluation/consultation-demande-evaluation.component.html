@@ -1,0 +1,196 @@
+<msss-sigct-content-zone id="section-demande-evaluation"
+                         title="{{ 'sigct.ss.f_appel.consultation.demandeevaluation' | translate }}">
+  <div class="tbl">
+    <!-- Niveau d'urgence / Type de consultation -->
+    <div *ngIf="dto?.niveauUrgence || dto?.typeConsultation">
+      <span *ngIf="dto?.niveauUrgence"
+            class="libelle">{{ 'sigct.sa.f_appel.consultevaluation.nivurgence' | translate }}</span>
+      <span *ngIf="dto?.niveauUrgence"
+            class="valeur valeur-niveau-urgence">{{ dto?.niveauUrgence }}</span>
+      <span *ngIf="dto?.typeConsultation"
+            class="inline-libelle">{{ 'sigct.sa.f_appel.consultevaluation.typeconsult' | translate }}</span>
+      <span class="inline-valeur">{{ dto?.typeConsultation }}&nbsp;&nbsp;</span>
+      <span *ngIf="dto?.referenceRaisonTypeFicheCode"
+            class="inline-libelle">{{ 'referenceRaisonTypeFicheCode' | translate }} : </span>
+      <span *ngIf="dto?.referenceRaisonTypeFicheCode"
+            class="inline-valeur">{{ dto?.referenceRaisonTypeFicheCode }}</span>
+    </div>
+    <!-- Demande initiale -->
+    <div *ngIf="dto?.demandeInitiale">
+      <span class="libelle">{{ 'sigct.sa.f_appel.consultevaluation.deminit' | translate }}</span>
+      <span class="valeur">{{ dto?.demandeInitiale }}</span>
+    </div>
+    <!-- Consentement accès fiches anterieures -->
+    <div *ngIf="dto?.consentementFichesAnterieurs">
+      <span class="libelle">{{ 'sigct.sa.f_appel.consultevaluation.consentementfichesant' | translate }} : </span>
+      <span class="valeur">{{ 'girpi.ok.label' | translate }}</span>
+    </div>
+    <!-- Réseau de soutien -->
+    <div *ngIf="dto?.reseauSoutien">
+      <span class="libelle">{{ 'sigct.sa.f_appel.consultevaluation.resosoutien' | translate }}</span>
+      <span class="valeur">{{ dto?.reseauSoutien }}<span *ngIf="dto?.detailsSoutien"
+              class="font-italic"> ({{ dto?.detailsSoutien }})</span></span>
+    </div>
+    <!-- Données pertinentes -->
+    <div *ngIf="dto?.donneesPertinentes">
+      <div class="libelle">{{ 'sigct.sa.f_appel.consultevaluation.donnepert' | translate }}</div>
+      <div class="valeur"
+           [innerHTML]="donneesPertinentesHtml"></div>
+    </div>
+    <!-- Antécédents -->
+    <div *ngIf="dto?.antecedent > 0">
+      <div class="libelle">{{ 'sigct.sa.f_appel.consultevaluation.antecedents' | translate }}</div>
+      <div class="valeur"
+           [ngSwitch]="dto?.antecedent">
+        <span *ngSwitchCase="1">&nbsp;{{ 'sigct.sa.f_appel.consultevaluation.aucunantecedent' | translate }}</span>
+        <span *ngSwitchCase="2">&nbsp;{{ 'sigct.sa.f_appel.consultevaluation.antecedentinconnu' | translate }}</span>
+        <span *ngSwitchCase="3">&nbsp;{{ 'sigct.sa.f_appel.consultevaluation.antecedentnonperti' | translate }}</span>
+      </div>
+    </div>
+    <div *ngIf="dto?.antecedents?.length > 0">
+      <div class="libelle">{{ 'sigct.sa.f_appel.consultevaluation.antecedents' | translate }}</div>
+      <div class="valeur">
+          <div *ngFor="let antecedent of dto?.antecedents;">
+            
+              <i [class]="antecedent.presence ? 'fa fa-check' : 'fa fa-ban'"
+              [style.color]="antecedent.presence ? 'green' : 'red'"></i>
+              <span> {{ antecedent.antecedent }}</span>
+              <span *ngIf="antecedent.details"
+                class="font-italic"> ({{ antecedent.details }})</span>
+            
+          </div>  
+        
+      </div>
+    </div>
+    <!-- Médication -->
+    <div *ngIf="dto?.medication > 0">
+      <div class="libelle">{{ 'sigct.sa.f_appel.consultevaluation.medicationreguliere' | translate }}</div>
+      <div class="valeur"
+           [ngSwitch]="dto?.medication">
+        <span *ngSwitchCase="1">{{ 'sigct.sa.f_appel.consultevaluation.aucunemedication' | translate }}</span>
+        <span *ngSwitchCase="2">{{ 'sigct.sa.f_appel.consultevaluation.medicationinconnu' | translate }}</span>
+        <span *ngSwitchCase="3">{{ 'sigct.sa.f_appel.consultevaluation.medicationnonperti' | translate }}</span>
+      </div>
+    </div>
+    <div *ngIf="dto?.medications?.length > 0">
+      <div class="libelle">{{ 'sigct.sa.f_appel.consultevaluation.medicationreguliere' | translate }}</div>
+      <div class="valeur">
+        <div  *ngFor="let medication of dto?.medications;">
+        
+        <i [class]="medication.presence ? 'fa fa-check' : 'fa fa-ban'"
+           [style.color]="medication.presence ? 'green' : 'red'"></i>
+        <span> {{ medication.medicament }}</span>
+        <span *ngIf="medication.details"
+              class="font-italic"> ({{ medication.details }})</span>
+        </div>
+      </div>
+    </div>
+    <!-- Manifestations, signes vitaux et démarches antérieures -->
+    <div *ngIf="dto?.manifestationSigneDemarcheAnterieures?.length > 0" class="no-padding-left">
+      <div class="libelle col-md-12 no-padding-left">{{ 'sigct.sa.f_appel.consultevaluation.mansignevitdemarches' | translate }}</div>
+      <div class="tbl no-padding-left"
+           *ngFor="let msda of dto?.manifestationSigneDemarcheAnterieures; let i = index; let isFirst = first;">
+        <div *ngIf="msda.dateDemandeEvaluation || msda.heureDemandeEvaluation || msda.detailDemandeEvaluation"
+             class="date-heure-details col-md-12 no-padding-left">
+          <!-- Masque Date/Heure/Detail si identiques à la ligne précédente -->
+          <span *ngIf="!isDateHeureDetailsIdentiques(dto.manifestationSigneDemarcheAnterieures[i], dto.manifestationSigneDemarcheAnterieures[i-1])"
+                [class.date-heure-detail-hidden]="!isFirst && isDateHeureDetailsIdentiques(dto.manifestationSigneDemarcheAnterieures[i], dto.manifestationSigneDemarcheAnterieures[i-1])">
+            <div class="tr-ligne">
+            <span *ngIf="msda.dateDemandeEvaluation"
+                  class="date detail-gris">{{msda.dateDemandeEvaluation| date:'yyyy-MM-dd'}}</span>
+            <span *ngIf="msda.heureDemandeEvaluation"
+                  class="heure detail-gris">{{msda.heureDemandeEvaluation}}</span>
+            <span *ngIf="(msda.dateDemandeEvaluation || msda.heureDemandeEvaluation ) && msda.detailDemandeEvaluation"
+                  class="detail-gris">(<em>{{msda.detailDemandeEvaluation}}</em>)</span>
+            <span *ngIf="(!msda.dateDemandeEvaluation && !msda.heureDemandeEvaluation ) && msda.detailDemandeEvaluation"
+                  class="detail-gris">(<em>{{msda.detailDemandeEvaluation}}</em>)</span>
+            </div>
+          </span>
+        </div>
+        <div *ngIf="!msda.dateDemandeEvaluation && !msda.heureDemandeEvaluation && !msda.detailDemandeEvaluation"
+             class="date-heure-details col-md-12 no-padding-left">
+             <div 
+                *ngIf="isFirstVide(dto.manifestationSigneDemarcheAnterieures[i])"
+                class="tr-ligne">
+             </div>
+
+        </div>
+        <div class="valeur col-md-12 no-padding-left">
+          <span [ngSwitch]="msda.type">
+            <span *ngSwitchCase="typeManifestationSigneDemarcheAnterieureEnum.MANIFESTATION">
+              <i [class]="msda.manifestationPresence ? 'fa fa-check' : 'fa fa-ban'"
+                 [style.color]="msda.manifestationPresence ? 'green' : 'red'"></i>
+              <span> {{ msda.manifestation }}</span>
+              <span *ngIf="msda.manifestationDetails"
+                    class="font-italic"> ({{ msda.manifestationDetails }})</span>
+            </span>
+            <span *ngSwitchCase="typeManifestationSigneDemarcheAnterieureEnum.AUTOSOIN">
+              <span>-&nbsp;{{ 'sigct.sa.f_appel.evaluation.autosoins' | translate }} : {{ msda.autosoin }}</span>
+              <span *ngIf="msda.autosoin && msda.autosoinResultat">, </span>
+              <span *ngIf="msda.autosoinResultat">{{ 'sigct.sa.f_appel.evaluation.rsltobtenus' | translate }} :
+                {{msda.autosoinResultat}}</span>
+              <span *ngIf="msda.autosoinDetails"
+                    class="font-italic"> ({{ msda.autosoinDetails }})</span>
+            </span>
+            <span *ngSwitchCase="typeManifestationSigneDemarcheAnterieureEnum.TRAITEMENT">
+              <span>-&nbsp;{{ 'sigct.sa.f_appel.evaluation.aconsulte' | translate }} :
+                {{ msda.traitementRessourceConsulte }}</span>
+              <span *ngIf="msda.traitementRessourceConsulte && msda.traitement">, </span>
+              <span *ngIf="msda.traitement">{{ 'sigct.sa.f_appel.evaluation.traitsuivi' | translate }} :
+                {{ msda.traitement }}</span>
+              <span *ngIf="msda.traitementResultat && (msda.traitementRessourceConsulte || msda.traitement)">,
+              </span>
+              <span *ngIf="msda.traitementResultat">{{ 'sigct.sa.f_appel.evaluation.rsltobtenus' | translate }} : {{ msda.traitementResultat }}</span>
+              <span *ngIf="msda.traitementDetails"
+                    class="font-italic"> ({{ msda.traitementDetails }})</span>
+            </span>
+            <span *ngSwitchCase="typeManifestationSigneDemarcheAnterieureEnum.SIGNE">
+              <span *ngIf="msda.glycemie">-&nbsp;{{'sigct.sa.f_appel.consultevaluation.glycemie'|translate}}
+                {{msda.glycemie}} mmol/L</span>
+              <span *ngIf="msda.temperatureValeur && msda.glycemie">, </span>
+              <span *ngIf="msda.temperatureValeur">{{'sigct.sa.f_appel.consultevaluation.temperature'|translate}}
+                {{msda.temperatureValeur}} °{{msda.temperatureUniteMesure}}
+                {{msda.temperatureConvertie}}<span *ngIf="msda.temperatureVoie">
+                  {{msda.temperatureVoie}}</span></span>
+              <span
+                    *ngIf="(msda.tensionArterielleMin || msda.tensionArterielleMax) && (msda.glycemie || msda.temperatureValeur)">,
+              </span>
+              <span
+                    *ngIf="msda.tensionArterielleMin || msda.tensionArterielleMax">{{'sigct.sa.f_appel.consultevaluation.tensionarterielle'|translate}}
+                {{msda.tensionArterielleMin}}/{{msda.tensionArterielleMax}}</span>
+              <span
+                    *ngIf="msda.frequenceCardiaque && (msda.glycemie || msda.temperatureValeur || msda.tensionArterielleMin || msda.tensionArterielleMax)">,
+              </span>
+              <span
+                    *ngIf="msda.frequenceCardiaque">{{'sigct.sa.f_appel.consultevaluation.frequencecardiauqe'|translate}}
+                {{msda.frequenceCardiaque}}</span>
+              <span
+                    *ngIf="msda.frequenceRespiratoire && (msda.glycemie || msda.temperatureValeur || msda.tensionArterielleMin || msda.tensionArterielleMax || msda.frequenceCardiaque)">,
+              </span>
+              <span
+                    *ngIf="msda.frequenceRespiratoire">{{'sigct.sa.f_appel.consultevaluation.frequencerespiratoire'|translate}}
+                {{msda.frequenceRespiratoire}}</span>
+              <span
+                    *ngIf="msda.saturationTaux && (msda.glycemie || msda.temperatureValeur || msda.tensionArterielleMin || msda.tensionArterielleMax || msda.frequenceCardiaque || msda.frequenceRespiratoire)">,
+              </span>
+              <span *ngIf="msda.saturationTaux">{{'sigct.sa.f_appel.consultevaluation.saturation'|translate}}
+                {{msda.saturationTaux}} {{msda.saturationPrecision}}</span>
+              <span
+                    *ngIf="msda.glasgow && (msda.glycemie || msda.temperatureValeur || msda.tensionArterielleMin || msda.tensionArterielleMax || msda.frequenceCardiaque || msda.frequenceRespiratoire || msda.saturationTaux)">,
+              </span>
+              <span *ngIf="msda.glasgow">{{'sigct.sa.f_appel.consultevaluation.glasgow'|translate}}
+                {{msda.glasgow}}</span>
+              <span *ngIf="msda.signeDetails"
+                    class="font-italic"> ({{ msda.signeDetails }})</span>
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- Constat d'évaluation -->
+    <div *ngIf="dto?.constatEvaluation">
+      <div class="libelle">{{ 'sigct.sa.f_appel.consultevaluation.constateval' | translate }}</div>
+      <div class="valeur">{{ dto?.constatEvaluation }}</div>
+    </div>
+  </div>
+</msss-sigct-content-zone>

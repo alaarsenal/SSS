@@ -1,0 +1,30 @@
+<div class="main">
+  <div class="conteneur">
+    <ng-template #alertContainer></ng-template>
+    <div id="Journalisation"
+         class="col-md-12"
+         *hasAllRoles="['ROLE_US_RAPPORT_AUD']">
+
+      <div class="border-bottom">
+        <h1 class="no-padding">{{'sigct.ss.f_rapport_journ.titre' | translate}}</h1>
+      </div>
+
+      <div id="sectionUsager" class="contentZone row">
+        <msss-consultation-journal #consultationJournalUsager 
+                                   labelTitreSection="sigct.ss.f_rapport_journ.section_usager"
+                                   labelIdentifiant="sigct.ss.f_rapport_journ.idUsager" 
+                                   [identifiantFocus]="true"
+                                  (submitEvent)="onSubmitUsagerEmitted($event)">
+        </msss-consultation-journal>
+      </div>
+
+      <div id="journalUtilisateurSectionUsager"
+           class="contentZone row">
+        <msss-consultation-journal-utilisateur [utilisateurs]="utilisateurs"
+                                               [typesRapportUtilisateur]="typesRapportUtilisateurUS"
+                                               [baseApiUrl]="apiUrl">
+        </msss-consultation-journal-utilisateur>
+      </div>
+    </div>
+  </div>
+</div>

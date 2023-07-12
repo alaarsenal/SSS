@@ -1,0 +1,21 @@
+<div class="consulter-isisw-page">
+  <div class="left-menu">
+    <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+  </div>
+  <div class="page">
+    <div class=form-top-bar>
+      <msss-form-top-bar label="{{'sigct.ss.f.rechercher.appel.anterieur.isisw.titre' | translate}}"
+                         [options]="formTopBarOptions"
+                         [nomModule]="'isiswhisto'"
+                         [fixe]="false">
+      </msss-form-top-bar>
+    </div>
+
+    <div class="conteneur"
+         cdkScrollable>
+      <ng-template #alertContainer></ng-template>
+      <msss-consulter-isisw-wrapper [idFicheIsisw]="idFicheIsisw">
+      </msss-consulter-isisw-wrapper>
+    </div>
+  </div>
+</div>

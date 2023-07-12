@@ -1,0 +1,24 @@
+<div *ngFor="let avis of avisDTOs;" class="row avis">
+    <div class="col-md-6">
+            <a href="#" onclick="return false" (click)="afficherAvis(avis.id)">{{avis.titre}}</a>
+    </div>
+    <div class="col-md-2">
+        {{ avis.dateCreationExt | date : "yyyy-MM-dd HH:mm"}}
+    </div>
+    <div class="col-md-3">{{avis.organisme}}</div>
+    <div class="col-md-1 no-padding-right">
+        <a href="#" onclick="return false" (click)="confirmerDeleteAvis(avis.id, avis.titre)"><i title="{{ 'sigct.supprimer.title' | translate }}" class="fa fa-trash-o cursor-pointer" id="remove_avis_button_{{avis.id}}" ></i></a>
+    </div>
+</div>
+<modal-confirmation id-container="confirm_popup_suppression_avis">
+    <div class="modal-confirm-body modal-body">
+        {{ 'ss-iu-c40008' | translate:{'0':nomAvisASupprimer} }}
+    </div>
+  
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+        id="ok_confirm_button_avis" (click)="deleteAvis();">Oui</button>
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+        id="cancel_confirm_button_avis">Non</button>
+    </div>
+</modal-confirmation>

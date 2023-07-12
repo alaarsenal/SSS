@@ -1,0 +1,54 @@
+<div class="col-md-12">
+  <form name="form" (ngSubmit)="onSubmit(fIdent)" #fIdent="ngForm">
+    <div class="row">
+      <div class="col-md-3 no-padding-right">
+        <msss-input-text #champ [(ngModel)]="usager.nom" #nom="ngModel" id="nom" name="nom" (keyup)="onKey($event)"
+          label="usager.identification.usager.nom" maxlength="50" setfocus="true" #inputText (focusout)="onBlur($event);" >
+        </msss-input-text>
+      </div>
+      <div class="col-md-3  no-padding-right padding-left-8">
+        <msss-input-text id="prenom" name="prenom" label="usager.identification.usager.prenom" maxlength="50" (keyup)="onKey($event)"
+          [(ngModel)]="usager.prenom" #prenom="ngModel" (focusout)="onBlur($event);">
+        </msss-input-text>
+      </div>
+      <div class="col-md-6">
+
+        <msss-input-radio id="sexeCode" #sexeCode name="sexeCode" [options]="inputOptionSexe"
+          label="usager.identification.usager.sexe" [(ngModel)]="usager.sexeCode"
+          [ngClass]="{ 'error': fIdent.submitted && !sexeCode.isValide }">
+        </msss-input-radio>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 no-padding-right">
+        <msss-sigct-groupe-age id="dtNaiss" name="dtNaiss" [(ngModel)]="usager.groupeAgeOptions"
+          (valueChangeEvent)="groupeAgeChanged($event)" idCalendrier="dtNaiss" idAns="idAnsIdent" idMois="idMoisIdent"
+          idJours="idJoursIdent" idSelect="idSelectIdent" amjClass="col-md-3 no-padding-left" (click)="onClickKeyupGroupeAge()" (keyup)="onClickKeyupGroupeAge()"
+          groupeAgeClass="col-md-4 no-padding-left" 
+          [class.error]="(bindingErrors['dtNaiss']!=undefined)">
+        </msss-sigct-groupe-age>
+      </div>
+      <div class="col-md-6">
+        <msss-input-text id="identification_detail" name="detail" label="usager.identification.usager.details"
+          maxlength="255" [(ngModel)]="usager.detail" #detail="ngModel" >
+        </msss-input-text>
+      </div>
+    </div>
+  </form>
+
+  <modal-confirmation id-container="confirm_popup_modifier_nom_prenom_ddn">
+    <div class="modal-confirm-body modal-body">
+      {{ 'us-iu-c50001' | translate }}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action hidePopup visibility-visible"
+        id="ok_confirm_button_modifs" (click)="updateChampsNomPrenomDDSOriginaux()">Oui</button>
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+        id="cancel_confirm_button_modifs" (click)="resetChampsNomPrenomDDS()">Non</button>
+    </div>
+  </modal-confirmation>
+
+</div>

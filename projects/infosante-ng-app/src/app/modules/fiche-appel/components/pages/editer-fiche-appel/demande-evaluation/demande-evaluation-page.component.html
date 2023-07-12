@@ -1,0 +1,270 @@
+<div class="col-md-12">
+
+  <div class="row">
+    <div class="col-sm-6">
+      <msss-input-radio #PremierElem
+                        id="radioNiveauUrgence"
+                        name="radioNiveauUrgence"
+                        [options]="inputOptionsNiveauxUrgence"
+                        label="sigct.sa.f_appel.evaluation.nivurg"
+                        [required]="mandatoryFields.includes('radioNiveauUrgence')"
+                        [(ngModel)]="ficheAppel.niveauUrgence">
+      </msss-input-radio>
+    </div>
+    <div class="col-sm-3">
+      <msss-sigct-chosen label="sigct.sa.f_appel.evaluation.typcnslt"
+                         name="typeFicheAppel"
+                         id="typeFicheAppel"
+                         [options]="inputOptionsTypeFicheAppel"
+                         [(ngModel)]="ficheAppel.typeConsultation"
+                         (optionSelected)="onTypeFicheSelected($event)">
+      </msss-sigct-chosen>
+    </div>
+    <div class="col-sm-3">
+      <msss-sigct-chosen label="sigct.sa.f_appel.evaluation.raison"
+                         name="raisonTypeFiche"
+                         id="raisonTypeFiche"
+                         #raisonTypeFiche
+                         [required]="displayRaisonTypeFiche"
+                         [options]="inputOptionsRaisonTypeFiche"
+                         [(ngModel)]="ficheAppel.referenceRaisonTypeFicheCode"
+                         *ngIf="displayRaisonTypeFiche">
+      </msss-sigct-chosen>
+    </div>
+  </div>
+
+  <div class="row"
+       id="antecedent-anchor">
+    <div class="col-sm-6">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <msss-input-textarea id="demandeInitiale"
+                               #demandeInitiale
+                               name="demandeInitiale"
+                               label="sigct.sa.f_appel.evaluation.deminit"
+                               rows="3"
+                               [required]="true"
+                               maxlength="1000"
+                               raccourcis=true
+                               [(ngModel)]="ficheAppel.demandeInitiale">
+          </msss-input-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 pb-1">
+          <msss-input-checkbox *ngIf="displayConsentementFichesAnterieures"
+                               id="consentementFichesAnterieures"
+                               #consentementFichesAnterieures
+                               name="consentementFichesAnterieures"
+                               [options]="inputOptionConsentementFichesAnterieures"
+                               [(ngModel)]="ficheAppel.usager.consentementFichesAnterieures"
+                               (itemLinkClickEvent)="onConsentementFicheAnterieuresClickEvent($event)">
+          </msss-input-checkbox>
+          <msss-popup [openPopup]="consentementFichesAnterieuresClicked"
+                      buttonCloseLabel="{{'sigct.sa.f_appel.fermerconsentement' | translate}}"
+                      buttonCloseTitle="{{'sigct.sa.f_appel.fermerconsentementinfobulle' | translate}}"
+                      (closedEvent)="onPopupConsentementFichesAnterieuresCloseEvent()">
+            {{'sigct.sa.f_appel.texteconsentement' | translate}}
+          </msss-popup>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <msss-sigct-chosen label="sigct.sa.f_appel.evaluation.resosoutien"
+                             name="reseauSoutien"
+                             #reseauSoutien
+                             id="reseauSoutien"
+                             [options]="inputOptionsReseauSoutien"
+                             [(ngModel)]="ficheAppel.reseauSoutien">
+          </msss-sigct-chosen>
+        </div>
+        <div class="col-sm-6">
+          <msss-input-text id="details"
+                           name="details"
+                           #details
+                           label="sigct.sa.f_appel.evaluation.details"
+                           maxlength="255"
+                           raccourcis="true"
+                           [(ngModel)]="ficheAppel.detailsSoutien">
+          </msss-input-text>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-6">
+      <msss-ckeditor id="donneesPertinentes"
+                     #donneesPertinentes
+                     label="sigct.sa.f_appel.evaluation.donnepert"
+                     maxlength="32767"
+                     [configOptions]="ckEditorConfigOptions"
+                     [height]="heightChampDonneePertinente"
+                     [(value)]="ficheAppel.donneesPertinentes"
+                     raccourcis=true>
+      </msss-ckeditor>
+    </div>
+  </div>
+
+
+</div>
+
+<msss-sigct-content-zone id="antecedents-pertinents"
+                         title="{{'sigct.sa.f_appel.evaluation.anteperti' | translate}}"
+                         [required]="mandatoryFields.includes('antecedents-pertinents')"
+                         [collapsed]="false">
+  <div class="row">
+    <app-antecedents-pertinents #antecedent
+                                [ficheAppel]="ficheAppel"
+                                [listeAntecedent]="listeAntecedents"
+                                (antecedentSave)="onAntecedentSave($event)"
+                                (antecedentDelete)="onAntecedentDelete($event)"
+                                (pertinenceSave)="onPertinenceAntecedentSave($event)"></app-antecedents-pertinents>
+  </div>
+</msss-sigct-content-zone>
+
+<msss-sigct-content-zone id="medication-actuelle"
+[required]="mandatoryFields.includes('medication-actuelle')"
+                         title="{{'sigct.sa.f_appel.evaluation.mediactl' | translate}}">
+  <div class="row">
+    <app-medication-actuelle #medication
+                             [ficheAppel]="ficheAppel"
+                             [listeMedication]="listeMedications"
+                             [listeLabelPertinenceMedication]="listeLabelPertinenceMedication"
+                             (medicationSave)="onMedicationSave($event)"
+                             (medicationDelete)="onMedicationDelete($event)"
+                             (pertinenceMedicationSave)="onPertinenceMedicationSave($event)">
+
+    </app-medication-actuelle>
+  </div>
+</msss-sigct-content-zone>
+
+<div class="col-md-12">
+  <div class="panel panel-body border-1">
+    <div class="row  enlever-espace">
+      <div class="col-sm-2 col-date enlever-espace-bas">
+
+        <msss-sigct-datepicker #dtcom
+                               id="calendar"
+                               label="sigct.sa.f_appel.evaluation.date"
+                               [(ngModel)]="champsCommun.dateCommune"
+                               dateFormat="yyyy-mm-dd"
+                               placeHolder="aaaa-mm-jj"
+                               [ngModelOptions]="{standalone:true}"
+                               [endDate]="champsCommun.endDate"
+                               (ngModelChange)="onDateCommuneChange()"
+                               required>
+        </msss-sigct-datepicker>
+
+      </div>
+
+      <div class="row col-sm-1 col-heure enlever-espace-bas">
+        <msss-input-text #hrcom
+                         id="heureCommune"
+                         name="heureCommune"
+                         label="sigct.sa.f_appel.evaluation.heure"
+                         maxlength="5"
+                         [(ngModel)]="champsCommun.heureCommune"
+                         [patternMask]="'90:00'"
+                         placeHolder="hh:mi"
+                         (ngModelChange)="onHeureCommuneChange()"
+                         (focusout)="onBlur();">
+        </msss-input-text>
+      </div>
+
+      <div class="row col-sm-4 col-detail enlever-espace-bas margin-left-4">
+        <msss-input-text id="detailsCommun"
+                         #detailsCommun
+                         name="detailsCommun"
+                         label="sigct.sa.f_appel.evaluation.details"
+                         maxlength="255"
+                         [(ngModel)]="champsCommun.detailsCommun"
+                         (blur)="onChangeChampCommun()"
+                         raccourcis=true>
+        </msss-input-text>
+      </div>
+
+      <div class="row col-sm-4 col-detail enlever-espace-bas margin-left-4 poubelle">
+
+        <a *ngIf="!hrcom.isDisabled"  href="#" onclick="return false" (click)="onViderChampCommunClick()"><i title="Supprimer" class="fa fa-trash-o cursor-pointer text-primary" id="viderChampsCommun" ></i></a>
+        <a *ngIf="hrcom.isDisabled"><i title="Supprimer" class="fa fa-trash-o text-muted" id="viderChampsCommun" ></i></a>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="enlever-espace">
+      <msss-sigct-content-zone id="manifestations"
+                               title="{{'sigct.sa.f_appel.evaluation.titremanifestations' | translate}}">
+        <div class="row">
+          <app-manifestations #manifestation
+                              [listeManifestations]="listeManifestations"
+                              [dateHeureDetail]="champsCommun"
+                              (manifestationSave)="onManifestationSave($event)"
+                              (listeManifestationSave)="onListeManifestationSave($event)"
+                              (manifestationDelete)="onManifestationDelete($event)"
+                              (modifierDateHeuresDetail)="onModifierManifestationDateHeuresDetail($event)">
+          </app-manifestations>
+        </div>
+      </msss-sigct-content-zone>
+
+      <msss-sigct-content-zone id="signes-vitaux"
+                               title="{{'sigct.sa.f_appel.evaluation.signes.titresection' | translate}}">
+        <div class="row">
+          <app-signes-vitaux #signesVitaux
+                             [listeSignesVitaux]="listeSignesVitaux"
+                             (sauvegarderSigne)="onSigneSave($event)"
+                             (supprimerSigne)="onSigneDelete($event)"
+                             (modifierDateHeuresDetail)="onModifierSigneDateHeuresDetail($event)"></app-signes-vitaux>
+        </div>
+      </msss-sigct-content-zone>
+
+      <msss-sigct-content-zone id="demarchetraitement"
+                               title="{{'sigct.sa.f_appel.evaluation.dmrchtrait' | translate}}">
+        <div class="row">
+          <app-demarche-traitement #demarchetraitement
+                                   [listeDemarcheTraitements]="listeDemarcheTraitements"
+                                   [dateHeureDetail]="champsCommun"
+                                   (demarcheTraitementSave)="onDemarcheTraitementSave($event)"
+                                   (demarcheTraitementDelete)="onDemarcheTraitementDelete($event)"
+                                   (modifierDateHeuresDetail)="onModifierDemarcheTraitementDateHeuresDetail($event)">
+          </app-demarche-traitement>
+        </div>
+      </msss-sigct-content-zone>
+
+      <msss-sigct-content-zone id="demarcheanterieures"
+                               title="{{'sigct.sa.f_appel.evaluation.dmrchantautosoins' | translate}}">
+        <div class="row">
+          <app-demarches-anterieures #demarcheanterieures
+                                     [listeDemarcheAnterieures]="listeDemarcheAnterieures"
+                                     [dateHeureDetail]="champsCommun"
+                                     (demarcheAnterieuresSave)="onDemarcheAnterieuresSave($event)"
+                                     (demarcheAnterieuresDelete)="onDemarcheAnterieuresDelete($event)"
+                                     (modifierDateHeuresDetail)="onModifierDemarcheAnterieuresDateHeuresDetail($event)">
+          </app-demarches-anterieures>
+        </div>
+      </msss-sigct-content-zone>
+    </div>
+  </div>
+</div>
+
+
+<msss-sigct-content-zone id="constat-evaluation"
+[required]="mandatoryFields.includes('constat-evaluation')"
+                         title="{{'sigct.sa.f_appel.evaluation.titreconstateval' | translate}}">
+  <div class="row">
+    <app-constat-evaluation #constatEvaluation [ficheAppel]="ficheAppel"></app-constat-evaluation>
+  </div>
+</msss-sigct-content-zone>
+
+<msss-grise-automatique-selon-type-intervention #griseAutomatique
+  [codeReferenceTypeFiche] = "ficheAppel.typeConsultation"
+  (onChangementTypeCancel) = "onChangmentTypeCencel($event)"
+  (onChangementTypeConfirme) = "onChangmentTypeConfirme($event)"
+  [nomPertDiabledList] = "[PremierElem, reseauSoutien, details, antecedent, medication, dtcom, hrcom, detailsCommun, manifestation, signesVitaux, demarcheanterieures, demarchetraitement, constatEvaluation]"
+  [demandeRessoucesList] = "[reseauSoutien, details, antecedent, medication, dtcom, hrcom, detailsCommun, manifestation, signesVitaux, demarcheanterieures, demarchetraitement, constatEvaluation]">
+</msss-grise-automatique-selon-type-intervention>
+
+

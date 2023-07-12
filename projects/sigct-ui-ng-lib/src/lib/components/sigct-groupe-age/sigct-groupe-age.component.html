@@ -1,0 +1,40 @@
+<div>
+  <div class="col-md-3 no-padding-left" style="max-width: 180px;" >
+    <msss-sigct-datepicker [startDate]="startDate" [endDate]="endDate" id="{{idCalendrier}}" label="sigct.user.datenaissance.label" [(ngModel)]="groupeAgeOptions.dateNaissance" 
+    (ngModelChange)="dateNaissanceChanged($event)" dateFormat="yyyy-mm-dd" placeHolder="aaaa-mm-jj"></msss-sigct-datepicker>
+  </div>
+  <div>
+    <div class="col-md-1 no-padding-right" >
+        <label for="id_annees">{{ 'usager.identification.usager.age' | translate}}</label>
+        <mat-form-field appearance = "outline" style="width:100% !important">
+            <input matInput placeholder="ans" [(ngModel)] = "groupeAgeOptions.annees" type="text" [disabled]="!dateNaissanceEmpty || !isContextAppel" msss-sigct-decimal precision="4" scale="1" 
+            id="{{idAns}}" [(ngModel)]="groupeAgeOptions.annees" (change)="anneesChanged($event)" name="annees" 
+            class="amj numerique numeriquefloat numberPositive numerique_scale1 numberDecimal numerique_precision3 age annees" pcmd="majca" aria-label="années">
+        </mat-form-field>
+    </div>
+    <div class="col-md-1 no-padding-right" >
+        <label for="{{idMois}}"><span class="sr-only">mois</span>&nbsp;</label>
+        <mat-form-field appearance = "outline" style="width:100% !important">
+            <input matInput placeholder="mois" [disabled]="!dateNaissanceEmpty || !isContextAppel" msss-sigct-decimal precision="3" scale="1" id="{{idMois}}" [(ngModel)]="groupeAgeOptions.mois" name="mois"
+            (change)="moisChanged($event)" type="text" class="amj numerique numeriquefloat numberPositive numerique_scale1 numberDecimal numerique_precision2 age mois" pcmd="majcm" >
+          </mat-form-field>
+    </div>
+    <div class="col-md-1 no-padding-right" >
+        <label for="{{idJours}}"><span class="sr-only">mois</span>&nbsp;</label>
+        <mat-form-field appearance = "outline" style="width:100% !important">
+            <input matInput placeholder="jours" [disabled]="!dateNaissanceEmpty || !isContextAppel"  msss-sigct-only-number id="{{idJours}}" [(ngModel)]="groupeAgeOptions.jours" 
+            (change)="joursChanged($event)" name="jours" type="text" class="amj numerique numeriquefloat numberPositive numerique_no_scale age jours" pcmd="majcj" maxlength="3">
+        </mat-form-field>    
+    </div>
+
+    <div class="col-md-4">
+        <msss-sigct-chosen #groupeAge id="groupe" name="groupe" label="usager.identification.usager.groupe.age"  (optionSelected)="onGroupeAgeSelected($event)" 
+        [(ngModel)]="groupeAgeOptions.groupe" [options]="inputOptionGroupeAge" [disabled]="!dateNaissanceEmpty || !isContextAppel || !(ageAnneeEmpty && ageMoisEmpty && ageJourEmpty)"></msss-sigct-chosen>
+      </div>
+
+    <div class="col-md-2" >
+      <p>&nbsp;</p> 
+      <p><span class="amjLabel">{{ AMJLabel }}</span></p> 
+    </div>
+  
+</div>

@@ -1,0 +1,21 @@
+<div class="rapport-fusion-page">
+    <div class="top-bar">
+        <msss-form-top-bar detail=""
+                        nomModule="infosante"
+                        label="{{'sigct.rapport.fusionusager.titre' | translate}}"
+                        [options]="formTopBarOptions">
+        </msss-form-top-bar>
+    </div>
+
+    <div class="conteneur">
+        <ng-template #alertContainer></ng-template>
+
+        <rapport-fusion-usager-ui #rapportFusionUsagerUi
+                                  [listeIntervenant]="listeIntervenant"
+                                  [listeOrganisme]="listeOrganisme"
+                                  [resultatDto]="rechercheFusionUsagerResultatDto"
+                                  (rechercherFusion)="onRechercherFusion($event)"
+                                  (exporterUsagerFusionResults)="exporter($event)">
+        </rapport-fusion-usager-ui>
+    </div>
+</div>

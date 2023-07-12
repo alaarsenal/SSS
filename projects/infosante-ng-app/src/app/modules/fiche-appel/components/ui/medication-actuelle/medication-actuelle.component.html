@@ -1,0 +1,119 @@
+<form name="form" (ngSubmit)="onSubmit()" #fMed="ngForm">
+  <div class="col-md-12 enlever-espace no-padding-right" title="">
+    <div class="row no-padding-right">
+
+      <div class="row col-md-6 margin-left-1">
+
+        <div class="col-sm-2">
+
+          <msss-input-radio #Aucun id="radioPertinenceMedication1" name="radioPertinenceMedication1"
+            [options]="inputOptionsAucunMedication" [disabled]="isAucunDisabled == true || isDisabled"
+            [(ngModel)]="this.pertinenceMedication" (ngModelChange)="onPertinenceChange()">
+          </msss-input-radio>
+        </div>
+
+        <div class="col-sm-2">
+
+          <msss-input-radio #Inconnu id="radioPertinenceMedication2" name="radioPertinenceMedication2"
+            [options]="inputOptionsMedicationInconnu"
+            [disabled]="(listeMedications.length > 0 && isNonPertinentDisabled == true) || isDisabled"
+            [(ngModel)]="this.pertinenceMedication" (ngModelChange)="onPertinenceChange()">
+          </msss-input-radio>
+
+        </div>
+
+        <div class="col-sm-2">
+
+          <msss-input-radio #NonPertinent id="radioPertinenceMedication3" name="radioPertinenceMedication3"
+            [options]="inputOptionsMedicationNonPertinent"
+            [disabled]="(listeMedications.length > 0 && isNonPertinentDisabled == true) || isDisabled"
+            [(ngModel)]="this.pertinenceMedication" (ngModelChange)="onPertinenceChange()">
+          </msss-input-radio>
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="row margin-left-0">
+
+      <div class="col-md-6 col-md-6-left background-gris">
+
+        <div class="row">
+
+          <div class="col-sm-4 no-padding-right">
+            <msss-input-text id="medicament" name="medicament" #medicament
+              label="sigct.sa.f_appel.evaluation.medicament" [valide]="isMedicationValide" maxlength="255"
+              [(ngModel)]="medication.medicament"
+              [disabled]="isDisabled" raccourcis=true>
+            </msss-input-text>
+          </div>
+
+          <div class="col-sm-1 margin-left-m15">
+
+
+              <a href="#" id="btnPre" [style]="setPresenceStyle()" onclick="return false;" (click)="onPresenceClick()"
+                (keyup.Space)="onPresenceClick()" title="{{'sigct.sa.f_appel.evaluation.pre' | translate}}">
+                <i id="pre" class="fa fa-check fa-2x icon presence-offset"></i>
+              </a>
+
+          </div>
+
+          <div class="col-sm-1 margin-left-m25">
+
+            <div class="row icon">
+              <a href="#" id="btnAbs" [style]="setAbsenceStyle()" onclick="return false;" (click)="onAbsenceClick()"
+                (keyup.Space)="onAbsenceClick()" title="{{'sigct.sa.f_appel.evaluation.abs' | translate}}">
+                <i id="abs" class="fa fa-ban fa-2x"></i>
+              </a>
+            </div>
+
+          </div>
+
+
+
+          <div class="col-sm-5 col-sm-5plus no-padding-left no-padding-right">
+            <msss-input-text id="detailsMed" name="detailsMed" label="sigct.sa.f_appel.evaluation.details"
+              maxlength="255" [(ngModel)]="medication.details" [disabled]="isDisabled" raccourcis=true>
+            </msss-input-text>
+          </div>
+
+          <div class="col-sm-1 margin-left-m5 offset">
+            <div id="medicationActionIcon">
+              <button type="submit" style="display:none" #submitBtn>Submit</button>
+              <msss-action-link [actionLinks]="actionLinks" [disableAll]="isDisabled"></msss-action-link>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 col-md-6-right background-blanc  bordures ">
+        <msss-list-info-action *ngIf="!isDisabled" [list]="this.listeMedications" [formatAction]="formatActionMedication"
+          (modifierAction)="confirmerModifierMedication($event)" editerId="editerBtnAnt" supprimerId="supprimerBtnAnt"
+          (supprimerAction)="confirmerSupprimerMedication($event)" [cacherAfficherReduire]="true"
+          [idElementModifieSelectionne]="idElementModifieSelectionne" [afficherBoutonSupprimer]="true">
+        </msss-list-info-action>
+
+        <modal-confirmation id-container="confirm_popup_modif_medication">
+          <div class="modal-confirm-body modal-body">
+            {{ messageConfirmModif }}
+          </div>
+
+          <div class="modal-confirm-footer modal-footer">
+            <button id="confi_med_btn_oui" type="button" data-dismiss="modal"
+              class="btn btn-primary btn-sm btn-key-action visibility-visible"
+              (click)="remplacerMedication()">Oui</button>
+            <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+              id="cancel_confirm_button">Non</button>
+          </div>
+        </modal-confirmation>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</form>

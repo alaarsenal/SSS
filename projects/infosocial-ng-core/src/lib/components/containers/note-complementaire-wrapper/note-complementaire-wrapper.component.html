@@ -1,0 +1,35 @@
+<ngx-spinner name="spinner-note-compl" [fullScreen]="true" bdColor="rgba(0,0,0,0)" type="ball-clip-rotate" color="#000000" size="medium"></ngx-spinner>
+
+<msss-note-complementaire #notecomplementaire
+                          id="notecomplementaire"
+                          domaine="SO"
+                          [setInputOptionsTypeNotes]="inputOptionsTypeNotes"
+                          [setInputOptionsLangues]="inputOptionsLangues"
+                          [setInputOptionsInterlocuteurs]="inputOptionsInterlocuteurs"
+                          [setInputOptionConsentementenFicheEnregistreur]="inputOptionConsentementenFicheEnregistreur"
+                          [note]="noteComplementaireDTO"
+                          [dureeFicheAppelDto]="dureeFicheAppelDto"
+                          [isReadonly]="isReadonly"
+                          (terminerClick)="onTerminerClick($event)"
+                          (retourClick)="onRetourClick()"
+                          [listeFichiers]="listeFichiers"
+                          (ajouterFileEvent)="addFile($event)"
+                          (deleteFileEvent)="deleteFile($event)"
+                          (cancelEvent)="cancelModif()">
+</msss-note-complementaire>
+
+<modal-confirmation id-container="confirmer-duree-popup">
+  <div class="modal-confirm-body modal-body">{{ msgConfirmerDureePopup }}</div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-sm btn-key-action hidePopup visibility-visible"
+            id="confirmer-duree-btn-oui"
+            (click)="onBtnConfirmerDureeClick()">Oui</button>
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="confirmer-duree-btn-non">Non</button>
+  </div>
+</modal-confirmation>

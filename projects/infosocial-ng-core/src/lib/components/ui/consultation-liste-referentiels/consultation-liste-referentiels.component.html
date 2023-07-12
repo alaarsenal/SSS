@@ -1,0 +1,22 @@
+<div class="row" *ngIf="_moyenSocialDTOs?.length > 0">
+    <ng-container *ngFor="let moyen of _moyenSocialDTOs">
+
+        <div class="no-padding-right col-md-11">
+            <a href="#"
+               onclick="return false"
+               (click)="onConsultReferentielClick(moyen.idDocumentIdentificationSocial)">{{ moyen.nomDocumentIdentificationSocial }}</a>
+        </div>
+
+        <div class="padding-left-74 col-md-1">
+            <a href="#"
+               onclick="return false"
+               (click)="onDeleteReferentielClick(moyen.id)"><i
+                   title="{{ 'sigct.so.f_appel.planaction.moyensmodalites.btnsupprimer' | translate }}"
+                   class="fa fa-trash-o cursor-pointer"
+                   id="supprimerId{{moyen.id}}"></i>
+                   <span class="sr-only">{{'sigct.so.f_appel.planaction.moyensmodalites.btnsupprimer' | translate}}</span>   
+            </a>
+        </div>
+
+    </ng-container>
+</div>

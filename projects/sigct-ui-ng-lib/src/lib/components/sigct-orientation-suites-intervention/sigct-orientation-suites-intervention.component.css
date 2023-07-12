@@ -1,0 +1,77 @@
+.enlever-espace {
+    margin-top: -15px;
+    margin-left: -15px;
+}
+
+.background-gris {
+    background-color: #D3D3D3;
+}
+
+.margin-top-5 {
+    margin-top: 5px;
+}
+
+.margin-top-40 {
+    margin-top: 40px;
+}
+
+.min-height-142 {
+    min-height: 142px;
+}
+
+@media (min-width: 1441px) and (max-width: 1920px) {
+    .margin-left-m1 {
+        margin-left: -18px !important;
+    }
+    
+    .col-btn {
+        width:1% !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1440px) {
+    .margin-left-m1 {
+        margin-left: -29px !important;
+    }
+    
+    .col-btn {
+        width:1% !important;
+    }
+}
+
+/* Classes destinées à liste de ce qui a été saisi */
+/* .fa.fa-trash-o:hover::before {
+    color: grey;
+    /*  correspond à fa-trash */
+    /* content: "\f1f8"; 
+  } */
+
+
+::ng-deep .list-orientation .contenu {
+    padding-left: 2rem;
+}
+
+::ng-deep .list-orientation {
+    color: black;
+}
+
+::ng-deep .padding-top-bottom-4 {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+::ng-deep .list-orientation .detail {
+    font-style: italic;
+    padding-left: .5rem;
+}
+  
+::ng-deep .rrss i {
+    color: #96999c;
+    margin-right: 1rem;
+    font-size: 2rem; 
+}
+  
+::ng-deep .rrss span {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}

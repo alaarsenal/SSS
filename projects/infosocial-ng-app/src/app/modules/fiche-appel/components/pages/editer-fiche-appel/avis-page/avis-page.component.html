@@ -1,0 +1,13 @@
+<div *ngIf="idAvis; else rechercheAvis">
+    <div class="subNav affix conteneur">
+	<div class="row margin-top-10">
+        <div class="col-md-2 col-md-offset-10 text-align-right padding-top-6">
+            <a href="#" class="btn-sm btn btn-default form-btn" onclick="return false" (click)="onRechercherAvis()"><i title="{{ 'sigct.ss.f_appel.avis.revenirrecherche' | translate }}" class="fa fa-times fa-lg cursor-pointer"></i></a>
+        </div>
+    </div>
+    </div>
+    <iframe id="iframe-avis" [src]="urlAvis" height="100%" width="100%"></iframe>
+</div>
+<ng-template #rechercheAvis>
+    <iframe id="iframe-avis" [src]="urlAvisAccueil" height="100%" width="100%" (load)="onFrameLoad($event)"></iframe>
+</ng-template>

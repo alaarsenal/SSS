@@ -1,0 +1,149 @@
+<div class="table-container pn margin-bottom-10">
+  <label class="display-inline padding-right-15">
+    {{ 'sigct.ss.f_appel.fichierAttache' | translate }} 
+</label>
+  <table class="mat-table cdk-table table marginB-0 tab-fichier">
+     <tr>
+       <td class="cell-selectfichier">
+
+            <input type="file"
+                  id="file"
+                  #inputFile
+                  placeholder="{{'usager.enregistrement.sec.fichier.choisir' | translate}}"
+                  (change)="handleFileInput($event.target.files)"
+                  style="display:none;"
+                  accept="typeFichierAccepter"
+                  aria-label="choisir">
+
+                  <msss-input-text
+                      placeholder="{{'usager.enregistrement.sec.fichier.choisir' | translate}}"
+                      style="background-color: aliceblue;"
+                      [(ngModel)]="fichier.nom" id="nom_fichier" maxlength="255" isReadonly="true"
+                      (click)="onBtnParcourirClick()"
+                      ariaLabel="{{'usager.enregistrement.sec.fichier.choisir' | translate}}">
+                  </msss-input-text>
+       </td>
+       <td class="cell-btn-parcourir">
+        <button type="button" class="btn btn-default btn-sm" id="ajouterBtn" #btnajouter
+          title="{{ 'usager.enregistrement.sec.fichier.parcourir' | translate }}" (click)="onBtnParcourirClick()">
+          {{ 'usager.enregistrement.sec.fichier.parcourir' | translate }}
+        </button>
+       </td>
+       <td *ngIf="showListeProfile == true">
+         <strong>{{'usager.enregistrement.sec.fichier.type' | translate}}</strong>
+      </td>
+      <td *ngIf="showListeProfile == true" >
+        <msss-sigct-chosen #listeProfilHTML label=""
+                name="fichier_type" required id="fichier_type" [options]="inputOptionsReferenceType"
+                [valide]="true" [(ngModel)]="fichier.idReferenceTypeFichier"
+                (ngModelChange)="fichier.idReferenceTypeFichier"
+                ariaLabel="{{'usager.enregistrement.sec.fichier.type' | translate}}">
+        </msss-sigct-chosen>
+      </td>
+      <td class="cell-btn-ajouter" >
+        <button type="button" class="btn-sm btn btn-primary form-btn" id="ajouterBtn" title="{{ 'button.ajouter.title' | translate }}" (click)="onBtnAjouterClick()">
+          {{ 'button.ajouter.label' | translate }} </button>
+      </td>
+
+     </tr>
+  </table>
+
+  <table mat-table [dataSource]="dataSource" class="table marginT-0" *ngIf="dataSource.data != null && dataSource.data.length>0">
+    <!-- State Column -->
+    <ng-container matColumnDef="aprecu">
+      <th mat-header-cell *matHeaderCellDef disableClear class="th-left paddingL-2  cell-aprecu">
+        {{ 'usager.enregistrement.sec.fichier.apercu' | translate}}
+      </th>
+      <td mat-cell *matCellDef="let row;index as idx;" class="paddingL-2 text-center">
+        <a  [href]="getLinktelechargment(row) | safe : 'resourceUrl'" target="_blank">
+          <i [ngClass]="getIco(row)" *ngIf="!isImg(row)"></i>
+          <img [src]="getUrlImg(row) | safe : 'resourceUrl'" *ngIf="isImg(row)"  width="25px" />
+          <span class="sr-only">{{'usager.enregistrement.sec.fichier.apercu' | translate}}</span>
+        </a>
+      </td>
+    </ng-container>
+
+     <!-- State Column -->
+     <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingL-2'">
+        {{ 'usager.enregistrement.sec.fichier.nom' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'paddingL-2'">
+        {{row.nom}}
+      </td>
+    </ng-container>
+
+    <!-- State Column -->
+    <ng-container *ngIf="showColReference == true" matColumnDef="reference">
+      <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingL-2'">
+        {{ 'usager.enregistrement.sec.fichier.type' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'paddingL-2 w-209'">
+          <msss-sigct-chosen #listeProfilHTML label=""
+          name="profils" required id="type" [options]="inputOptionsReferenceType"
+          [valide]="true" [(ngModel)]="row.idReferenceTypeFichier"
+          (ngModelChange)="row.idReferenceTypeFichier"
+          ariaLabel="{{'usager.enregistrement.sec.fichier.type' | translate}}">
+          </msss-sigct-chosen>
+      </td>
+    </ng-container>
+
+
+     <!-- State Column -->
+     <ng-container *ngIf="showColTitre == true" matColumnDef="titre">
+      <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingL-2'">
+        {{ 'usager.enregistrement.sec.fichier.titreliste' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'paddingL-2 w-209'">
+        <msss-input-text [(ngModel)]="row.titre" id="{{'titre_'+row.id}}" name="fichier_titre" maxlength="255"
+        ariaLabel="{{'usager.enregistrement.sec.fichier.titreliste' | translate}}">
+        </msss-input-text>
+      </td>
+    </ng-container>
+
+
+
+      <!-- State Column -->
+      <ng-container *ngIf="showColDescription == true" matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingL-2'">
+          {{ 'usager.enregistrement.sec.fichier.description' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'paddingL-2 w-209'">
+          <msss-input-text [(ngModel)]="row.description" id="{{'nom_'+row.description}}" name="fichier_description" maxlength="1000"
+          ariaLabel="{{'usager.enregistrement.sec.fichier.description' | translate }}">
+          </msss-input-text>
+        </td>
+      </ng-container>
+
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-right w-action-col paddingL-0'">
+          {{ 'usager.enregistrement.sec.soins.action' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'w-center w-action'">
+          <button type="button" class="btn btn-default btn-sm btn-delete-medication" id="remove_button" (click)="onBtnSupprimerClick(row);"
+            title="{{ 'usager.enregistrement.sec.fichier.supprimer' | translate }}">
+            <i class="fa fa-trash-o"></i></button>
+        </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<modal-confirmation id-container="confirm_popup_supression_fichier">
+  <div class="modal-confirm-body modal-body">
+    {{msgSupprimer}}
+  </div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible" id="ok_supression_button_fichier" (click)="onBtnOksupprimerClick()">Oui</button>
+    <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible" id="cancel_supression_button_fichier">Non</button>
+  </div>
+</modal-confirmation>
+
+
+
+

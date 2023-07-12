@@ -1,0 +1,102 @@
+<div class="row">
+  <div class="col-md-4">
+      <msss-input-radio id="raioSoinServiceStatut" name="radioSoinServiceStatut" (click)="onRedioSoinsServiceChange()"
+          [options]="inputOptionsSoinServiceStatut"
+          [(ngModel)]="radioSoinServiceStatut" ariaLabel="statut soins et services">
+      </msss-input-radio>
+  </div>
+</div>
+
+<div class="table-container pn margin-bottom-0">
+  <table mat-table [dataSource]="dataSource" class="table marginB-0">
+    <!-- State Column -->
+    <ng-container matColumnDef="dateDebut">
+      <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingL-2'">{{ 'usager.enregistrement.sec.soins.date' | translate}}
+      </th>
+      <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'paddingL-2 w-209'">
+        <msss-sigct-datepicker [(ngModel)]="row.dateDebut" id="{{'soin_service_dateDebut_'+row.id}}" #soin_service_dateDebut name="soin_service_dateDebut"
+          dateFormat="yyyy-mm-dd" placeHolder="aaaa-mm-jj"
+          [ngModelOptions]="{standalone:true}" required ariaLabel="{{'usager.enregistrement.sec.soins.date' | translate}}">
+        </msss-sigct-datepicker>
+      </td>
+    </ng-container>
+
+    <!-- State Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingL-2'">
+        {{ 'usager.enregistrement.sec.indicateur.type' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'paddingL-2 w-209'">
+        <msss-sigct-chosen [(ngModel)]="row.type" id="{{'type_'+row.id}}" #indicateurs_lien="ngModel" [(ngModel)]="row.idReferenceTypeSoinService"
+          name="indicateurs_type" [valide]="listeTypeCommunicationValide" [options]="inputOptionsTypeSoinsSecuriteSecurite" (ngModelChange)="row.idReferenceTypeSoinService"
+          ariaLabel="{{'usager.enregistrement.sec.indicateur.type' | translate }}" >
+        </msss-sigct-chosen>
+      </td>
+    </ng-container>
+
+    <!-- Created Column -->
+    <ng-container matColumnDef="commentaires">
+      <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="' th-left w-full'">
+        {{ 'usager.enregistrement.sec.indicateur.commentaire' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="''">
+        <msss-input-textarea
+            [(ngModel)]="row.commentaires"
+            id="{{'commentaires_soin'+row.id}}"
+            #indicateurs_commentaires="ngModel"
+            name="soin_service_commentaires"
+            maxlength="500"
+            CSSResize="vertical"
+            minRows=2
+            ariaLabel="{{'usager.enregistrement.sec.indicateur.commentaire' | translate }}">
+        </msss-input-textarea>
+      </td>
+    </ng-container>
+
+
+    <!-- Created Column -->
+    <ng-container matColumnDef="actif">
+      <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'w-actif w-center'">
+        {{ 'usager.enregistrement.sec.soins.actif' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let row;index as idx;" title="{{row.actif}}" [ngClass]="'w-actif w-center'">
+        <msss-input-checkbox [(ngModel)]="row.actif" id="{{'soin_service_actif_'+idx}}" #soin_service_actif="ngModel" name="soin_service_actif"
+          [options]="inputOptionSoinServiceActif">
+        </msss-input-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Created Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-right w-action-col paddingL-0'">
+        {{ 'usager.enregistrement.sec.soins.action' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'w-center'">
+        <button type="button" class="btn btn-default btn-sm btn-delete-medication" id="remove_button" (click)="confirmerSupprimer(idx);"
+          title="{{ 'usager.enregistrement.sec.soins.supprimer' | translate }}">
+          <i class="fa fa-trash-o"></i></button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.hidden]="isHidden(row)"></tr>
+  </table>
+  <div *ngIf="dataSource.data===null || dataSource.data===undefined  ||dataSource.data.length === 0" class="no-records mat-row">
+    {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+  </div>
+  <mat-toolbar>
+    <mat-toolbar-row class="toolbar-medication-add">
+        <button type="button" class="btn-sm btn btn-primary form-btn" id="ajouterBtn" title="{{ 'usager.enregistrement.sec.soins.ajouter' | translate }}" (click)="ajouterUneNouvelle(true)"> {{ 'usager.enregistrement.sec.soins.ajouter' | translate }} </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <modal-confirmation id-container="confirm_popup_supression">
+    <div class="modal-confirm-body modal-body">
+      {{ messageSupprimer }}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible" id="ok_supression_button"  (click)="supprimer()" >Oui</button>
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible" id="cancel_supression_button">Non</button>
+    </div>
+  </modal-confirmation>
+</div>

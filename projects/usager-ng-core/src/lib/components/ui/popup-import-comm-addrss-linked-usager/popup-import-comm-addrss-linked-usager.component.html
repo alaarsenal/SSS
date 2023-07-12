@@ -1,0 +1,13 @@
+<ng-container *ngIf="isCommToBind(typeDataToAdd)">
+    <app-add-communication-from-linked-usager [communications]="communications" 
+                                          (forwardCommunication)="addCommunication($event)"
+                                          (retourModifierUsager)="closeAndReturnModifyUI()">
+    </app-add-communication-from-linked-usager>  
+</ng-container>
+
+<ng-container *ngIf="isAddressToBind(typeDataToAdd)">
+    <app-add-address-from-linked-usager [addresses]="addresses"
+                                        (forwardAddress)="addAddress($event)"
+                                         (retourModifierUsager)="closeAndReturnModifyUI()">
+    </app-add-address-from-linked-usager>
+</ng-container>

@@ -1,0 +1,36 @@
+<msss-form-top-bar label="" detail="" nomModule="infosocial" [options]="formTopBarOptions"></msss-form-top-bar>
+
+<div class="row main no-margin-left">
+    <div class="col-md-12 pull-left no-padding-left margin-left-minus-one">
+        <msss-onglets [onglets]="this.onglets" 
+                      [nbOngletMax]="5" 
+                      [titleCode]="this.titreOngletAjout"
+                      (ongletClick)="this.onOngletClick($event)" 
+                      (addOngletClick)="this.onAddOngletClick()" >
+        </msss-onglets>
+        <div class="onglet-panel">
+            <div class="onglet-panel-menu">
+                <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+            </div>
+            
+            <div #ongletPanelContenu id="ongletPanelContenu" class="onglet-panel-contenu" cdkScrollable>
+                <ng-template #alertContainer></ng-template>
+                <router-outlet (activate)="onActivate($event)"></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+
+<modal-confirmation id-container="confirm_popup_annuler_layout">
+    <div class="modal-confirm-body modal-body">
+      {{'usager.msg.confirmatiom' | translate}}
+    </div>
+  
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+        id="ok_confirm_button" (click)="confirmPopUpAnnuler();">Oui</button>
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+        id="cancel_confirm_button">Non</button>
+    </div>
+  </modal-confirmation>
+

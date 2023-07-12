@@ -1,0 +1,20 @@
+.contentZone {
+  margin-bottom: 10px;
+}
+
+.btn-submit {
+  padding-top: 1.3rem;
+}
+
+.inline {
+  display: inline-block;
+  padding-right: 30px;
+}
+
+.date {
+  max-width: 160px;
+}
+
+.chosen {
+  width: 300px;
+}

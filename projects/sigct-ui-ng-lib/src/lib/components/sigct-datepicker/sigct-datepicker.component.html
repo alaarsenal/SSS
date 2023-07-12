@@ -1,0 +1,36 @@
+<label for={{id}} class="control-label"
+       [class.label_disabled]="disabled"> {{label|translate}}
+
+  <span class="mandatory-indicator" *ngIf="isRequired" >*</span>
+       <span class="sr-only" *ngIf="!label">{{ariaLabel}}</span>
+</label>
+<mat-form-field #matFormField
+                appearance="outline"
+                style="width:100% !important">
+
+       <input #inputText
+              matInput
+              msss-sigct-date
+              [matDatepicker]="dp"
+              [id]="id"
+              [name]="name"
+              [placeholder]="placeHolder"
+              style="max-width: 100px;"
+              [(ngModel)]="value"
+              [min]="dateMinSaisissableStr"
+              [max]="dateMaxSaisissableStr"
+              [type]="type"
+              (blur)="onBlur($event)"
+              (keydown.enter)="onKeydownEnter($event)"
+              (dateChange)="onChangeDate($event)"
+              disabled="{{disabled}}"
+              [class.disabled]="disabled"
+              maxlength="10"
+              [attr.aria-label]="ariaLabel ? ariaLabel : label | translate">
+       <mat-datepicker-toggle class="datepicker-button"
+                              [class.disabled]="disabled"
+                              matSuffix
+                              [for]="dp"></mat-datepicker-toggle>
+       <mat-datepicker #dp></mat-datepicker>
+
+</mat-form-field>

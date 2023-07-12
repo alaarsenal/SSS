@@ -1,0 +1,17 @@
+<div>
+  <div class="title" *ngIf="label">
+    <label>{{label | translate}}: </label>
+  </div>
+  <div class="content" [style.backgroundColor]="backgroundColor" [style.height]="height">
+    <div class="inline" *ngIf="separator; else block">
+      <span *ngFor="let item of contentList">
+        {{item.key}}{{separator}}
+      </span>
+    </div>
+    <ng-template #block>
+      <div *ngFor="let item of contentList">
+        {{item.key}}
+      </div>
+    </ng-template>
+  </div>
+</div>

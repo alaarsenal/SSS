@@ -1,0 +1,20 @@
+<label>{{label | translate}}</label>
+
+<mat-form-field appearance="outline" style="width:100% !important">
+  <!-- On ne peut pas utiliser la directive "mask" sur l'input en plus du "matAutocomplete" sinon on obtient l'erreur:
+       Error: More than one custom value accessor matches form control with unspecified name attribute.
+       Le masque doit être géré manuellement. -->
+  <input matInput [matAutocomplete]="auto" [formControl]="formControl" (blur)="onBlur()"
+         placeholder="{{placeholder}}" msss-sigct-code-postal longueurMin="{{longueurMin}}" autocomplete="none" [attr.aria-label]="label | translate">
+
+  <mat-autocomplete #matAutocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn">
+    <mat-option *ngIf="isLoading" class="is-loading">
+      <mat-spinner diameter="20"></mat-spinner>
+    </mat-option>
+    <ng-container *ngIf="!isLoading">
+      <mat-option *ngFor="let item of autoCompleteItems" [value]="item.codePostal" (onSelectionChange)="onSelected(item)">
+        <span [innerHTML]="getAutoCompleteDisplay(item) | highlight: textToHighlight"></span>
+      </mat-option>
+    </ng-container>
+  </mat-autocomplete>
+</mat-form-field>

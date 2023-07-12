@@ -1,0 +1,128 @@
+<mat-dialog-content>
+  <div class="conteneur">
+    <div class="menu-gauche">
+      <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+    </div>
+    <div class="contenu">
+      <ng-template [ngIf]="isRechercheUsagerEnCours()">
+        <sigct-usager-recherche [topBarreFixe]="false"
+                                [fusionEnabled]="false"
+                                [boutonFermerDialogVisible]="true"
+                                [inputInfobulleButtonFermer]="infobulleButtonFermer"
+                                [infoAppelCti]="infoAppelCtiDto"
+                                [alerts]="alerts"
+                                (consulterEnregistrementsUsager)="onConsulterEnregistrementsUsager($event)"
+                                (editerUsager)="onEditerUsager($event)"
+                                (consulterUsager)="onConsulterUsager($event)"
+                                (relierUsager)="onRelierUsager($event)"
+                                (fermerDialog)="onFermerDialog()">
+        </sigct-usager-recherche>
+      </ng-template>
+
+      <ng-template [ngIf]="isEditionUsagerEnCours()">
+        <sigct-usager-edition #sigctUsagerEdition
+                              [topBarreFixe]="false"
+                              idUsager="{{idUsager}}"
+                              [boutonFermerDialogVisible]="true"
+                              (modifierUsager)="onEditerUsager($event)"
+                              (relierUsager)="onRelierUsager($event)"
+                              (retourListe)="onRechercherUsager()"
+                              (fermerDialog)="onFermerDialog()"
+                              [linkedUsagerDTOs]="linkedUsagerDTOs">
+        </sigct-usager-edition>
+      </ng-template>
+
+      <ng-template [ngIf]="isConsultationUsagerEnCours()">
+        <sigct-usager-consultation [topBarreFixe]="false"
+                                   idUsager="{{idUsager}}"
+                                   [boutonFermerDialogVisible]="true"
+                                   (relierUsager)="onRelierUsager($event)"
+                                   (retourListe)="onRechercherUsager()"
+                                   (fermerDialog)="onFermerDialog()">
+        </sigct-usager-consultation>
+      </ng-template>
+
+      <ng-template [ngIf]="isListerAppelsAnterieursEnCours()">
+        <sigct-usager-appels-anterieurs-container [topBarreFixe]="false"
+                                                  idUsager="{{idUsager}}"
+                                                  [boutonFermerDialogVisible]="true"
+                                                  (retourListe)="onRechercherUsager()"
+                                                  (fermerDialog)="onFermerDialog()"
+                                                  (consulterFicheAppel)="onConsulterFicheAppel($event)">
+        </sigct-usager-appels-anterieurs-container>
+      </ng-template>
+
+      <ng-template [ngIf]="isConsultationAppelAnterieurEnCours()">
+        <sigct-usager-consulter-appel-anterieur-container #consulterAppelAnterieur
+                                                          [topBarreFixe]="false"
+                                                          [idUsager]="idUsager"
+                                                          [boutonFermerDialogVisible]="true"
+                                                          [appelAnterieurDto]="appelAnterieurDto"
+                                                          (fermerDialog)="onFermerDialog()"
+                                                          (fermerDialogAndRedirectTo)="onFermerDialogAndRedirectTo($event)"
+                                                          (retourListe)="onRechercherUsager()">
+        </sigct-usager-consulter-appel-anterieur-container>
+      </ng-template>
+
+      <ng-template [ngIf]="isConsulterEnregistrementsUsagerEnCours()">
+        <sigct-usager-enregistrements [topBarreFixe]="false"
+                                      idUsager="{{idUsager}}"
+                                      [boutonFermerDialogVisible]="true"
+                                      (ajouterEnregistrement)="actionAjouterEnregistrementUsager($event)"
+                                      (consulterEnregistrement)="actionConsulterEnregistrementUsager($event)"
+                                      (retourListe)="onRechercherUsager()"
+                                      (fermerDialog)="onFermerDialog()"
+                                      (editerEnregistrement)="actionEditerEnregistrementUsager($event)"
+                                      (copierEnregistrement)="onCopierEnregistrement($event)">
+        </sigct-usager-enregistrements>
+      </ng-template>
+
+      <ng-template [ngIf]="isAjouterEnregistrementUsagerEnCours()">
+        <sigct-usager-enregistement-ajout [topBarreFixe]="false"
+                                          idUsager="{{idUsager}}"
+                                          [boutonFermerDialogVisible]="true"
+                                          (consulterEnregistrement)="actionConsulterEnregistrementUsager($event)"
+                                          (retourListeEnregistrements)="actionConsulterEnregistrementsUsager($event)"
+                                          (fermerDialog)="onRetourEnregistements()"></sigct-usager-enregistement-ajout>
+      </ng-template>
+
+      <ng-template [ngIf]="isEditerEnregistrementsUsagerEnCours()">
+        <sigct-usager-enregistement-ajout [topBarreFixe]="false"
+                                          [idEnregistrement]=idEnregistrement
+                                          idUsager="{{idUsager}}"
+                                          [boutonFermerDialogVisible]="true"
+                                          (consulterEnregistrement)="actionConsulterEnregistrementUsager($event)"
+                                          (retourListeEnregistrements)="actionConsulterEnregistrementsUsager($event)"
+                                          (fermerDialog)="onRetourEnregistements()"></sigct-usager-enregistement-ajout>
+      </ng-template>
+
+      <ng-template [ngIf]="isConsulterEnregistrementUsagerEnCours()">
+        <sigct-usager-enregistement-consultation [topBarreFixe]="false"
+                                                 idUsager="{{idUsager}}"
+                                                 idEnregistrement="{{idEnregistrement}}"
+                                                 [boutonFermerDialogVisible]="true"
+                                                 (editerEnregistrement)="actionEditerEnregistrementUsager($event)"
+                                                 (retourListeEnregistrements)="actionConsulterEnregistrementsUsager($event)"
+                                                 (fermerDialog)="onRetourEnregistements()">
+        </sigct-usager-enregistement-consultation>
+      </ng-template>
+
+      <ng-template [ngIf]="isCopieEnregistrementsUsagerEnCours()">
+        <sigct-usager-enregistement-ajout [topBarreFixe]="false"
+                                          [idEnregistrement]=idEnregistrement
+                                          idUsager="{{idUsager}}"
+                                          [boutonFermerDialogVisible]="true"
+                                          (consulterEnregistrement)="actionConsulterEnregistrementUsager($event)"
+                                          (retourListeEnregistrements)="actionConsulterEnregistrementsUsager($event)"
+                                          (fermerDialog)="onRetourEnregistements()"
+                                          (editerEnregistrement)="actionEditerEnregistrementUsager($event)"
+                                          [action]="'Copier'">
+        </sigct-usager-enregistement-ajout>
+      </ng-template>
+    </div>
+  </div>
+
+  <msss-verificateur-de-changement #verifiDeChangementUi>
+  </msss-verificateur-de-changement>
+
+</mat-dialog-content>

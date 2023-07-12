@@ -1,0 +1,147 @@
+<div class="sigct-about-component">
+    <router-outlet></router-outlet>
+    <div class="main container">
+        <!-- Informations serveur -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{dateActuelle | date : 'yyyy-MM-dd HH:mm'}}</h1>
+
+                <h1>{{'sigct.commun.f_bandeau.informationsserveur' | translate}} </h1>
+
+                <ul>
+                    <li>{{'sigct.commun.f_bandeau.informationsserveur.hote' | translate}} : {{serverHostName}}</li>
+                    <li>{{'sigct.commun.f_bandeau.informationsserveur.ip' | translate}} : {{serverIpAddress}}</li>
+                    <li>{{'sigct.commun.f_bandeau.informationsserveur.type' | translate}} : {{serverType}}</li>
+                    <li>{{'sigct.commun.f_bandeau.informationsserveur.servlet' | translate}} : {{servletVersion}}</li>
+                    <li>{{'sigct.commun.f_bandeau.informationsserveur.angular' | translate}} : {{versionAngular}}</li>
+                    <li>{{'sigct.commun.f_bandeau.informationsserveur.java' | translate}} : {{javaVersion}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Informations poste client -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{'sigct.commun.f_bandeau.informationsclient' | translate}}</h1>
+                <ul>
+                    <li>{{'sigct.commun.f_bandeau.informationsclient.navigateur' | translate}} : {{navigator}}</li>
+                    <li>{{'sigct.commun.f_bandeau.informationsclient.version' | translate}} : {{navigatorVersion}}</li>
+                    <li>{{'sigct.commun.f_bandeau.informationsclient.resolution' | translate}} : {{resolution}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Informations configurations locales -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{'sigct.commun.f_bandeau.informationslocales' | translate}}</h1>
+                <ul>
+                    <li>{{'sigct.commun.f_bandeau.informationslocale.langue' | translate}} : {{localeDisplayName}}</li>
+                    <li>{{'sigct.commun.f_bandeau.informationslocale.pays' | translate}} : {{localeDisplayCountry}}</li>
+                    <li>{{'sigct.commun.f_bandeau.informationslocale.culture' | translate}} : {{localeDisplayLanguage}}
+                    </li>
+                    <li>{{'sigct.commun.f_bandeau.informationslocale.application' | translate}} : {{appLang}}</li>
+                </ul>
+
+                <h1>{{'sigct.commun.f_bandeau.module' | translate}} {{nomModule | translate}}</h1>
+
+                <h1>{{'sigct.commun.f_bandeau.permission' | translate}} {{user.prenom}} {{user.nomFamille}}
+                    ({{user.name}})
+                    <br />{{user.nomOrganismeCourant}}
+                </h1>
+            </div>
+        </div>
+
+        <!-- Tableau des permissions -->
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-condensed table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{ 'sigct.commun.f_bandeau.permission.nom' | translate}}</th>
+                            <th>{{ 'sigct.commun.f_bandeau.permission.description' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of permissions">
+                            <td>{{row.permissionName}}</td>
+                            <td>{{row.description}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Rafraichir cache applicative -->
+        <div class="row"
+             *hasAllRoles="['ROLE_ST_PILOTAGE_DGTI']">
+            <div class="col-md-12">
+                <button class="btn-link"
+                        (click)="onRafraichirCache()">{{'sigct.commun.f_bandeau.cache' | translate}}</button>
+            </div>
+        </div>
+
+        <!-- Réindexation Solr -->
+        <div class="row"
+             *hasAllRoles="['ROLE_ST_PILOTAGE_DGTI']">
+            <div class="col-md-12 panel-body">
+                <msss-sigct-field-set [titleFieldset]="'sigct.commun.f_bandeau.index' | translate">
+                    <ng-container #alertContainer></ng-container>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-2 width-200px">
+                                <msss-sigct-datepicker #dateDebutDatePicker
+                                                       id="calendar"
+                                                       label="sigct.ss.f_bandeau.informations.Datedebut"
+                                                       [(ngModel)]="dateDebut"
+                                                       dateFormat="yyyy-mm-dd"
+                                                       placeHolder="aaaa-mm-jj"
+                                                       [ngModelOptions]="{standalone:true}"
+                                                       [endDate]="dateFin"
+                                                       required>
+
+                                </msss-sigct-datepicker>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <ng-template [ngIf]="isModuleUsager()">
+                                <div class="col-md-6">
+                                    <button class="btn btn-link"
+                                            (click)="onIndexerUsager()">
+                                        {{'sigct.commun.f_bandeau.index.usager' | translate}}
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-spinner *ngIf="indexerUsager"
+                                                 strokeWidth="3"
+                                                 [diameter]="25"></mat-spinner>
+                                </div>
+                            </ng-template>
+
+                            <ng-template [ngIf]="!isModuleUsager()">
+                                <div class="col-md-6">
+                                    <button class="btn btn-link"
+                                            (click)="onIndexerFiches()">
+                                        {{'sigct.commun.f_bandeau.index.appels' | translate}}
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-spinner *ngIf="indexerFiche"
+                                                 strokeWidth="3"
+                                                 [diameter]="25"></mat-spinner>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </msss-sigct-field-set>
+            </div>
+        </div>
+    </div>
+    <!-- Pour le formatage de la page, le code suivant corrige l'apparence de la date début, sans cela la taille n'est pas correcte-->
+    <div class="col-md-12 display-none">
+        <msss-input-text>
+        </msss-input-text>
+    </div>
+</div>

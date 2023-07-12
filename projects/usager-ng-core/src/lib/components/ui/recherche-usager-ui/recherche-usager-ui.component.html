@@ -1,0 +1,292 @@
+<div class="row panel panel-default panel-fusion"
+     *ngIf="listeUsagerFusion.length > 0">
+  <div class="col-md-10">
+    <mat-chip-list>
+      <mat-chip *ngFor="let usager of listeUsagerFusion"
+                selected
+                [removable]="true"
+                [disableRipple]="true"
+                (removed)="onRemoveUsagerFusion(usager)">{{getDescriptionUsagerFusion(usager)}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+
+  <div class="col-md-2 text-right">
+    <button *ngIf="listeUsagerFusion.length > 1"
+            id="btn-fusion"
+            type="button"
+            class="btn btn-sm btn-primary"
+            title="{{'usager.recherche.btnfusionner' | translate}}"
+            (click)="onBtnFusionnerClick()">{{'usager.recherche.btnfusionner' | translate}}</button>
+  </div>
+</div>
+
+<div class=" col-md-12">
+  <div id="filtre-usager" class="panel panel-default contentZone">
+    <div class="panel-heading" style="height:50px;">
+      <span><i class="fa fa-filter fa-fw"></i><b>{{ "usager.recherche.filtrerecherche" | translate }}</b></span>
+      <span class="badge badge_content_zone"></span>
+      <span class="pull-right">
+        <button type="button" class="btn-sm btn btn-primary form-btn" title="{{ 'usager.recherche.btnrechercher' | translate }}" id="recherche_btn"
+          (click)="onBtnRechercher()">{{ 'usager.recherche.btnrechercher' | translate }}</button>&nbsp;
+        <button type="button" class="btn-sm btn btn-reinit form-btn" title="{{ 'usager.recherche.btnreinitialiser' | translate }}" id="reinit_btn"
+          (click)="onBtnReinitialiser()">{{ 'usager.recherche.btnreinitialiser' | translate }}</button>
+      </span>
+    </div>
+
+    <div class="panel-body">
+      <app-recherche-usager-criteres #appCriteresRecherche
+                                     [critereRecherche]="critereRecherche"
+                                     [infoAppelCti]="infoAppelCti"
+                                     [inputOptionDoublonPotentiel]="inputOptionDoublonPotentiel"
+                                     [inputOptionLangue]="inputOptionLangue"
+                                     [inputOptionMalentendant]="inputOptionMalentendant"
+                                     [inputOptionRegion]="inputOptionRegion"
+                                     [inputOptionSexe]="inputOptionSexe"
+                                     [inputOptionChampDoublon]="fusionEnabled ? inputOptionChampDoublon : undefined"
+                                     (enterKeydown)="onEnterKeydown()"></app-recherche-usager-criteres>
+    </div>
+  </div>
+</div>
+
+<msss-sigct-content-zone id="tableau-doublons"
+                         title="{{'usager.recherche.tableaudoublons' | translate}}"
+                         *ngIf="displayListeInfosDoublon">
+  <div class="panel-doublon">
+    <table mat-table
+          [dataSource]="listeInfosDoublon">
+      <tr mat-header-row
+          *matHeaderRowDef="displayedColumnsDoublon"></tr>
+      <tr mat-row
+          *matRowDef="let row; columns: displayedColumnsDoublon; let rowIndex = index;"
+          [class.highlightRow]="rowIndex == selectedRowIndex"
+          (click)="onRowClick($event, rowIndex)"></tr>
+      <mat-text-column name="adresse_facet"
+                      headerText="{{'usager.recherche.infocommune.adresse' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="adresse_code_postal_facet"
+                      headerText="{{'usager.recherche.infocommune.codepostal' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="communication_coord_facet"
+                      headerText="{{'usager.recherche.infocommune.comm' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="date_naissance_facet"
+                      headerText="{{'usager.recherche.infocommune.dtnaiss' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="langue_code_facet"
+                      headerText="{{'usager.recherche.infocommune.langue' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="adresse_municipalite_facet"
+                      headerText="{{'usager.recherche.infocommune.municipalite' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="nam_facet"
+                      headerText="{{'usager.recherche.infocommune.nam' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="nom_facet"
+                      headerText="{{'usager.recherche.infocommune.nom' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="nom_mere_facet"
+                      headerText="{{'usager.recherche.infocommune.nommere' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="prenom_facet"
+                      headerText="{{'usager.recherche.infocommune.prenom' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="prenom_mere_facet"
+                      headerText="{{'usager.recherche.infocommune.prenommere' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="adresse_region_code_facet"
+                      headerText="{{'usager.recherche.infocommune.region' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="sexe_code_facet"
+                      headerText="{{'usager.recherche.infocommune.sexe' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <mat-text-column name="count"
+                      headerText="{{'usager.recherche.tableaudoublons.count' | translate}}"
+                      [dataAccessor]="getDoublonColValue.bind(this)"></mat-text-column>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell
+            *matHeaderCellDef
+            disableClear>{{'usager.recherche.tableaudoublons.action' | translate}}</th>
+        <td mat-cell
+            *matCellDef="let row"
+            class="padding-3">
+          <button type="button"
+                  class="btn btn-sm btn-default padding-2"
+                  id="btn-consulter-doublon"
+                  (click)="onRechercherDoublon(displayedColumnsDoublon, row);"
+                  title="{{'usager.recherche.tableaudoublons.consulter' | translate}}">
+            <i class="fa fa-fw fa-eye"></i>
+          </button>
+        </td>
+      </ng-container>
+    </table>
+    <div *ngIf="listeInfosDoublon===null || listeInfosDoublon===undefined  ||listeInfosDoublon.length === 0" class="no-records mat-row">
+      {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+    </div>
+  </div>
+</msss-sigct-content-zone>
+
+<div class=" col-md-12">
+  <div id="resultats-usager" class="panel panel-default contentZone">
+    <div class="panel-heading ">
+      <span>
+        <i class="fa fa-list fa-fw"></i>
+        Affichage {{(pageIndex * pageSize) + 1}} à {{(pageIndex + 1) * pageSize}} sur
+        <span class="badge" id="total-records">{{pageLength}}</span> résultat(s)
+      </span>
+      <span class="badge badge_content_zone"></span>
+      <span class="float-right"></span>
+    </div>
+
+    <div class="example-container mat-elevation-z0">
+      <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+        <!--mat-spinner *ngIf="isLoadingResults"></mat-spinner-->
+        <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+          Aucune données trouvées.
+        </div>
+      </div>
+
+      <div class="example-table-container pn">
+
+        <table mat-table [dataSource]="data" matSort matSortActive="nom" matSortDisableClear matSortDirection="asc">
+
+          <ng-container matColumnDef="badgeSante">
+            <th mat-header-cell *matHeaderCellDef><span style="display: none;">badge santé</span></th>
+            <td mat-cell *matCellDef="let row" style="text-align: center;">
+              <span class="badge sante-color" id="total-sante-records" title="{{ 'usager.recherche.liste.nombrefichesanteinfobulle' | translate }}">{{row.nbAppelAnterieurSante}}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="badgeSocial">
+            <th mat-header-cell *matHeaderCellDef><div style="min-width: 32px;"><span style="display: none;">badge social</span></div></th>
+            <td mat-cell *matCellDef="let row" style="text-align: center;">
+              <span class="badge social-color" id="total-social-records" title="{{ 'usager.recherche.liste.nombrefichesocialinfobulle' | translate }}">{{row.nbAppelAnterieurSocial}}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="prenom">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.recherche.liste.prenom' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{row.prenom}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.recherche.liste.nom' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{row.nom}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="dtNaiss">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+              {{ 'usager.recherche.liste.datnaiss' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row">{{ datePipe.transform(row.dtNaiss, 'yyyy-MM-dd')}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="sexeCode">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+              {{ 'usager.recherche.liste.sexe' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row">{{row.sexeCode}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="communication">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ 'usager.recherche.liste.communication' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row">{{row.communication}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="region">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ 'usager.recherche.liste.municregion' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row">{{row.region}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="codePostal">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ 'usager.recherche.liste.codepostal' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row">{{row.codePostal}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="doublonPotentiel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center" id="doublon-potentiel-header">
+              {{ 'usager.recherche.liste.doublpotentiel' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row" class="text-center"><i class="fa fa-check" *ngIf="row.doublonPotentiel"></i></td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions" align="right">
+            <th mat-header-cell *matHeaderCellDef disableClear>
+              {{ 'usager.recherche.liste.actions' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row" class="padding-3">
+              <button type="button" class="btn btn-default btn-sm padding-2" id="consuler_button"
+                (click)="onConsulterUsager(row.id);" title="{{ 'usager.recherche.liste.btnconsulter' | translate }}" [attr.aria-label]="'usager.recherche.liste.btnconsulter' | translate">
+                <i class="fa fa-file-text-o fa-lg"></i></button>&nbsp;
+              <button type="button" class="btn btn-default btn-sm padding-2" id="modifier_button" *hasAllRoles="['ROLE_US_USAGER_MODIF']"
+                (click)="onModifierUsager(row.id);" title="{{ 'usager.recherche.liste.btnmodifier' | translate }}" [attr.aria-label]="'usager.recherche.liste.btnmodifier' | translate">
+                <i class="fa fa-edit fa-lg"></i></button>&nbsp;
+              <button type="button" class="btn btn-default btn-sm padding-2" id="enregistrements_button_{{row.id}}"
+                (click)="onConsulterEnregistrementsUsager(row.id)"
+                [title]="'usager.recherche.liste.btnenregistrements' | translate"
+                [attr.aria-label]="'usager.recherche.liste.btnenregistrements.aria.' + (row.statutEnregistrement ? row.statutEnregistrement.toLowerCase() : 'aucun') | translate">
+                <i class="fa fa-lg icon-address-card-o"
+                   [class.enregistrement-actif]="row.statutEnregistrement === statusEnregisrementActif"
+                   [class.enregistrement-inactif]="row.statutEnregistrement === statusEnregisrementInactif"></i>
+              </button>&nbsp;
+              <button *ngIf="isRelierUsagerVisible"  type="button" class="btn btn-default btn-sm padding-2" id="ajouter_button"
+                (click)="onRelierUsager(row)" title="{{ 'usager.recherche.liste.btnrelier' | translate }}" [attr.aria-label]="'usager.recherche.liste.btnrelier' | translate">
+                <i class="fa fa-plus-circle fa-lg"></i></button>
+              <ng-container *ngIf="fusionEnabled">
+                <button *hasAllRoles="['ROLE_US_USAGER_FUSION']" type="button" class="btn btn-default btn-sm padding-2" id="fusionner_button"
+                (click)="onAjouterUsagerFusion(row)" title="{{ 'usager.recherche.liste.btnajoutfusion' | translate }}">
+                <i class="fa fa-compress fa-lg"></i></button>
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="identId">
+            <th mat-header-cell *matHeaderCellDef disableClear>
+              Id
+            </th>
+            <td mat-cell *matCellDef="let row">{{row.id}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" (click)="onResultatHeaderClick()"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+      </div>
+      <div *ngIf="data===null || data===undefined  ||data.length === 0" class="no-records mat-row">
+        {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+      </div>
+      <mat-paginator [length]="resultsLength" [pageSize]="100" [pageSizeOptions]="[5,10,15,20,25,50,100]"
+        [showFirstLastButtons]="true"></mat-paginator>
+    </div>
+
+  </div>
+
+  <modal-confirmation id-container="trop_resultat" titre="Avertissement" (onModalClose)="onModalClose($event)">
+    <div class="modal-confirm-body modal-body">
+      {{ 'us-iu-e00018' | translate }}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+        id="cancel_trop_button">Fermer</button>
+    </div>
+  </modal-confirmation>
+
+  <modal-confirmation id-container="au_moins_un" titre="Avertissement" (onModalClose)="onModalClose($event)">
+    <div class="modal-confirm-body modal-body">
+      {{ 'us-iu-e00019' | translate }}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+        id="cancel_moins_button">Fermer</button>
+    </div>
+  </modal-confirmation>
+<div #bottom id="bottom-div"></div>

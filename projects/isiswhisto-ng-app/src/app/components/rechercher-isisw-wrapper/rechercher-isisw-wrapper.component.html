@@ -1,0 +1,62 @@
+<div class="row margin-left-20 margin-right-20">
+    <div class="col-md-12">
+        <div class="panel panel-default contentZone">
+            <div class="panel-heading height-50">
+                <span>
+                    <i class="fa fa-filter fa-fw"></i>
+                    <b>{{ "sigct.ss.r_appelsisisw.filtre_recherche" | translate}}</b>
+                </span>
+
+                <span class="pull-right">
+                    <button #btnRechercher
+                            type="button"
+                            id="btn-rechercher"
+                            class="btn-sm btn btn-primary form-btn"
+                            title="{{ 'sigct.ss.r_appelsisisw.btnrechercher.infobulle' | translate }}"
+                            (click)="onRechercher()">{{ 'sigct.ss.r_appelsisisw.btnrechercher' | translate
+                        }}</button>&nbsp;
+                    <button type="button"
+                            id="btn-reinitialiser"
+                            class="btn-sm btn btn-reinit form-btn"
+                            title="{{ 'sigct.ss.r_appelsisisw.btnreinitialiser.infobulle' | translate }}"
+                            (click)="onReinitialiser()">{{ 'sigct.ss.r_appelsisisw.btnreinitialiser' | translate
+                        }}</button>
+                </span>
+            </div>
+
+            <div class="panel-body">
+                <msss-rechercher-isisw-criterias #rechercherIsiswCriteriasComponent
+                                                 [critereRecherche]="critereRechercheDto"
+                                                 [listeSexe]="inputOptionCollections.listeSexe"
+                                                 [listeRegionResidence]="inputOptionCollections.listeRegionResidence"
+                                                 [listeProfessionnel]="inputOptionCollections.listeProfessionnel"
+                                                 [listeService]="inputOptionCollections.listeService"
+                                                 (serviceChange)="onServiceChange($event)"
+                                                 (rechercher)="onRechercher()">
+                </msss-rechercher-isisw-criterias>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row margin-left-20 margin-right-20">
+    <div class="col-md-12">
+        <msss-table-pagination #tblResultatIsisw
+                               identifiantPaginationTable="tbl-resultat-isisw"
+                               [displayedColumns]="displayedColumns"
+                               [dataSource]="resultatRechercheDto.listeAppel"
+                               [defaultsortField]="defaultSortField"
+                               [defaultPageSize]="defaultPageSize"
+                               [headTitleByCodeColumn]="headTitleByCodeColumn"
+                               [columnsHeadThatNeedPostalCodeFormat]="['postalCode']"
+                               [columnsHeadThatNeedTelephoneFormat]="['princPhoneNumber']"
+                               [columnsHeadThatNeedEllipsis]="['lastName','firstName','regionName']"
+                               [isConsultBtnDisplayed]="true"
+                               consultBtnCssClass="fa-file-text-o"
+                               [resultsLength]="resultatRechercheDto.nbTotalElements"
+                               (rechercherTabContent)="onRefreshTable($event)"
+                               (consultElement)="onConsulterAppel($event)">
+        </msss-table-pagination>
+    </div>
+</div>

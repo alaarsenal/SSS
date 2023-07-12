@@ -1,0 +1,32 @@
+<div class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+  [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+  <div id="intoxicationGroupe_popup" class="modal in" role="dialog" aria-hidden="false" style="display: block;">
+    <div class="modal-dialog    ui-draggable" style="width: auto; height: auto;">
+      <div class="modal-content  ui-resizable">
+        <div class="modal-header draggable ui-draggable-handle">
+
+          <ng-content select=".app-modal-header"></ng-content>
+
+
+        </div>
+        <div class="modal-body" style="overflow-y: auto; height: 429px; width: auto; max-height: none;">
+
+
+          <ng-content select=".app-modal-body"></ng-content>
+
+
+        </div>
+
+        <div class="modal-footer">
+          <ng-content select=".app-modal-footer"></ng-content>
+
+        </div>
+        
+        <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
+        <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
+        <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

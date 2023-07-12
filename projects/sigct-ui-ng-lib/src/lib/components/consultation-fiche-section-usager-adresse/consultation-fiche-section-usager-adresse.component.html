@@ -1,0 +1,10 @@
+<div class="content">
+  <div class="row" *ngFor="let item of dtos">
+    <div class="col-md-2 text-nowrap">
+      <label [innerHTML]="item.key + ' :'"></label>
+    </div>
+    <div class="col-md-10">
+      <span [innerHTML]="item.value"></span>
+    </div>
+  </div>
+</div>

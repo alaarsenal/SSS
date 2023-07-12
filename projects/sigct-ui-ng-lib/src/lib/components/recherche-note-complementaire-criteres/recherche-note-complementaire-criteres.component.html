@@ -1,0 +1,119 @@
+<div class="col-md-12 padding-left-15">
+    <div class="row">
+        <div class="col-md-3 padding-left-5">
+            <msss-sigct-chosen #usernameIntervenantNote
+                               id="usernameIntervenantNote"
+                               label="sigct.ss.r_appels.sctn_criteres_notes_cmpltr.prfsnlintrvn"
+                               [options]="listeIntervenantNote"
+                               [(ngModel)]="criteresRecherche.usernameIntervenantNote"
+                               (keydown.enter)="onExecuterRecherche()">
+            </msss-sigct-chosen>
+        </div>
+        <div class="col-md-3 padding-right-30">
+            <msss-sigct-chosen id="idRfTypeNote"
+                               label="sigct.ss.r_appels.sctn_criteres_notes_cmpltr.type"
+                               [options]="listeTypeNote"
+                               [(ngModel)]="criteresRecherche.idRfTypeNote"
+                               (keydown.enter)="onExecuterRecherche()">
+            </msss-sigct-chosen>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12 no-padding-left">
+                    <strong>{{'sigct.ss.r_appels.sctn_criteres_notes_cmpltr.date'| translate}}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 no-padding-left padding-right-5">
+                    <msss-sigct-datepicker id="dateDebutNoteMin"
+                                           label=""
+                                           dateFormat="yyyy-mm-dd"
+                                           placeHolder="aaaa-mm-jj"
+                                           [endDate]="demain"
+                                           [(ngModel)]="criteresRecherche.dateDebutNoteMin"
+                                           (keydown.enter)="onExecuterRecherche()"
+                                           ariaLabel="date début">
+                    </msss-sigct-datepicker>
+                </div>
+                <div class="col-md-4 no-padding-left padding-right-5">
+                    <msss-input-text id="heureDebutNoteMin"
+                                     maxlength="5"
+                                     patternMask="Hh:m9"
+                                     placeholder="hh:mm"
+                                     [valide]="isHeureDebutMinValide"
+                                     [(ngModel)]="criteresRecherche.heureDebutNoteMin"
+                                     (focusout)="onBlurHeureDtDebut()"
+                                     (keydown.enter)="onExecuterRecherche()"
+                                     ariaLabel="hh:mm">
+                    </msss-input-text>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12 no-padding-left">
+                    <strong>{{'sigct.ss.r_appels.sctn_criteres_notes_cmpltr.dhfinperiode'| translate}}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 no-padding-left padding-right-5">
+                    <msss-sigct-datepicker id="dateDebutNoteMax"
+                                           dateFormat="yyyy-mm-dd"
+                                           placeHolder="aaaa-mm-jj"
+                                           [endDate]="demain"
+                                           [(ngModel)]="criteresRecherche.dateDebutNoteMax"
+                                           (keydown.enter)="onExecuterRecherche()"
+                                           ariaLabel="date fin">
+                    </msss-sigct-datepicker>
+                </div>
+                <div class="col-md-4 no-padding-left padding-right-5">
+                    <msss-input-text id="heureDebutNoteMax"
+                                     maxlength="5"
+                                     patternMask="Hh:m9"
+                                     placeholder="hh:mm"
+                                     [valide]="isHeureDebutMaxValide"
+                                     [(ngModel)]="criteresRecherche.heureDebutNoteMax"
+                                     (focusout)="onBlurHeureDtFin()"
+                                     (keydown.enter)="onExecuterRecherche()"
+                                     ariaLabel="hh:mm">
+                    </msss-input-text>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12 padding-left-25">
+                    <strong>{{'sigct.ss.r_appels.sctn_criteres_notes_cmpltr.duree'| translate}}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 padding-left-25 col-duree-min">
+                    <msss-input-text id="dureeNoteMin"
+                                     maxlength="3"
+                                     patternMask="099"
+                                     [disableNumberCheck]="false"
+                                     [(ngModel)]="criteresRecherche.dureeNoteMin"
+                                     (keydown.enter)="onExecuterRecherche()"
+                                     ariaLabel="minutes minimum">
+                    </msss-input-text>
+                </div>
+                <div class="col-md-1 col-et">
+                    <strong>{{'sigct.ss.r_appels.sctn_criteres_notes_cmpltr.dureeet'| translate}}</strong>
+                </div>
+                <div class="col-md-3 col-duree-max">
+                    <msss-input-text id="dureeNoteMax"
+                                     maxlength="3"
+                                     patternMask="099"
+                                     [disableNumberCheck]="false"
+                                     [(ngModel)]="criteresRecherche.dureeNoteMax"
+                                     (keydown.enter)="onExecuterRecherche()"
+                                     ariaLabel="minutes maximum">
+                    </msss-input-text>
+                </div>
+                <div class="col-md-1 col-minute">
+                    <strong>{{'sigct.ss.r_appels.sctn_criteres_notes_cmpltr.dureemin'| translate}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

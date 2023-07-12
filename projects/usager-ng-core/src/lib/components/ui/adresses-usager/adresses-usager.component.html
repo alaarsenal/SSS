@@ -1,0 +1,288 @@
+<!-- <div #container> -->
+<!-- ce code a été mis en commentaire pour cacher la case du code postal inconnu voir mantis 3707, par contre il faudra faire le ménage quand on travaillera sur ce mantis
+    <div class="col-md-12">
+    <msss-input-checkbox disabled="false" ng-disabled="all"  id="codePostalInconnu" name="codePostalInconnu"
+    [options]="inputOptionCodePostalInconnu" [(ngModel)]="usagerLieuResidence.codePostalInconnu"
+    #codePostalInconnu="ngModel" (ifclick)="toggleVisibility();" ></msss-input-checkbox>
+  </div>
+
+  <div class="col-md-12" style="border-bottom: 1px solid #ddd;"></div>
+
+    Mantis 3707 -->
+<div class="row margin-top-15 margin-bottom-15"
+     *ngIf="isContextAppel && likedUsagerAvailable">
+  <div class="col-md-2 padding-left-30 padding-top-8">
+    <label>{{importerCommMsg}}</label>
+  </div>
+  <div class="col-md-3">
+    <msss-sigct-chosen id="type"
+                       name="type"
+                       required
+                       [(ngModel)]="usagerLieuResidence.idIdentifLinkedUsager"
+                       #type="ngModel"
+                       [options]="inputOptionlinkedUsager"
+                       (focus)="onFocus($event)"
+                       ariaLabel="type">
+    </msss-sigct-chosen>
+  </div>
+  <div class="col-md-2">
+    <button #btnSelectComm
+            type="button"
+            id="btnSelectComm"
+            class="btn-sm btn btn-default"
+            title="{{selectLabelMsg}}"
+            (click)="selctionnerAddress();">{{selectLabelMsg}}
+    </button>
+  </div>
+</div>
+
+<div class="col-md-6 padding-top-10"
+     style="background-color: lightgray; padding-bottom: 1%;">
+  <form name="form"
+        (ngSubmit)="onSubmit(fAdresse)"
+        #fAdresse="ngForm"
+        novalidate>
+    <div class="col-md-11 no-padding">
+      <div class="row">
+        <div class="col-md-6 no-padding-right">
+          <m10-code-postal-autocomplete #codePostal
+                                        label="usager.adresses.codepostal"
+                                        name="codePostal"
+                                        id="codePostal"
+                                        [(ngModel)]="usagerLieuResidence.codePostal"
+                                        (optionSelected)="onCodePostalSelected($event)"
+                                        (blur)="onCodePostalBlur($event)"
+                                        longueurMin="3"
+                                        dropdownWidth="300px"
+                                        nbCarMinAutocomplete="3">
+          </m10-code-postal-autocomplete>
+        </div>
+
+        <div class="col-md-6 no-padding-right padding-left-5">
+          <m10-municipalite-autocomplete #municipalite
+                                         label="usager.adresses.municipalite"
+                                         name="municNom"
+                                         id="municNom"
+                                         maxlength="70"
+                                         dropdownWidth="400px"
+                                         nbCarMinAutocomplete="3"
+                                         (blur)="onMunicipaliteBlur($event)"
+                                         [(ngModel)]="usagerLieuResidence.municNom"
+                                         (optionSelected)="onMunicipaliteSelected($event)">
+          </m10-municipalite-autocomplete>
+        </div>
+
+        <div class="col-md-6 no-padding-right">
+          <msss-sigct-chosen #codeRegion
+                             label="usager.adresses.region"
+                             name="codeRegion"
+                             id="codeRegion"
+                             [(ngModel)]="usagerLieuResidence.codeRegion"
+                             [options]="inputOptionRegion"
+                             (optionSelected)="onRegionSelected($event)"
+                             [valide]="listeRegionValide"
+                             (focus)="onFocus($event)"
+                             (cancelOptionSelected)="onRegionSelected($event)">
+          </msss-sigct-chosen>
+        </div>
+
+        <div class="col-md-6 no-padding-right padding-left-5">
+          <msss-sigct-chosen #codeTypeAdresse
+                             label="usager.adresses.type"
+                             name="codeTypeAdresse"
+                             id="codeTypeAdresse"
+                             (focus)="onFocus($event)"
+                             [(ngModel)]="usagerLieuResidence.codeTypeAdresse"
+                             [valide]="listeTypeAdresseValide"
+                             [options]="inputOptionType"
+                             (optionSelected)="onTypeAdresse($event)">
+          </msss-sigct-chosen>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 no-padding-right padding-top-16">
+          <m10-adresse-autocomplete #adresse
+                                    label="usager.adresses.adresse"
+                                    id="adresse"
+                                    name="adresse"
+                                    maxlength="56"
+                                    dropdownWidth="600px"
+                                    nbCarMinAutocomplete="3"
+                                    (blur)="onAdresseBlur($event)"
+                                    [(ngModel)]="usagerLieuResidence.adresse"
+                                    (optionSelected)="onAdresseSelected($event)">
+          </m10-adresse-autocomplete>
+        </div>
+
+        <div class="col-md-3 padding-left-5 no-padding-right padding-top-16">
+          <msss-sigct-chosen #subdvImmeu
+                             label="usager.adresses.type.unite"
+                             id="codeCategSubdvImmeu"
+                             name="codeCategSubdvImmeu"
+                             (optionSelected)="onCategSubdvImmeu($event)"
+                             [(ngModel)]="usagerLieuResidence.codeCategSubdvImmeu"
+                             [options]="inputOptionAppartement"
+                             ariaLabel="Catégorie immeuble">
+                            </msss-sigct-chosen>
+        </div>
+
+        <div class="col-md-3 padding-left-5 no-padding-right padding-top-16">
+          <msss-input-text #subdvImmeuSuffx
+                           label="usager.adresses.numero.unite"
+                           id="subdvImmeuSuffx"
+                           name="subdvImmeuSuffx"
+                           [(ngModel)]="usagerLieuResidence.subdvImmeu"
+                           maxlength="12" 
+                           ariaLabel="subdivision">
+                          </msss-input-text>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-6 no-padding-right ">
+          <msss-sigct-chosen #codeProvince
+                             label="usager.adresses.province"
+                             name="codeProvince"
+                             id="codeProvince"
+                             [(ngModel)]="usagerLieuResidence.codeProvince"
+                             [options]="inputOptionProvince"
+                             (optionSelected)="onProvinceSelected($event)"
+                             [valide]="listeProvinceValide"
+                             (focus)="onFocus($event)"
+                             (cancelOptionSelected)="onProvinceSelected($event)">
+                            </msss-sigct-chosen>
+        </div>
+
+        <div class="col-md-6 no-padding-right padding-left-5">
+          <msss-sigct-chosen #codePays
+                             label="usager.adresses.pays"
+                             name="codePays"
+                             id="codePays"
+                             [(ngModel)]="usagerLieuResidence.codePays"
+                             [options]="inputOptionPays"
+                             (optionSelected)="onPaysSelected($event)"
+                             [valide]="listePaysValide"
+                             (focus)="onFocus($event)"
+                             (cancelOptionSelected)="onPaysSelected($event)">
+                            </msss-sigct-chosen>
+        </div>
+
+        <div class="col-md-12 no-padding-right">
+          <msss-input-text #detail
+                           label="usager.adresses.details"
+                           name="detail"
+                           id="detailAdresse"
+                           [(ngModel)]="usagerLieuResidence.detail"
+                           maxlength="255">
+          </msss-input-text>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-1">
+      <div class="padding-left-8"
+           style="padding-top:125px;"
+           id="usgActionIcon">
+        <button type="submit"
+                style="display:none"
+                #submitFAdresseBtn>Submit</button>
+        <msss-action-link [actionLinks]="actionLinks"></msss-action-link>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div><b>{{ "usager.adresses.territoire" | translate }}</b></div>
+        <div class="territoire-list">
+          {{usagerLieuResidence.rtsNom}}<span
+                *ngIf="usagerLieuResidence.rtsNom && usagerLieuResidence.rlsNom">,&nbsp;</span>
+          {{usagerLieuResidence.rlsNom}}<span
+                *ngIf="usagerLieuResidence.rlsNom && usagerLieuResidence.clscNom">,&nbsp;</span>
+          {{usagerLieuResidence.clscNom}}
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="col-md-6 padding-top-10">
+  <msss-list-info-action [list]="this.usagerLieuResidences"
+                         [formatAction]="formatActionUsagerLieuResidence"
+                         (modifierAction)="selectionnerLieuResidenceEditer($event)"
+                         (archiverAction)="confirmerArchiverLieuResidence($event)"
+                         (displayAllAction)="afficherOuReduireListeLieuResidence($event)"
+                         [idElementModifieSelectionne]="idElementModifieSelectionne"
+                         editerId="editerBtnAdr"
+                         archiverId="archiverBtnAdr"
+                         afficherId="afficherBtnAdr"
+                         labelDevelopper="{{'usager.adresses.lnkaffichertout' | translate}}"
+                         labelReduire="{{'usager.adresses.lnkreduiretout' | translate}}"
+                         [cacherAfficherReduire]="cacherAfficherReduire"
+                         [displayButtonAfficherTout]="true"
+                         ariaLabel="adresses">
+  </msss-list-info-action>
+
+  <modal-confirmation id-container="confirm_popup">
+
+    <div class="modal-confirm-body modal-body">
+      {{ messageConfirmationArchiverAdresse }}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button"
+              data-dismiss="modal"
+              class="btn btn-primary btn-sm btn-key-action visibility-visible"
+              id="ok_confirm_button"
+              (click)="submitFAdresseBtn.click()">Oui</button>
+      <button type="button"
+              data-dismiss="modal"
+              class="btn btn-sm btn-key-action hidePopup visibility-visible"
+              id="cancel_confirm_button"
+              (click)="refuserModif()">Non</button>
+    </div>
+  </modal-confirmation>
+
+  <modal-confirmation id-container="confirm_popup_archiver">
+
+    <div class="modal-confirm-body modal-body">
+      {{"us-iu-a00000" | translate}}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button"
+              data-dismiss="modal"
+              class="btn btn-primary btn-sm btn-key-action visibility-visible"
+              id="ok_confirm_button"
+              (click)="archiverLieuResidence()">Oui</button>
+      <button type="button"
+              data-dismiss="modal"
+              class="btn btn-sm btn-key-action hidePopup visibility-visible"
+              id="cancel_confirm_button"
+              (click)="refuserModif()">Non</button>
+    </div>
+  </modal-confirmation>
+
+  <modal-confirmation id-container="confirm_popup_modif">
+
+    <div class="modal-confirm-body modal-body">
+      {{"us-iu-a00011" | translate}}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+      <button type="button"
+              data-dismiss="modal"
+              class="btn btn-primary btn-sm btn-key-action visibility-visible"
+              id="ok_confirm_button"
+              (click)="confirmModif()"
+              md-autofocus>Oui</button>
+      <button type="button"
+              data-dismiss="modal"
+              class="btn btn-sm btn-key-action hidePopup visibility-visible"
+              id="cancel_confirm_button"
+              (click)="refuserModif()">Non</button>
+    </div>
+  </modal-confirmation>
+</div>
+<!-- </div> Mis en commentaire pour Mantis 3707 -->

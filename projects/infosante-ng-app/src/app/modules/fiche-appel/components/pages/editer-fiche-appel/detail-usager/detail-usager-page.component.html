@@ -1,0 +1,75 @@
+<div class="col-md-12 btn-toolbar">
+  <button type="button"
+          #btnusager
+          id="btn-infos-usager"
+          class="btn-sm btn btn-primary pull-right"
+          title="{{'sigct.ss.f_appel.btninfosusager' | translate}}"
+          (click)="onBtnInfosUsagerClick()">
+    {{'sigct.ss.f_appel.btninfosusager' | translate}}
+  </button>
+
+  <button type="button"
+          *hasAnyRoles="['ROLE_SA_APPEL_RECH_ISISW','ROLE_SA_APPEL_RECH_ISISW_TOUS']"
+          class="btn-sm btn btn-primary pull-right"
+          title="{{ 'sigct.ss.f_accueil.btn.info.bullerechappelisisw' | translate }}"
+          id="btn-rech-isisw-histo"
+          (click)="onBtnRechercherIsiswClick()">
+    {{ 'sigct.ss.f_accueil.btn.rechappelisisw' | translate}}
+  </button>
+</div>
+
+<sigct-usager-consultation *ngIf="idUsagerIdent;else aucunUsager"
+                           [topBarreVisible]="false"
+                           [idUsager]="idUsagerIdent"
+                           [doublonPotentielVisible]="false" [alertContainerVisible]="false" >
+</sigct-usager-consultation>
+<ng-template #aucunUsager>
+  <!-- Aucun usager relié -->
+  <msss-sigct-content-zone id="usager"
+                           title="{{'sigct.ss.f_appel.aucunusager' | translate}}"
+                           [collapsed]="true">
+  </msss-sigct-content-zone>
+</ng-template>
+
+<div class="row">
+  <div class="col-md-4 padding-lien-appelant">
+    <msss-sigct-chosen #categorieAppelantRef
+                       id="codeReferenceCategorieAppelant"
+                       name="codeReferenceCategorieAppelant"
+                       [required]="ficheAppelDTO.typeConsultation!='DEMRESS' && ficheAppelDTO.typeConsultation!='NONPERT'"
+                       label="{{ 'sigct.ss.f_appel.aplntusag.catgaplnt' | translate }}"
+                       [(ngModel)]="ficheAppelDTO.codeReferenceCategorieAppelant"
+                       [options]="inputOptionCategoriesAppelant">
+    </msss-sigct-chosen>
+  </div>
+</div>
+
+
+<msss-sigct-content-zone id="appelant-initial"
+                         title="{{'sigct.ss.f_appel.aplntusag.titreaplnt' | translate}}">
+
+  <msss-sigct-appelant-initial [appelService]="appelService"
+                               [idAppel]="idAppel"
+                               [infoAppelCti]="infoAppelCtiDto"
+                               [rrssParamsUrl]="rrssParamsUrl">
+  </msss-sigct-appelant-initial>
+
+</msss-sigct-content-zone>
+
+<modal-confirmation id-container="confirmer-relier-usager-popup">
+  <div class="modal-confirm-body modal-body">{{ 'us-iu-c00001' | translate }}</div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-sm btn-key-action hidePopup visibility-visible"
+            id="confirmer-remplacer-usager-btn-oui"
+            (click)="relierUsager(usagerALier)">Oui
+    </button>
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="confirmer-remplacer-usager-btn-non">Non
+    </button>
+  </div>
+</modal-confirmation>

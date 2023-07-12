@@ -1,0 +1,25 @@
+.czAction {
+  cursor: pointer;
+}
+
+.col-md-12 {
+  display: block !important;
+}
+.panelHeading{
+  font-weight: 600;
+  font-size:16px;
+  color: #333;
+  background-image: linear-gradient(to bottom,#f6f6f6 0,#f6f6f6 100%);
+  padding: 10px ;
+
+}
+.borderSante{
+  border-left: 3px solid #c9dc87
+}
+.borderSocial{
+  border-left: 3px solid  #E8AA31
+}
+.borderUsager{
+  border-left: 3px solid  #2b669a
+}
+

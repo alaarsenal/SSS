@@ -1,0 +1,28 @@
+<div class="main">
+  <div class="left-menu">
+    <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+  </div>
+  <div class="conteneur">
+    <div class=form-top-bar>
+      <msss-form-top-bar label="{{'sigct.sa.r_appels.titre' | translate}}"
+                         [options]="formTopBarOptions"
+                         nomModule="infosante"></msss-form-top-bar>
+    </div>
+
+    <div class="compos"
+         cdkScrollable>
+      <ng-template #alertContainer></ng-template>
+
+      <app-rechercher-fiche-appel-ui #appRechercherFicheAppelUi
+                                     domaine="SA"
+                                     labelSectionCriteresFicheAppel="sigct.sa.r_appels.sctn_criteres_consultation"
+                                     [inputOptionCollections]="rechercheFicheAppelCollections"
+                                     [criteresRecherche]="rechercheFicheAppelCriteres"
+                                     (consulterFicheAppel)="onConsulterFicheAppel($event)"
+                                     (rechercherFicheAppel)="onRechercherFicheAppel($event)"
+                                     (exporterFicheAppel)="exporter($event)"
+                                     (majListeIntervenant)="onMajListeIntervenant($event)">
+      </app-rechercher-fiche-appel-ui>
+    </div>
+  </div>
+</div>

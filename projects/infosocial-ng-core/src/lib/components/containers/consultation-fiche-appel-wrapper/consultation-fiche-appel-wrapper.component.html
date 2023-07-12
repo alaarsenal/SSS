@@ -1,0 +1,154 @@
+<div #mainContainer>
+  <div *ngIf="_showTitleVisualisation"
+       class="row enlever-espace-droite-gauche">
+    <div class="col-md-12">
+      <h4 class="h4center">{{ 'sigct.so.f_appel.menuver.visuinter' | translate }}</h4>
+    </div>
+  </div>
+  <div class="row no-margin">
+    <div class="col-md-5"></div>
+    <div class="col-md-2 bande-flottante-container">
+      <msss-bande-flottante #bandeflottante
+                            [contentZones]="sectionsContentZones"
+                            [divToScroll]="mainContainer">
+      </msss-bande-flottante>
+    </div>
+    <div class="col-md-5 pull-right btns">
+      <ng-container *ngIf="isBtnConvertirFicheEnNoteComplVisible">
+        <button id="btnConvertirFicheEnNoteCompl"
+                class="btn btn-primary"
+                title="{{'sigct.ss.f_appel.consultation.convertirnotecompib'|translate}}"
+                (click)="onBtnConvertirFicheEnNoteComplClick()">
+          {{"sigct.ss.f_appel.consultation.convertirnotecomp"|translate}}
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="isBtnCorrigerFicheVisible">
+        <button id="btnCorrigerFiche"
+                class="btn btn-primary"
+                title="{{'sigct.ss.f_appel.consultation.corrigerinfobulle'|translate}}"
+                (click)="onBtnCorrigerFicheClick()">
+          {{'sigct.ss.f_appel.consultation.corriger'|translate}}
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="isBtnAjouterRelanceVisible">
+        <button id="btnAjouterRelance"
+                class="btn btn-primary"
+                title="{{infobulleAjouterRelance|translate}}"
+                [disabled]="isBtnAjouterRelanceDisabled"
+                (click)="onBtnAjouterRelanceClick()">
+          {{'sigct.ss.f_appel.consultation.ajouterrelance'|translate}}
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="isBtnModifierRelanceVisible">
+        <button id="btnModifierRelance"
+                class="btn btn-primary"
+                title="{{infobulleModifierRelance|translate}}"
+                (click)="onBtnModifierRelanceClick()">
+          {{'sigct.ss.f_appel.consultation.modifierrelance'|translate}}
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="isBtnAjouterNoteVisible">
+        <button id="btn-ajouter-note-complementaire"
+                *hasAllRoles="['ROLE_SO_APPEL_NOTE']"
+                class="btn btn-primary"
+                title="{{'sigct.ss.f_appel.consultation.btnajouternoteinfobulle'|translate}}"
+                (click)="onBtnAjouterNoteClick()">
+          {{'sigct.ss.f_appel.consultation.btnajouternote'|translate}}
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="isBtnSupppFicheVisible">
+        <button id="btnSuppFicheAppel"
+                *hasAllRoles="['ROLE_SO_APPEL_SUPPR']"
+                class="btn btn-primary"
+                title="{{'sigct.ss.f_appel.consultation.supprimerinfobulle'|translate}}"
+                (click)="onBtnSupprimerFicheAppelClick()">
+          {{'sigct.ss.f_appel.consultation.supprimer'|translate}}
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="isBtnImprimerFicheVisible">
+        <button id="btn-imprimer-fiche"
+                *hasAllRoles="['ROLE_SO_APPEL_IMPR']"
+                class="btn btn-outline-primary btn-print"
+                title="Imprimer Fiche"
+                (click)="onBtnImprimerClick()"
+                [attr.aria-label]="'sigct.ss.f_appel.consultation.visualiserpdfinfobulle' | translate">
+          <i class="fa fa-file-pdf-o"
+             title="{{ 'sigct.ss.f_appel.consultation.visualiserpdfinfobulle' | translate }}">
+          </i>
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <msss-consultation-fiche-section-usager #consultationFicheSectionUsager
+                                            [consultationUsager]="consultationFicheSectionUsagerDTO">
+    </msss-consultation-fiche-section-usager>
+  </div>
+  <div class="col-md-12">
+    <msss-consultation-fiche-section-appelant #consultationFicheSectionAppelant
+                                              [consultationAppelantDTO]="consultationAppelantDTO">
+    </msss-consultation-fiche-section-appelant>
+  </div>
+  <div class="col-md-12">
+    <app-consultation-fiche-section-demande-analyse #consultationFicheSectionDemandeAnalyse
+                                                    [ficheAppelSocialDto]="ficheAppelSocialDto">
+    </app-consultation-fiche-section-demande-analyse>
+  </div>
+  <div class="col-md-12">
+    <app-consultation-fiche-section-plan-action #consultationFicheSectionPlanAction
+                                                [ficheAppelSocialDto]="ficheAppelSocialDto"
+                                                (consulterAvis)="onConsulterAvis($event)">
+    </app-consultation-fiche-section-plan-action>
+  </div>
+  <div class="col-md-12">
+    <msss-consultation-fiche-section-terminaison #consultationFicheSectionTerminaison
+                                                 domaine="SO"
+                                                 labelSectionResumeIntervention="sigct.so.f_appel.consultation.terminaison.statistiques"
+                                                 labelChampLangue="sigct.so.f_appel.consultation.terminaison.statistiques.langueconsultation"
+                                                 [consultationFicheSectionTerminaison]="consultationFicheSectionTerminaisonDTO">
+      <app-consultation-fiche-section-terminaison-validation [validationFinIntervention]="validationFinInterventionDTO">
+      </app-consultation-fiche-section-terminaison-validation>
+    </msss-consultation-fiche-section-terminaison>
+  </div>
+  <div class="col-md-12">
+    <app-consultation-fiche-section-fichiers #consultationFicheSectionFichiers
+                                             [dto]="consultationFIchiersDTO"
+                                             (onTelechargeFichier)="onTelechargerFichier($event)">
+    </app-consultation-fiche-section-fichiers>
+  </div>
+  <div class="col-sm-12">
+    <msss-consultation-fiche-section-signature #consultationFicheSectionSignature
+                                               [signatureDTO]="signatureDTO"
+                                               [listeCorrectionsFicheAppel]="listeCorrectionFicheAppel">
+    </msss-consultation-fiche-section-signature>
+  </div>
+  <div class="col-sm-12">
+    <msss-consultation-fiche-section-identifiant #consultationFicheSectionIdentifiant
+                                                 domaine="SO"
+                                                 [identifiantDTO]="identifiantDTO">
+    </msss-consultation-fiche-section-identifiant>
+  </div>
+  <div class="col-sm-12">
+    <app-consultation-fiche-section-relance #consultationFicheSectionRelance
+                                            domaine="SO"
+                                            [idFicheAppel]="ficheAppelSocialDto?.id">
+    </app-consultation-fiche-section-relance>
+  </div>
+  <div class="col-md-12">
+    <app-consultation-fiche-section-note-compl #consultationFicheSectionNoteCompl
+                                               [idFicheAppel]="_ficheAppelId"
+                                               [consultationNoteComplDto]="consultationNoteComplDTO"
+                                               (downloadFileEvent)="downloadFile($event)">
+    </app-consultation-fiche-section-note-compl>
+  </div>
+</div>
+<a #bottom></a>

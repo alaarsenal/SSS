@@ -1,0 +1,40 @@
+<form name="form" (ngSubmit)="onSubmit()" #fCom="ngForm">
+<div class="row col-md-12 padding-left-15">
+
+    <div class="col-md-2">
+        <msss-input-text #idusager id="idusager" name="idusager" label="sigct.ss.f_rapport_journ.idUsager"
+                    maxlength="10" [(ngModel)]="rapportDTO.identifiant" [patternMask]="'9999999990'" placeHolder="Identifiant Usager"
+                    [valide]="isIdentifiantUsagerValide">
+        </msss-input-text>
+    </div>
+
+    <div class="col-md-2 erreur">
+        <msss-sigct-datepicker #dtdebut id="calendarDebut" label="sigct.ss.f_rapport_journ.datedebut"
+                    [(ngModel)]="rapportDTO.dateDebut" dateFormat="yyyy-mm-dd" placeHolder="aaaa-mm-jj"
+                    [ngModelOptions]="{standalone:true}" [endDate]="endDate"  [valide]="isDateDebutValide"
+                    required >
+        </msss-sigct-datepicker>
+    </div>
+
+    <div class="col-md-2">
+        <msss-sigct-datepicker #dtfin id="calendarFin" label="sigct.ss.f_rapport_journ.datefin"
+                    [(ngModel)]="rapportDTO.dateFin" dateFormat="yyyy-mm-dd" placeHolder="aaaa-mm-jj"
+                    [ngModelOptions]="{standalone:true}" [endDate]="endDate" [valide]="isDateFinValide"
+                   required>
+        </msss-sigct-datepicker>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="row padding-bouton">
+            <button #btngenerer type="submit" class="btn btn-primary btn-sm btn-key-action pull-right"
+            id="generer_button" title="{{tooltip}}" >{{'sigct.ss.f_rapport_journ.btn.genrer' | translate}}</button>
+        </div>
+
+
+    </div>
+
+
+
+</div>
+</form>

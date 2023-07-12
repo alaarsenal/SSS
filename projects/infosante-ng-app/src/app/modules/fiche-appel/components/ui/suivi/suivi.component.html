@@ -1,0 +1,16 @@
+<div class="ml-1-5">
+  <div class="row">
+    <div class="col-md-6">
+      <msss-input-text label="sigct.sa.f_appel.intervention.suivi.si-non-amelioration" id="siNonAmelioration"
+        name="sinonamelioration" [(ngModel)]="suiviDTO.siNonAmelioration" maxlength="255"
+        [disabled]="isDisabled" raccourcis=true>
+      </msss-input-text>
+    </div>
+    <div class="col-md-6">
+      <msss-sigct-chosen label="sigct.sa.f_appel.intervention.suivi.consulter" id="consulter" name="consulter"
+        [options]="inputOptionsConsulter" [(ngModel)]="suiviDTO.referenceRessourceSuiviCode"
+        [disabled]="isDisabled">
+      </msss-sigct-chosen>
+    </div>
+  </div>
+</div>

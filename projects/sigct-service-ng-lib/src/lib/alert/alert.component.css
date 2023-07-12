@@ -1,0 +1,6 @@
+/*  Les messages d'avertissement (alert-light) ont un fond blanc mais un contour et une écriture comme
+    un Warning */
+div .alert-light {
+    border: 1px solid rgb(245, 231, 158);
+    color: #8a6d3b;
+}

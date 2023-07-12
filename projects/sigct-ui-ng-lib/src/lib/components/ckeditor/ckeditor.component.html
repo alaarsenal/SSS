@@ -1,0 +1,16 @@
+<div class="form-group ">
+  <label [id]="label_id"
+         class="control-label">{{label | translate }}</label>
+  <div>
+    <ckeditor #ckEditor
+              [editor]="editor"
+              tagName="textarea"
+              [config]="config"
+              [data]="value"
+              [ngClass]="getHeightClass()"
+              [(ngModel)]="value"
+              (focus)="setCharLimit($event)"
+              (change)="onChange()">
+    </ckeditor>
+  </div>
+</div>

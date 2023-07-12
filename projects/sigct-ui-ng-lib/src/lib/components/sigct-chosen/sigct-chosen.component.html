@@ -1,0 +1,37 @@
+<label [id]="label_id" for="{{id}}" [class.error]="inputValide == false" [class]="(disabled)?'label_disabled':''" >{{label | translate}}<span class="margin-left-3 mandatory-indicator  mondatory-asterisk" *ngIf="required">*</span>
+  <span class="sr-only" *ngIf="!label">{{ariaLabel}}</span></label>
+
+<mat-form-field appearance="outline"  style="width:100% !important" [class]="(disabled)?'disabled':''">
+  <input #inputText
+        [id]="id"
+        [name]="name"
+        type="text"
+        matInput [formControl]="formControl"
+        [matAutocomplete]="auto"
+        [title]="infoBulle"
+        [placeholder]="placeholder"
+        (keyup.ArrowDown)="onArrowDown($event)"
+        (blur)="onBlur()"
+        (focus)="onFocus()"
+        (mouseenter)="onMouseEnter()"
+        (keydown)="onKeyDow($event)"
+        autocomplete="none"
+        [attr.aria-label]="ariaLabel ? ariaLabel : label | translate">
+
+  <mat-autocomplete [tabindex]="1" (optionSelected)="onOptionSelected($event.option.value)" (opened)="onOpenDropdown()"
+    #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option" [title]="dropdownTitlesVisible ? displayTitleFn(option) : ''">
+
+      <span [class.inactif]="option.actif === false" [innerHTML]="option.label | highlight: toHighlight"></span>
+
+    </mat-option>
+  </mat-autocomplete>
+
+  <div style="display: flex; align-items: center; height: 10px;" matSuffix>
+    <button style="width: 1.5em;" type="button" mat-button *ngIf="checkEmptyOrNull() && value" mat-icon-button aria-label="Clear" (click)="cancelOption()">
+      <mat-icon style="font-size: 18px;">close</mat-icon>
+    </button>
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </div>
+
+</mat-form-field>

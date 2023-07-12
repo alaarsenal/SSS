@@ -1,0 +1,112 @@
+<label class="cadenas cadenas_{{classCadenaUsager}} control-label"><i class="fa fa-lock fa-lg"></i>
+  {{msgCadenaUsager | translate }}</label>
+
+<div class="grid-container">
+  <div class="item1">
+    <fieldset>
+      <legend>{{"usager.identification.title" | translate}}</legend>
+
+      <table>
+        <tr>
+          <th><label>{{"usager.identification.usager.nomlabel" | translate}} : </label></th>
+          <td><span>{{nomUsager}}</span></td>
+        </tr>
+        <tr>
+          <th><label>{{"usager.identification.usager.date.naissance" | translate}} : </label></th>
+          <td><span>{{dateNaissance}}</span></td>
+        </tr>
+        <tr>
+          <th><label>{{"usager.identification.usager.age" | translate}} : </label></th>
+          <td>{{ageFormater}}</td>
+        </tr>
+        <tr>
+          <th><label>{{"usager.identification.usager.groupe.age" | translate}} : </label></th>
+          <td>{{groupeAgeAffiche}}</td>
+        </tr>
+        <tr>
+          <th><label>{{"usager.identification.usager.sexe" | translate}} : </label></th>
+          <td>{{sexeAffiche}}</td>
+        </tr>
+        <tr>
+          <th><label>{{"usager.identification.usager.details" | translate}} : </label></th>
+          <td><i>{{usagerDetail}}</i></td>
+        </tr>
+      </table>
+    </fieldset>
+  </div>
+  <div class="item2">
+    <fieldset>
+      <legend>{{"usager.info.supp.title" | translate}}</legend>
+      <table>
+        <tr>
+          <th><label>{{"usager.info.supp.nam" | translate}} : </label></th>
+          <td><span>{{usagerNam}}</span></td>
+        </tr>
+        <tr>
+          <th><label>{{"usager.info.supp.expiration" | translate}} : </label></th>
+          <td><span>{{usagerNamExpiration}}</span></td>
+        </tr>
+        <tr>
+          <th><label>{{"usager.info.supp.langue" | translate}} : </label></th>
+          <td><span>{{usagerLangue}}</span></td>
+        </tr>
+        <tr>
+          <th><label>{{"usager.info.supp.malentendant" | translate}} : </label></th>
+          <td>{{usagerMalentendant}}</td>
+        </tr>
+        <tr>
+          <th><label>{{"sigct.ss.f_appel.consultation.infossupp.merenomprenom" | translate}} : </label></th>
+          <td>{{usagerNomMere}}</td>
+        </tr>
+        <tr>
+          <th><label>{{"sigct.ss.f_appel.consultation.infossupp.perenomprenom" | translate}} : </label></th>
+          <td>{{usagerNomPere}}</td>
+        </tr>
+        <tr *ngIf="doublonPotentielVisible">
+          <th><label>{{"usager.info.supp.doublon.potentiel" | translate}} : </label></th>
+          <td>{{usagerDoublon}}</td>
+        </tr>
+      </table>
+    </fieldset>
+  </div>
+  <div class="item1">
+    <fieldset>
+      <legend>{{"usager.adresses.title" | translate}}</legend>
+      <div class="grid-container-2">
+        <div class="span1_3">
+          <msss-list-info-action [list]="listeAdresseAff"
+                                 [formatAction]="formatActionUsagerLieuResidence"
+                                 (displayAllAction)="afficherOuReduireListeLieuResidence($event)"
+                                 afficherBouttons="false"
+                                 labelDevelopper="{{'usager.comm.liste.lnkaffichertout' | translate}}"
+                                 labelReduire="{{'usager.adresses.lnkreduiretout' | translate}}"
+                                 [cacherAfficherReduire]="cacherAfficherReduireAdresse"
+                                 [displayButtonAfficherTout]="true">
+          </msss-list-info-action>
+        </div>
+        <div style="display:none;"
+             class="item1">2</div>
+        <div style="display:none;"
+             class="item2">3</div>
+        <div style="display:none;"
+             class="item3">4</div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="item2">
+    <fieldset class="display-flex">
+      <legend>{{"usager.communications.title" | translate}}</legend>
+      <div class="grid-container">
+        <msss-list-info-action [list]="listeCommunicationAff"
+                               [formatAction]="formatActionUsagerCommunication"
+                               (displayAllAction)="afficherOuReduireListeCommunications($event)"
+                               afficherBouttons="false"
+                               labelDevelopper="{{'usager.comm.liste.lnkaffichertout' | translate}}"
+                               labelReduire="{{'usager.adresses.lnkreduiretout' | translate}}"
+                               [cacherAfficherReduire]="cacherAfficherReduireCommunication"
+                               [displayButtonAfficherTout]="true">
+        </msss-list-info-action>
+      </div>
+    </fieldset>
+  </div>
+</div>

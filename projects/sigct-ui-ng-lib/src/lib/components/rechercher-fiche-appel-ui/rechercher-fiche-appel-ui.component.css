@@ -1,0 +1,98 @@
+.btn-reinit {
+    text-shadow: 0 1px 0 #fff;
+    background-image: linear-gradient(to bottom,#fff 0,#ffffff 100%);
+    background-repeat: repeat-x;
+    border-color: #dbdbdb;
+    border-color: #ccc;
+ }
+
+.panel-body {
+    padding: 0 0 10px 0 !important;
+}
+
+/* Résultats recherche */
+
+.no-margin-left{
+    margin-left: 0px !important;
+}
+
+.mat-table {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+}
+
+.mat-cell, .mat-footer-cell {
+    font-size: 12px;
+}
+
+table {
+    width: 100%;
+}
+
+tr.mat-header-row {
+    height: 28px;
+}
+
+tr.mat-footer-row, tr.mat-row {
+    height: 24px;
+}
+
+th {
+    font-weight: bold;
+    color:black;
+}
+
+a {
+    cursor: pointer;
+}
+
+.mat-row:nth-child(2n+1){
+    background-color: #f9f9f9;
+}
+
+.mat_row:nth-child(4n+1) {
+    background-color: white;
+}
+
+::ng-deep .mat-paginator-page-size-select {
+      line-height: 3.125!important;
+}
+
+/* Surcharge de btn-default de Bootstrap afin que le fond des bouttons soient blanc */   
+.btn-default {
+    background-image:none;
+}
+
+.padding-2 {
+    padding: 2px;
+}
+
+.center {
+    text-align: center !important;
+}
+
+.col-date-debut {
+    width: 175px;
+}
+.col-sis {
+    width: 50px;
+}
+.col-sexe {
+    width: 50px;
+}
+.col-telephone {
+    width: 150px;
+}
+.col-region {
+    width: 250px;
+}
+.col-code-postal {
+    width: 110px;
+}
+.col-action {
+    width: 100px;
+}
+
+.display-debug-info {
+    display: none;
+}

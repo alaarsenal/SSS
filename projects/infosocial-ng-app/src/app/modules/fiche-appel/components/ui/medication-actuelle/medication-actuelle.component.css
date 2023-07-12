@@ -1,0 +1,49 @@
+.background-gris {
+    background-color: #D3D3D3;
+}
+
+.background-blanc {
+    background-color: white;
+}
+
+.margin-left-m45 {
+    margin-left: -45px !important;
+}
+
+.enlever-espace {
+    margin-top: -15px;
+    margin-left: -15px;
+}
+
+.margin-top-5 {
+    margin-top: 5px;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+@media (min-width: 1441px) and (max-width: 1920px) {
+    .margin-left-m1 {
+
+        margin-left: -18px !important;
+    
+    }
+
+    .col-btn {
+        width:1% !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1440px) {
+    .margin-left-m1 {
+
+        margin-left: -29px !important;
+        
+    }
+
+    .col-btn {
+        width:1% !important;
+    }
+}
+

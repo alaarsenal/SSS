@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h4 mat-dialog-title class=" float-left">{{titre}}</h4>
+    <a tabindex="-1" class="icone close float-right" title="Fermer" (click)="onNonClick()"><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>
+</div>
+
+<div mat-dialog-content class="modal-body">{{monMessage}}</div>
+
+<div mat-dialog-actions class="modal-footer">
+    <button mat-button id="confi_quitte_btn_oui" class="btn btn-primary btn-sm" (click)="onOuiClick()">Oui</button>
+    <button mat-button id="cancel_confirm_button" class="btn btn-sm" (click)="onNonClick()">Non</button>
+</div>

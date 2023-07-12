@@ -1,0 +1,29 @@
+.consulter-isisw-page {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  margin: 0;
+}
+
+.left-menu {
+  background-color: black;
+  padding-top: 42px;
+  position: sticky;
+  width: 45px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-top-bar {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.conteneur {
+  flex-grow: 1;
+  overflow-y: auto;
+}

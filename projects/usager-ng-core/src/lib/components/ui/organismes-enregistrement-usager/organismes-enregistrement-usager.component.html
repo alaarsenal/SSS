@@ -1,0 +1,130 @@
+<div class="table-container pn">
+    <table mat-table [dataSource]="dataSource" class="table marginB-0">
+
+        <ng-container matColumnDef="organisme_site">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingL-2'">
+                {{ 'usager.enregistrement.sec.organisme.organisme' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'paddingL-2'">
+                <msss-lien-rrss-pdf [codeRRSS]="row.codeOrganismeRRSS" [nomRRSS]="row.nomOrganisme"></msss-lien-rrss-pdf>
+                <msss-lien-rrss-pdf [codeRRSS]="row.codeSiteRRSS" [nomRRSS]="row.nomSite"></msss-lien-rrss-pdf>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="garde">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+                {{ 'usager.enregistrement.sec.organisme.garde' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'th-center w-action-col paddingR-0 paddingL-0'">
+                <msss-bouton-module-garde [codeMG]="getCodeMG(row)"></msss-bouton-module-garde>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+                {{ 'usager.enregistrement.sec.organisme.type' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;">
+                {{row.type}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nonGestionnaire">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+                {{ 'usager.enregistrement.sec.organisme.gestionnaire' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;">
+                {{row.nomGestionnaire}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="raison">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+                {{ 'usager.enregistrement.sec.organisme.raison' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;">
+                {{row.raison}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="numeroDossier">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+                {{ 'usager.enregistrement.sec.organisme.nodossier' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;">
+                {{row.numeroDossier}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="commentaires">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+                {{ 'usager.enregistrement.sec.organisme.commentaires' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;">
+                {{row.commentaires}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date_debut">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-leftpaddingR-0'">
+                {{ 'usager.enregistrement.sec.organisme.debut' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'paddingR-0'">
+                <div class="text-nowrap" *ngIf="row.dateDebut">
+                    {{ row.dateDebut | date : "yyyy-MM-dd"}}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date_fermeture_prevue">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingR-0'">
+                {{ 'usager.enregistrement.sec.organisme.fermp' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'paddingR-0'">
+                <div class="text-nowrap" *ngIf="row.dateFermeturePrevue">
+                    {{ row.dateFermeturePrevue | date : "yyyy-MM-dd"}}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fermeture">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+                {{ 'usager.enregistrement.sec.organisme.fermeture' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'paddingR-0'">
+                <div *ngIf="row.dateFermetureEffective">
+                    {{ row.dateFermetureEffective | date : "yyyy-MM-dd"}}
+                </div>
+                <div>{{ row.fermetureFullDisplayName}}</div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-right w-action-col paddingL-0'">
+                {{ 'usager.enregistrement.sec.organisme.action' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'th-center w-action-col paddingR-0 paddingL-0'">
+
+                <button type="button" class="btn btn-default btn-sm padding-2" id="modifier_button" *ngIf="row.modifiable"
+                    (click)="modifierDetailsOrganisme(row.id, idx)"
+                    title="{{ 'usager.enregistrement.sec.organisme.modifier' | translate }}">
+                    <i class="fa fa-edit fa-lg"></i></button>
+            </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  <div *ngIf="dataSource.data===null || dataSource.data===undefined  ||dataSource.data.length === 0" class="no-records mat-row">
+    {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+  </div>
+    <mat-toolbar>
+        <mat-toolbar-row class="toolbar-organismes-add">
+            <button type="button" class="btn-sm btn btn-primary form-btn" id="ajouterBtn"
+                title="{{ 'usager.enregistrement.sec.organisme.ajouter' | translate }}" (click)="ajouterUnOrganisme()">
+                {{ 'usager.enregistrement.sec.organisme.ajouter' | translate }} </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</div>

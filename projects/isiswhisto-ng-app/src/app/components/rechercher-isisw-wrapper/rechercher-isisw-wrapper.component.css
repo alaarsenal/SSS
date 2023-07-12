@@ -1,0 +1,50 @@
+.btn-reinit {
+    text-shadow: 0 1px 0 #fff;
+    background-image: linear-gradient(to bottom,#fff 0,#ffffff 100%);
+    background-repeat: repeat-x;
+    border-color: #dbdbdb;
+    border-color: #ccc;
+ }
+
+ ::ng-deep #tableRef  {
+    border-color: #ddd;
+ }
+
+ ::ng-deep #tableRef .panel-body {  
+     padding: 0px;
+ }
+
+ ::ng-deep #tableRef .panel-heading {  
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#ffe8e8e8', GradientType=0);
+    background-repeat: repeat-x;
+  }
+
+
+  ::ng-deep #tbl-resultat-isisw thead .mat-header-row .mat-header-cell {
+    border-bottom: 0px !important; 
+    border-top: 0px !important;
+  }
+
+
+  ::ng-deep .panel-footer .mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 13px 0px;
+  }
+
+  ::ng-deep #total-records {
+    color: #f5f5f5 !important; 
+    background-color: #333 !important; 
+  }
+
+  .margin-left-20 {
+    margin-left: 20px; 
+  }
+  .margin-right-20 {
+    margin-right: 20px;
+  }
+
+  .height-50 {
+    height:50px;
+  }

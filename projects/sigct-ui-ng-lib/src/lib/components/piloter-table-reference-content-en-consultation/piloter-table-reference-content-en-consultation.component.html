@@ -1,0 +1,50 @@
+
+<div class="piloter-table-reference-content-en-consultation-component">
+    <div class="container">
+
+
+        <div class="row margin-bottom-15" [ngClass]="getPiloterTablesRefTitleClass()">
+            <div class="col-md-9 ">
+                <h1 class="label-font-size">
+                    <i class="fa fa-wrench fa-lg margin-right-10"></i>{{ tableRefContentNameForConsultPageTile }}
+                </h1>
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="float-right">
+                    <button (click)="addTableRefContentItem()"
+                            class="btn btn-primary"
+                            title="{{'sigct.ss.pilotage.tableref.edition.ajouterinfobulle'|translate}}">
+                            {{'sigct.ss.pilotage.tableref.edition.ajouter'|translate}}
+                    </button>
+
+                    <button (click)="backToTablesRefPagination()"
+                            class="btn btn-default margin-left-5"
+                            title="{{'sigct.ss.pilotage.tableref.edition.revenirlisteinfobulle'|translate}}">
+                            <i class="fa fa-lg fa-times ng-star-inserted"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <msss-table-pagination [displayedColumns]="displayedColumns"
+                            [dataSource]="tableRefContentDTOs"
+                            [defaultsortField]="defaultsortField"
+                            [defaultPageSize]="defaultPageSize"
+                            [columnsHeadThatNeedTitleProperty]="columnsHeadThatNeedTitleProperty"
+                            [columnsHeadThatNeedEllipsis]="columnsHeadThatNeedEllipsis"
+                            [columnsHeadThatNeedConvertFormBooleanToMark]="columnsHeadThatNeedConvertFormBooleanToMark"
+                            [headTitleByCodeColumn]="headTitleByCodeColumn"
+                            [isModifBtnDisplayed]="true"
+                            [identifiantPaginationTable]="identifiantPaginationTable"
+                            [resultsLength]="resultsLength"
+                            (rechercherTabContent)="rechercherTabsRefsWhenPaginationOrSortEventIsTriggered($event)"
+                            (modifElement)="modifTableRefContent($event)">
+    </msss-table-pagination>
+    </div>
+</div>

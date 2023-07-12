@@ -1,0 +1,119 @@
+<msss-sigct-content-zone id="zone-lieux-residence"
+                         title="sigct.usager.fusion.adresses">
+    <div class="row">
+        <div class="col-md-12 padding-bottom-10">
+            <table id="tbl-lieux-residence"
+                   class="table">
+                <colgroup>
+                    <!-- <col style="width: 37.5%;" />
+                    <col style="width: 37.5%;" />
+                    <col style="width: 25%;" /> -->
+                    <col style="width: 33%;" />
+                    <col style="width: 33%;" />
+                    <col style="width: 33%;" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-center">{{"sigct.usager.fusion.usager" | translate}} #{{idUsager1}}</th>
+                        <th class="text-center">{{"sigct.usager.fusion.usager" | translate}} #{{idUsager2}}</th>
+                        <th class="text-center">{{"sigct.usager.fusion.infofusion" | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usagerLieuxResidences of tableauLieuxResidence; let i = index">
+                        <td class="vertical-align-top">
+                            <div *ngIf="usagerLieuxResidences[0]">
+                                <ng-template
+                                             *ngTemplateOutlet="usagerLieuResTemplate; context: {usagerLieuResDto : usagerLieuxResidences[0]}">
+                                </ng-template>
+                            </div>
+                        </td>
+                        <td class="vertical-align-top">
+                            <div *ngIf="usagerLieuxResidences[1]">
+                                <ng-template
+                                             *ngTemplateOutlet="usagerLieuResTemplate; context: {usagerLieuResDto : usagerLieuxResidences[1]}">
+                                </ng-template>
+                            </div>
+                        </td>
+                        <td>
+                            <table class="tbl-lieux-residence-boutons"
+                                   width="100%">
+                                <colgroup>
+                                    <col />
+                                    <col style="width: 20px;" />
+                                    <col style="width: 20px;" />
+                                </colgroup>
+                                <tr>
+                                    <td>
+                                        <div class="readonly-div"
+                                             [class.erreur]="indexLieuxResNonValides.includes(i)">
+                                            <ng-template
+                                                         *ngTemplateOutlet="usagerLieuResTemplate; context: {usagerLieuResDto : usagerLieuxResidences[2]}">
+                                            </ng-template>
+                                        </div>
+                                    </td>
+                                    <td class="vertical-align-middle">
+                                        <button id="btn-editer-{{usagerLieuxResidences[2]?.id}}"
+                                                class="btn-link color-black"
+                                                title="{{'sigct.usager.fusion.modifierinfobulle' | translate}}"
+                                                (click)="onEditerLieuResidence(i)">
+                                            <i class="fa fa-pencil-square-o font-size-120pct"></i>
+                                        </button>
+                                    </td>
+                                    <td class="vertical-align-middle">
+                                        <button id="btn-archiver-{{usagerLieuxResidences[2]?.id}}"
+                                                class="btn-link color-black"
+                                                title="{{'sigct.usager.fusion.supprimerinfobulle' | translate}}"
+                                                (click)="onSupprimerLieuResidence(i)">
+                                            <i class="fa fa-trash-o font-size-120pct"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</msss-sigct-content-zone>
+
+<!-- Template pour afficher une communication -->
+<ng-template #usagerLieuResTemplate
+             let-usagerLieuResDto="usagerLieuResDto">
+    <ng-container *ngIf="usagerLieuResDto">
+        <div [class.archive]="!usagerLieuResDto.actif">
+            <div>
+                <span *ngIf="usagerLieuResDto.noCiviq">{{usagerLieuResDto.noCiviq}} </span>
+                <span *ngIf="usagerLieuResDto.noCiviqSuffx">{{usagerLieuResDto.noCiviqSuffx}} </span>
+                <span *ngIf="usagerLieuResDto.rue">{{usagerLieuResDto.rue}} </span>
+                <span *ngIf="usagerLieuResDto.subdvImmeu">{{usagerLieuResDto.nomCategSubdvImmeu}}
+                    {{usagerLieuResDto.subdvImmeu}} </span>
+                <span *ngIf="usagerLieuResDto.municNom">{{usagerLieuResDto.municNom}} </span>
+                <span *ngIf="usagerLieuResDto.codePostal">{{usagerLieuResDto.codePostal | codePostalPipe}} </span>
+                <span
+                      *ngIf="usagerLieuResDto.noCiviq || usagerLieuResDto.rue || usagerLieuResDto.municNom || usagerLieuResDto.codePostal">
+                    - </span>
+                <span *ngIf="usagerLieuResDto.codeTypeAdresse"
+                      class="font-weight-bold">{{usagerLieuResDto.nomTypeAdresse}}</span>
+            </div>
+            <div *ngIf="usagerLieuResDto.codeRegion || usagerLieuResDto.nomProvince || usagerLieuResDto.nomPays">
+                <span *ngIf="usagerLieuResDto.codeRegion">{{usagerLieuResDto.codeRegion}} -
+                    {{usagerLieuResDto.nomRegion}} </span>
+                <span>{{usagerLieuResDto.nomProvince}} </span>
+                <span>{{usagerLieuResDto.nomPays}}</span>
+            </div>
+            <div *ngIf="usagerLieuResDto.rtsNom || usagerLieuResDto.rlsNom || usagerLieuResDto.clscNom">
+                <span>{{usagerLieuResDto.rtsNom}}</span>
+                <span *ngIf="usagerLieuResDto.rlsNom">
+                    <span *ngIf="usagerLieuResDto.rtsNom">, </span>{{usagerLieuResDto.rlsNom}}</span>
+                <span *ngIf="usagerLieuResDto.clscNom"><span
+                          *ngIf="usagerLieuResDto.rtsNom || usagerLieuResDto.rlsNom">,
+                    </span>{{usagerLieuResDto.clscNom}}</span>
+            </div>
+            <div *ngIf="usagerLieuResDto.detail">
+                <span class="font-style-italic">({{usagerLieuResDto.detail}})</span>
+            </div>
+        </div>
+    </ng-container>
+</ng-template>

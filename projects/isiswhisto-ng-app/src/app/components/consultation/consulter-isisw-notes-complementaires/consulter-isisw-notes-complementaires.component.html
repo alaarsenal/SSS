@@ -1,0 +1,56 @@
+<msss-sigct-content-zone id="consulter-isisw-section-usager"
+                         title="{{ 'sigct.ss.c_appelsisisw.titrenotescomp' | translate }}">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-2">
+        <label>
+          {{'sigct.ss.c_appelsisisw.notedate' | translate}}
+        </label>
+      </div>
+      <div class="col-md-1">
+        <label>
+          {{'sigct.ss.c_appelsisisw.noteduree' | translate}}
+        </label>
+      </div>
+      <div class="col-md-5">
+        <label>
+          {{'sigct.ss.c_appelsisisw.notecommentaire' | translate}}
+        </label>
+      </div>
+      <div class="col-md-1">
+        <label>
+          {{'sigct.ss.c_appelsisisw.noteconsentement' | translate}}
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label>
+          {{'sigct.ss.c_appelsisisw.noteprofessionnel' | translate}}
+        </label>
+      </div>
+    </div>
+    <div class="row"
+         *ngFor="let note of dto.listeNoteComplementaires; index as i">
+      <div class="col-md-2">
+        <span>{{note.dateNote}}</span>
+      </div>
+      <div class="col-md-1">
+        <span>{{note.dureeNote}}</span>
+      </div>
+      <div class="col-md-5">
+        <span>{{note.commentaireNote}}</span>
+      </div>
+      <div class="col-md-1">
+        <msss-input-checkbox name="{{'usagerAutoriseTransmission_' + note.idNote}}"
+                             [options]="listeInputOptionConsentement[i]"
+                             [(ngModel)]="note.consentementNote"
+                             [disabled]="true">
+        </msss-input-checkbox>
+      </div>
+      <div class="col-md-3">
+        <span>{{note.professionnel}}</span>
+        <br />
+        <span>{{note.organisme}}</span>
+      </div>
+    </div>
+  </div>
+</msss-sigct-content-zone>

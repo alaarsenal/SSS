@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/projects/usager-ng-app",
+            "sourceMaps": true,
+          // "sourceMapPathOverrides": {
+          //       "webpack:///../sigct-service-ng-lib/src/lib/alert/*": "${workspaceFolder}/projects/sigct-service-ng-lib/src/lib/alert/*",
+           //      "webpack:///../sigct-service-ng-lib/src/lib/modal-dialog/modal-dialog.service.ts": "${workspaceFolder}/projects/sigct-service-ng-lib/src/lib/modal-dialog/modal-dialog.service.ts",
+           //      "webpack:///../sigct-service-ng-lib/src/lib/**/*": "${workspaceFolder}/projects/sigct-service-ng-lib/src/lib/**/*",
+            //     "webpack:///../sigct-ui-ng-lib/src/lib/components/sigct-chosen/sigct-chosen.component.ts": "${workspaceFolder}/projects/sigct-ui-ng-lib/src/lib/components/sigct-chosen/sigct-chosen.component.ts",
+            //     "webpack:///../sigct-service-ng-lib/src/*": "${workspaceFolder}/projects/sigct-service-ng-lib/src/*",
+            // },
+
+        }
+    ]
+}

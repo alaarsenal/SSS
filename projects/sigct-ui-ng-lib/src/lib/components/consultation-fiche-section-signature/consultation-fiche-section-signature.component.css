@@ -1,0 +1,35 @@
+.correction-fiche hr {
+  margin-top: 0rem;
+  margin-bottom: .8rem;
+}
+
+.correction-fiche label {
+  display: inline-block;
+}
+
+.correction-fiche span {
+  margin-left: .5rem;
+}
+
+.mr-space {
+  margin-right: 3rem;
+}
+
+.mt-space {
+  margin-top: .5rem;
+}
+
+.pb-space {
+  padding-bottom: 1rem;
+}
+
+.raison-correction label {
+  vertical-align: top;
+}
+
+.raison-correction .valeur {
+  display: inline-block;
+  overflow-wrap:break-word;
+  white-space: pre-wrap;
+  padding-left: .5rem;
+}

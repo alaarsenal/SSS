@@ -1,0 +1,311 @@
+<div class="piloter-table-reference-content-en-ajout-modification-component">
+    <div class="container">
+
+
+        <div class="row margin-bottom-15" [ngClass]="getPiloterTablesRefTitleClass()">
+            <div class="col-md-9 ">
+                <h1 class="label-font-size">
+                    <i class="fa fa-wrench fa-lg margin-right-10"></i> {{ _tableRefItemDTO.descriptionTableRef }}
+                </h1>
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="float-right">
+                    <button
+                        (click)="submitAction()"
+                            class="btn btn-primary"
+                            title="{{'sigct.ss.pilotage.tableref.valeur.edition.sauvegarderinfobulle'|translate}}">
+                        {{'sigct.ss.pilotage.tableref.valeur.edition.sauvegarder'|translate}}
+                    </button>
+
+                    <button
+                        (click)="confirmerAnnulerAction()"
+                        class="btn btn-default margin-left-5"
+                            title="{{'sigct.ss.pilotage.tableref.valeur.edition.annulerinfobulle'|translate}}">
+                        {{'sigct.ss.pilotage.tableref.valeur.edition.annuler'|translate}}
+                    </button>
+
+                    <button
+                        (click)="confirmBackToTAbleRefContenPagination()"
+                            class="btn btn-default margin-left-5"
+                            title="{{'sigct.ss.pilotage.tableref.valeur.edition.revenirlisteinfobulle'|translate}}">
+                        <i class="fa fa-lg fa-times ng-star-inserted"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <ng-template #alertContainer></ng-template>
+
+        <msss-sigct-content-zone title="Référence" id="reference">
+
+            <form name="form" (ngSubmit)="onSubmit(fCom)" #fCom="ngForm">
+
+            <div class="row">
+                <div class="col-md-2" *ngIf="!_isModifyMode">
+                    <msss-input-text [(ngModel)]="_tableRefItemDTO.tableRefContentDTO.code"
+                                    #code="ngModel"
+                                    #codeElement
+                                    id="code"
+                                    name="code"
+                                    required
+                                    [valide]="isCodeValide"
+                                    label="sigct.ss.pilotage.tableref.valeur.edition.code"
+                                    showAsterisk="true"
+                                    maxlength="10"
+                                    (click)="onClick($event)"
+                                    (focus)="onFocus($event)">
+                    </msss-input-text>
+                </div>
+                <div class="col-md-12 margin-bottom-8" *ngIf="_isModifyMode">
+                    <div class="row margin-bottom-8">
+                        <div class="col-md-3 width-auto padding-right-3">
+                            <strong>{{'sigct.ss.pilotage.tableref.valeur.edition.identifiant' | translate}}&nbsp;:&nbsp;</strong>
+                        </div>
+                        <div class="col-md-9 width-auto no-padding-left ">
+                            {{_tableRefItemDTO.tableRefContentDTO.id}}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 width-auto padding-right-3">
+                            <strong>{{'sigct.ss.pilotage.tableref.valeur.edition.code' | translate}}&nbsp;:&nbsp;</strong>
+                        </div>
+                        <div class="col-md-9 width-auto no-padding-left ">
+                            {{_tableRefItemDTO.tableRefContentDTO.code}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <msss-input-text [(ngModel)]="_tableRefItemDTO.tableRefContentDTO.tri"
+                                    #tri="ngModel"
+                                    #triElement
+                                    id="tri"
+                                    name="tri"
+                                    required
+                                    [valide]="isTriValide"
+                                    label="sigct.ss.pilotage.tableref.valeur.edition.tri"
+                                    showAsterisk="true"
+                                    maxlength="5"
+                                    [patternMask]="99999" [validationMask]="false" [disableNumberCheck]="false"
+                                    (click)="onClick($event)"
+                                    (focus)="onFocus($event)">
+                    </msss-input-text>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <msss-input-text [(ngModel)]="_tableRefItemDTO.tableRefContentDTO.nom"
+                                    id="nom"
+                                    name="nom"
+                                    #nom
+                                    required
+                                    [valide]="isNomValide"
+                                    label="sigct.ss.pilotage.tableref.valeur.edition.nom"
+                                    showAsterisk="true"
+                                    maxlength="255"
+                                    (click)="onClick($event)"
+                                    (focus)="onFocus($event)">
+                    </msss-input-text>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <msss-input-textarea id="description"
+                                        name="description"
+                                        label="sigct.ss.pilotage.tableref.valeur.edition.description"
+                                        maxlength="1000"
+                                        rows="5"
+                                        [(ngModel)]="_tableRefItemDTO.tableRefContentDTO.description">
+                    </msss-input-textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <msss-input-text [(ngModel)]="_tableRefItemDTO.tableRefContentDTO.codeCn"
+                                    id="codecn"
+                                    name="codecn"
+                                    label="sigct.ss.pilotage.tableref.valeur.edition.codecn"
+                                    maxlength="10">
+                    </msss-input-text>
+                </div>
+            </div>
+
+                <ng-container *ngFor="let prop of _tableRefItemDTO.tableRefContentDTO.props | keyvalue">
+
+                    <ng-container *ngIf="prop.value.edition">
+                        <ng-container *ngIf="prop.value.complexType">
+                            <msss-sigct-chosen label="{{prop.value.label}}"
+                            name="{{prop.key}}"
+                            id="{{prop.key}}"
+                            [options]="_tableRefItemDTO.tableRefContentDTO.inputOptionCollectionsByComplexeFieldName[prop.key]"
+                            [(ngModel)]="_tableRefItemDTO.tableRefContentDTO.objectProps[prop.key]"
+                            [required]="isRequiredForNonStandardPorperty(prop.key)"
+                            [required]="getRequiredForNonStandardPorperty(prop.key)"
+                            [valide]="_tableRefItemDTO.tableRefContentDTO.validationStatusOfRequiredByNonStandardPropertyName[prop.key]">
+                            </msss-sigct-chosen>
+                        </ng-container>
+                        <ng-container *ngIf="prop.value.booleanType"></ng-container>
+                        <ng-container *ngIf="prop.value.integerType">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <msss-input-text
+                                    [(ngModel)]="_tableRefItemDTO.tableRefContentDTO.objectProps[prop.key]"
+                                    id="{{prop.key}}"
+                                    name="{{prop.key}}"
+                                    label="{{prop.value.label}}"
+                                    maxlength="{{prop.value.length}}"
+                                    [patternMask]="99999" [validationMask]="false" [disableNumberCheck]="false"
+                                    (click)="onClick($event)"
+                                    (focus)="onFocus($event)"
+                                    [valide]="_tableRefItemDTO.tableRefContentDTO.validationStatusOfRequiredByNonStandardPropertyName[prop.key]">
+                                    </msss-input-text>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="!prop.value.booleanType && !prop.value.complexType && !prop.value.integerType">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <msss-input-text [(ngModel)]="_tableRefItemDTO.tableRefContentDTO.objectProps[prop.key]"
+                                    id="{{prop.key}}"
+                                    name="{{prop.key}}"
+                                    label="{{prop.value.label}}"
+                                    maxlength="{{prop.value.length}}"
+                                    (click)="onClick($event)"
+                                    (focus)="onFocus($event)"
+                                    [showAsterisk]="isRequiredForNonStandardPorperty(prop.key)"
+                                    [required]="getRequiredForNonStandardPorperty(prop.key)"
+                                    [valide]="_tableRefItemDTO.tableRefContentDTO.validationStatusOfRequiredByNonStandardPropertyName[prop.key]">
+                                    </msss-input-text>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+
+
+                </ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="row">
+                <div class="col-md-1">
+
+                    <msss-input-checkbox name="actif"
+                                        #actif="ngModel"
+                                        [options]="inputOptionActif"
+                                        [(ngModel)]="_tableRefItemDTO.tableRefContentDTO.actif"
+                                        [disabled]="false">
+                    </msss-input-checkbox>
+                </div>
+
+            </div>
+
+            <div class="row" [ngClass]="!_isModifyMode ? 'margin-bottom-15' : ''">
+                <div class="col-md-1 margin-top-7">
+
+                    <msss-input-checkbox name="defaut"
+                                        #defaut="ngModel"
+                                        [options]="inputOptionDefaut"
+                                        [(ngModel)]="_tableRefItemDTO.tableRefContentDTO.defaut"
+                                        [disabled]="false">
+                    </msss-input-checkbox>
+                </div>
+
+            </div>
+
+        <ng-container *ngIf="_isModifyMode">
+            <div class="row margin-top-7">
+                <div class="col-md-3 width-auto padding-right-3">
+                    <strong>{{'sigct.ss.pilotage.tableref.valeur.edition.creele' | translate}}&nbsp;:&nbsp;</strong>
+                </div>
+                <div class="col-md-3 width-auto no-padding-left padding-right-3">
+                    {{_tableRefItemDTO.tableRefContentDTO.dateCreation}}
+                </div>
+                <div class="col-md-3 width-auto no-padding-left padding-right-3">
+                    <strong>{{'sigct.ss.pilotage.tableref.valeur.edition.creepar' | translate}}&nbsp;:&nbsp;</strong>
+                </div>
+                <div class="col-md-3 width-auto no-padding-left">
+                    {{_tableRefItemDTO.tableRefContentDTO.userCreationUsername}}
+                </div>
+            </div>
+
+            <div class="row margin-top-7 margin-bottom-15">
+                <div class="col-md-3 width-auto padding-right-3">
+                    <strong>{{'sigct.ss.pilotage.tableref.valeur.edition.modifiele' | translate}}&nbsp;:&nbsp;</strong>
+                </div>
+                <div class="col-md-3 width-auto no-padding-left padding-right-3">
+                    {{_tableRefItemDTO.tableRefContentDTO.dateModification}}
+                </div>
+                <div class="col-md-3 width-auto no-padding-left padding-right-3">
+                    <strong>{{'sigct.ss.pilotage.tableref.valeur.edition.modifiepar' | translate}}&nbsp;:&nbsp;</strong>
+                </div>
+                <div class="col-md-3 width-auto no-padding-left">
+                    {{_tableRefItemDTO.tableRefContentDTO.userModificationUsername}}
+                </div>
+            </div>
+        </ng-container>
+
+        <button type="submit" style="display:none" #submitBtn>Submit</button>
+        </form>
+
+        </msss-sigct-content-zone>
+
+
+
+    </div>
+</div>
+
+<modal-confirmation id-container="confirm_popup_annuler-modif">
+    <div class="modal-confirm-body modal-body">
+        {{'ss-iu-c70005'|translate}}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+        <button type="button"
+                data-dismiss="modal"
+                class="btn btn-primary btn-sm btn-key-action visibility-visible"
+                id="ok_confirm_button"
+                (click)="annulerAction()">Oui</button>
+        <button type="button"
+                data-dismiss="modal"
+                class="btn btn-sm btn-key-action hidePopup visibility-visible"
+                id="cancel_confirm_button">Non</button>
+    </div>
+</modal-confirmation>
+
+<modal-confirmation id-container="confirm_popup_annuler-modif_et_retour_list_recherche">
+    <div class="modal-confirm-body modal-body">
+        {{'ss-iu-c70005'|translate}}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+        <button type="button"
+                data-dismiss="modal"
+                class="btn btn-primary btn-sm btn-key-action visibility-visible"
+                id="ok_confirm_button"
+                (click)="annulerModifEtRetourListeRecherche()">Oui</button>
+        <button type="button"
+                data-dismiss="modal"
+                class="btn btn-sm btn-key-action hidePopup visibility-visible"
+                id="cancel_confirm_button">Non</button>
+    </div>
+</modal-confirmation>

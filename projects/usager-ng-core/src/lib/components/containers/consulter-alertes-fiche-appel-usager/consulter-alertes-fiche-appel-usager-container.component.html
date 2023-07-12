@@ -1,0 +1,20 @@
+<msss-form-top-bar [label]="labelMenuTop"
+                   [options]="formTopBarOptions"
+                   [fixe]="topBarreFixe"
+                   [nomModule]="'usager'">
+</msss-form-top-bar>
+<div #contenuScroll
+     id="contenuScroll"
+     class="contenu-avec-scrollbar">
+  <ng-template #alertContainer></ng-template>
+  <sa-consultation-fiche-container #saConsultationContainer
+                                   *ngIf="domaine == 'SA'"
+                                   [idFicheAppel]="idFicheAppel"
+                                   [idAppel]="idAppel">
+  </sa-consultation-fiche-container>
+  <so-consultation-fiche-container #soConsultationContainer
+                                   *ngIf="domaine == 'SO'"
+                                   [ficheAppelId]="idFicheAppel"
+                                   [idAppel]="idAppel">
+  </so-consultation-fiche-container>
+</div>

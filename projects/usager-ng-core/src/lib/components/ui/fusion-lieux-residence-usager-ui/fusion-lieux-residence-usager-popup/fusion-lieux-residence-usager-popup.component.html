@@ -1,0 +1,175 @@
+<div class="header"
+     mat-dialog-title>
+    <div class="pull-left header-title">
+        <i class="fa fa-compress"></i>
+        <span>{{"sigct.usager.fusion.editadresse.titre" | translate}}</span>
+    </div>
+    <div class="pull-right header-actions">
+        <button id="btn-sauvegarder"
+                class="btn btn-sm btn-primary"
+                (click)="onSauvegarderClick()"
+                title="{{'sigct.usager.fusion.editadresse.btnsauvegarderinfobulle' | translate}}">
+            {{"sigct.usager.fusion.editadresse.btnsauvegarder" | translate}}
+        </button>
+        <button id="btn-annuler"
+                class="btn btn-sm btn-default"
+                (click)="onAnnulerClick()"
+                title="{{'sigct.usager.fusion.editadresse.btnannulerinfobulle' | translate}}">
+            {{"sigct.usager.fusion.editadresse.btnannuler" | translate}}
+        </button>
+        <button id="btn-retour"
+                class="btn btn-sm btn-default"
+                (click)="onRetourFusionClick()"
+                title="{{'sigct.usager.fusion.editadresse.btnrevenirinfobulle' | translate}}">
+            <i class="fa fa-lg fa-times"></i>
+        </button>
+    </div>
+</div>
+
+<mat-dialog-content>
+    <ng-template #alertContainer></ng-template>
+
+    <div class="col-md-12">
+        <table id="tbl-usager-lieu-res"
+               class="table">
+            <colgroup>
+                <col style="width: 19%;" />
+                <col style="width: 27%;" />
+                <col style="width: 27%;" />
+                <col style="width: 27%;" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="text-center">{{"sigct.usager.fusion.usager" | translate}}
+                        #{{idUsagerIdent1}}</th>
+                    <th class="text-center">{{"sigct.usager.fusion.usager" | translate}}
+                        #{{idUsagerIdent2}}</th>
+                    <th class="text-center">{{"sigct.usager.fusion.infofusion" | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>{{'sigct.usager.fusion.editadresse.nociviqnomrue' | translate}}</th>
+                    <td [class.archive]="!usagerLieuRes1Dto?.actif">{{usagerLieuRes1Dto?.noCiviqRue}}</td>
+                    <td [class.archive]="!usagerLieuRes2Dto?.actif">{{usagerLieuRes2Dto?.noCiviqRue}}</td>
+                    <td>
+                        <msss-sigct-chosen id="usager-lieu-res-fusion-no-civiq-rue"
+                                           [placeholder]="usagerLieuRes1Dto?.noCiviqRue || usagerLieuRes2Dto?.noCiviqRue ? selectionnezLabel : ''"
+                                           [disabled]="!(usagerLieuRes1Dto?.noCiviqRue && usagerLieuRes2Dto?.noCiviqRue && usagerLieuRes1Dto?.noCiviqRue != usagerLieuRes2Dto?.noCiviqRue)"
+                                           [valide]="isNoCiviqRueValdie"
+                                           [(ngModel)]="usagerLieuResFusionDto.noCiviqRue"
+                                           [options]="noCiviqRueOptions">
+                        </msss-sigct-chosen>
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{'sigct.usager.fusion.editadresse.type' | translate}}</th>
+                    <td [class.archive]="!usagerLieuRes1Dto?.actif">{{usagerLieuRes1Dto?.nomTypeAdresse}}</td>
+                    <td [class.archive]="!usagerLieuRes2Dto?.actif">{{usagerLieuRes2Dto?.nomTypeAdresse}}</td>
+                    <td>
+                        <msss-sigct-chosen id="usager-lieu-res-fusion-type"
+                                           [valide]="isCodeTypeAdresseValide"
+                                           [(ngModel)]="usagerLieuResFusionDto.codeTypeAdresse"
+                                           [options]="typeLieuResidenceOptions">
+                        </msss-sigct-chosen>
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{'sigct.usager.fusion.editadresse.lieuresid' | translate}}</th>
+                    <td [class.archive]="!usagerLieuRes1Dto?.actif">
+                        <ng-template
+                                     *ngTemplateOutlet="usagerLieuResTemplate; context: {usagerLieuResidenceDto : usagerLieuRes1Dto}">
+                        </ng-template>
+                    </td>
+                    <td [class.archive]="!usagerLieuRes2Dto?.actif">
+                        <ng-template
+                                     *ngTemplateOutlet="usagerLieuResTemplate; context: {usagerLieuResidenceDto : usagerLieuRes2Dto}">
+                        </ng-template>
+                    </td>
+                    <td class="padding-top-5 padding-bottom-5">
+                        <div class="readonly-div">
+                            <ng-template
+                                         *ngTemplateOutlet="usagerLieuResTemplate; context: {usagerLieuResidenceDto : usagerLieuResFusionDto}">
+                            </ng-template>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{'sigct.usager.fusion.editadresse.details' | translate}}</th>
+                    <td [class.archive]="!usagerLieuRes1Dto?.actif">
+                        <!-- Affiche une case à cocher uniquement si les détails de U1 et U2 sont présents et différents, sinon c'est du texte -->
+                        <mat-checkbox *ngIf="usagerLieuRes1Dto?.detail && usagerLieuRes2Dto?.detail && usagerLieuRes1Dto?.detail != usagerLieuRes2Dto?.detail else txtusagerLieuRes1DtoDetail"
+                                      id="chk-usager-lieu-res1-detail"
+                                      color='primary'
+                                      [(ngModel)]="usagerLieuRes1DetailChecked"
+                                      (change)="onPopupUsagerLieuRes1DetailClick($event)">{{usagerLieuRes1Dto?.detail}}
+                        </mat-checkbox>
+                        <ng-template #txtusagerLieuRes1DtoDetail>{{usagerLieuRes1Dto?.detail}}</ng-template>
+                    </td>
+                    <td [class.archive]="!usagerLieuRes2Dto?.actif">
+                        <!-- Affiche une case à cocher uniquement si les détails de U1 et U2 sont présents et différents, sinon c'est du texte -->
+                        <mat-checkbox *ngIf="usagerLieuRes1Dto?.detail && usagerLieuRes2Dto?.detail && usagerLieuRes1Dto?.detail != usagerLieuRes2Dto?.detail else txtusagerLieuRes2DtoDetail"
+                                      id="chk-usager-lieu-res2-detail"
+                                      color='primary'
+                                      [(ngModel)]="usagerLieuRes2DetailChecked"
+                                      (change)="onPopupUsagerLieuRes2DetailClick($event)">{{usagerLieuRes2Dto?.detail}}
+                        </mat-checkbox>
+                        <ng-template #txtusagerLieuRes2DtoDetail>{{usagerLieuRes2Dto?.detail}}</ng-template>
+                    </td>
+                    <td class="padding-top-5">
+                        <textarea id="usager-lieu-res-fusion-detail"
+                                  disabled
+                                  [(ngModel)]="usagerLieuResFusionDto.detail"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{'sigct.usager.fusion.editadresse.archivee' | translate}}</th>
+                    <td [class.archive]="!usagerLieuRes1Dto?.actif">
+                        <span *ngIf="usagerLieuRes1Dto?.archive === 'true'">{{ouiLabel}}</span>
+                        <span *ngIf="usagerLieuRes1Dto?.archive === 'false'">{{nonLabel}}</span>
+                    </td>
+                    <td [class.archive]="!usagerLieuRes2Dto?.actif">
+                        <span *ngIf="usagerLieuRes2Dto?.archive === 'true'">{{ouiLabel}}</span>
+                        <span *ngIf="usagerLieuRes2Dto?.archive === 'false'">{{nonLabel}}</span>
+                    </td>
+                    <td>
+                        <msss-sigct-chosen id="usager-lieu-res-fusion-archive"
+                                           [placeholder]="usagerLieuRes1Dto?.archive || usagerLieuRes2Dto?.archive ? selectionnezLabel : ''"
+                                           [valide]="isActifValide"
+                                           [(ngModel)]="usagerLieuResFusionDto.archive"
+                                           [options]="ouiNonOptions">
+                        </msss-sigct-chosen>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Template pour afficher un lieu de résidence -->
+    <ng-template #usagerLieuResTemplate
+                 let-usagerLieuResidenceDto="usagerLieuResidenceDto">
+        <ng-container *ngIf="usagerLieuResidenceDto">
+            <div *ngIf="usagerLieuResidenceDto.municNom || usagerLieuResidenceDto.codePostal">
+                <span>{{usagerLieuResidenceDto.municNom}} </span>
+                <span>{{usagerLieuResidenceDto.codePostal | codePostalPipe}}</span>
+            </div>
+            <div
+                 *ngIf="usagerLieuResidenceDto.codeRegion || usagerLieuResidenceDto.nomProvince || usagerLieuResidenceDto.nomPays">
+                <span *ngIf="usagerLieuResidenceDto.codeRegion">{{usagerLieuResidenceDto.codeRegion}} -
+                    {{usagerLieuResidenceDto.nomRegion}} </span>
+                <span *ngIf="usagerLieuResidenceDto.nomProvince">{{usagerLieuResidenceDto.nomProvince}} </span>
+                <span>{{usagerLieuResidenceDto.nomPays}} </span>
+            </div>
+            <div *ngIf="usagerLieuResidenceDto.rtsNom">
+                <span>{{usagerLieuResidenceDto.rtsNom}}</span>
+            </div>
+            <div *ngIf="usagerLieuResidenceDto.rlsNom">
+                <span>{{usagerLieuResidenceDto.rlsNom}}</span>
+            </div>
+            <div *ngIf="usagerLieuResidenceDto.clscNom">
+                <span>{{usagerLieuResidenceDto.clscNom}}</span>
+            </div>
+        </ng-container>
+    </ng-template>
+</mat-dialog-content>

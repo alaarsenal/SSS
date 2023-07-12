@@ -1,0 +1,16 @@
+:host ::ng-deep #codePostal input {
+    text-transform: uppercase;
+}
+
+:host ::ng-deep #nam input {
+    text-transform: uppercase;
+}  
+
+.col {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.row {
+    margin: 0;
+}

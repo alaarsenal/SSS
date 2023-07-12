@@ -1,0 +1,31 @@
+<ng-template [ngIf]="consultationWrapperState">
+  <so-consultation-fiche-appel-wrapper #consultationWrapper
+                                       [afficherBoutonCorrigerFicheAppel]="afficherBoutonCorrigerFicheAppel"
+                                       [afficherBoutonConvertirFicheAppelEnNoteCompl]="isAfficherBoutonConvertirFicheAppelEnNoteCompl"
+                                       [ficheAppelId]="_idFicheAppel"
+                                       [idAppel]="idAppel"
+                                       [statutFiche]="statutFiche"
+                                       (corrigerFicheEvent)="onCorrigerFicheEvent()"
+                                       (editionRelanceEvent)="onEditionRelanceEvent()"
+                                       (ajouterNoteComplementaire)="onAjouterNoteComplementaire()"
+                                       (convertirFicheAppelEnNoteCompl)="onBtnConvertirFicheAppelEnNoteCompl()"
+                                       (supprimerFicheApple)="onBtnSupprimerFicheAppelClick($event)">
+  </so-consultation-fiche-appel-wrapper>
+</ng-template>
+
+<ng-template [ngIf]="relanceWrapperState">
+  <app-relance-wrapper #relanceWrapper
+                       [domaine]="'SO'"
+                       [idFicheAppel]="_idFicheAppel"
+                       (relanceReturnEvent)="onRelanceReturnEvent()">
+  </app-relance-wrapper>
+</ng-template>
+
+<ng-template [ngIf]="noteComplementaireWrapperState">
+  <so-note-complementaire-wrapper #noteComplementaireWrapper
+                                  [idAppel]="idAppel"
+                                  [idFicheAppel]="_idFicheAppel"
+                                  [conversionFicheEnNoteCompl]="isConversionFicheEnNoteCompl"
+                                  (noteComplementaireTerminerEvent)="onWrapperReturnEvent($event)">
+  </so-note-complementaire-wrapper>
+</ng-template>

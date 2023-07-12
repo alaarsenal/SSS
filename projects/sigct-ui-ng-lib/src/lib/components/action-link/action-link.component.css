@@ -1,0 +1,23 @@
+:host >div{
+    cursor:pointer;
+    width: 52px;
+    text-align: center;
+    position: relative;
+  }
+
+  :host:hover {
+    color:#285E8E;
+  }
+
+  :host i {
+    margin-top: 5px;
+  }
+
+  :host input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    min-height: 100px;
+  
+  }

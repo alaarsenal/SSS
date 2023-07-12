@@ -1,0 +1,24 @@
+<label class="control-label"
+       *ngFor="let item of inputOptionCollection?.options; let i = index">
+  <mat-checkbox [id]="id"
+                [name]="name"
+                class="tp-margin"
+                [(ngModel)]="value"
+                color="primary"
+                [disabled]="disabled">
+    <span *ngIf="item.label; else linkLabelGroup">
+      {{item.label | translate}}
+    </span>
+    <ng-template #linkLabelGroup>
+      <span class="sr-only">{{name}}</span>
+      <span>{{item.labelBeforeLink | translate}}</span>
+      <a href="#"
+         onclick="return false;"
+         (click)="onClickItemLink(item)">
+        {{item.link | translate}}
+        <span class="sr-only">{{name}}</span></a>
+      <span>{{item.labelAfterLink | translate}}</span>
+    </ng-template>
+  </mat-checkbox>
+  <span class="sr-only">{{name}}</span>
+</label>

@@ -1,0 +1,19 @@
+.main-sante {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.top-menu {
+    flex: none;
+}
+
+.conteneur {
+    flex: auto;
+    width: 100%;
+}
+
+html, body { 
+    overflow-y: hidden;
+    height: 100%;
+}

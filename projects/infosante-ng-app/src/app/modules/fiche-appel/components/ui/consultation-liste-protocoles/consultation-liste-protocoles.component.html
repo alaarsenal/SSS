@@ -1,0 +1,40 @@
+<div class="row protocole-row"
+     *ngFor="let protocole of listeProtocoleDto">
+    <div *ngIf="protocole.idDocIdent"
+         class="no-padding-right col-md-11">
+        <span class="id-protocole">{{ protocole.idDocIdent}}</span>
+
+        <ng-container *ngIf="readOnly">
+            <span>{{ protocole.titre }}</span>
+        </ng-container>
+        <ng-container *ngIf="!readOnly">
+            <a routerLink=""
+               (click)="onConsulterProtocole(protocole)">{{ protocole.titre }}</a>
+        </ng-container>
+    </div>
+
+    <div *ngIf="protocole.refDocumentDrupal"
+         class="no-padding-right col-md-11">
+        <span class="id-protocole" title="Version: {{protocole.versionDoc}}">{{ protocole.refDocumentDrupal}}</span>
+
+        <ng-container *ngIf="readOnly">
+            <span title="Version: {{protocole.versionDoc}}">{{ protocole.titre }}</span>
+        </ng-container>
+        <ng-container *ngIf="!readOnly">
+            <a routerLink=""
+               (click)="onConsulterProtocole(protocole)"
+               title="Version: {{protocole.versionDoc}}">{{ protocole.titre }}</a>
+        </ng-container>
+    </div>
+
+    <div *ngIf="!readOnly"
+         class="text-right col-md-1">
+        <a routerLink=""
+           (click)="onSupprimerProtocole(protocole)">
+            <i title="{{ 'sigct.sa.f_appel.intervention.referentiels.btnsupprimer' | translate }}"
+               class="fa fa-trash-o cursor-pointer"
+               id="supprimer-protocole-{{protocole.id}}"></i>
+            <span class="sr-only">{{'sigct.sa.f_appel.intervention.referentiels.btnsupprimer' | translate}}</span>
+        </a>
+    </div>
+</div>

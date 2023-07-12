@@ -1,0 +1,20 @@
+<msss-form-top-bar label="{{labelMenuTop}}"
+                   [options]="formTopBarOptions"
+                   [fixe]="topBarreFixe"
+                   [nomModule]="'usager'"></msss-form-top-bar>
+
+<div class="contenu-avec-scrollbar">
+    <ng-template #alertContainer></ng-template>
+
+    <app-recherche-usager-ui #appRechercheUsagerUi
+                             [listeSexe]="listeSexe"
+                             [listeRegion]="listeRegion"
+                             [listeLangue]="listeLangue"
+                             [infoAppelCti]="infoAppelCti"
+                             [fusionEnabled]="fusionEnabled"
+                             (consulterEnregistrementsUsager)="onConsulterEnregistrementsUsager($event)"
+                             (consulterUsager)="onConsulterUsager($event)"
+                             (editerUsager)="onEditerUsager($event)"
+                             (fusionnerUsager)="onFusionnerUsager($event)"
+                             (relierUsager)="onRelierUsager($event)"></app-recherche-usager-ui>
+</div>

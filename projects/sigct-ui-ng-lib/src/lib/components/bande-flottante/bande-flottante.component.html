@@ -1,0 +1,36 @@
+<div class="row row-boutons-interface">
+  <div class="col-sm-4 col-sm-offset-4">
+    <div class="row well stiky">
+      <div class="col-sm-3 no-padding-left  no-padding-right">
+        <button #btnOuvrirTout id="btn-ouvrir-tout" class="btn btn-link"
+          title="{{ toutOuvrirLb }}" (click)="onOuvrirTout()">
+          <i class="fa fa-caret-square-o-down fa-lg"></i>
+          <!-- {{ toutOuvrirLb | translate }} -->
+        </button>
+      </div>
+      <div class="col-sm-3 no-padding-left  no-padding-right">
+        <button id="btn-fermer-tout" class="btn btn-link"
+          title="{{ toutFermerLb }}" (click)="onFermerTout()">
+          <i class="fa fa-caret-square-o-up fa-lg"></i>
+          <!-- {{ toutFermerLb }} -->
+        </button>
+      </div>
+      <div class="col-sm-3 no-padding-left  no-padding-right">
+        <button id="btn-bas-page" class="btn btn-link" title="{{ basPageLb }}"
+          (click)="scrollToBottom()">
+          <i class="fa fa-arrow-circle-down fa-lg"></i>
+          <!-- {{ basPageLb }} -->
+        </button>
+      </div>
+      <div class="col-sm-3 no-padding-left  no-padding-right">
+        <button id="btn-haut-page" class="btn btn-link"
+          title="{{ hautPageLb }}" (click)="scrollToTop()">
+          <i class="fa fa-arrow-circle-up fa-lg"></i>
+          <!-- {{ hautPageLb }} -->
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

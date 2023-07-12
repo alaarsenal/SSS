@@ -1,0 +1,12 @@
+<msss-sigct-content-zone id="section-relance"
+                         title="{{ 'sigct.ss.f_appel.consultation.listerelance' | translate }}">
+  <div class="wrapper">
+    <app-liste-relances #listeRelances
+                        *ngIf="isRelances; else aucuneRelance"
+                        [relances]="relances">
+    </app-liste-relances>
+    <ng-template #aucuneRelance>
+      {{ 'sigct.ss.f_appel.consultation.listerelance.aucunerelance' | translate }}
+    </ng-template>
+  </div>
+</msss-sigct-content-zone>

@@ -1,0 +1,124 @@
+<msss-sigct-content-zone id="avis"
+                         title="{{ 'sigct.ss.f_appel.aviscommuniques' | translate }}">
+  <app-avis-communiques [idFicheAppel]="idFicheAppel"
+                        (consulterAvis)="onConsulterAvis($event)">
+  </app-avis-communiques>
+</msss-sigct-content-zone>
+
+<msss-sigct-content-zone id="referentiel"
+                         title="{{ 'sigct.sa.f_appel.intervention.titrereferentiel' | translate }}">
+  <app-consultation-liste-protocoles [listeProtocoleDto]="listeProtocole"
+                                     (consulter)="onConsulterProtocole($event)"
+                                     (supprimer)="onSupprimerProtocole($event)">
+  </app-consultation-liste-protocoles>
+
+  <msss-input-textarea #champintervention
+                       id="intervention"
+                       name="intervention"
+                       label="sigct.sa.f_appel.intervention.intervention"
+                       rows="15"
+                       maxlength="32767"
+                       [(ngModel)]="ficheIntervention.intervention"
+                       raccourcis=true>
+  </msss-input-textarea>
+
+</msss-sigct-content-zone>
+
+<msss-sigct-content-zone id="AutresSourcesInformations"
+                         title="{{'sigct.sa.f_appel.intervention.titreautressourcesinformation' | translate}}">
+
+  <div class="contentZone col-md-12 no-padding-right">
+    <!--autresSourcesInformationsZone-->
+    <app-autres-sources-information #autresSourcesInformation
+                                    (ajoutAutreSourceInformation)="onAjoutAutreSourceInformation($event)"
+                                    (supprimerAutreSourceInformation)="onSupprimerAutreSourceInformation($event)"
+                                    [listeAutresSourcesInformation]="listeAutresSourcesInformation"
+                                    [listeRefAutresSourcesInformation]="listeRefAutresSourcesInformation">
+    </app-autres-sources-information>
+  </div>
+
+</msss-sigct-content-zone>
+
+<msss-sigct-content-zone id="SuitesIntervention"
+                        [required]="true"
+                         title="{{ 'sigct.sa.f_appel.intervention.titre' | translate }}"  >
+
+  <div class="contentZone">
+
+    <div class="col-md-12">
+      <msss-input-checkbox @aucuneSuite
+                           id="aucuneSuite"
+                           name="acunesuite"
+                           [options]="inputOptionAucuneSuite"
+                           [(ngModel)]="ficheIntervention.aucuneSuite"
+                           #aucuneSuite="ngModel"
+                           [disabled]="aucuneSuiteDisabled">
+      </msss-input-checkbox>
+    </div>
+
+    <div class="col-md-12 no-padding-right">
+      <app-orientation-suites-intervention #orientationSuitesIntervention
+                                           (orientationSave)="onAjoutOrientationSuitesIntervention($event)"
+                                           (orientationDelete)="onSupprimerOrientationSuitesIntervention($event)"
+                                           [idFicheAppel]="idFicheAppel"
+                                           [libelle]="'SA'"
+                                           [listeOrientationRrss]="listeOrientationSuitesIntervention"
+                                           [listeRefOrientationSuitesIntervention]="listeRefOrientationSuitesIntervention">
+      </app-orientation-suites-intervention>
+    </div>
+
+    <div class="col-md-12 padding-top-10 no-padding-right">
+      <app-reference-suites-intervention #referenceSuitesIntervention
+                                         (onSubmit)="onAjoutReferenceSuitesIntervention($event)"
+                                         (onDelete)="onSupprimerReferenceSuitesIntervention($event)"
+                                         [idFicheAppel]="idFicheAppel"
+                                         [libelle]="'SA'"
+                                         [listeReferenceSuitesIntervention]="listeReferenceSuitesIntervention"
+                                         [listeRefReferenceSuiteIntervention]="listeRefReferenceSuitesIntervention">
+      </app-reference-suites-intervention>
+    </div>
+
+    <div class="col-md-12">
+      <msss-input-checkbox #autorisationTransm
+                           id="autorisationTransmission"
+                           name="autorisationtransmission"
+                           [options]="inputOptionAutorisationTransmission"
+                           [(ngModel)]="ficheIntervention.autorisationTransmission"
+                           [disabled]="autorisationTransmissionDisabled"
+                           #autorisationTransmission="ngModel">
+      </msss-input-checkbox>
+    </div>
+
+    <div class="col-md-12 margin-bottom-10">
+      <msss-input-checkbox id="consentementenFicheEnregistreur"
+                           #consentementenFicheEnregistreur
+                           name="consentementenFicheEnregistreur"
+                           [options]="inputOptionConsentementenFicheEnregistreur"
+                           [(ngModel)]="ficheIntervention.consentementenFicheEnregistreur"
+                           [disabled]="consentementenFicheEnregistreurDisabled"
+                           #autorisationTransmission="ngModel">
+      </msss-input-checkbox>
+    </div>
+
+  </div>
+
+</msss-sigct-content-zone>
+
+<msss-sigct-content-zone id="suivi"
+                         title="{{ 'sigct.sa.f_appel.suivi.titre' | translate }}">
+
+  <div class="contentZone">
+    <app-suivi #appSuivi
+               [inputReferencesRessourceSuivi]="listeReferencesRessourceSuivi"
+               [inputSuivi]="suiviDTO">
+    </app-suivi>
+  </div>
+
+</msss-sigct-content-zone>
+
+
+<msss-grise-automatique-selon-type-intervention #griseAutomatique
+                                                [codeReferenceTypeFiche]="ficheIntervention.typeConsultation"
+                                                [nomPertDiabledList]="[champintervention, autresSourcesInformation, autorisationTransm, consentementenFicheEnregistreur, appSuivi]"
+                                                [demandeRessoucesList]="[autorisationTransm,appSuivi]">
+</msss-grise-automatique-selon-type-intervention>

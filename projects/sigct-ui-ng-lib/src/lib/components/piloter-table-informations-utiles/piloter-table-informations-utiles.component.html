@@ -1,0 +1,182 @@
+<div>
+    <form name="form"
+          (ngSubmit)="onSubmit(fCom)"
+          #fCom="ngForm">
+
+        <div class="row">
+
+            <div class="col-md-12 margin-bottom-8"
+                 *ngIf="_isModifyMode">
+                <div class="row margin-bottom-8">
+                    <div class="col-md-3 width-auto padding-right-3">
+                        <strong>{{'sigct.ss.pilotage.info_utile.ajoutmodif.identifiant' |
+                            translate}}&nbsp;:&nbsp;</strong>
+                    </div>
+                    <div class="col-md-9 width-auto no-padding-left ">
+                        {{dto.identifiant}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <msss-sigct-chosen label="sigct.ss.pilotage.info_utile.ajoutmodif.categorie"
+                                   name="categorieInforUtile"
+                                   id="categorieInforUtile"
+                                   [options]="inputOptionsCategorieInforUtile"
+                                   [(ngModel)]="dto.categorie"
+                                   required="true"
+                                   (click)="onClick($event)"
+                                   (focus)="onFocus($event)"
+                                   #categorie>
+                </msss-sigct-chosen>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <msss-input-text [(ngModel)]="dto.nom"
+                                 id="nom"
+                                 name="nom"
+                                 #nom
+                                 required
+                                 [valide]="isNomValide"
+                                 label="sigct.ss.pilotage.info_utile.ajoutmodif.nom"
+                                 showAsterisk="true"
+                                 maxlength="1000"
+                                 (click)="onClick($event)"
+                                 (focus)="onFocus($event)">
+                </msss-input-text>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <msss-input-textarea id="description"
+                                     name="description"
+                                     label="sigct.ss.pilotage.info_utile.ajoutmodif.description"
+                                     maxlength="1000"
+                                     rows="5"
+                                     [(ngModel)]="dto.description">
+                </msss-input-textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <msss-input-text [(ngModel)]="dto.url"
+                                 id="url"
+                                 name="url"
+                                 label="sigct.ss.pilotage.info_utile.ajoutmodif.URL"
+                                 maxlength="1000">
+                </msss-input-text>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1">
+                <msss-input-text [(ngModel)]="dto.tri"
+                                 #tri="ngModel"
+                                 #triElement
+                                 id="tri"
+                                 name="tri"
+                                 required
+                                 [valide]="isTriValide"
+                                 label="sigct.ss.pilotage.info_utile.ajoutmodif.tri"
+                                 showAsterisk="true"
+                                 maxlength="5"
+                                 [patternMask]="99999"
+                                 [validationMask]="false"
+                                 [disableNumberCheck]="false"
+                                 (click)="onClick($event)"
+                                 (focus)="onFocus($event)">
+                </msss-input-text>
+            </div>
+        </div>
+
+        <msss-sigct-content-zone #fichiersZone
+                                 id="fichers-enregistrement"
+                                 [contentStyles]="{'padding-top': '1px'}"
+                                 title="{{'sigct.ss.pilotage.info_utile.ajoutmodif.fichier.fichierattache' | translate}}"
+                                 [css]="'col-md-12 no-padding-left no-padding-right'"
+                                 *ngIf="dto.identifiant != null && dto.identifiant != undefined">
+            <msss-gestionnaire-de-fichiers class="no-padding-left no-padding-right"
+                                           [showListeProfile]="isShowListeProfile"
+                                           [showColReference]="isShowColReference"
+                                           [showColTitre]="isShowColTitre"
+                                           [showColDescription]="isShowColDescription"
+                                           [listeFichiers]="listeFichiers"
+                                           [titreSection]="titreSection"
+                                           (onAjouterFichier)="onAjouterFichier($event)"
+                                           (onSupprimerFichier)="onSupprimerFichier($event)"
+                                           (onListFichier)="onListFichier($event)"
+                                           (onTelechargerFichier)="onTelechargerFichier($event)"
+                                           [readonly]="isFichierReadOnly()"
+                                           [urlBaseMiniatureImg]="getUrlBaseTelecharge()"
+                                           [typeFichierAccepter]="typeFichierAccepter"
+                                           [displayedColumns]="displayedColumns"
+                                           [msgSupprimer]="msgSupprimer"
+                                           [urlTelechargment]="getUrlBaseTelecharge()"
+                                           >
+
+            </msss-gestionnaire-de-fichiers>
+        </msss-sigct-content-zone>
+
+
+        <div class="row">
+            <div class="col-md-1">
+                <br/>
+                <msss-input-checkbox name="actif"
+                                     #actif="ngModel"
+                                     [options]="inputOptionActif"
+                                     [(ngModel)]="dto.actif"
+                                     [disabled]="false">
+                </msss-input-checkbox>
+            </div>
+
+        </div>
+
+
+    </form>
+
+
+
+</div>
+
+<ng-container *ngIf="_isModifyMode">
+    <div class="row margin-top-7">
+        <div class="col-md-3 width-auto padding-right-3">
+            <strong>{{'sigct.ss.pilotage.info_utile.ajoutmodif.creele' |
+                translate}}&nbsp;:&nbsp;</strong>
+        </div>
+        <div class="col-md-3 width-auto no-padding-left padding-right-3">
+            {{dto.dateCreation | date:'yyyy-MM-dd H:mm'}}
+        </div>
+        <div class="col-md-3 width-auto no-padding-left padding-right-3">
+            <strong>{{'sigct.ss.pilotage.info_utile.ajoutmodif.creepar' |
+                translate}}&nbsp;:&nbsp;</strong>
+        </div>
+        <div class="col-md-3 width-auto no-padding-left">
+            {{dto.userCreationUsername}}
+        </div>
+    </div>
+
+    <div class="row margin-top-7 margin-bottom-15">
+        <div class="col-md-3 width-auto padding-right-3">
+            <strong>{{'sigct.ss.pilotage.info_utile.ajoutmodif.modifiele' |
+                translate}}&nbsp;:&nbsp;</strong>
+        </div>
+        <div class="col-md-3 width-auto no-padding-left padding-right-3">
+            {{dto.dateModification | date:'yyyy-MM-dd H:mm'}}
+        </div>
+        <div class="col-md-3 width-auto no-padding-left padding-right-3">
+            <strong>{{'sigct.ss.pilotage.info_utile.ajoutmodif.modifiepar' |
+                translate}}&nbsp;:&nbsp;</strong>
+        </div>
+        <div class="col-md-3 width-auto no-padding-left">
+            {{dto.userModificationUsername}}
+        </div>
+    </div>
+</ng-container>

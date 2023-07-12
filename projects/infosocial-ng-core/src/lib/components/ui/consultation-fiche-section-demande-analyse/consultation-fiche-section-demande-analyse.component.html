@@ -1,0 +1,44 @@
+<msss-sigct-content-zone id="demandeAnalyse"
+                         title="{{ 'sigct.so.f_appel.consultation.analyse' | translate }}">
+  <div class="row margin-bottom-8">
+    <div class="col-md-4">
+      <label class="display-inline">{{ 'sigct.so.f_appel.consultation.analyse.typefiche' | translate }}
+        :</label>
+      {{ nomReferenceTypeFiche }}
+    </div>
+    <div class="col-md-4" *ngIf="referenceRaisonTypeInterventionCode">
+      <label class="display-inline">{{ 'sigct.so.f_appel.analyse.raison' | translate }}
+        :</label>
+      {{ referenceRaisonTypeInterventionNom }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <msss-cadre-text [cadreTextDto]="cadreTextDtoAccueil"> </msss-cadre-text>
+    </div>
+    <div class="col-md-12 pb-1"
+         *ngIf="displayConsentementFicheAnterieures">
+      <label class="display-inline">
+        {{ 'sigct.so.f_appel.consultation.suitesintervention.consentementfichesant' | translate }} :
+      </label>
+      <span>{{ 'girpi.ok.label' | translate }}</span>
+    </div>
+  </div>
+
+  <ng-container *ngFor="let cadreTextDto of cadreTextDtos">
+    <msss-cadre-text [cadreTextDto]="cadreTextDto"> </msss-cadre-text>
+  </ng-container>
+
+  <div class="contentZone margin-top-8">
+    <msss-list-info-affichage [listInfoAffichageDtos]="medicationSocialDTOs"
+                              titleSection="{{ 'sigct.so.f_appel.consultation.analyse.medactuelle' | translate }}">
+    </msss-list-info-affichage>
+  </div>
+
+  <div class="contentZone">
+    <msss-list-info-affichage [listInfoAffichageDtos]="consultationAnterieureListInfo"
+                              titleSection="{{ 'sigct.so.f_appel.consultation.analyse.consulant' | translate }}">
+    </msss-list-info-affichage>
+  </div>
+</msss-sigct-content-zone>

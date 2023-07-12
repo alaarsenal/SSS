@@ -1,0 +1,184 @@
+<ng-template #alertContainer></ng-template>
+
+<div class="col-md-12 ml-10">
+
+  <div id="suiviEnregistraments" class="panel panel-default contentZone" #contentZone>
+    <div class="panel-heading h-50">
+      <span><i class="fa fa-filter fa-fw"></i><b>{{ "usager.recherche.filtrerecherche" | translate }}</b></span>
+      <span class="badge badge_content_zone"></span>
+      <span class="pull-right">
+
+        <button type="button" class="btn-sm btn btn-primary form-btn" title="{{ 'usager.notification.recherche.btnrechercher' | translate }}" id="recherche_btn"
+          (click)="rechercher();">{{ 'usager.notification.recherche.btnrechercher' | translate }}</button> &nbsp;
+
+        <button type="button" class="btn-sm btn btn-reinit form-btn" title="{{ 'usager.notification.recherche.btnreinitialiser' | translate }}" id="reinit_btn"
+          (click)="reinitialiser();">{{ 'usager.notification.recherche.btnreinitialiser' | translate }}</button>
+      </span>
+    </div>
+  </div>
+
+
+  <form name="form" #fCriteres="ngForm" novalidate>
+    <div id="filtre" class=" mat-elevation-z1">
+
+      <div class="col-md-12 ">
+
+        <div class="combo">
+            <msss-sigct-chosen label="usager.notification.recherche.types" name="types" id="types" #types="ngModel"
+              [(ngModel)]="rechercheCritere.typeAlert" [options]="inputOptionsTypeDAlert" (optionSelected) ="onOptionsTypeChange($event)">
+            </msss-sigct-chosen>
+        </div>
+
+        <div class="date">
+          <msss-sigct-datepicker #date id="date" label="usager.notification.recherche.date"
+            [(ngModel)]="rechercheCritere.date" dateFormat="yyyy-mm-dd" placeHolder="aaaa-mm-jj"
+            [ngModelOptions]="{standalone:true}"
+            [disabled] = isDateDisabled()>
+          </msss-sigct-datepicker>
+        </div>
+
+        <div class="combo">
+          <msss-sigct-chosen label="usager.notification.recherche.site" name="site" id="site" #site="ngModel"
+            [(ngModel)]="rechercheCritere.idSite" [options]="inputOptionsSite">
+          </msss-sigct-chosen>
+        </div>
+
+        <div class="combo">
+          <msss-sigct-chosen label="usager.notification.recherche.gestionnaire" name="gestionaire" id="gestionaire" #gestionaire="ngModel"
+            [(ngModel)]="rechercheCritere.idGestionaire" [options]="inputOptionsGestionaire">
+          </msss-sigct-chosen>
+        </div>
+
+      </div>
+
+    </div>
+  </form>
+
+</div>
+
+<div class=" col-md-12">
+  <div id="usager" class="panel panel-default contentZone" #contentZone>
+    <div class="panel-heading ">
+      <span>
+        <i class="fa fa-list fa-fw"></i>
+        Affichage {{(paginator.pageIndex * paginator.pageSize) + 1}} à
+        {{(paginator.pageIndex + 1) * paginator.pageSize}} sur
+        <span class="badge" id="total-records">{{paginator.length}}</span> résultat(s)
+      </span>
+      <span class="badge badge_content_zone"></span>
+      <span class="float-right"></span>
+    </div>
+
+    <div class="result-container mat-elevation-z1">
+
+
+      <div class="result-table-container pn">
+
+        <table mat-table [dataSource]="dataSource" class="example-table" matSort>
+
+          <!-- State Column -->
+           <!-- State Column -->
+           <ng-container matColumnDef="cree">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.notification.recherche.liste.creele' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{row.cree |  date : 'yyyy-MM-dd'}}</td>
+          </ng-container>
+
+          <!-- State Column -->
+          <ng-container matColumnDef="fermPrevue">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.notification.recherche.liste.fermprevue' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{row.fermPrevue |  date : 'yyyy-MM-dd'}}</td>
+          </ng-container>
+
+          <!-- State Column -->
+          <ng-container matColumnDef="aReviser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.notification.recherche.liste.areviser' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{row.areviser |  date : 'yyyy-MM-dd'}}</td>
+          </ng-container>
+
+          <!-- State Column -->
+          <ng-container matColumnDef="usager">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.notification.recherche.liste.usager' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{row.usager}}</td>
+          </ng-container>
+
+          <!-- State Column -->
+          <ng-container matColumnDef="nam">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.notification.recherche.liste.nam' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{row.nam}}</td>
+          </ng-container>
+
+          <!-- State Column -->
+          <ng-container matColumnDef="naissance">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'usager.notification.recherche.liste.naissance' | translate }}</th>
+            <td mat-cell *matCellDef="let row">{{row.dtNaissance |  date : 'yyyy-MM-dd'}}</td>
+          </ng-container>
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ 'usager.notification.recherche.liste.typefiche' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.type }}</td>
+          </ng-container>
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="site">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ 'usager.notification.recherche.liste.site' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row">{{row.site}}</td>
+          </ng-container>
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="gestionaire">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ 'usager.notification.recherche.liste.gestionnaire' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row">{{row.gestionaire}}</td>
+          </ng-container>
+
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="actions" align="right">
+            <th mat-header-cell *matHeaderCellDef disableClear>
+              {{ 'usager.notification.recherche.liste.actions' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row" class="padding-3">
+              <button (click)=consulter(row) type="button" class="btn btn-default btn-sm padding-2" id="consuler_button"
+                 title="{{ 'usager.recherche.liste.btnconsulter' | translate }}">
+                <i class="fa fa-file-text-o fa-lg"></i></button>&nbsp;
+              <button (click)=editer(row) type="button" class="btn btn-default btn-sm padding-2" id="modifier_button" *hasAllRoles="['ROLE_US_USAGER_MODIF']"
+                 title="{{ 'usager.recherche.liste.btnmodifier' | translate }}">
+                <i class="fa fa-edit fa-lg"></i></button>&nbsp;
+            </td>
+          </ng-container>
+
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="identId">
+            <th mat-header-cell *matHeaderCellDef disableClear>
+              Id
+            </th>
+            <td mat-cell *matCellDef="let row">{{row.id}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div *ngIf="dataSource.data===null ||dataSource.data===undefined  || dataSource.data.length === 0" class="no-records mat-row">
+          {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+        </div>
+      </div>
+
+      <mat-paginator
+        [pageSize]="15"
+        [pageSizeOptions]="[5,10,15,20,25,50,100]"
+        [showFirstLastButtons]="true">
+      </mat-paginator>
+
+    </div>
+
+    <div class="text-right" *ngIf="dataSource.data.length > 0">
+      <button type="button" class="btn-sm btn btn-primary form-btn m-8"  id="ajouterBtn" title="{{ 'usager.notification.recherche.liste.btnexporterinfobulle' | translate }}" (click)="exporter()"> {{ 'usager.notification.recherche.liste.btnexporter' | translate }} </button>
+    </div>
+

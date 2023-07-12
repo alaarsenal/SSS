@@ -1,0 +1,74 @@
+<msss-form-top-bar label="{{labelMenuTop}}" detail="{{detailMenuTop}}" [options]="formTopBarOptions"
+  [fixe]="topBarreFixe" [nomModule]="'usager'">
+</msss-form-top-bar>
+
+<!-- #3957 Lorsque le composant est utilisé dans un popup, cdkScrollable permet aux liste déroulantes 
+           ouvertes de demeurer fixées à leur component lors du scroll.
+           Réf: https://github.com/angular/components/issues/10079#issuecomment-491620284 -->
+<div class="contenu-avec-scrollbar" cdkScrollable>
+
+  <ng-template #alertContainer></ng-template>
+
+  <div id="cadenas" style="padding-right:15px;">
+    <label class="cadenas_{{classCadenaUsager}} cadenas control-label"><i class="fa fa-lock fa-lg"></i>
+      {{msgCadenaUsager | translate }}</label>
+  </div>
+
+  <msss-sigct-content-zone id="identification-usager" title="{{'usager.identification.title' | translate}}">
+    <div class="row">
+      <app-identification-usager (change)="getCadenasUsager()" (outputChangeSexe)="getCadenasUsager()"
+        (outputChangeDtNasc)="getCadenasUsager()" (outputRelierUsagerAction)="relierUsagerAfterBlurPopUpChoice()"
+        (outputSubmit)="sauvegarderEtValiderUsager()" #appIdentificationUsager [listeSexe]="listeSexe">
+      </app-identification-usager>
+    </div>
+  </msss-sigct-content-zone>
+
+  <msss-sigct-content-zone id="communication-usager" title="{{'usager.communications.title' | translate}}"
+    [contentStyles]="noPaddingBottomStyle">
+    <div class="row communicationUsagerZone">
+      <app-communication-usager #appCommunicationUsager  [idUsager]="idUsager"
+        (outputArchiverCommunication)="onArchiverCommunication()" (outputSubmit)="onSubmitCommunication()"
+        (outputafficherToutCommunicationInactif)="getListeResultatCommunicationInatif()"
+        (outputafficherToutCommunication)="getListeResultatCommunication()" [listeMoyenCommunication]="listeTypeEquip"
+        [listeTypeCommunication]="listeCoord" [listeCommunication]="listeResultatCommunication"
+        [linkedUsagerDTOs]="linkedUsagerDTOs" (selectCommLinkedUsagerEvent)="selectCommOrAddressFromLinkedUsager($event)"
+        (openModalForConfirmerArchiverCommEvent)="openModalForConfirmerArchiverComm()">
+      </app-communication-usager>
+    </div>
+  </msss-sigct-content-zone>
+
+  <msss-sigct-content-zone id="adresse-usager" title="{{'usager.adresses.title' | translate}}"
+    [contentStyles]="noPaddingBottomStyle">
+    <div class="row adresseUsagerZone">
+      <app-adresses-usager #appAdresseUsager (outputArchiverLieuResidence)="onArchiverAdresse($event)" [idUsager]="idUsager"
+        (outputSubmit)="submitAdresse()" [listePays]="listePays" [listeProvince]="listeProvince"
+        [listeRegion]="listeRegion" [listeTypeAdresse]="listeTypeAdresse" [listeTypeAppartement]="listeTypeAppartement"
+        (outputafficherToutLieuResidenceInactif)="getListeResultatAdresseInatif()"
+        (outputafficherToutLieuResidence)="getListeResultatAdresse()" (outputClearCodePostal)="clearCodePostal()"
+        [listeAdresse]="listeResultatAdresse" [linkedUsagerDTOs]="linkedUsagerDTOs" 
+        (selectAddressLinkedUsagerEvent)="selectCommOrAddressFromLinkedUsager($event)"
+        (openModalForConfirmerArchiverAddressEvent)="openModalForConfirmerArchiverAdrss()"></app-adresses-usager>
+    </div>
+  </msss-sigct-content-zone>
+
+  <msss-sigct-content-zone id="informations-sup-usager" title="{{'usager.info.supp.title' | translate}}">
+    <app-informations-supp-usager #appInfoSupUsager (change)="getCadenasUsager()" [listeLangue]="listeLangue">
+    </app-informations-supp-usager>
+  </msss-sigct-content-zone>
+
+  <!-- div vide pour ajouter un espace vertical -->
+  <div class="col-12">&nbsp;</div>
+</div>
+
+<modal-confirmation id-container="confirm_popup_annuler">
+  <div class="modal-confirm-body modal-body">
+    {{'usager.msg.confirmatiom' | translate}}
+  </div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible"
+      id="ok_confirm_button" (click)="getUsagerById(); closeModal('confirm_popup_annuler');">Oui</button>
+    <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+      id="cancel_confirm_button">Non</button>
+  </div>
+</modal-confirmation>

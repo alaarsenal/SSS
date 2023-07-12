@@ -1,0 +1,54 @@
+.mat-dialog-content {
+    position: relative;
+    border-top: 1px solid #E0E0E0;
+    border-bottom: 1px solid #E0E0E0;
+    height: calc(100% - 80px);
+    max-height: calc(100% - 80px);
+    overflow: hidden;
+}
+
+#btn-fermer-dialog {
+    width: 80px;
+}
+
+.modal-header {
+    padding: 0px;
+}
+
+.visibility-visible {
+    visibility: visible
+}
+
+.conteneur {
+    margin-top: 15px;
+}
+
+.margin-bottom-10 {
+	margin-bottom: 10px;
+}
+
+.fermeture {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.contenu {
+    width: 100%;
+}
+
+.padding-right-60 {
+    padding-right: 60px !important;
+}
+
+::ng-deep #typeSante > .mat-checkbox-layout .mat-checkbox-label,
+::ng-deep #typeSocial > .mat-checkbox-layout .mat-checkbox-label  {
+    font-weight: normal;
+}
+
+button {
+    margin-left: 15px;
+}
+
+.scroll-auto {
+  overflow-y: auto;
+}

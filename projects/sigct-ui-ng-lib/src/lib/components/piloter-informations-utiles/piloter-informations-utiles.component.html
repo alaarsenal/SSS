@@ -1,0 +1,39 @@
+<msss-table-pagination [displayedColumns]="displayedColumns"
+                         [dataSource]="tableRefDTO"
+                         [defaultsortField]="defaultsortField"
+                         [defaultPageSize]="defaultPageSize"
+                         [headTitleByCodeColumn]="headTitleByCodeColumn"
+                         [columnsHeadThatNeedTitleProperty]="columnsHeadThatNeedTitleProperty"
+                         [columnsHeadThatNeedEllipsis]="columnsHeadThatNeedEllipsis"
+                         [isConsultBtnDisplayed]="false"
+                         [isSupprBtnDisplayed]="isSupprBtnDisplayed"
+                         [isModifBtnDisplayed]="isModifBtnDisplayed"
+                         [resultsLength]="resultsLength"
+                         (consultElement)="consultTableRef($event)"
+                         (modifElement)="modifierInforUtile($event)"
+                         (supprimerElement)="supprimerInforUtile($event)"
+                         (rechercherTabContent)="rechercherTabsRefsWhenPaginationOrSortEventIsTriggered($event)"
+                         [columnsHeadThatNeedConvertFormBooleanToMark]="columnsHeadThatNeedConvertFormBooleanToMark"
+                         [columnsHeadWithNoSort]="columnsHeadWithNoSort"
+                         [identifiantPaginationTable]="identifiantPaginationTable"
+                         >
+  </msss-table-pagination>
+
+  <modal-confirmation id-container="confirm_popup_supprimer-modif">
+    <div class="modal-confirm-body modal-body">
+        {{'ss-iu-a00010'|translate}}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+        <button type="button"
+                data-dismiss="modal"
+                class="btn btn-primary btn-sm btn-key-action visibility-visible"
+                id="ok_confirm_button"
+                (click)="supprimerInforUtile($event)">Oui</button>
+        <button type="button"
+                data-dismiss="modal"
+                class="btn btn-sm btn-key-action hidePopup visibility-visible"
+                id="cancel_confirm_button">Non</button>
+    </div>
+</modal-confirmation>
+

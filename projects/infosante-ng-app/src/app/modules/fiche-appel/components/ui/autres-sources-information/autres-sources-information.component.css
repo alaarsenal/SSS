@@ -1,0 +1,55 @@
+.background-gris {
+    background-color: lightgray;
+}
+
+.background-blanc {
+    background-color: white;
+}
+
+.padding-left-8 {
+    padding-left : 8px;
+}
+
+.padding-left-0 {
+    padding-left : 0px;
+}
+
+.padding-top-10 {
+    padding-top:10px;
+}
+
+.padding-top-bottom-2 {
+    padding-top:2px;
+    padding-bottom:2px;
+}
+
+/* Surcharge de sigct/layout.css pour que la corbeille reste grise  */
+.fa.fa-trash-o:hover::before {
+    color: grey;
+    /*  correspond à fa-trash */
+    content: "\f1f8"; 
+}
+
+.margin-left-m30{
+    margin-left: -13px !important;
+}
+
+
+.no-padding-left{
+    padding-left:0% !important;
+}
+
+.padding-right-5{
+    padding-right:0px !important;
+}
+
+.btn-submit-wrapper {
+    margin: 0.3rem 0rem;
+}
+
+.fontcolorblack {
+    color:black !important;
+}
+
+
+

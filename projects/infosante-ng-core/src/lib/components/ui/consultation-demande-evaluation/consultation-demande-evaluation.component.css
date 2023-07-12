@@ -1,0 +1,75 @@
+.tbl {
+  display: table;
+  table-layout: fixed;
+  width:100%;
+}
+
+.libelle {
+  font-weight: bold;
+  display: table-cell;
+  padding-right: 5px;
+  white-space: nowrap;
+  width:10%;
+}
+
+.inline-libelle {
+  display: table-cell;
+  font-weight: bold;
+  padding-right: 5px;
+  white-space: nowrap;
+}
+
+.valeur,
+.inline-valeur {
+  display: table-cell;
+  overflow-wrap:break-word;
+  white-space: pre-wrap;
+  max-width: 100%;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.valeur-niveau-urgence {
+  padding-right: 15px;
+}
+
+.date-heure-details {
+  display: table-cell;
+  padding-right: 5px;
+  white-space:pre-line;
+  overflow-wrap:break-word;
+}
+
+.date-heure-detail-hidden {
+  visibility: hidden !important;
+}
+
+.date,
+.heure {
+  padding-right: 5px;
+}
+
+.detail {
+  font-style: italic;
+  padding-right: 5px;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+.no-padding-left {
+  padding-left: 0px;
+}
+
+.detail-gris {
+  padding-right: 5px;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+.tr-ligne {
+  border-top : 1px solid #d9d9d9 !important;
+}
+
+

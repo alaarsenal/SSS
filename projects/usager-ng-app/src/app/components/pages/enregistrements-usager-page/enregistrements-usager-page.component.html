@@ -1,0 +1,15 @@
+<div class="main">
+    <div class="left-menu">
+        <msss-left-menu [leftMenuItems]="leftMenuItems"></msss-left-menu>
+    </div>
+    <div class="conteneur">
+        <sigct-usager-enregistrements
+        idUsager="{{idUsager}}"
+        (retourListe)="onRetourListe()"
+        (ajouterEnregistrement)="onAjouterEnregistrement($event)"
+        (consulterEnregistrement)="onConsulterEnregistrement($event)"
+        (editerEnregistrement)="onEditerEnregistrement($event)"
+        (copierEnregistrement)="onCopieEnregistrement($event)">
+        </sigct-usager-enregistrements>
+    </div>
+</div>

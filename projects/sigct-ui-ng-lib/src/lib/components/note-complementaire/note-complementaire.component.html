@@ -1,0 +1,152 @@
+<form name="form"
+      #fCom="ngForm">
+  <div class="padding-left-15 padding-right-15">
+    <div class="row title"
+         [ngClass]="getDomaineClass()">
+      <div class="col-md-6">
+        <i class="fa fa-lg fa-clipboard"></i>
+        <h1>{{ 'sigct.ss.f_appel.notecompl.ajoutnotecompl' | translate }}</h1>
+      </div>
+      <div class="col-md-6 actions">
+        <button *ngIf="isReadonly === false"
+                id="btnTerminer"
+                class="btn btn-primary"
+                (click)="onBtnTerminerClick()"
+                title="{{'sigct.ss.f_appel.notecompl.terminer' | translate}}">
+          {{'sigct.ss.f_appel.notecompl.terminer' | translate}}
+        </button>
+        <button (click)="onBtnCancelClick()"
+                class="btn btn-default margin-left-5"
+                title="{{'sigct.ss.f_appel.corriger.annuler' | translate}}">
+          {{'sigct.ss.f_appel.corriger.annuler' | translate}}
+        </button>
+        <button id="btnRetour"
+                class="btn btn-outline-primary btn-retour"
+                (click)="onBtnRetourClick()"
+                title="{{'sigct.ss.f_appel.notecompl.revenirinfobulle' | translate}}">
+          <i class="fa fa-lg fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="row padding-right-15">
+      <div class="col-md-3">
+        <msss-sigct-chosen #listeTypeNoteHTML
+                           label="sigct.ss.f_appel.notecompl.typenotecompl"
+                           name="typenote"
+                           required
+                           [required]="true"
+                           id="typenote"
+                           [options]="inputOptionsTypeNotes"
+                           [valide]="isTypeNoteValide"
+                           [(ngModel)]="note.typeNoteCode"
+                           (ngModelChange)="onTypeNoteChange()"
+                           (optionSelected)="onTypeNoteValide($event)"
+                           [disabled]="isReadonly">
+        </msss-sigct-chosen>
+      </div>
+      <div class="col-md-2">
+        <msss-sigct-chosen #listeLangueHTML
+                           *ngIf="isLangueVisible"
+                           label="sigct.ss.f_appel.notecompl.langue"
+                           name="langue"
+                           required
+                           [required]="true"
+                           id="langue"
+                           [options]="inputOptionsLangues"
+                           [valide]="isLangueValide"
+                           [(ngModel)]="note.langueAppelCode"
+                           (ngModelChange)="onLangueChange()"
+                           (optionSelected)="onLangueValide($event)"
+                           [disabled]="isReadonly">
+        </msss-sigct-chosen>
+      </div>
+      <div class="col-md-3">
+        <msss-sigct-chosen #listeInterlocuteurHTML
+                           *ngIf="isInterlocuteurVisible"
+                           label="sigct.ss.f_appel.notecompl.typeinterlocuteur"
+                           name="interlocuteur"
+                           required
+                           [required]="true"
+                           id="interlocuteur"
+                           [options]="inputOptionsInterlocuteurs"
+                           [valide]="isInterlocuteurValide"
+                           [(ngModel)]="note.interlocuteurCode"
+                           (ngModelChange)="onInterlocuteurChange()"
+                           (optionSelected)="onInterlocuteurValide($event)"
+                           [disabled]="isReadonly">
+        </msss-sigct-chosen>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+
+    <div class="row padding-left-15 padding-right-15">
+      <msss-input-textarea #champnote
+                           id="note"
+                           name="note"
+                           [required]="true"
+                           class="padding-right-15"
+                           label="sigct.ss.f_appel.notecompl.note"
+                           rows="15"
+                           maxlength="500000"
+                           [(ngModel)]="note.notecompl"
+                           [CSSResize]="'vertical'"
+                           required
+                           raccourcis=true>
+      </msss-input-textarea>
+    </div>
+
+    <div class="row padding-left-15 consentement">
+      <msss-input-checkbox id="consentementenFicheEnregistreur"
+                           name="consentementenFicheEnregistreur"
+                           [options]="inputOptionsConsentementenFicheEnregistreur"
+                           [(ngModel)]="note.consentementenFicheEnregistreur">
+      </msss-input-checkbox>
+    </div>
+
+    <div class="row no-padding-left">
+      <div class="col-md-6">
+        <msss-duree-fiche-appel #appDureeFicheAppel
+                                [libelleCreeLe]="'sigct.ss.f_appel.notecompl.notecreeele'"
+                                [dureeFicheAppel]="dureeFicheAppelDto"></msss-duree-fiche-appel>
+      </div>
+    </div>
+  </div>
+</form>
+
+<msss-sigct-content-zone id="fichierAttache"
+                         title="{{ 'sigct.ss.f_appel.consultation.fichiersattaches' | translate }}">
+  <msss-manager-files-batch #managerFilesBatchComponent
+                            [showListeProfile]="showListeProfile"
+                            [showColReference]="showColReference"
+                            [showColTitre]="showColTitre"
+                            [showColDescription]="showColDescription"
+                            [listeFichiers]="listeFichiers"
+                            (onAjouterFichier)="onAjouterFichierToList($event)"
+                            (onSupprimerFichier)="onSupprimerFichierFromList($event)"
+                            (onListFichier)="onListFichier($event)"
+                            (onTelechargerFichier)="onTelechargerFichier($event)"
+                            [typeFichierAccepter]="typeFichierAccepter"
+                            [urlTelechargment]="urlBaseMiniatureImg"
+                            [readonly]="isFichierReadOnly()"
+                            [displayedColumns]="displayedColumns">
+  </msss-manager-files-batch>
+</msss-sigct-content-zone>
+
+<modal-confirmation id-container="confirm_popup_cancel">
+  <div class="modal-confirm-body modal-body">
+    Les informations saisies seront perdues. Voulez-vous continuer?
+  </div>
+
+  <div class="modal-confirm-footer modal-footer">
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-sm btn-key-action visibility-visible"
+            id="ok_confirm_button"
+            (click)="confirmCancelClick()">Oui</button>
+    <button type="button"
+            data-dismiss="modal"
+            class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="cancel_confirm_button">Non</button>
+  </div>
+</modal-confirmation>

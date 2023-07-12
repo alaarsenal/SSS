@@ -1,0 +1,94 @@
+<div class="wrapper">
+  <table mat-table
+         [dataSource]="dataSource">
+    <ng-container matColumnDef="referenceSuitesIntervention">
+      <th mat-header-cell
+          *matHeaderCellDef> {{titreReferenceSuitesIntervention | translate}} </th>
+      <td mat-cell
+          *matCellDef="let item">
+        <msss-sigct-chosen id="{{'referenceSuitesIntervention_' + item.id}}"
+                           name="referenceSuitesIntervention"
+                           [options]="inputOptionsReferenceSuitesIntervention"
+                           [(ngModel)]="item.codeReferenceSuitesIntervention">
+        </msss-sigct-chosen>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="rrss">
+      <th mat-header-cell
+          *matHeaderCellDef> {{'sigct.ss.f_appel.corriger.suitesintervention.liste-ressources' | translate}} </th>
+      <td mat-cell
+          *matCellDef="let item">
+        <div class="rrss-link">
+          <msss-rrss-link id="{{'rrssLink_'+item.id}}"
+                          rrssLink="sigct.ss.f_appel.corriger.suitesintervention.rrss"
+                          title="{{'sigct.ss.f_appel.corriger.suitesintervention.accederaurrss' | translate}}"
+                          [selectMultiRrss]="!isSuitesInterventionReference"
+                          (rssDialogClosed)="onCloseRrssDialog($event, item)">
+          </msss-rrss-link>
+        </div>
+        <div class="rrss-input">
+          <msss-input-text id="{{'rrssContent_'+item.id}}"
+                           cssClass="rrss-field"
+                           [title]="item.rrssListContent"
+                           [isReadonly]="true"
+                           [(ngModel)]="item.rrssListContent">
+          </msss-input-text>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="programmeService">
+      <th mat-header-cell
+          *matHeaderCellDef> {{'sigct.ss.f_appel.corriger.suitesintervention.programmeservice' | translate}} </th>
+      <td mat-cell
+          *matCellDef="let item">
+        <msss-input-text id="{{'programmeServiceInputText_'+item.id}}"
+                         name="{{'programmeServiceInputText_'+item.id}}"
+                         maxlength="255"
+                         [(ngModel)]="item.programmeService" raccourcis=true>
+        </msss-input-text>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="details">
+      <th mat-header-cell
+          *matHeaderCellDef> {{suitesinterventionLabel | translate}} </th>
+      <td mat-cell
+          *matCellDef="let item">
+        <msss-input-text id="{{'detailsInputText_'+item.id}}"
+                         name="{{'detailsInputText_'+item.id}}"
+                         maxlength="255"
+                         [(ngModel)]="item.details"
+                         raccourcis=true>
+        </msss-input-text>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell
+          *matHeaderCellDef> {{'sigct.ss.f_appel.corriger.action' | translate}} </th>
+      <td mat-cell
+          *matCellDef="let item; index as idx">
+        <button type="button"
+                class="btn btn-default btn-sm padding-2"
+                (click)="onClickBtnSupprimer(idx)"
+                title="{{ 'sigct.ss.f_appel.corriger.suitesintervention.btnsupprimer' | translate }}">
+          <i class="fa fa-lg fa-trash-o"></i>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row
+        *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div *ngIf="dataSource.data===null || dataSource.data===undefined  ||dataSource.data.length === 0"class="no-records mat-row">
+    {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+  </div>
+  <div class="btn-ajouter">
+    <button id="btnAjouterSuitesIntervention"
+            class="btn btn-primary"
+            type="button"
+            title="{{'sigct.ss.f_appel.corriger.suitesintervention.btnajouterinfobulle'|translate}}"
+            (click)="onClickBtnAjouterUneLigne()">
+      {{'sigct.ss.f_appel.corriger.suitesintervention.btnajouter'|translate}}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+:host(.error) > div > div {
+    border: 1px solid #ed541d!important;
+}
+
+.highlight {
+    font-weight: bold;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button !important;
+}
+
+::ng-deep .mat-option{
+    height: 30px !important;
+    font-size: 14px !important;
+}
+
+::ng-deep .mat-option strong {
+    color: red;
+}
+    
+mat-icon:hover {
+    cursor: pointer;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+label {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

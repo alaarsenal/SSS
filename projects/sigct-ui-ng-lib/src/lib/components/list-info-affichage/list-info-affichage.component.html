@@ -1,0 +1,14 @@
+<ng-container *ngIf="listInfoAffichageDtos && listInfoAffichageDtos.length > 0">
+    <div class="row">
+        <div class="col-md-2 padding-right-4" style="width: auto;">
+            <label class="display-inline">{{ titleSection }} :</label>
+        </div>
+        <div class="col-md-10">
+            <ul class="dashed padding-left-7 margin-top-3">
+                <ng-container *ngFor="let item of listInfoAffichageDtos">
+                    <li>{{item.data}} <span *ngIf="item.detail" class="font-style-italic">({{item.detail}})</span></li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+</ng-container>

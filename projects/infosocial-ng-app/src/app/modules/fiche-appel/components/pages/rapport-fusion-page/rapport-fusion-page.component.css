@@ -1,0 +1,14 @@
+.rapport-fusion-page {
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+}  
+
+.top-bar {
+    flex: none;
+}
+
+.conteneur {
+    flex: auto;
+    overflow-y: auto;
+}

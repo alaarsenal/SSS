@@ -1,0 +1,28 @@
+<msss-sigct-content-zone id="consulter-isisw-section-usager"
+                         title="{{ 'sigct.ss.c_appelsisisw.titrenotesuivi' | translate }}">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12 align-right">
+        <msss-input-checkbox name="consentementOrganismeEnregistreur"
+                             [options]="inputOptionConsentementOrganismeEnregistreur"
+                             [(ngModel)]="dto.consentementOrganismeEnregistreur"
+                             [disabled]="true">
+        </msss-input-checkbox>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 align-right">
+        <msss-input-checkbox name="usagerAutoriseTransmission"
+                             [options]="inputOptionUsagerAutoriseTransmission"
+                             [(ngModel)]="dto.usagerAutoriseTransmission"
+                             [disabled]="true">
+        </msss-input-checkbox>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <span>{{dto.noteSuivi}}</span>
+      </div>
+    </div>
+  </div>
+</msss-sigct-content-zone>

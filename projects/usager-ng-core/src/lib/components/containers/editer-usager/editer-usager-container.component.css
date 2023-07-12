@@ -1,0 +1,31 @@
+.adresseUsagerZone {
+    margin-bottom: 0;
+    margin-top: -15px;  /* ajouter pour commencer mantis 3707 */  
+}
+
+.communicationUsagerZone {
+    margin-bottom: 0;
+    margin-top: -15px;
+}
+
+.cadenas {
+    text-align: right;   
+}
+
+.cadenas_rouge{
+    color: #cc0000 ;
+}
+
+.cadenas_vert{
+    color: #009e11 ;
+}
+
+.cadenas_jaune{
+    color: #f1c231 ;
+}
+
+.contenu-avec-scrollbar {
+    height: calc(100% - 45px);
+    width: 100%;
+    overflow-y: auto;
+}

@@ -1,0 +1,34 @@
+<div class="menu-gauche-zone">
+  <ul class="menu-items-gauche">
+    <li *ngFor="let item of leftMenuItems; let i = index"
+    [id]="item.id"
+        title="{{item.title | translate}}">
+      <ng-template [ngIf]="item.link && item.visible">
+        <a routerLink="{{item.link}}"
+           [class.active]="isMenuItemActif(item.link) || item.isActive"
+           [class.readonly]="item.disabled"
+           [class.colorO]="item.isColorHighlited === true"
+           [class.colorB]="item.isColorHighlited === false"
+           title="{{item.title | translate}}">
+          <i class="{{item.icon}} fa-lg"
+             style="height:13px; position: relative; font-weight: 400;"></i>
+             <span class="sr-only">{{item.title | translate}}</span>
+        </a>
+      </ng-template>
+
+      <ng-template [ngIf]="item.isAction && item.visible">
+        <a href="javascript:void(0)"
+           (click)="item.action()"
+           [class.active]="item.isActive"
+           [class.readonly]="item.disabled"
+           [class.colorO]="item.isColorHighlited === true"
+           [class.colorB]="item.isColorHighlited === false"
+           title="{{item.title | translate}}">
+          <i class="{{item.icon}} fa-lg"
+             style="height:13px; position: relative; font-weight: 400;"></i>
+             <span class="sr-only">{{item.title | translate}}</span>
+        </a>
+      </ng-template>
+    </li>
+  </ul>
+</div>

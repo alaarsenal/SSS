@@ -1,0 +1,36 @@
+
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0px;
+}
+
+::ng-deep .mat-form-field-infix {
+border-top: 0px;
+}
+
+.text-indent-59 {
+    text-indent: -72px!important;
+}
+
+.border-gray {
+    border: 1px solid #ddd;
+}
+
+.nestedLabel {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif!important;
+}
+
+ul.dashed {
+    list-style-type: none;
+  }
+  ul.dashed > li {
+    text-indent: -5px;
+  }
+  ul.dashed > li:before {
+    content: "- ";
+    text-indent: -5px;
+  }

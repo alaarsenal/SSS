@@ -1,0 +1,30 @@
+<div class="piloter-table-reference-component">
+  <div class="container" cdkScrollable>
+    <div class="row margin-bottom-15">
+      <div class="col-md-12" [ngClass]="getPiloterTablesRefTitleClass()">
+        <h1 class="label-font-size">
+          <i class="fa fa-wrench fa-lg margin-right-10"></i>{{ 'sigct.ss.pilotage.tableref.titre' | translate }}
+        </h1>
+      </div>
+    </div>
+
+    <msss-piloter-tables-references-section-criteres-recherche (rechercherTabRefsBtn)="rechercherTabsRefsWhenRechercherBtnIsTriggered($event)"
+                                                              (enterKeydown)="rechercherTabsRefsWhenEnterKeydownIsTriggered($event)">
+    
+    </msss-piloter-tables-references-section-criteres-recherche>
+
+    <msss-table-pagination [displayedColumns]="displayedColumns"
+                          [dataSource]="tableRefDTO"
+                          [defaultsortField]="defaultsortField"
+                          [defaultPageSize]="defaultPageSize"
+                          [headTitleByCodeColumn]="headTitleByCodeColumn"
+                          [columnsHeadThatNeedTitleProperty]="columnsHeadThatNeedTitleProperty"
+                          [columnsHeadThatNeedEllipsis]="columnsHeadThatNeedEllipsis"
+                          [isConsultBtnDisplayed]="true"
+                          [resultsLength]="resultsLength"
+                          [identifiantPaginationTable]="identifiantPaginationTable"
+                          (rechercherTabContent)="rechercherTabsRefsWhenPaginationOrSortEventIsTriggered($event)"
+                          (consultElement)="consultTableRef($event)">
+    </msss-table-pagination>
+  </div>
+</div>

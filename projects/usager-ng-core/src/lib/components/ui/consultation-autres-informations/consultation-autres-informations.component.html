@@ -1,0 +1,13 @@
+<div class="row" *ngIf="!autresInformations">
+    <div class="col-md-12 aucune-donnee">
+        {{ 'usager.enregistrement.aucune.donnee' | translate}}
+    </div>
+</div>
+<div class="row" *ngIf="autresInformations">
+    <div class="col-md-12 autres-infos" [innerHTML]="autresInformations"></div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <app-consultation-fichiers #fichiersAutresInfo [idEnregistrement]="idEnregistrementIdent" [codeTypeFichier]="codeTypeFichierAutreInfo"></app-consultation-fichiers>
+    </div>
+</div>

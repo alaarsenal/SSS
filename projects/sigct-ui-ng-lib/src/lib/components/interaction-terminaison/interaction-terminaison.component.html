@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-2 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.interaction' | translate}}</label>
+        <span>{{appelDto?.idInteraction}}</span>
+    </div>
+    <div class="col-md-2 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.media' | translate}}</label>
+        <span>{{appelDto?.referenceTypeCommunication?.nom}}</span>
+    </div>
+    <div class="col-md-2 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.file' | translate}}</label>
+        <span>{{appelDto?.fileCti}}</span>
+    </div>
+</div>
+
+<div class="row padding-top-10">
+    <div class="col-md-2 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.debut' | translate}}</label>
+        <span>{{appelDto?.dtDebut | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+    </div>
+    <div class="col-md-2 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.fin' | translate}}</label>
+        <span>{{appelDto?.dtFin | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+    </div>
+    <div class="col-md-2 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.duree' | translate}}</label>
+        <span>{{appelDto?.dureeInteraction}}</span>
+    </div>
+</div>

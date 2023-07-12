@@ -1,0 +1,114 @@
+<div class="col-md-12 enlever-espace no-padding-right" title="">
+    <div class="col-md-6 background-gris no-padding-right">
+
+        <form name="form" (ngSubmit)="onSubmit()" #fConsultationAnterieure="ngForm">
+
+            <div class="col-md-11 no-padding-left no-padding-right">
+                <div class="row margin-top-5">
+                    <div class="col-sm-6">
+                        <msss-input-text id="momentConsultationInputText"
+                                        #momentConsultation
+                                        name="quand"
+                                        maxlength="50"
+                                        label="sigct.so.f_appel.analyse.consulant.moment"
+                                        [(ngModel)]="consultationAnterieureSaisi.quand"
+                                        [disabled]="disabledAll">
+                        </msss-input-text>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <msss-sigct-chosen label="sigct.so.f_appel.analyse.consulant.professionnel"
+                                        name="referenceRessConsult"
+                                        id="referenceRessConsult"
+                                        valide="{{ bindingErrors['referenceRessConsult']==undefined }}"
+                                        [options]="inputOptionsRessourceConsulte"
+                                        [(ngModel)]="consultationAnterieureSaisi.codeRefRessConsult"
+                                        (focus)="onFocus($event)"
+                                        [disabled]="disabledAll">
+                        </msss-sigct-chosen>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <msss-input-text id="RaisonConsultationInputText"
+                                        name="raison"
+                                        maxlength="255"
+                                        [valide]="raisonConsultationValide"
+                                        label="sigct.so.f_appel.analyse.consulant.raison"
+                                        [(ngModel)]="consultationAnterieureSaisi.raison"
+                                        (focus)="onFocus($event)"
+                                        [disabled]="disabledAll">
+                        </msss-input-text>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <msss-input-text id="DetailConsultationInputText"
+                                        name="precision"
+                                        maxlength="255"
+                                        label="sigct.so.f_appel.analyse.consulant.details"
+                                        [(ngModel)]="consultationAnterieureSaisi.precision"
+                                        [disabled]="disabledAll">
+                        </msss-input-text>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-1 col-btn">
+                <div class="col-sm-1 enlever-espace margin-top-40 margin-left-m1">
+                    <div id="ConsultationAnterieureActionIcon">
+                        <button type="submit" style="display:none" #submitBtn [disabled]="disabledAll">Submit</button>
+                        <msss-action-link [actionLinks]="actionLinks" [disableAll]="disabledAll"></msss-action-link>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="col-md-6 background-blanc no-padding-right">
+
+        <msss-list-info-action [list]="this.listeConsultationsAnterieure"
+                               [formatAction]="formatActionConsultationAnterieure"
+                               (modifierAction)="confirmerModifierConsultationAnterieure($event)"
+                               editerId="editerBtnConsultationAnterieure"
+                               supprimerId="supprimerBtnConsultationAnterieure"
+                               (supprimerAction)="confirmerSupprimerConsultationAnterieure($event)"
+                               [cacherAfficherReduire]="true"
+                               [idElementModifieSelectionne]="idConsultationAnterieureSelectionne"
+                               [afficherBoutonSupprimer]="true">
+        </msss-list-info-action>
+
+        <modal-confirmation id-container="confirm_popup_modif_consultation_anterieure">
+            <div class="modal-confirm-body modal-body">
+              {{ messageConfirmModif }}
+            </div>
+
+            <div class="modal-confirm-footer modal-footer">
+              <button id="confi_consult_btn_oui" type="button" data-dismiss="modal"
+                class="btn btn-primary btn-sm btn-key-action visibility-visible" (click)="remplacerConsultationAnterieure()">Oui</button>
+              <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+                id="cancel_confirm_button_consult">Non</button>
+            </div>
+          </modal-confirmation>
+
+          <modal-confirmation id-container="confirm_popup_supri_consultation_anterieure">
+            <div class="modal-confirm-body modal-body">
+              {{ messageConfirmSupp }}
+            </div>
+
+            <div class="modal-confirm-footer modal-footer">
+              <button id="supri_consult_btn_oui" type="button" data-dismiss="modal"
+                class="btn btn-primary btn-sm btn-key-action visibility-visible" (click)="supprimerConsultationAnterieure()">Oui</button>
+              <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+                id="cancel_delete_button_consult">Non</button>
+            </div>
+          </modal-confirmation>
+    </div>
+</div>
+

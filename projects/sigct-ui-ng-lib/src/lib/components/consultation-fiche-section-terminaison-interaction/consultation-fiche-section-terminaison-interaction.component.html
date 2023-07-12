@@ -1,0 +1,32 @@
+<msss-sigct-field-set id="section-interaction"
+                      titleFieldset="sigct.ss.f_appel.consultation.terminaison.interaction">
+  <div class="row">
+    <div class="col-md-3 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.interaction' | translate}} :</label>
+        <span>{{consultationInteractionDto?.idInteraction}}</span>
+    </div>
+    <div class="col-md-3 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.media' | translate}} :</label>
+        <span>{{consultationInteractionDto?.nomRefTypeCommunication}}</span>
+    </div>
+    <div class="col-md-3 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.file' | translate}} :</label>
+        <span>{{consultationInteractionDto?.fileCti}}</span>
+    </div>
+  </div>
+
+  <div class="row padding-top-5">
+    <div class="col-md-3 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.debut' | translate}} :</label>
+        <span>{{consultationInteractionDto?.dtDebut | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+    </div>
+    <div class="col-md-3 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.fin' | translate}} :</label>
+        <span>{{consultationInteractionDto?.dtFin | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+    </div>
+    <div class="col-md-3 no-padding-right">
+        <label>{{'sigct.ss.f_appel.consultation.terminaison.interaction.duree' | translate}} :</label>
+        <span>{{consultationInteractionDto?.dureeInteraction}}</span>
+    </div>
+  </div>
+</msss-sigct-field-set>

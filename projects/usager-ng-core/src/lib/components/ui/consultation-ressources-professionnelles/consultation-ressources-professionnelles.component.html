@@ -1,0 +1,76 @@
+<div class="row" *ngIf="listConsultationRessourcesProfessionnelles.length <= 0">
+    <div class="col-md-12 aucune-donnee">
+        {{ 'usager.enregistrement.aucune.donnee' | translate}}
+    </div>
+</div>
+<div class="table-container pn" *ngIf="listConsultationRessourcesProfessionnelles.length > 0">
+    <table mat-table [dataSource]="dataSource" class="table marginB-0">
+      <!-- State Column -->
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingL-2'">{{ 'usager.enregistrement.sec.ress.prof.nom' | translate}}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'w-209 paddingL-2'">
+            {{row.nomPrenom}}
+        </td>
+      </ng-container>
+
+      <!-- State Column -->
+      <ng-container matColumnDef="lien">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">{{ 'usager.enregistrement.sec.ress.prof.lien' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'w-209'">
+            {{row.lien}}
+        </td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="adresse">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+          {{ 'usager.enregistrement.sec.ress.prof.precision' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'w-addres'">
+            {{row.adresse}}
+        </td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="telephone1">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+          {{ 'usager.enregistrement.sec.ress.prof.tel1' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'w-122'" >
+            <div class="text-nowrap">
+                {{row.telephonePrincipal}}
+            </div>
+        </td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="telephone2">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+          {{ 'usager.enregistrement.sec.ress.prof.tel2' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'w-122'" >
+            <div class="text-nowrap">
+                {{row.telephoneSecondaire}}
+            </div>
+        </td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="disponibilite">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingR-0'">
+          {{ 'usager.enregistrement.sec.ress.prof.dispo' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'paddingR-0 w-200'">
+            {{row.disponibilite}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  <div *ngIf="dataSource.data===null || dataSource.data===undefined  ||dataSource.data.length === 0" class="no-records mat-row">
+    {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+  </div>
+</div>

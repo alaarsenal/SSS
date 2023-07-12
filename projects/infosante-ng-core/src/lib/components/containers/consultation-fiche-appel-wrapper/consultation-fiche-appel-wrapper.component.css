@@ -1,0 +1,23 @@
+.btn:focus, .btn:active:focus {
+  outline: thin dotted;
+}
+
+.btn-print {
+  border: .5px solid #555555;
+  font-size: 2rem;
+  padding: .2rem .5rem;
+}
+
+.btns {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.btns button {
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+.no-margin {
+  margin: 0;
+}

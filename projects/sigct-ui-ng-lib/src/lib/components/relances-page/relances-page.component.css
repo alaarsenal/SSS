@@ -1,0 +1,38 @@
+::ng-deep .wrapper {
+  min-height: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  margin-left: 0px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: larger;
+  border-bottom: solid 2px #C9DC87;
+}¨
+
+.infosante {
+  border-bottom: solid 2px #C9DC87;
+}
+
+.infosocial {
+  border-bottom: solid 2px #E8AA31;
+}
+
+.title h1 {
+  font-size: 20px;
+  display: inline-block;
+  margin-left: 2rem;
+}
+
+.filter {
+  padding: 1rem 0rem;
+}
+
+.relance-page {
+  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}

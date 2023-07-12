@@ -1,0 +1,11 @@
+
+:host>div{
+    position:relative; width: 1%; float: left;
+}
+:host >div>div{
+    position: absolute;
+     top: -15px;
+      left: 0px;
+      border-left: 1px #ddd solid;
+      height: 100px;
+}

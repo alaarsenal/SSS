@@ -1,0 +1,20 @@
+  ul.dashed {
+    list-style-type: none;
+  }
+
+  ul.dashed > li {
+    text-indent: -5px;
+  }
+
+  ul.dashed > li:before {
+    content: "- ";
+    text-indent: -5px;
+  }
+
+  .margin-bottom-5 {
+    margin-bottom: 5px;
+  }
+
+  .margin-top-5 {
+    margin-top: 5px;
+  }

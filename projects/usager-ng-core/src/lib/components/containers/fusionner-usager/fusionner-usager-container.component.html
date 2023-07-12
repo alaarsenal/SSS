@@ -1,0 +1,265 @@
+<msss-form-top-bar *ngIf="topBarreVisible"
+                   detail=""
+                   nomModule="usager"
+                   [label]="labelMenuTop"
+                   [options]="formTopBarOptions"
+                   [fixe]="topBarreFixe">
+</msss-form-top-bar>
+
+<div [class.contenu-avec-scrollbar]="topBarreVisible" cdkScrollable>
+
+  <ng-template #alertContainer></ng-template>
+
+  <msss-sigct-content-zone id="zone-identification"
+                           title="sigct.usager.fusion.identusager">
+    <div class="row">
+      <div class="col-md-12 padding-bottom-10">
+        <table id="tbl-identification"
+               class="table">
+          <colgroup>
+            <col style="width: 15%;" />
+            <col style="width: 30%;" />
+            <col style="width: 30%;" />
+            <col style="width: 25%;" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th></th>
+              <th class="text-center">{{"sigct.usager.fusion.usager" | translate}} #{{usager1Dto?.id}}</th>
+              <th class="text-center">{{"sigct.usager.fusion.usager" | translate}} #{{usager2Dto?.id}}</th>
+              <th class="text-center">{{"sigct.usager.fusion.infofusion" | translate}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>{{'sigct.usager.fusion.nom' | translate}}</th>
+              <td>{{usager1Dto?.nom}}</td>
+              <td>{{usager2Dto?.nom}}</td>
+              <td>
+                <msss-sigct-chosen id="usager-fusion-nom"
+                                   [placeholder]="usager1Dto?.nom || usager2Dto?.nom ? selectionnezLabel : ''"
+                                   [disabled]="!(usager1Dto?.nom && usager2Dto?.nom && usager1Dto?.nom != usager2Dto?.nom)"
+                                   [valide]="isNomValide"
+                                   [(ngModel)]="usagerFusionDto.nom"
+                                   [options]="nomOptions">
+                </msss-sigct-chosen>
+              </td>
+            </tr>
+            <tr>
+              <th>{{'sigct.usager.fusion.prenom' | translate}}</th>
+              <td>{{usager1Dto?.prenom}}</td>
+              <td>{{usager2Dto?.prenom}}</td>
+              <td>
+                <msss-sigct-chosen id="usager-fusion-prenom"
+                                   [placeholder]="usager1Dto?.prenom || usager2Dto?.prenom ? selectionnezLabel : ''"
+                                   [disabled]="!(usager1Dto?.prenom && usager2Dto?.prenom && usager1Dto?.prenom != usager2Dto?.prenom)"
+                                   [valide]="isPrenomValide"
+                                   [(ngModel)]="usagerFusionDto.prenom"
+                                   [options]="prenomOptions">
+                </msss-sigct-chosen>
+              </td>
+            </tr>
+            <tr>
+              <th>{{'sigct.usager.fusion.dtnaiss' | translate}}</th>
+              <td>{{usager1Dto?.dtNaiss | date: 'yyyy-MM-dd'}}</td>
+              <td>{{usager2Dto?.dtNaiss | date: 'yyyy-MM-dd'}}</td>
+              <td>
+                <msss-sigct-chosen id="usager-fusion-dt-naiss"
+                                   [placeholder]="usager1Dto?.dtNaiss || usager2Dto?.dtNaiss ? selectionnezLabel : ''"
+                                   [disabled]="!(usager1Dto?.dtNaiss && usager2Dto?.dtNaiss && usager1Dto?.dtNaiss != usager2Dto?.dtNaiss)"
+                                   [valide]="isDtNaissValide"
+                                   [(ngModel)]="usagerFusionDto.dtNaiss"
+                                   [options]="dtNaissOptions">
+                </msss-sigct-chosen>
+              </td>
+            </tr>
+            <tr>
+              <th>{{'sigct.usager.fusion.sexe' | translate}}</th>
+              <td>{{usager1Dto?.sexeNom}}</td>
+              <td>{{usager2Dto?.sexeNom}}</td>
+              <td>
+                <msss-sigct-chosen id="usager-fusion-sexe"
+                                   [placeholder]="usager1Dto?.sexeCode || usager2Dto?.sexeCode ? selectionnezLabel : ''"
+                                   [disabled]="!(usager1Dto?.sexeCode && usager2Dto?.sexeCode && usager1Dto?.sexeCode != usager2Dto?.sexeCode)"
+                                   [valide]="isSexeValide"
+                                   [(ngModel)]="usagerFusionDto.sexeCode"
+                                   [options]="sexeOptions">
+                </msss-sigct-chosen>
+              </td>
+            </tr>
+            <tr>
+              <th>{{'sigct.usager.fusion.details' | translate}}</th>
+              <td>
+                <!-- Affiche une case à cocher uniquement si les détails de U1 et U2 sont présents et différents, sinon c'est du texte -->
+                <mat-checkbox *ngIf="usager1Dto?.detail && usager2Dto?.detail && usager1Dto?.detail != usager2Dto?.detail else txtUsager1DtoDetail"
+                              id="chk-usager1-detail"
+                              color='primary'
+                              [(ngModel)]="usager1DetailChecked"
+                              (change)="onUsager1DetailClick($event)">{{usager1Dto?.detail}}</mat-checkbox>
+                <ng-template #txtUsager1DtoDetail>{{usager1Dto?.detail}}</ng-template>
+              </td>
+              <td>
+                <!-- Affiche une case à cocher uniquement si les détails de U1 et U2 sont présents et différents, sinon c'est du texte -->
+                <mat-checkbox *ngIf="usager1Dto?.detail && usager2Dto?.detail && usager1Dto?.detail != usager2Dto?.detail else txtUsager2DtoDetail"
+                              id="chk-usager2-detail"
+                              color='primary'
+                              [(ngModel)]="usager2DetailChecked"
+                              (change)="onUsager2DetailClick($event)">{{usager2Dto?.detail}}</mat-checkbox>
+                <ng-template #txtUsager2DtoDetail>{{usager2Dto?.detail}}</ng-template>
+              </td>
+              <td class="padding-top-7">
+                <textarea id="usager-fusion-detail"
+                          [class.erreur]="!isDetailValide"
+                          disabled
+                          [(ngModel)]="usagerFusionDto.detail"></textarea>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </msss-sigct-content-zone>
+
+  <msss-sigct-content-zone id="zone-info-supp"
+                           title="sigct.usager.fusion.infosupp">
+    <div class="row">
+      <div class="col-md-12 padding-bottom-10">
+        <table id="tbl-info-supp"
+               class="table">
+          <colgroup>
+            <col style="width: 15%;" />
+            <col style="width: 30%;" />
+            <col style="width: 30%;" />
+            <col style="width: 25%;" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th></th>
+              <th class="text-center">{{"sigct.usager.fusion.usager" | translate}} #{{usager1Dto?.id}}</th>
+              <th class="text-center">{{"sigct.usager.fusion.usager" | translate}} #{{usager2Dto?.id}}</th>
+              <th class="text-center">{{"sigct.usager.fusion.infofusion" | translate}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>{{'sigct.usager.fusion.nam' | translate}}</th>
+              <td>{{usager1Dto?.nam | mask : 'SSSS-0000-0000'}}</td>
+              <td>{{usager2Dto?.nam | mask : 'SSSS-0000-0000'}}</td>
+              <td>
+                <msss-sigct-chosen id="usager-fusion-nam"
+                                   [placeholder]="usager1Dto?.nam || usager2Dto?.nam ? selectionnezLabel : ''"
+                                   [disabled]="!(usager1Dto?.nam && usager2Dto?.nam && usager1Dto?.nam != usager2Dto?.nam)"
+                                   [valide]="isNamValide"
+                                   [(ngModel)]="usagerFusionDto.nam"
+                                   [options]="namOptions">
+                </msss-sigct-chosen>
+              </td>
+            </tr>
+            <tr>
+              <th>{{'sigct.usager.fusion.expiration' | translate}}</th>
+              <td>{{usager1Dto?.expiration}}</td>
+              <td>{{usager2Dto?.expiration}}</td>
+              <td>
+                <msss-sigct-chosen id="usager-fusion-expiration"
+                                   [placeholder]="usager1Dto?.expiration || usager2Dto?.expiration ? selectionnezLabel : ''"
+                                   [disabled]="!(usager1Dto?.expiration && usager2Dto?.expiration && usager1Dto?.expiration != usager2Dto?.expiration)"
+                                   [valide]="isExpirationValide"
+                                   [(ngModel)]="usagerFusionDto.expiration"
+                                   [options]="expirationOptions">
+                </msss-sigct-chosen>
+              </td>
+            </tr>
+            <tr>
+              <th>{{'sigct.usager.fusion.langueusage' | translate}}</th>
+              <td>{{usager1Dto?.langueNom}}</td>
+              <td>{{usager2Dto?.langueNom}}</td>
+              <td>
+                <msss-sigct-chosen id="usager-fusion-langue"
+                                   [placeholder]="usager1Dto?.langueCode || usager2Dto?.langueCode ? selectionnezLabel : ''"
+                                   [disabled]="!(usager1Dto?.langueCode && usager2Dto?.langueCode && usager1Dto?.langueCode != usager2Dto?.langueCode)"
+                                   [valide]="isLangueValide"
+                                   [(ngModel)]="usagerFusionDto.langueCode"
+                                   [options]="langueOptions">
+                </msss-sigct-chosen>
+              </td>
+            </tr>
+            <tr>
+              <th>{{'sigct.usager.fusion.malentendant' | translate}}</th>
+              <td>{{usager1Dto?.malentendant ? ouiLabel : nonLabel}}</td>
+              <td>{{usager2Dto?.malentendant ? ouiLabel : nonLabel}}</td>
+              <td>
+                <msss-sigct-chosen id="usager-fusion-malentendant"
+                                   [placeholder]="usager1Dto?.malentendantTxt || usager2Dto?.malentendantTxt ? selectionnezLabel : ''"
+                                   [disabled]="!(usager1Dto?.malentendantTxt && usager2Dto?.malentendantTxt && usager1Dto?.malentendantTxt != usager2Dto?.malentendantTxt)"
+                                   [valide]="isMalentendantValide"
+                                   [(ngModel)]="usagerFusionDto.malentendantTxt"
+                                   [options]="ouiNonOptions">
+                </msss-sigct-chosen>
+              </td>
+            </tr>
+            <tr>
+              <th>{{'sigct.usager.fusion.nommere' | translate}}</th>
+              <td>{{usager1Dto?.nomPrenomMere}}</td>
+              <td>{{usager2Dto?.nomPrenomMere}}</td>
+              <td>
+                <msss-sigct-chosen id="usager-fusion-nomPrenomMere"
+                                   [placeholder]="usager1Dto?.nomPrenomMere || usager2Dto?.nomPrenomMere ? selectionnezLabel : ''"
+                                   [disabled]="!(usager1Dto?.nomPrenomMere && usager2Dto?.nomPrenomMere && usager1Dto?.nomPrenomMere != usager2Dto?.nomPrenomMere)"
+                                   [valide]="isNomPrenomMereValide"
+                                   [(ngModel)]="usagerFusionDto.nomPrenomMere"
+                                   [options]="nomPrenomMereOptions">
+                </msss-sigct-chosen>
+              </td>
+            </tr>
+            <tr>
+              <th>{{'sigct.usager.fusion.nompere' | translate}}</th>
+              <td>{{usager1Dto?.nomPrenomPere}}</td>
+              <td>{{usager2Dto?.nomPrenomPere}}</td>
+              <td>
+                <msss-sigct-chosen id="usager-fusion-nomPrenomPere"
+                                   [placeholder]="usager1Dto?.nomPrenomPere || usager2Dto?.nomPrenomPere ? selectionnezLabel : ''"
+                                   [disabled]="!(usager1Dto?.nomPrenomPere && usager2Dto?.nomPrenomPere && usager1Dto?.nomPrenomPere != usager2Dto?.nomPrenomPere)"
+                                   [valide]="isNomPrenomPereValide"
+                                   [(ngModel)]="usagerFusionDto.nomPrenomPere"
+                                   [options]="nomPrenomPereOptions">
+                </msss-sigct-chosen>
+              </td>
+            </tr>
+            <tr>
+              <th>{{'sigct.usager.fusion.doublonpot' | translate}}</th>
+              <td>{{usager1Dto?.doublonPotentiel ? ouiLabel : nonLabel}}</td>
+              <td>{{usager2Dto?.doublonPotentiel ? ouiLabel : nonLabel}}</td>
+              <td>
+                <msss-sigct-chosen id="usager-fusion-doublon-potentiel"
+                                   [placeholder]="usager1Dto?.doublonPotentielTxt || usager2Dto?.doublonPotentielTxt ? selectionnezLabel : ''"
+                                   [valide]="isDoublonPotentielValide"
+                                   [(ngModel)]="usagerFusionDto.doublonPotentielTxt"
+                                   [options]="ouiNonOptions">
+                </msss-sigct-chosen>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </msss-sigct-content-zone>
+
+  <fusion-communications-usager-ui #fusionCommunicationsUsagerUi
+                                   [idUsager1]="idUsager1"
+                                   [idUsager2]="idUsager2"
+                                   [typeEquipementCommOptions]="typeEquipementCommOptions"
+                                   [typeCoordonneeCommOptions]="typeCoordonneeCommOptions"
+                                   [communicationsUsager1]="listeCommunicationUsager1"
+                                   [communicationsUsager2]="listeCommunicationUsager2">
+  </fusion-communications-usager-ui>
+
+  <fusion-lieux-residence-usager-ui #fusionLieuxResidenceUsagerUi
+                                    [idUsager1]="idUsager1"
+                                    [idUsager2]="idUsager2"
+                                    [typeLieuResidenceOptions]="typeLieuResidenceOptions"
+                                    [lieuxResidenceUsager1]="listeLieuResidenceUsager1"
+                                    [lieuxResidenceUsager2]="listeLieuResidenceUsager2">
+  </fusion-lieux-residence-usager-ui>
+
+  <div class="filler">&nbsp;</div>
+</div>

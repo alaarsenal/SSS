@@ -1,0 +1,58 @@
+.mat-dialog-content {
+  position: relative;
+  border-bottom: 1px solid #E0E0E0;
+  height: calc(100% - 30px);
+  max-height: calc(100% - 30px);
+  overflow: hidden;
+}
+
+#btn-fermer-dialog {
+  width: 80px;
+}
+
+.conteneur {
+  display: flex;
+  min-height: 100%;
+}
+
+.menu-gauche {
+  background-color: black;
+  padding-top: 40px;
+  width: 45px;
+}
+
+.contenu {
+  width: 100%;
+}
+
+#rrss_frame {
+  width: 100%;
+}
+
+.result {
+  padding: 1rem 1rem 1rem 1rem;
+  background-color: #ffffff;
+  border: 1px solid #E1E1E1;
+  width: 100%;
+}
+
+.result .item {
+  width: auto;
+  display: inline-block;
+  margin-top: .6rem;
+  margin-bottom: .6rem;
+}
+
+.result .item span {
+  background: #4876E0;
+  color: #ffffff;
+  padding: .5rem;
+  margin-right: .5rem;
+  border-radius: 4px;
+}
+
+.result .item a {
+  cursor: pointer;
+  color: #ffffff;
+  margin-left: .5rem;
+}

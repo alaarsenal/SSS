@@ -1,0 +1,15 @@
+#iframe-protocoles-rpi {
+    border: 1px solid #DDD;
+    height: calc(100vh - 210px);
+}
+
+#iframe-protocoles-giea {
+    border: 0px solid #DDD;
+    height: calc(100vh - 210px);
+}
+
+.boutons-row {
+    height: 35px;
+    margin-left: 0;
+    margin-right: 0;
+}

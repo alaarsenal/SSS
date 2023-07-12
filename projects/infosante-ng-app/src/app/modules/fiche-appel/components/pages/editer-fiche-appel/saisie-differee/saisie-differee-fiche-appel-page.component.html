@@ -1,0 +1,217 @@
+<div class="row first-row">
+  <div class="col-md-2">
+    <msss-sigct-chosen #chosenTypeConsultation
+                       id="typeConsultation"
+                       name="typeConsultation"
+                       label="sigct.sa.f_appel_rapide.typcnslt"
+                       [options]="inputOptionsTypeConsultation"
+                       [(ngModel)]="ficheAppelDto.typeConsultation"
+                       (optionSelected)="onTypeConsultationSelected($event)">
+    </msss-sigct-chosen>
+  </div>
+
+  <div class="col-md-2">
+    <msss-sigct-chosen id="raisonConsultation"
+                       name="raisonConsultation"
+                       [required]="isTypeConsultationNonPertinente"
+                       label="sigct.sa.f_appel_rapide.raison"
+                       [disabled]="!isTypeConsultationNonPertinente"
+                       [options]="inputOptionsRaisonConsultationNonPertinente"
+                       [(ngModel)]="ficheAppelDto.referenceRaisonTypeFicheCode">
+    </msss-sigct-chosen>
+  </div>
+
+  <div class="col-md-3">
+    <msss-sigct-chosen id="intervenantOrganisme"
+                       name="intervenantOrganisme"
+                       label="sigct.sa.f_appel_rapide.prfsnl"
+                       required
+                       [required]="true"
+                       [options]="inputOptionsIntervenantOrganisme"
+                       [(ngModel)]="appelDto.usernameIntervenant">
+    </msss-sigct-chosen>
+  </div>
+
+  <div class="col-md-2">
+    <div class="row">
+      <div class="col-md-12">
+        <strong>{{'sigct.sa.f_appel_rapide.dhdbtappel' | translate}}
+          <span class="mandatory-indicator"> *</span>
+        </strong>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 padding-right-5">
+        <msss-sigct-datepicker id="date-debut-fiche-appel"
+                               [(ngModel)]="dateDebutFicheAppel"
+                               dateFormat="yyyy-mm-dd"
+                               placeHolder="aaaa-mm-jj"
+                               [required]="true"
+                               [ngModelOptions]="{standalone:true}"
+                               [endDate]="demain">
+        </msss-sigct-datepicker>
+      </div>
+      <div class="col-md-4 no-padding-left">
+        <msss-input-text id="heure-debut-fiche-appel"
+                         maxlength="5"
+                         patternMask="Hh:m9"
+                         placeholder="hh:mm"
+                         [valide]="isHeureDebutValide"
+                         [(ngModel)]="heureDebutFicheAppel"
+                         (focusout)="onBlurHeureDebutFicheAppel()">
+        </msss-input-text>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="row">
+      <div class="col-md-12">
+        <strong>{{'sigct.sa.f_appel_rapide.dhfinappel' | translate}}
+          <span class="mandatory-indicator"> *</span>
+        </strong>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 padding-right-5">
+        <msss-sigct-datepicker id="date-fin-fiche-appel"
+                               [(ngModel)]="dateFinFicheAppel"
+                               dateFormat="yyyy-mm-dd"
+                               [required]="true"
+                               placeHolder="aaaa-mm-jj"
+                               [ngModelOptions]="{standalone:true}"
+                               [endDate]="demain">
+        </msss-sigct-datepicker>
+      </div>
+      <div class="col-md-4 no-padding-left">
+        <msss-input-text id="heure-fin-fiche-appel"
+                         maxlength="5"
+                         patternMask="Hh:m9"
+                         placeholder="hh:mm"
+                         [valide]="isHeureFinValide"
+                         [(ngModel)]="heureFinFicheAppel"
+                         (focusout)="onBlurHeureFinFicheAppel()">
+        </msss-input-text>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-1 btn-terminer">
+    <button id="btn-terminer"
+            class="btn btn-primary"
+            title="{{'sigct.sa.f_appel_rapide.terminerinfobulle' | translate}}"
+            (click)="onBtnTerminerClick()">{{'sigct.sa.f_appel_rapide.terminer' | translate}}
+    </button>
+  </div>
+</div>
+
+<msss-sigct-content-zone id="suites-intervention"
+                         title="sigct.sa.f_appel.intervention.titre"
+                         [required]="true"
+                      >
+  <div class="contentZone">
+    <div class="col-md-12">
+      <msss-input-checkbox id="aucuneSuite"
+                           name="acunesuite"
+                           [options]="inputOptionAucuneSuite"
+                           [(ngModel)]="ficheAppelDto.aucuneSuite"
+                           #aucuneSuite="ngModel"
+                           [disabled]="aucuneSuiteDisabled">
+      </msss-input-checkbox>
+    </div>
+
+    <div class="col-md-12 no-padding-right">
+      <app-orientation-suites-intervention #orientationSuitesIntervention
+                                           (orientationSave)="onAjouterOrientationSuitesIntervention($event)"
+                                           (orientationDelete)="onSupprimerOrientationSuitesIntervention($event)"
+                                           [idFicheAppel]="idFicheAppel"
+                                           [libelle]="'SA'"
+                                           [listeOrientationRrss]="listeOrientationSuitesIntervention"
+                                           [listeRefOrientationSuitesIntervention]="listeRefOrientationSuitesIntervention">
+      </app-orientation-suites-intervention>
+    </div>
+
+    <div class="col-md-12 padding-top-10 no-padding-right">
+      <app-reference-suites-intervention #referenceSuitesIntervention
+                                         (onSubmit)="onAjouterReferenceSuitesIntervention($event)"
+                                         (onDelete)="onSupprimerReferenceSuitesIntervention($event)"
+                                         [idFicheAppel]="idFicheAppel"
+                                         [libelle]="'SA'"
+
+                                         [listeReferenceSuitesIntervention]="listeReferenceSuitesIntervention"
+                                         [listeRefReferenceSuiteIntervention]="listeRefReferenceSuitesIntervention">
+      </app-reference-suites-intervention>
+    </div>
+
+    <div class="col-md-12">
+      <msss-input-checkbox id="autorisationTransmission"
+                           name="autorisationtransmission"
+                           [options]="inputOptionAutorisationTransmission"
+                           [(ngModel)]="ficheAppelDto.autorisationTransmission"
+                           [disabled]="autorisationTransmissionDisabled"
+                           #autorisationTransmission="ngModel">
+      </msss-input-checkbox>
+    </div>
+
+    <div class="col-md-12 margin-bottom-10">
+      <msss-input-checkbox id="consentementenFicheEnregistreur"
+                           name="consentementenFicheEnregistreur"
+                           [options]="inputOptionConsentementenFicheEnregistreur"
+                           [(ngModel)]="ficheAppelDto.consentementenFicheEnregistreur"
+                           [disabled]="consentementenFicheEnregistreurDisabled"
+                           #autorisationTransmission="ngModel">
+      </msss-input-checkbox>
+    </div>
+  </div>
+</msss-sigct-content-zone>
+
+<msss-sigct-content-zone id="statistiques"
+                         title="sigct.sa.f_appel.terminaison.statistiques">
+  <div class="contentZone contentZone-statistique">
+    <app-statistiques #appStatistiques
+                      [listeRaisonAppel]="listeRaisonAppel"
+                      [listeRoleAction]="listeRoleAction"
+                      [listeReferenceRaison]="listeReferenceRaison"
+                      [listeReferenceRole]="listeReferenceRoleAction"
+                      (raisonAppelSave)="onAjouterRaisonAppel($event)"
+                      (raisonAppelDelete)="onSupprimerRaisonAppel($event)"
+                      (roleActionSave)="onAjouterRoleAction($event)"
+                      (roleActionDelete)="onSupprimerRoleAction($event)">
+
+    </app-statistiques>
+
+    <div class="row">
+      <div class="col-md-6 padding-left-15 no-padding-right">
+        <msss-sigct-chosen #liste_langue
+                           label="sigct.sa.f_appel.terminaison.statistiques.langueconsultation"
+                           name="langue"
+                           required
+                           id="langue"
+                           [required]="true"
+                           [options]="inputOptionsLangue"
+                           [valide]="isLangueValide"
+                           [(ngModel)]="ficheAppelDto.referenceLangueAppelCode"
+                           (optionSelected)="onLangueChange($event)">
+        </msss-sigct-chosen>
+      </div>
+    </div>
+
+    <div class="row margin-bottom-10">
+      <div class="col-md-6 padding-left-15 no-padding-right">
+        <msss-sigct-chosen #liste_centre_activite
+                           label="sigct.sa.f_appel.terminaison.statistiques.centreactivite"
+                           name="centreactivite"
+                           required
+                           id="centreactivite"
+                           [required]="true"
+                           [options]="inputOptionsCentreActivite"
+                           [valide]="isCentreActiviteValide"
+                           [(ngModel)]="ficheAppelDto.referenceCentreActiviteCode"
+                           (optionSelected)="onCentreActiviteChange($event)">
+        </msss-sigct-chosen>
+      </div>
+    </div>
+  </div>
+</msss-sigct-content-zone>
+
+<div>&nbsp;</div>

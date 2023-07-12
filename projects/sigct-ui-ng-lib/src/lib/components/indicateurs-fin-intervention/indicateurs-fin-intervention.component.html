@@ -1,0 +1,32 @@
+<div>
+  <div class="row">
+    <div class="col-md-9"></div>
+    <div class="col-md-3 padding-left-45">
+      <label class="oui-ml" [ngClass]="isDisabled ? 'label_disabled' : ''">
+        {{labelReponseOui}}
+      </label>
+      <label class="non-ml" [ngClass]="isDisabled ? 'label_disabled' : ''">
+        {{labelReponseNon}}
+      </label>
+      <label class="non-ml" [ngClass]="isDisabled ? 'label_disabled' : ''">
+        {{labelReponseSO}}
+      </label>
+    </div>
+  </div>
+  <div *ngFor="let indicateur of questionsIndicateurs; index as i">
+    <div class="row" *ngIf="indicateur.question">
+      <div class="col-md-9 line-height">
+        <span [title]="getQuestionInfoBull(indicateur.question)" [ngClass]="isDisabled ? 'disabled' : ''">
+          {{indicateur.question.nom}}  <span class="mandatory-indicator" *ngIf="!isDisabled" > *</span>
+
+        </span>
+      </div>
+      <div class="col-md-3 center">
+        <msss-input-radio #radioIndicateurs [disabled]="isDisabled" id="radioReponseOui" [name]="'radioReponseOui'+i" [options]="inputOptionReponsesArray[i]"
+          [(ngModel)]="indicateur.reponseCode" (ngModelChange)="onReponseSelectedValueChange(indicateur)"
+          ariaLabel="réponses">
+        </msss-input-radio>
+      </div>
+    </div>
+  </div>
+</div>

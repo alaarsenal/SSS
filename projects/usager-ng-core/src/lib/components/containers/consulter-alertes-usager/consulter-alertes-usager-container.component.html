@@ -1,0 +1,8 @@
+<msss-form-top-bar label="{{ 'usager.alertes.titre' | translate }}" [options]="formTopBarOptions" [nomModule]="'usager'"></msss-form-top-bar>
+
+<div class="contenu-avec-scrollbar">
+  <ng-template #alertContainer></ng-template>
+
+  <app-consulter-alertes-ui #consulterAlertes (consulterFicheAppel)="onConsulterFicheAppel($event)"></app-consulter-alertes-ui>
+  
+</div>

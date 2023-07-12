@@ -1,0 +1,14 @@
+<modal-confirmation id-container="confirm_popup_verificateur_changement">
+  <div class="modal-confirm-body modal-body">
+      {{messagAvertissement | translate}}
+  </div>
+
+  <div class="modal-confirm-footer modal-footer">
+      <button id="verificateur_changement_btn_oui" type="button" data-dismiss="modal"
+          class="btn btn-primary btn-sm btn-key-action visibility-visible"
+          (click)="onBtnOuiCallback()">Oui</button>
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+          id="verificateur_changement_cancel_confirm_button"
+          (click)="onBtnNomCallback()">Non</button>
+      </div>
+</modal-confirmation>

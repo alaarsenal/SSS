@@ -1,0 +1,26 @@
+<msss-form-top-bar label="{{labelMenuTop}}" [options]="formTopBarOptions" [fixe]="topBarreFixe" [nomModule]="'usager'"></msss-form-top-bar>
+
+<div class="contenu-avec-scrollbar">
+    <ng-template #alertContainer></ng-template>
+    <app-enregistrements-usager-ui #appEnregistrementsUsagerUi
+    (consulterEnregistrement)="onConsulterEnregistrement($event)"
+    (editerEnregistrement)="onModifierEnregistrement($event)"
+    (copierEnregistrement)="onCopierEnregistrementInactif($event)"
+    (ajouterEnregistrement) = "ajouterEnregistrement()"
+    [adressePrincipaleUsager] = adressePrincipaleUsager>
+  </app-enregistrements-usager-ui>
+</div>
+
+<modal-confirmation id-container="confirm_popup_ajouter_enregistrement_region">
+    <div class="modal-confirm-body modal-body">
+            {{messageConfirmerAjoutEnregistrementRegion}}
+    </div>
+
+    <div class="modal-confirm-footer modal-footer">
+        <button id="confi_popup_ajouter_enregistrement_region_btn_oui" type="button" data-dismiss="modal"
+            class="btn btn-primary btn-sm btn-key-action visibility-visible"
+            (click)="confirmerAjouterEnregistrementRegion()">Oui</button>
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible"
+            id="cancel_confirm_button">Non</button>
+        </div>
+</modal-confirmation>

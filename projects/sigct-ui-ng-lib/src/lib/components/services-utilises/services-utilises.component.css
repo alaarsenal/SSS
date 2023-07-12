@@ -1,0 +1,9 @@
+@media (max-width: 1440px) {
+  .w-4 {
+    width: 33.33%;
+  }
+
+  .w-8 {
+    width: 66.66%;
+  }
+}

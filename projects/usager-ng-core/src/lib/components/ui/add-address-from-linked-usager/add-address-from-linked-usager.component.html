@@ -1,0 +1,26 @@
+<msss-form-top-bar label="{{ 'usager.importation.adresse' | translate}}" [options]="formTopBarOptions"
+  [fixe]="topBarreFixe" [nomModule]="'usager'">
+</msss-form-top-bar>
+
+<div class="contenu-avec-scrollbar" cdkScrollable>
+
+    <ng-container *ngIf="addresses?.length == 0; else validAddress">
+        <label class="aucuneAdr">{{ 'usager.importation.adresse.aucune' | translate}}</label>
+      </ng-container>
+    
+      <ng-template #validAddress>
+        <ng-container *ngFor="let adr of addresses;">
+          <div class="row adr">
+            <div class="col-md-11 black-color" [innerHTML]="formatActionUsagerLieuResidence(adr)"></div>
+      
+            <div class="col-md-1 plus-container">
+              <a title="{{ 'usager.importation.importer' | translate}}" class="addComm">
+                <i class="fa fa-plus plus-color" (click)="forwardAddress(adr)"></i>
+              </a>
+            </div>
+          </div>
+        </ng-container>
+      </ng-template>
+
+
+</div>   

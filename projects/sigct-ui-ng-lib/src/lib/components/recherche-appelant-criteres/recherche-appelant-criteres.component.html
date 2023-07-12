@@ -1,0 +1,71 @@
+<div class="col-md-12 padding-left-10">
+    <div class="row">
+        <div class="col-md-2">
+            <msss-input-text #nomAppelant
+                             label="sigct.ss.r_appels.sctn_criteres_appelant.nmaplnt"
+                             id="nomAppelant"
+                             maxlength="50"
+                             [(ngModel)]="criteresRecherche.nomAppelant"
+                             [valide]="isNomValide"
+                             (keydown.enter)="onExecuterRecherche()">
+            </msss-input-text>
+        </div>
+        <div class="col-md-2">
+            <msss-input-text id="prenomAppelant"
+                             label="sigct.ss.r_appels.sctn_criteres_appelant.prnmaplnt"
+                             maxlength="50"
+                             [(ngModel)]="criteresRecherche.prenomAppelant"
+                             [valide]="isPrenomValide"
+                             (keydown.enter)="onExecuterRecherche()">
+            </msss-input-text>
+        </div>
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-3 padding-right-10">
+                    <msss-input-text id="telephoneAppelant"
+                                     label="sigct.ss.r_appels.sctn_criteres_appelant.notel"
+                                     placeHolder="(999) 999-9999"
+                                     patternMask="000 000-0000"
+                                     [(ngModel)]="criteresRecherche.telephoneAppelant"
+                                     [validationMask]="false"
+                                     [valide]="isTelephoneValide"
+                                     (keydown.enter)="onExecuterRecherche()">
+                    </msss-input-text>
+                </div>
+                <div class="col-md-9">
+                    <msss-sigct-chosen id="categorieAppelant"
+                                       label="sigct.ss.r_appels.sctn_criteres_appelant.lienapplntusager"
+                                       [options]="listeCategorieAppelant"
+                                       [(ngModel)]="criteresRecherche.idRfCatgrAppelant"
+                                       (keydown.enter)="onExecuterRecherche()">
+                    </msss-sigct-chosen>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="col-md-11 no-padding">
+                <msss-rrss-link id="rrssLink"
+                                rrssLabel="sigct.ss.r_appels.sctn_criteres_appelant.orgnsmapplnt"
+                                rrssLink="sigct.ss.r_appels.sctn_criteres_appelant.rrss"
+                                [selectMultiRrss]="false"
+                                (rssDialogClosed)="onRrssDialogClose($event)">
+                </msss-rrss-link>
+                <msss-output-multiselect-text id="multiSelectOrientationRessourceRrss"
+                                              [outputContentList]="listeRessourceRrss"
+                                              backgroundColor="lightGrey"
+                                              height="25px">
+                </msss-output-multiselect-text>
+            </div>
+            <div class="col-md-1 no-padding">
+                <button type="button"
+                        class="btn btn-link poubelle"
+                        (click)="onViderRrss()">
+                    <i class="fa fa-trash-o"
+                       title="{{'sigct.ss.r_appels.sctn_criteres_appelant.ibviderrrss' | translate }}">
+                    </i>
+                    <span class="sr-only">{{'sigct.ss.r_appels.sctn_criteres_appelant.ibviderrrss' | translate}}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

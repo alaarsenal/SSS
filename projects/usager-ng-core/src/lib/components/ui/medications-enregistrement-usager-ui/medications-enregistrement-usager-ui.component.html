@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-md-4">
+        <msss-input-radio id="radioMedicationStatut" name="radioMedicationStatut"
+        (click)="onRedioMedicationChange()"
+            [options]="inputOptionsMedicationStatut"
+            [(ngModel)]="radioMedicationStatut"
+            ariaLabel="statut médication">
+        </msss-input-radio>
+    </div>
+</div>
+
+<div class="table-container pn margin-bottom-10">
+    <table mat-table [dataSource]="dataSource" class="table marginB-0">
+      <!-- State Column -->
+      <ng-container matColumnDef="dateDebut">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left paddingL-2'">{{ 'usager.enregistrement.sec.medication.date' | translate}}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'w-209 paddingL-2'">
+          <msss-sigct-datepicker [(ngModel)]="row.dateDebut" id="{{'medication_dateDebut_'+row.id}}" #medication_dateDebut name="medication_dateDebut"
+            dateFormat="yyyy-mm-dd" placeHolder="aaaa-mm-jj"
+            [ngModelOptions]="{standalone:true}" required ariaLabel="{{'usager.enregistrement.sec.medication.date' | translate}}">
+          </msss-sigct-datepicker>
+        </td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-left'">
+          {{ 'usager.enregistrement.sec.medication.medic' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" class="w-full">
+          <msss-input-text [(ngModel)]="row.medicament" id="{{'medication_nom_'+row.id}}" #medication_nom="ngModel"
+            name="medication_nom" maxlength="350" ariaLabel="{{'usager.enregistrement.sec.medication.medic' | translate }}">
+          </msss-input-text>
+        </td>
+      </ng-container>
+
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="actif">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'w-actif w-center'">
+          {{ 'usager.enregistrement.sec.medication.actif' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" title="{{row.actif}}" [ngClass]="'w-actif w-center'">
+          <msss-input-checkbox [(ngModel)]="row.actif" id="{{'medication_actif_'+idx}}" #medication_actif="ngModel" name="medication_actif"
+            [options]="inputOptionMedicationActif">
+          </msss-input-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef disableClear [ngClass]="'th-right w-action-col paddingL-0'">
+          {{ 'usager.enregistrement.sec.medication.action' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row;index as idx;" [ngClass]="'w-center'">
+          <button type="button" class="btn btn-default btn-sm btn-delete-medication" id="remove_button" (click)="confirmerSupprimerMedication(idx);"
+            title="{{ 'usager.enregistrement.sec.medication.supprimer' | translate }}">
+            <i class="fa fa-trash-o"></i></button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.hidden]="isHidden(row)"></tr>
+    </table>
+  <div *ngIf="dataSource.data===null ||dataSource.data===undefined  || dataSource.data.length === 0" class="no-records mat-row">
+    {{'usager.enregistrement.liste.aucunedonnees' | translate}}
+  </div>
+    <mat-toolbar>
+      <mat-toolbar-row class="toolbar-medication-add">
+          <button type="button" class="btn-sm btn btn-primary form-btn" id="ajouterBtn" title="{{ 'usager.enregistrement.sec.medication.ajouter' | translate }}" (click)="ajouterUneNouvelleMedication(true)"> {{ 'usager.enregistrement.sec.ress.prof.ajouter' | translate }} </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <modal-confirmation id-container="confirm_popup_supression_medication">
+      <div class="modal-confirm-body modal-body">
+        {{ messageSupprimerMedication }}
+      </div>
+
+      <div class="modal-confirm-footer modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm btn-key-action visibility-visible" id="ok_supression_medication_button"  (click)="supprimerMedication()" >Oui</button>
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-key-action hidePopup visibility-visible" id="cancel_supression_medication_button">Non</button>
+      </div>
+    </modal-confirmation>
+  </div>
+
+<div class="row">
+    <div class="col-md-12 margin-bottom-10">
+        <msss-input-textarea  id="therapieIntraveneuse" name="therapieIntraveneuse" label="usager.enregistrement.sec.medication.therapie"
+                    rows="2" maxlength="4000" CSSResize="vertical" [(ngModel)]="enregistrement.therapieIntraveneuse"
+                    minRows=2>
+        </msss-input-textarea>
+    </div>
+</div>

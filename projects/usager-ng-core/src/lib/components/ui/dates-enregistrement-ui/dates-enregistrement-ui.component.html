@@ -1,0 +1,66 @@
+<div class="col-md-12">
+    <form name="form"  #fDates="ngForm">
+      <div class="row">
+        <div class="col-md-2 text-nowrap">
+            <label>{{'usager.enregistrement.sec.date.creele' | translate}}</label>
+        </div>
+        <div class="col-md-2 padding-left-53 no-padding-right">
+            {{ enregistrement.dateCreation | date : "yyyy-MM-dd HH:mm:ss"}}
+        </div>
+        <div class="col-md-8 no-padding-left">
+            <label>
+                {{'usager.enregistrement.sec.date.modif.par' | translate}}
+                <span class="display-inline-block"> {{ enregistrement.creeFullDisplayName }}</span>
+                <span class="display-inline-block padding-left-20">{{ enregistrement.creeParOrganisme }}</span>
+            </label>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-2 text-nowrap">
+            <label>{{'usager.enregistrement.sec.date.modif' | translate}}</label>  
+        </div>
+        <div class="col-md-2 padding-left-53 no-padding-right">
+            {{ enregistrement.dateModifie | date : "yyyy-MM-dd HH:mm:ss"}}
+        </div>
+        <div class="col-md-8 no-padding-left"> 
+            <label>
+                {{'usager.enregistrement.sec.date.modif.par' | translate}}
+                <span class="display-inline-block"> {{ enregistrement.modifieFullDisplayName }}</span>
+                <span class="display-inline-block padding-left-20">{{ enregistrement.modifieParOrganisme }}</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2 text-nowrap">
+            <label>{{'usager.enregistrement.sec.date.rev' | translate}}</label>   
+        </div>
+        <div class="col-md-2 padding-left-53 no-padding-right">
+            {{ enregistrement.dateRevision | date : "yyyy-MM-dd HH:mm:ss"}}
+        </div>
+        <div class="col-md-8 no-padding-left">
+            <label>
+                {{'usager.enregistrement.sec.date.modif.par' | translate}}
+                <span class="display-inline-block"> {{ enregistrement.revisionFullDisplayName }}</span>
+                <span class="display-inline-block padding-left-20">{{ enregistrement.revisionParOrganisme }}</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="row">
+            <div class="col-md-2 text-nowrap">
+                <label>{{'usager.enregistrement.sec.date.rev.avant.le' | translate}}</label>
+            </div>
+            <div class="col-md-2 padding-left-53 no-padding-right">
+                {{ enregistrement.dateAReviser | date : "yyyy-MM-dd HH:mm:ss"}}
+            </div>
+            <div class="col-md-8 no-padding-left margin-bottom-10">
+                <button type="button" class="btn-sm btn  btn-primary form-btn"
+                    title="{{ 'usager.enregistrement.sec.date.btnreviser.infobulle' | translate }}" id="reviser_btn" (click)="reviserCompletement();">
+                    {{ 'usager.enregistrement.sec.date.btnreviser' | translate}}
+                </button>      
+            </div>
+        </div>
+    </form>
+  </div>

@@ -1,0 +1,43 @@
+<msss-sigct-content-zone id="section-intervention"
+                         title="{{'sigct.ss.f_appel.consultation.intervention' | translate}}">
+
+    <msss-sigct-field-set *ngIf="avisDTOs && avisDTOs.length > 0"
+                          titleFieldset="{{ 'sigct.ss.f_appel.aviscommuniques' | translate }}">
+        <ng-container>
+            <div *ngFor="let avis of avisDTOs;"
+                 class="row avis">
+                <div class="col-md-7">
+                    <a href="#"
+                       onclick="return false" (click)="afficherAvis(avis.id)">{{avis.titre}}</a>
+                </div>
+                <div class="col-md-2"
+                     *ngIf="avis.dateModifieExt; else noDateModifieExt">
+                    {{ avis.dateModifieExt | date : "yyyy-MM-dd HH:mm"}}
+                </div>
+                <ng-template #noDateModifieExt>
+                    <div class="col-md-2">
+                        {{ avis.dateCreationExt | date : "yyyy-MM-dd HH:mm"}}
+                    </div>
+                </ng-template>
+                <div class="col-md-3">{{avis.organisme}}</div>
+            </div>
+    
+        </ng-container>
+    </msss-sigct-field-set>
+                         
+    <msss-display-vertical-list-by-title [verticalListByTitleDTO]="verticalListByTitleDTO">
+    </msss-display-vertical-list-by-title>
+
+    <msss-consultation-fiche-section-suite-intervention
+                                                        [consultationFicheSectionSuiteInterventionDto]="consultationFicheSectionSuiteInterventionDto">
+    </msss-consultation-fiche-section-suite-intervention>
+
+    <div class="row" *ngIf="suiviInfo">
+         <div class="col-md-1 width-auto no-padding-right">
+            <label class="display-inline">Suivi : </label>
+        </div>
+        <div class="col-md-11 padding-left-5">
+            {{suiviInfo}}
+        </div>
+    </div>
+</msss-sigct-content-zone>

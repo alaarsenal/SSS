@@ -1,0 +1,39 @@
+button {
+    background:none!important;
+    color:#285E8E;
+    border:none; 
+    padding:0!important;
+    font: inherit;
+    /*border is optional*/
+    border-bottom:1px solid #285E8E; 
+    cursor: pointer;
+    float: right;
+}
+
+.separateur-horizontal {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.texte-noir {
+    color: black;
+}
+
+.dispaly-none {
+    display: none;
+}
+
+.padding-left-37 {
+    padding-left: 37px
+}
+
+.disabled{
+    color: grey;
+    background:#eeeeee;
+    border-bottom:none;
+}
+
+.archiveLabel{
+    color:black;
+    font-weight:bold;
+}

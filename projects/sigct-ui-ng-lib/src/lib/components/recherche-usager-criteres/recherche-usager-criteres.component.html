@@ -1,0 +1,250 @@
+<div id="panel-criteres-usager">
+  <msss-cti-aide-saisie *ngIf="infoAppelCti?.nomAppel || infoAppelCti?.noTelAppel"
+                        [infoAppelCti]="infoAppelCti"
+                        colsStyle="padding-left:5px;padding-right:5px;"
+                        (nomSelected)="onNomCtiSelected($event)"
+                        (prenomSelected)="onPrenomCtiSelected($event)"
+                        (telephoneSelected)="onTelephoneCtiSelected($event)"></msss-cti-aide-saisie>
+
+  <div class="row">
+    <div class="col col-md-2">
+      <msss-sigct-datepicker #dateNaissance
+                             id="calendar"
+                             label="usager.identification.usager.date.naissance"
+                             [(ngModel)]="critereRecherche.dateNaissance"
+                             [ngModelOptions]="{standalone:true}"
+                             dateFormat="yyyy-mm-dd"
+                             placeHolder="aaaa-mm-jj"
+                             (keydown)="onKeydown($event)"
+                             [endDate]="endDate">
+      </msss-sigct-datepicker>
+    </div>
+    <div class="col-md-2"
+         *ngIf="isRechercheConsultOuTnterv">
+      <msss-sigct-chosen #groupeage
+                         id="groupeage"
+                         label="usager.identification.usager.groupe.age"
+                         name="groupeage"
+                         [options]="listeGroupeAge"
+                         [(ngModel)]="critereRecherche.idRfGroupeAge"
+                         (keydown)="onKeydown($event)">
+      </msss-sigct-chosen>
+    </div>
+    <div class="col col-md-3">
+      <msss-input-text id="nom"
+                       label="usager.identification.usager.nom"
+                       [(ngModel)]="critereRecherche.nom"
+                       [ngModelOptions]="{standalone:true}"
+                       [valide]="inputTextNomValide"
+                       [maxlength]="MAX_LENGTH_NOM"
+                       (keydown)="onKeydown($event)"
+                       (click)="onClick($event)"
+                       (focus)="onFocus($event)">
+      </msss-input-text>
+    </div>
+    <div class="col col-md-3">
+      <msss-input-text id="prenom"
+                       label="usager.identification.usager.prenom"
+                       [(ngModel)]="critereRecherche.prenom"
+                       [ngModelOptions]="{standalone:true}"
+                       [valide]="inputTextPrenomValide"
+                       [maxlength]="MAX_LENGTH_PRENOM"
+                       (keydown)="onKeydown($event)"
+                       (click)="onClick($event)"
+                       (focus)="onFocus($event)">
+      </msss-input-text>
+    </div>
+    <div class="col col-md-2">
+      <msss-input-text #numero
+                       id="numero"
+                       name="numero"
+                       label="usager.label.telephonique"
+                       [(ngModel)]="critereRecherche.telephone"
+                       [ngModelOptions]="{standalone:true}"
+                       placeHolder="(999) 999-9999"
+                       [patternMask]="'000 000-0000'"
+                       [validationMask]="false"
+                       [valide]="inputTextNoTelValide"
+                       (keydown)="onKeydown($event)"
+                       (click)="onClick($event)"
+                       (focus)="onFocus($event)">
+      </msss-input-text>
+    </div>
+    <!--div class="col-md-2">
+              <msss-input-checkbox  id="phonetic" name="phonetic" [options]="inputOptionPhonetic"  [(ngModel)]="usager.phonetic" #phonetic="ngModel" 
+              [ngModelOptions]="{standalone:true}"></msss-input-checkbox>
+          </div-->
+    <div class="col-md-2 pull-right">
+      <span class="pull-right">
+        <a id="rechercheAv"
+           href="#"
+           onClick="return false;"
+           style="text-align: right;"
+           (click)="toggleRechercheAvancee()">
+          <span *ngIf="critereRecherche.rechercheAvancee">{{ 'usager.recherche.btnlirchrrpd' | translate }}&nbsp;
+            <i class="fa fa-chevron-up"></i></span>
+          <span *ngIf="!critereRecherche.rechercheAvancee">{{ 'usager.recherche.btnlirchravc' | translate }}&nbsp;
+            <i class="fa fa-chevron-down"></i></span>
+        </a>
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="critereRecherche.rechercheAvancee == true">
+    <div class="row">
+      <div class="col col-sm-2">
+        <msss-sigct-chosen #langueCode
+                           id="langueCode"
+                           name="langueCode"
+                           label="usager.info.supp.langue"
+                           [(ngModel)]="critereRecherche.langueCode"
+                           [options]="inputOptionLangue"
+                           (keydown)="onKeydown($event)">
+        </msss-sigct-chosen>
+      </div>
+      <div class="col col-md-3">
+        <msss-input-text #numeroAssuranceMaladie
+                         id="nam"
+                         name="nam"
+                         label="usager.info.supp.nam"
+                         [(ngModel)]="critereRecherche.nam"
+                         [patternMask]="'SSSS-0000-0000'"
+                         [ngModelOptions]="{standalone:true}"
+                         [validationMask]="false"
+                         [valide]="inputTextNAMValide"
+                         (keydown)="onKeydown($event)"
+                         (click)="onClick($event)"
+                         (focus)="onFocus($event)">
+        </msss-input-text>
+      </div>
+      <div class="col col-md-3">
+        <msss-sigct-chosen #sexeCode
+                           id="sexeCode"
+                           name="sexeCode"
+                           label="usager.identification.usager.sexe"
+                           [options]="inputOptionSexe"
+                           [(ngModel)]="critereRecherche.sexeCode"
+                           [ngModelOptions]="{standalone:true}"
+                           (keydown)="onKeydown($event)">
+        </msss-sigct-chosen>
+      </div>
+      <div class="col col-md-2">
+        <msss-input-text id="moyen"
+                         name="moyen"
+                         label="usager.label.courriel"
+                         [(ngModel)]="critereRecherche.autreMoyenCommunication"
+                         [ngModelOptions]="{standalone:true}"
+                         [valide]="inputTextCourrielValide"
+                         maxlength="75"
+                         (keydown)="onKeydown($event)"
+                         (click)="onClick($event)"
+                         (focus)="onFocus($event)">
+        </msss-input-text>
+      </div>
+      <div class="col col-md-2">
+        <msss-input-checkbox *ngIf="critereDoublonPotentielVisible"
+                             id="doublonPotentiel"
+                             name="doublonPotentiel"
+                             [(ngModel)]="critereRecherche.doublonPotentiel"
+                             [ngModelOptions]="{standalone:true}"
+                             [options]="inputOptionDoublonPotentiel"
+                             (keydown)="onKeydown($event)">
+        </msss-input-checkbox>
+        <msss-input-checkbox id="malentendant"
+                             name="malentendant"
+                             [(ngModel)]="critereRecherche.malentendant"
+                             [ngModelOptions]="{standalone:true}"
+                             [options]="inputOptionMalentendant"
+                             (keydown)="onKeydown($event)">
+        </msss-input-checkbox>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-sm-2">
+        <msss-input-text #codePostal
+                         id="codePostal"
+                         name="codePostal"
+                         label="usager.adresses.codepostal"
+                         [(ngModel)]="critereRecherche.codePostal"
+                         [patternMask]="'S0S 0S0'"
+                         [validationMask]="false"
+                         [valide]="inputTextCodePostalValide"
+                         (keydown)="onKeydown($event)"
+                         (click)="onClick($event)"
+                         (focus)="onFocus($event)">
+        </msss-input-text>
+      </div>
+      <div class="col col-md-3">
+        <msss-input-text #mun
+                         id="mun"
+                         name="mun"
+                         label="usager.adresses.municipalite"
+                         [(ngModel)]="critereRecherche.municipalite"
+                         [ngModelOptions]="{standalone:true}"
+                         [valide]="inputTextMunicipaliteValide"
+                         maxlength="70"
+                         (keydown)="onKeydown($event)"
+                         (click)="onClick($event)"
+                         (focus)="onFocus($event)">
+        </msss-input-text>
+      </div>
+      <div class="col col-md-3">
+        <msss-sigct-chosen #region
+                           id="codeRegion"
+                           name="codeRegion"
+                           label="usager.adresses.region"
+                           [(ngModel)]="critereRecherche.regionCode"
+                           [options]="inputOptionRegion"
+                           (keydown)="onKeydown($event)">
+        </msss-sigct-chosen>
+      </div>
+      <div class="col col-md-2">
+        <msss-input-text #adr
+                         id="adr"
+                         name="adr"
+                         label="usager.recherche.adresse"
+                         [(ngModel)]="critereRecherche.adresse"
+                         [ngModelOptions]="{standalone:true}"
+                         maxlength="56"
+                         [valide]="inputTextAdressesValide"
+                         (keydown)="onKeydown($event)"
+                         (click)="onClick($event)"
+                         (focus)="onFocus($event)">
+        </msss-input-text>
+      </div>
+      <div class="col col-md-2">
+        <msss-input-text id="idUsagerIdent"
+                         name="idUsagerIdent"
+                         label="usager.recherche.usagerIdent"
+                         [(ngModel)]="critereRecherche.idUsagerIdent"
+                         [patternMask]="'0999999999'"
+                         [disableNumberCheck]="false"
+                         [decimalPatternCheck]="false"
+                         maxlength="10"
+                         (keydown)="onKeydown($event)"
+                         [autocomplete]="'off'">
+        </msss-input-text>
+      </div>
+
+      <ng-template [hasAnyRoles]="['ROLE_US_USAGER_FUSION']">
+        <!-- Masque le composant si collection undefined -->
+        <div class="row"
+             *ngIf="inputOptionChampDoublon">
+          <div class="col col-sm-3">
+            <msss-sigct-multi-select #listeChampDoublon
+                                     id="listeChampDoublon"
+                                     name="listeChampDoublon"
+                                     label="usager.recherche.infocommune"
+                                     [options]="inputOptionChampDoublon.options"
+                                     [(ngModel)]="critereRecherche.listeChampDoublon"
+                                     (keydown)="onKeydown($event)"
+                                     (click)="onClick($event)"
+                                     (focus)="onFocus($event)">
+            </msss-sigct-multi-select>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

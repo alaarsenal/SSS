@@ -1,0 +1,69 @@
+<msss-sigct-content-zone id="consulter-isisw-section-usager"
+                         title="{{ 'sigct.ss.c_appelsisisw.titreintervention' | translate }}">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.soustitreprioriser' | translate}} :
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <span>{{dto.problemIdentification}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.soustitreconseils' | translate}} :
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"
+           *ngFor="let protocol of dto.listeConseilProtocole">
+        <span>{{protocol}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.soustitreponse' | translate}} :
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div [innerHTML]="dto.reponseProtocole"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>
+          {{'sigct.ss.c_appelsisisw.consultation' | translate}} :
+        </label>
+        <span>{{dto.consultation}}</span>
+      </div>
+      <div class="col-md-6">
+        <label>
+          {{'sigct.ss.c_appelsisisw.heureconsultation' | translate}} :
+        </label>
+        <span>{{dto.heureConsultation}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>
+          {{'sigct.ss.c_appelsisisw.roleaction' | translate}} :
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"
+           *ngFor="let roleAction of dto.listeRoleAction">
+        <span>{{roleAction}}</span>
+      </div>
+    </div>
+  </div>
+</msss-sigct-content-zone>

@@ -1,0 +1,8 @@
+<div id="rrss_hyperlink_{{codeRRSS}}" *ngIf="codeRRSS; else noCodeRRSS">
+    <a href="javascript:" class="text-decoration-underline" (click)="ouvrirModuleRRSS(codeRRSS)">{{nomRRSS}}</a>&nbsp;
+</div>
+<ng-template #noCodeRRSS>
+    <div>
+        {{nomRRSS}}
+    </div>&nbsp;
+</ng-template>
